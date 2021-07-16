@@ -1,0 +1,148 @@
+\documentclass[
+    % Velikost základního písma je 12 bodů
+    12pt,
+    % Formát papíru je A4
+    a4paper,
+    % Oboustranný tisk
+    twoside,
+    % Záložky a metainformace ve výsledném  PDF budou v kódování unicode
+    unicode,
+]{article}
+
+%%%%%%%%%%%%%%%%%%%%
+% OBECNÉ NASTAVENÍ %
+%%%%%%%%%%%%%%%%%%%%
+
+% Kódování zdrojových souborů
+\usepackage[utf8]{inputenc}
+% Kódování výstupního souboru
+\usepackage[T1]{fontenc}
+% Podpora češtiny
+\usepackage[czech]{babel}
+
+% Geometrie stránky
+\usepackage[
+    % Vnitřní a vnější okraj
+    hmargin={20mm,30mm},
+    % Horní a dolní okraj
+    vmargin={25mm,25mm},
+    % Velikost zápatí
+    footskip=17mm,
+    % Vypnutí záhlaví
+    nohead,
+]{geometry}
+
+% Zajištění kopírovatelnosti a prohledávanosti vytvořených PDF
+\usepackage{cmap}
+% Podmínky (pro použití v titulní straně)
+\usepackage{ifthen}
+
+%%%%%%%%%%%%%%%
+% FORMÁTOVÁNÍ %
+%%%%%%%%%%%%%%%
+
+% Nastavení stylu nadpisů
+\usepackage{sectsty}
+% Formátování obsahů
+\usepackage{tocloft}
+% Možnost odstranění mezer mezi řádky v seznamech (pomocí '[noitemsep]')
+\usepackage{enumitem}
+% Sázení správných uvozovek pomocí '\enquote{}'
+\usepackage{csquotes}
+% Vynucení umístění poznámek pod čarou vespod stránky
+\usepackage[bottom]{footmisc}
+
+% Bezpatkové sázení nadpisů
+\allsectionsfont{\sffamily}
+% Změna formátování nadpisu a podnadpisů v Obsahu
+\renewcommand{\cfttoctitlefont}{\Large\bfseries\sffamily}
+\renewcommand{\cftsubsecdotsep}{\cftdotsep}
+
+%\usepackage{lmodern}
+
+%%%%%%%%%%
+% ODKAZY %
+%%%%%%%%%%
+
+% Tvorba hypertextových odkazů
+\usepackage[
+    breaklinks=true,
+    hypertexnames=false,
+]{hyperref}
+% Nastavení barvení odkazů
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+%%%%%%%%%%%%%%%%%%
+% OBRÁZKY, GRAFY %
+%%%%%%%%%%%%%%%%%%
+
+% Vkládání obrázků
+\usepackage{graphicx}
+% Nastavení popisů obrázků, výpisů a tabulek
+\usepackage{caption}
+% Grafy a vektorové obrázky
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+%%%%%%%%%%%%%%
+% MATEMATIKA %
+%%%%%%%%%%%%%%
+
+% Sázení matematiky a matematických symbolů ('\mathbb{}')
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Náhrada za \mod a \pmod, které mají přehaně velký prostor před svou značkou
+\newcommand{\Mod}[1]{\ \mathrm{mod}\ #1}
+\newcommand{\Pmod}[1]{\ (\mathrm{mod}\ #1)}
+% Náhrada za \forall, které kolem sebe prostor nemá žádný
+\newcommand{\Forall}{\ \forall\ }
+
+%%%%%%%%%%%%%%%%%
+% ZDROJOVÉ KÓDY %
+%%%%%%%%%%%%%%%%%
+
+% Sazba zdrojových kódů
+\usepackage[formats]{listings}
+% Sazba zdrojových kódů
+\usepackage[newfloat]{minted}
+% Formátování 'minted' kódů
+\usemintedstyle{pastie}
+% Přepnutí prostředí 'code' do režimu výpisu kódu
+\newenvironment{code}{\captionsetup{type=listing}}{}
+
+%%%%%%%%%%%
+% TITULKA %
+%%%%%%%%%%%
+
+\newcommand{\titulka}{
+    \vspace*{2em}
+    \begin{center}
+        {\Huge \bfseries MPC-KRY}
+
+        \vspace*{1em}
+
+        {\Huge \bfseries Kryptografie}
+
+        \vspace*{1em}
+
+        {\Large Otázky ke státnicím}
+    \end{center}
+
+    \vfill
+
+    \begin{tabular}{ll}
+        Text: & (autoři) \\
+        Korektura: & (autoři) \\
+    \end{tabular}
+    \hfill
+    \today
+
+    \clearpage
+}
