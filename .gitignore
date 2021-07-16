@@ -1,0 +1,15 @@
+main.pdf
+*.zip
+.hidden
+# LaTeX build files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.synctex(busy)
+*.toc
+# Cache directories
+**/cache*
+**/_minted*
