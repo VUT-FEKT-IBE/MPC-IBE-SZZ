@@ -30,16 +30,16 @@ Vybírají se právě dva předměty.
 
 ### MPC-KRY
 
-- [ ] Základní pojmy: kryptologie, kryptografie, kryptoanalýza, princip symetrických a asymetrických šifer. Matematické základy kryptologie: modulární aritmetika, inverse "modulo", Euclidův algoritmus, Eulerova funkce, prvočísla - princip generování.Generování náhodných čísel, princip, kryptografické generátory, testování generátorů, baterie testů.
-- [ ] Symetrické šifrovací algoritmy: principy, používané techniky, Cézarova šifra, Vernamova šifra, substituční a transpoziční šifry, proudové a blokové šifry, módy blokových šifer, příklady se stručnou charakteristikou (AES, DES, RC(x)), šifry používané v GSM a UMTS, princip autentizace účastníků GSM a UMTS sítě.
-- [ ] Kvantová kryptografie: princip, protokol pro výměnu klíčů.
-- [ ] Asymetrické šifrovací algoritmy: zavazadlový algoritmus, RSA, Diffie-Hellman, El Gamal systém, šifry na bázi eliptických křivek.
-- [ ] "Hašovací" funkce: princip, příklady, kolize, odolnost proti kolizím.
-- [ ] Digitální podpis: DSS, DSA, PGP, struktura, používané algoritmy. PKI, certifikát X.509 struktura certifikační autorita základní části, časová razítka, autorita časových razítek
-- [ ] Autentizace, autentizační metody, vícefaktorová autentizace.
-- [ ] Možné způsoby kryptografického zabezpečení datové komunikace, možnosti zabezpečení v jednotlivých vrstvách OSI (metody a mechanizmy), bezpečný web SSL/TSL, IPsec.
-- [ ] Elektronické platby na Internetu, 3D Secure, princip, popis protokolů, použité algoritmy.
-- [ ] Postranní kanály v kryptografii, základní typy postranních kanálů.
+- [ ] Formální definice kryptografického systému, symetrické a asymetrické šifry. Výpočetně těžké matematické problémy pro asymetrické šifry.
+- [ ] Služby bezpečnosti zajišťované kryptografickými prostředky, kryptografické mechanismy, které tyto služby zajišťují.
+- [ ] Kryptograficky bezpečné generátory náhodných čísel – požadavky, hodnocení bezpečnosti, příklady realizace.
+- [ ] Hašovací funkce - požadavky, hodnocení bezpečnosti. Princip konstrukce - iterační, typu „houba“ (SHA3).
+- [ ] Kvantový přenos informace - důvody použití, příklady protokolů.
+- [ ] Postkvantová kryptografie – důvody použití, jaké těžké matematické problémy se zde využívají, (kryptosystém McEliece, kryptosystém založený na mřížkách). Jednorázový podpis pomocí hašovacích funkcí (Lamport).
+- [ ] V souvislosti s nařízením eIDAS vysvětlete pojmy - elektronický podpis, zaručený elektronický podpis a kvalifikovaný elektronický podpis. elektronická pečeť, elektronické časové razítko.
+- [ ] Technologie blockchain – struktura, princip, možnosti využití.
+- [ ] Fyzicky neklonovatelné funkce (FNF) - k čemu lze využít, výhody a nevýhody, požadované vlastnosti, příklady.
+- [ ] Autentizační protokoly – na jakém principu pracují, využívané proměnné parametry, hodnocení jejich bezpečnosti (BAN logika).
 
 ### MPC-PTK
 
