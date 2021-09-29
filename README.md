@@ -24,7 +24,7 @@ Vybírají se právě dva předměty.
 - [MPC-SKS](#MPC-SKS) Služby komunikačních systémů
 - [MPC-UIN](#MPC-UIN) Umělá inteligence
 - [MPC-VDP](#MPC-VDP) Vyšší techniky datových přenosů
-- [MPC-KPM](#MPC-KPM) Mobile Network Communication Systems
+- [MPA-KPM](#MPA-KPM) Mobile Network Communication Systems
 
 ## Seznam předmětů a jejich otázek
 
@@ -43,22 +43,56 @@ Vybírají se právě dva předměty.
 
 ### MPC-PTK
 
-- [ ] TCP/IP: Vazba mezi RM ISO/OSI a TCP/IP. Filozofie vzájemného propojování sítí. Souběh aplikací a zapouzdřování.
+- [ ] TCP/IP: Vazba mezi RM ISO/OSI a TCP/IP. Filozofie vzájemného propojování sítí. Souběh aplikací a zapouzdřování přenášených dat.
 - [ ] Úloha IPv4 (Internet Protocol verze 4) vrstvy. IPv4 adresy. IPv4 datagram. IP tunelování. Protokol ICMPv4 (Internet Control Message Protocol verze 4).
-- [ ] Protokol UDP (User Datagram Protocol). Protokol TCP (Transmission Control Protocol).
-- [ ] Překlad logických a fyzických adres, Protokol ARP (Address Resolution Protocol).
-- [ ] Protokol DHCP (Dynamic Host Configuration Protocol). Překlad adres – NAT (Network Address Translation).
-- [ ] Jmenný systém DNS (Domain Name System): důvody existence, popis fungování protokolu, úloha resolveru, kořenové servery DNS. Firewally dle vrstev filtrování.
-- [ ] Princip protokolů zálohování výchozí brány.
+- [ ] Protokoly transportní vrstvy a jejich srovnání: UDP (User Datagram Protocol), Protokol TCP (Transmission Control Protocol), SCTP (Stream Control Transmission Protocol).
+- [ ] Jmenný systém DNS (Domain Name System): důvody existence, popis fungování protokolu, úloha resolveru, kořenové servery DNS. Protokoly MDNS (Multicast DNS) a LLMNR (Link-Local Multicast Name Resolution).
+- [ ] Princip protokolů zálohování výchozí brány. Protokoly HSRP (Hot Standby Router Protocol) a VRRP (Virtual Router Redundancy Protocol).
+- [ ] Multicastový přenos dat, adresování, protokoly, směrování multicastu.
+- [ ] IPv6 (Internet Protocol verze 6): vlastnosti protokolu a důvody existence, přechodové mechanizmy, datagram a systém rozšiřujících záhlaví, adresace.
+- [ ] IPv6 (Internet Protocol verze 6): funkce ICMPv6 protokolu, popis automatické konfigurace v IPv6 síti, fungování multicastu v IPv6.
 - [ ] Autonomní systémy. Protokoly IGP (Interior Gateway Protocol) a EGP (Exterior Gateway Protocol). Základní charakteristika protokolu BGP (Border Gateway Protocol). Multihoming, peering a tranzit.
-- [ ] IPv6 (Internet Protocol verze 6): vlastnosti a důvody existence, přechodové mechanizmy, datagram, adresace, funkce ICMPv6 protokolu, popis automatické konfigurace v IPv6 síti, fungování multicastu v IPv6.
-- [ ] Teorie konečných automatů, způsoby reprezentace, použití.
+- [ ] Teorie konečných automatů a její použití v oblasti komunikačních protokolů, způsoby reprezentace.
 
 ### MPC-CT3
 
+- [ ] Bezpečnost na vrstvě L1 (bezpečnostní opatření, klíčování, dohled nad sítí) a bezpečnost na vrstvě L2 (bezpečnostní opatření, příklady útoků, MACsec).
+- [ ] Bezpečnost na vrstvě L3 (bezpečnostní opatření, příklady útoků, IPsec, bezpečnost IPv6).
+- [ ] Bezpečnost TCP (útoky, protiopatření), protokol TLS - Transport Layer Security (princip, součásti, příklady útoků).
+- [ ] Bezpečnost UDP (útoky, protiopatření, zabezpečení nad protokolem UDP), bezpečnost DNS, protokol DNSSEC.
+- [ ] Zabezpečení v sítích typu Low-Power Wide Area Network (kryptografické ochrany, problémy a omezení), zabezpečení v mobilních sítích 2G - 5G (základní principy bezpečnosti pro 2G, 3G a 4G).
+- [ ] Ochrana soukromí v ICT (pojmy, typy anonymizace), kryptografické metody zajištující ochranu soukromí, síťové metody poskytující ochranu soukromí a anonymizační nástroje a systémy.
+- [ ] Forenzní analýza (hlavní cíle, základní principy, vysvětlete časové značky a časovou osu událostí).
+- [ ] Analýza škodlivého kódu (základní dělení analýz, cíle a metody statické a dynamické analýzy).
+- [ ] Penetrační testování (rozdíly v penetračním testování realizovaným metodou Ad-hoc a pomocí metodologie, hlavní cíle ASVS metodologie, bezpečnostní úrovně).
+- [ ] Testování bezpečnosti webové aplikace (vysvětlete zranitelnost Path traversal, co obsahuje testování vstupu pro nahrání souboru).
+
 ### MPC-PDA
 
+- [ ] Hierarchie výpočetní složitosti. Třídy složitosti P, NP, #P, PSPACE, EXP, NP-těžké. Definice problému Problém batohu (Knapsnack), problém směrování vozidel (VRP), Metrický k-střed.
+- [ ] Problém obchodního cestujícího a modifikace genetických algoritmů, Genetické programování, Optimalizace hejnem, Optimalizace mravenčí kolonií, Evoluční strategie.
+- [ ] Definice grafu. Incidenční matice, matice sousednosti. Handshaking lemma. Algoritmus detekce bipartitního grafu. Silně propojené komponenty. Kosarajův algoritmus. Tarjanův algoritmus.
+- [ ] Vlastnosti grafu: průměr, excentricita. Párování grafu. Maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Izomorfismus grafu a Ullmanův algoritmus.
+- [ ] Problém maximálního toku a minimálního řezu grafem. Řešení problému s více zdroji a více cíly. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.
+- [ ] Univerzální aproximační funkce. Dopředná neuronová síť. Maticová reprezentace NN. Gradientní sestup. Vrstva zahazování. Aktivační funkce. Softmax.
+- [ ] Konvoluční neuronové sítě – princip. Max pooling, Dávková normalizace. Známé architektury neuronových sítí.
+- [ ] Lineární regrese. Polynomiální regrese. Logistická regrese.
+- [ ] Rekurentní neuronové sítě. LSTM. UNet sítě. Struktury neuronových sítí.
+- [ ] Q-učení, srovnání s genetickými algoritmy.
+- [ ] Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu. Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.
+
 ### MPC-ODP
+
+- [ ] Režim omezení odpovědnosti poskytovatelů služeb informační společnosti typu mere conduit, caching a hosting
+- [ ] Aktivní povinnosti poskytovatelů služeb informační společnosti (monitoring, filtrování)
+- [ ] Pojem osobního údaje, titul ke zpracování osobních údajů, zvláštní kategorie osobních údajů
+- [ ] Právní postavení správce a zpracovatele osobních údajů
+- [ ] Práva subjektů osobních údajů
+- [ ] Povinné subjekty dle zákona o kybernetické bezpečnosti
+- [ ] Bezpečnostní opatření, varování, reaktivní opatření a ochranná opatření dle zákona o kybernetické bezpečnosti
+- [ ] Procesní nástroje pro zajištování elektronických důkazů
+- [ ] Typy a znaky skutkových podstat počítačových trestných činů
+- [ ] Subjektivní a objektivní odpovědnost
 
 ---
 
@@ -77,34 +111,42 @@ Vybírají se právě dva předměty.
 
 ### MPC-MPG
 
+- [ ] Světlo, barva. Barevné modely a prostory (RGB, CMY, CMYK, HLS, YCBCR, Lab, stupně šedi). Gama korekce.
+- [ ] Obraz jako dvojrozměrný signál. Vzorkování spojitého obrazu, kvantování. Aliasing, moiré. Vektorová vs. bitmapová grafika - výhody, nevýhody. Transformace obrazu (DFT, DCT, DWT).
 - [ ] Základní zobrazovací režimy, struktura systému s grafickým adaptérem, paměť snímku, bitové roviny.
-- [ ] Světlo, barva. Barevné modely a prostory (RGB, CMY(K), HLS, Lab). Gama korekce. Teplota chromatičnosti světla.
-- [ ] Obraz jako dvojrozměrný signál. Vzorkování spojitého obrazu, kvantování. Aliasing, moiré. Vektorová vs. bitmapová grafika - výhody, nevýhody.
-- [ ] Transformace obrazu (DFT, DCT, DWT).
-- [ ] Základy vektorové grafiky. Maticový popis 2D křivek, parametrická a geometrická spojitost křivek. Princip a postup rasterizace základních prvků - přímka, kružnice, elipsa.
-- [ ] 3D plochy. Bézierovy kubiky v 3D, řídicí body, způsoby napojování. Algoritmus de Casteljau pro jejich polygonizaci.
-- [ ] Texturování, metody komprese textur, mapování textur, interpolace textur.
-- [ ] Metody bezeztrátové komprese rastrového obrazu, RLE komprese, Huffmanovo kódování, LZW komprese.
-- [ ] Metody ztrátové komprese rastrového obrazu. Predikční kódování, adaptivní predikční kódování. Transformační kódování. JPEG, JPEG2000, SPIHT.
-- [ ] Formáty čísel, aritmetika procesoru. Multimediální procesory a rozšiřování instrukčního souboru, proudové zpracování instrukcí, cache, technologie SIMD.
-- [ ] Architektury moderních GPU. GPU jako paralelní systém. CUDA.
+- [ ] Základy vektorové grafiky. Matematický popis 2D křivek. Typy navázání dvou křivek. Princip a postup rasterizace základních prvků – přímka, kružnice, elipsa.
+- [ ] Pláty a Bézierovy kubiky v 3D, řídicí body. Typy navazování plátů. Algoritmus de Casteljau pro jejich polygonizaci, subdivision.
+- [ ] Homogenní souřadnice a jejich použití při geometrických transformacích (posun, rotace, změna měřítka a podobně). Promítání rovnoběžné a středové, pohledový objem.
+- [ ] Texturování, mapování 2D textur na 3D objekt, interpolace textur, komprese textur. Bitmapové a procedurální textury.
+- [ ] Formáty vyjádření čísel, pevná a pohyblivá řádová čárka, aritmetika procesoru.
+- [ ] Třídění paralelních systémů. Proudové zpracování instrukcí, cache, technologie SIMD.
+- [ ] Architektury moderních grafických procesorů (GPU). Řetězec zpracování grafických dat. GPU jako paralelní systém. Jazyk CUDA.
 
 ### MPC-NAV
 
-- [ ] Základní pojmy z počítačové techniky, architektury, úzké profily,
-- [ ] Mikroprocesory 8086, 80286, chráněný režim, adresace v chráněném režimu
-- [ ] Mikroprocesor 80386, stránkování, deskriptor
-- [ ] Vyrovnávací paměť, 80486, zavedení násobných jednotek, Pentium, jednotka MMX,
-- [ ] Superskalární architektura mikroprocesoru, mikroprocesory Pentium Pro, Pentium II, SSE, PIII,
-- [ ] Architektura Netburst, Pentium IV, multiprocessing a jeho implementace u PIV, GPR registry x86-64,
-- [ ] Architektura mikroprocesorů AMD64, APU a jeho implementace, Mikroarchitektura Core a Core iX, jednotka AVX
-- [ ] Operační paměť, parametry, typy operačních pamětí, synchronní paměti DRAM (DDR, DDR2, DDR3), parametry a vlastnosti, paměťové moduly,
-- [ ] Sběrnice, parametry, typy, hierarchie, interní sběrnice PC, sběrnice PCI, port AGP, sběrnice PCI-Express, sběrnice HyperTransport, sběrnice QPI,
+- [ ] Počítač, mikroprocesor, princip funkce, architektury počítačů, CISC, RISC, úzké profily.
+- [ ] Mikroprocesory 8086, 80286, chráněný režim, adresace v chráněném režimu.
+- [ ] Mikroprocesor 80386, stránkování, deskriptor, adresace se stránkováním.
+- [ ] Vyrovnávací paměť, 80486, zavedení násobných jednotek, Pentium, jednotka MMX.
+- [ ] Superskalární architektura mikroprocesoru, mikroprocesory Pentium Pro, Pentium II, SSE, PIII.
+- [ ] Architektura Netburst, Pentium IV, multiprocessing a jeho implementace u PIV, GPR registry x86-64.
+- [ ] Architektura mikroprocesorů AMD64, APU a jeho implementace, mikroarchitektura Core a Core iX, jednotka AVX.
+- [ ] Operační paměť, parametry, typy operačních pamětí, synchronní paměti DRAM (DDR, DDR2, DDR3, DDR4), parametry a vlastnosti, paměťové moduly.
+- [ ] Sběrnice, parametry, typy, hierarchie, interní sběrnice PC, sběrnice PCI, port AGP, sběrnice PCI-Express, sběrnice HyperTransport, QPI.
 - [ ] Čipová sada, parametry a vlastnosti, typy, hierarchie, vývoj čipových sad.
 
 ### MPC-OSE
 
-Přenosové vlastnosti optických vláken, vlákna mnohovidová a jednovidová, polymerová optická vlákna (POF). Výroba optických vláken, druhy vláken a kabelů (standardy UIT – T, G xxx), spojování optických vláken a kabelů, optické konektory. Základy pokládky a montáže optických vláken a kabelů. Optické vazební členy. Zdroje a detektory záření - jejich charakteristiky. Teoretické problémy přenosu optickou sítí - vlnová optika a geometrická optika. Nelineární vlivy u optických vláken. Vlnové délky a pásma využívaná pro přenos, útlum a disperze vláken, disperze chromatická - CD a polarizační – PMD, doporučení UIT. Metody potlačování dispersních vlivů. Optické opakovače a zesilovače. Optické přístupové sítě - FTTx, optické transportní sítě, globální sítě. Výhledy sítí FTTH. Optické linkové zakončení, optické linkové kódy, dosah optického spoje. Optoelektronické linkové trakty. Příklady sítí různých provozovatelů. Optoelektronické systémy pro přenos analogové modulace a televizního signálu. Optoelektornické systémy pro průmyslové aplikace. Optické bezvláknové spoje. Optické filtry. Multiplexování u optických přenosů - WDM, DWDM, CWDM. Transmisní a reflektometrická (OTDR) metoda měření optických vláken. Metody měření CD a PMD. Dohled (monitoring) optických telekomunikačních sítí. Planární optické světlovody.
+- [ ] Přenosové vlastnosti optických vláken, vlákna mnohovidová a jednovidová, polymerová optická vlákna (POF).
+- [ ] Výroba optických vláken, druhy vláken a kabelů (standardy UIT – T, G xxx), spojování optických vláken a kabelů, optické konektory.
+- [ ] Zdroje a detektory záření - jejich charakteristiky.
+- [ ] Teoretické problémy přenosu optickou sítí - vlnová optika a geometrická optika. Nelineární vlivy u optických vláken.
+- [ ] Vlnové délky a pásma využívaná pro přenos, útlum a disperze vláken, disperze chromatická - CD a polarizační – PMD, doporučení UIT. Metody potlačování dispersních vlivů.
+- [ ] Optické opakovače a zesilovače.
+- [ ] Optické přístupové sítě - FTTx, optické transportní sítě, globální sítě. Výhledy sítí FTTH.
+- [ ] Optické linkové zakončení, optické linkové kódy, dosah optického spoje. Optoelektronické linkové trakty. Příklady sítí různých provozovatelů.
+- [ ] Multiplexování u optických přenosů - WDM, DWDM, CWDM.
+- [ ] Transmisní a reflektometrická (OTDR) metoda měření optických vláken. Metody měření CD a PMD. Dohled (monitoring) optických telekomunikačních sítí.
 
 ### MPC-PLD
 
@@ -121,43 +163,42 @@ Přenosové vlastnosti optických vláken, vlákna mnohovidová a jednovidová, 
 
 ### MPC-PZO
 
-- [ ] Základní vlastnosti rastrového obrazu, okolí pixelu, vzdálenost pixelů. Základní popis knihovny OpenCV, algoritmizace přístupu k obrazovým datům šedotónového a barevného obrazu.
-- [ ] Jasové transformace: základní typy, gama korekce. Histogram a ekvalizace histogramu: odvození pro spojitou funkci, přechod k diskrétním hodnotám, souvislost distribuční funkce s ekvalizační procedurou.
+- [ ] Základní vlastnosti rastrového obrazu, okolí pixelu, vzdálenost pixelů. Jasové transformace: základní typy, gama korekce. Histogram, ekvalizace histogramu: odvození pro spojitou funkci, přechod k diskrétním hodnotám, souvislost distribuční funkce s ekvalizační procedurou.
 - [ ] Geometrické transformace obrazu: euklidovské, afinní, projektivní, transformační rovnice, význam jednotlivých prvků transformační matice. Interpolační techniky: nejbližší soused, bilineární.
-- [ ] DFT, filtrace obrazu: základní transformační rovnice, vlastnosti spektra, SS složka, maximální obrazová frekvence, postup při filtraci, základní typy filtrů, konvoluční teorém.
+- [ ] DFT, filtrace obrazu: základní transformační rovnice pro DFT, vlastnosti spektra, SS složka, maximální obrazová frekvence, postup při filtraci, základní typy filtrů, konvoluční teorém.
 - [ ] Detekce hran, objektů v obraze: vyhlazovací prostorové filtry, metody výpočtu první a druhé derivace obrazové funkce, princip zostření obrazu pomocí Laplaciánu, jednorozměrná hrana a její derivace.
 - [ ] Základy segmentace: Cannyho hranový detektor, přehled a popis prahovacích metod. Metoda detekce objektů dle Violy-Jonese: definice Haarových příznaků, trénování, řazení do kaskády.
-- [ ] Model kamery: popis přímky a bodu v projektivní rovině, paralelní promítání, perspektivní promítání, intrinsické parametry, extrinsické parametry, scéna se dvěma pohledy (disparita), princip kalibrace.
-- [ ] Homografie: tři základní typy, důkaz existence matice H pro zobrazení roviny snímané perspektivní kamerou, skládání panoramatického pohledu: válcové, kulové souřadnice, detektory významných bodů.
-- [ ] Epipolární geometrie: kamerová báze, epipól, epipolární rovina, epipolární svazek, epipolární přímky, geometrická podstata, základní rovnice mapování bod->přímka, rektifikace stereo páru do jednoduché geometrie.
 - [ ] Biometrická obrazová identifikace: přehled metod a jejich základní vlastnosti, třídy otisků prstu, markanty, rozpoznání tváří metodou PCA, vysvětlení principu vlastních vektorů.
-- [ ] Extrakce prostorové informace: jednoduchá stereo geometrie, disparitní mapa, disparitní prostor, korespondenční problém, základní princip dynamického programování.
+- [ ] Model kamery: popis přímky a bodu v projektivní rovině, paralelní promítání, perspektivní promítání, intrinsické parametry, extrinsické parametry, scéna se dvěma pohledy (disparita), princip kalibrace. Homografie: tři základní typy, důkaz existence matice H pro zobrazení roviny snímané perspektivní kamerou, skládání panoramatického pohledu: válcové, kulové souřadnice, detektory významných bodů.
+- [ ] Epipolární geometrie: kamerová báze, epipól, epipolární rovina, epipolární svazek, epipolární přímky, geometrická podstata, základní rovnice mapování bod->přímka, rektifikace stereo páru do jednoduché geometrie. Extrakce prostorové informace: jednoduchá stereo geometrie, disparitní mapa, disparitní prostor, korespondenční problém, základní princip dynamického programování.
 - [ ] Optický tok: aperturový problém, charakteristika metod dle Horna-Schuncka, dle Lucase-Kanadeho, pojem časoprostorová krychle, algoritmus SimpleFlow, algoritmus dle Farnebäcka.
 
 ### MPC-SSY
 
-- [ ] Základní architektura AVR mikroprocesorů, rozdělení AVR mikroprocesorů, dostupné periférie, základy práce s registry – binární zápis, hexadecimální, bitový posun, nulování příznaku.
+- [ ] Základní architektura AVR mikroprocesorů, dostupné periférie, práce s registry.
 - [ ] Pamětní prostor mikroprocesoru AVR - FLASH paměť, SRAM paměť, EEPROM paměť.
-- [ ] Sériový přenos dat. Sběrnice USART, parametry komunikace, parita, baudrate, asynchronní versus synchronní režim, přenosové rychlosti.     Sběrnice SPI, základní charakteristika, propojení dvou SPI zařízení.     Sběrnice I2C,základní charakteristika, adresování zařízení.
-- [ ] Princip čítače s přetečením, princip čítače s přerušením. Rozlišovací schopnost čítačů. Pulsně šířková modulace, střída.
-- [ ] Rozdělení senzorů, princip senzoru teploty, popis negistoru, popis zapojení měřícího přípravku s negistorem . ADC převod-vzorkování, kvantování, kódování, kvantizační chyba. Princip AD převodníku s postupnou aproximací. Chybovost převodníku, chyba nastavení nuly, chyba zisku, integrální a diferenciální nelinearita.
-- [ ] Princip šíření rádiového signálu prostředím, výkonová úroveň přijatého signálu a její závislost na vzdálenosti, popis logaritmického útlumového modelu, převod dBm na mW, vliv frekvence na výkonovou úroveň signálu, zisk antény, čtvrtvlnné antény.
-- [ ] Standard IEEE 802.15. a jeho rozdělení. Definice fyzické vrstvy dle IEEE 802.15.4, použitá frekvenční pásma, modulace, přenosové rychlosti.     Problematika koexistence standardu IEEE 802.15.4 s ostatními bezdrátovými technologiemi. Detekce energie na kanále, parametr RSSI, parametr LQI, formát rámce na fyzické vrstvě IEEE 802.15.4 8. Definice linkové vrstvy dle IEEE 802.15.4 , formát rámce, struktura superrámce, typy zařízení, mezirámcové intervaly, synchronizovaná a nesynchronizované metoda CSMA/CA.
-- [ ] Protokol Zigbee, definice síťové vrstvy, formát NWK rámce, směrování v mesh síti pomocí AODV, směrování ve stromové struktuře. Směrovací tabulky – dočasná a trvalá, tabulka sousedů.
-- [ ] Aplikační vrstva protokolu Zigbee, aplikační profily, koncové body (endpoints), zabezpečení komunikace, struktura rámce na aplikační vrstvě.
-- [ ] Protokoly Wireless HART, standard ISA100.11a. Lokalizace bezdrátových uzlů, energetická spotřeba při přenosu dat.
+- [ ] Sériový přenos dat. Sběrnice USART, SPI, I2C.
+- [ ] Čítače/časovače, režimy funkce, princip, využití.
+- [ ] Rozdělení senzorů, senzory neelektrických veličin, principy. A/D převod, parametry převodníků, chyby A/D převodu.
+- [ ] Princip šíření rádiového signálu prostředím, využívané antény a jejich vlastnosti.
+- [ ] Standard IEEE 802.15.4 a jeho rozdělení. Fyzická vrstva dle IEEE 802.15.4. Detekce energie na kanále, parametr RSSI, parametr LQI, formát rámce na fyzické vrstvě IEEE 802.15.4
+- [ ] Definice linkové vrstvy dle IEEE 802.15.4, formát rámce, struktura super-rámce, typy zařízení, mezirámcové intervaly, synchronizovaná a nesynchronizované metoda CSMA/CA.
+- [ ] Protokol ZigBee, definice síťové vrstvy, formát NWK rámce, směrování v mesh síti pomocí AODV, směrování ve stromové struktuře. Směrovací tabulky – dočasná a trvalá, tabulka sousedů, Aplikační vrstva.
+- [ ] Protokoly Bluetooth a Bluetooth Low Energy, LORA, SigFox. MQTT protokol pro Internet věcí.
+- [ ] Protokoly pro průmyslové aplikace, lokalizace bezdrátových uzlů, energetická spotřeba při přenosu dat.
 
 ### MPC-SKS
 
-- [ ] Komunikační služby, druhy komunikačních služeb. Datové služby. Telematické služby, textové služby, obrazové služby, kombinované služby, audiovizuální služby.
-- [ ] Koncepce ISDN. Referenční model ISDN, konfigurace účastnické přípojky, napájení terminálů. struktura rámce.
-- [ ] Buňka ATM, rozdělení služeb ATM do tříd. Referenční model ATM, fyzická vrstva, vrstva ATM, vrstva AAL, vyšší vrstvy. Synchronizace buněk ATM, HEC.
-- [ ] Signalizace SS7, signalizační síť, způsoby provozu, signalizační zprávy. Technologie digitální přípojky xDSL. HDSL, VDSL. ADSL, popis. Referenční model ADSL.
-- [ ] Modulace v ADSL, QAM, CAP, DMT, cyklická předpona CP, rušivé vlivy v ADSL, protichybové kódy. 6. Internet protokol verze 6, návaznost na IPv4. Kvalita služeb QoS.
-- [ ] MPLS - Multi Protocol Label Switching- sítě používané na páteřních sítích, důvody pro vytvoření MPLS s ohledem na kvalitu služby. Struktura MPLS sítě, princip směrování v MPLS. IP a ATM, komunikační principy.
-- [ ] Základní principy fungování aktivních síťových prvků - směrovačů, přepínačů a služby, které v síti poskytují. Umělá inteligence pro řízení priorit v síťových prvcích.
-- [ ] ayer 3 switching, peer-to-peer multilayer mapping, integrace ATM/IP, nespojově orientovaná služba, clasical IP over ATM (CLIP) a jeho další vývoj. Emulace LAN, private network - to - network interface (PNNI).
-- [ ] Přenos dat a s tím související služby po energetické síti a kabelové televizi.
+- [ ] Komunikační služby, kategorizace, Internet a telekomunikační služby, kvalita služby QoS, integrované a diferencované služby, Resource ReSerVation Protocol RSVP.
+- [ ] IPv6, návaznost na IPv4. Kvalita služeb QoS v IPv6.
+- [ ] Integrované služby digitální sítě – ISDN, rozhraní S a U, doporučení pro ISDN, signalizace v ISDN.
+- [ ] Asynchronní přepravní způsob – ATM, buňky ATM, synchronizace, virtuální cesta a virtuální kanál, třídy služeb, ATM referenční model, síťové prvky ATM, ATM spínání.
+- [ ] Digitální účastnická linka xDSL, HDSL, ADSL, spojení, referenční model, modulace, přeslechy, další typy xDSL.
+- [ ] Referenční OSI model, síťová architektura TCP/IP, multimediální služby v IPv6.
+- [ ] Multimediální sítě, směrovací protokoly EGP, BGP, H.323, Ethernet over SDH/Sonet - EoS, Multiplrotocol Label Switching MPLS, MPLS versus ATM, MPLS a Virtual Private Network (VPN).
+- [ ] Pasivní optické sítě PON, přístupové sítě a jejich nasazení, rizika, zkušenosti.
+- [ ] Využití celočíselného programování v současných sítích, síť jako graf, uplatnění celočíselného dělení pro řešení nejkratší cesty, rozdělení zátěže.
+- [ ] IP přenos sítí Wavelength division multiplexing (WDM), CWDM, DWDM, TDM versus WDM, Routing and Wavelength Assignment (RWA).
 
 ### MPC-UIN
 
@@ -166,7 +207,7 @@ Přenosové vlastnosti optických vláken, vlákna mnohovidová a jednovidová, 
 - [ ] Umělé neuronové sítě - základní terminologie a rozdělení UNN: neuron, topologie, učení, vybavování
 - [ ] Vícevrstvá neuronová síť - charakteristika, neuron, topologie, algoritmus učení "error back propagation", vybavování.
 - [ ] Hopfieldova síť - charakteristika, neuron, topologie, algoritmus učení, vybavování.
-- [ ] Kohenenova samoorganizační mapa - charakteristika, topologie, neuron, algoritmus učení, vybavování.
+- [ ] Kohonenova samoorganizační mapa - charakteristika, topologie, neuron, algoritmus učení, vybavování.
 - [ ] RCE síť - charakteristika, neuron, topologie, algoritmus učení, vybavování.
 - [ ] Expertní systémy (ES) - historie znalostních systémů, definice, typy ES, pravidlový ES, tvorba BZ, konzultace, přínosy ES.
 - [ ] Inteligentní robot - inteligentní systém, generace robotů, inteligentní (kognitivní) robot, blokové schéma inteligentního robota.
@@ -184,18 +225,15 @@ Přenosové vlastnosti optických vláken, vlákna mnohovidová a jednovidová, 
 - [ ] Vliv rušení na provoz xDSL, kategorizace, dosažitelná přenosová rychlost, model přeslechů (NEXT, FEXT), princip výpočtu přeslechů. Spektrální vlastnosti DSL přenosových systémů, správa spektra, cíle, metody.
 - [ ] PLC systémy, princip, základní parametry, použité modulace, vazební členy, začlenění do sítě.
 
-### MPC-KPM
+### MPA-KPM
 
-- [ ] Mobilní sítě - vlastnosti, služby, typy. Problémy mobility – zjištění dostupnosti mobilních sítí, identifikace sítí a komunikačních parametrů, registrace a autentizace v síti, výběr vhodného přístupového bodu k síti, handover, roaming, identifikace, zabezpečení komunikace.
-- [ ] Struktura mobilních sítí - základní prvky, jejich význam a funkce. Vývoj mobilních sítí. Systém GSM - vývoj, fáze 1, 2, 2+, struktura, rozhraní. Služby mobilních sítí - hlasové služby, kódování hlasu - FR, HR, EFR, AMR; datové služby; zabezpečení přenosu na rádiovém rozhraní.
-- [ ] Přístupová síť GSM – základnový subsystém - BTS, BSC; rádiové rozhraní – pásma a jejich dělení, fyzická struktura komunikačních kanálů, logické kanály a jejich funkce.
-- [ ] Spojovací subsystém - MSC, GMSC, registry HLR, VLR, EIR. Signalizace - signalizační systém, autentizace uživatele, aktualizace polohy účastníka, průběhy realizace služeb,
-- [ ] Operační subsystém - provozní a servisní centrum, centrum managementu sítě, administrativní centrum, centrum služeb inteligentních sítí
-- [ ] Přenos dat v mobilních sítích – okruhově spojované technologie CSD a HSCSD; paketový způsob datové komunikace v mobilních sítích, technologie GPRS – architektura sítě GPRS, funkce uzlů SGSN a GGSN.
-- [ ] Přístupová část sítě GPRS – sdílení rádiových prostředků s technologií GSM, fyzické a logické kanály, kódovací schémata, kontexty mobility a paketového přenosu dat,
-- [ ] Technologie EDGE – modulační a kódová schémata, změny v architektuře sítě oproti síti GPRS.
-- [ ] Systémy třetí generace – vývoj, cíle, typy, pásma IMT-2000 – UMTS, CDMA2000. Technologie UMTS – architektura sítě, podtypy FDD, TDD.
-- [ ] Přístupová síť UMTS – uzly NodeB, RNC a jejich funkce; rádiové rozhraní – technologie WCDMA, funkce a princip rozprostírání a skramblování.
-- [ ] Handover v sítích UMTS – hard, soft, softer. Komunikační kanály v sítích UMTS – fyzické, transportní, logické kanály a jejich funkce.
-- [ ] Zvyšování přenosové kapacity a snižování latence pro multimediální služby – technologie HSDPA, HSUPA, HSPA+, technologické změny.
-- [ ] Technologie EPS – architektura sítě, all-IP struktura, části LTE, EPC. Rádiové rozhraní – techniky OFDMA, SC-FDMA, adaptivní modulační schémata, kanálová architektura rádiové přístupové sítě. Signalizace - sledování pohybu terminálu a realizace služeb.
+- [ ] Legacy cellular systems 0G, 1G, 2G: Network architecture, medium access control, packet switching, and circuit switching techniques. Multiple access (FDMA, TDMA, CDMA).
+- [ ] 3G cellular systems: Network architecture, handover types, modulation schemes (CDMA, WCDMA), radio interface channel architecture.
+- [ ] 4G cellular systems: Modulation schemes for LTE (OFDM, OFDMA, SC-FDMA), error-control methods (ARQ/HARQ).
+- [ ] 4G cellular systems: IP-based architecture (E-UTRAN, EPS vs. EPC), LTE radio resource grid (frame structure, slot structure). Utilization of the frequency spectrum, physical layer (physical channels, transport channels).
+- [ ] 4G cellular systems: 6) 4G cellular systems: Key blocks within the communication infrastructure (RAN, EPC), EPS communication levels with UE (AS, NAS).
+- [ ] 4G cellular systems: EPS bearers, protocol architecture (control plane, user plane X2 interface), EPC tracking area update procedure.
+- [ ] 4G cellular systems: EPS protocol architecture (Control Plane, User Plane), S1 interface, S5/S8 interface, X2 interface,
+- [ ] 4G cellular systems: RRC states (RRC Idle, RRC Connected), EPS Connection Management (ECM Idle, ECM Connected), EPS mobility management (EMM Registered, EMM Deregistered), EPS Radio Resource Management (RRM).
+- [ ] 4G cellular system: VoLTE (architecture, principles), CSFB, SVLTE, VoWiFi, Quality of Service (QoS) mechanisms in LTE (QCi), EPS security (key hierarchy and their relations).
+- [ ] Next-generation heterogeneous systems: Different types of use cases: eMBB (enhanced Mobile Broadband), URLLC (Ultra Reliable Low Latency Communications), mMTC (massive Machine Type Communications). Utilization of the frequency spectrum (sub-6GHz, millimeter wave).
