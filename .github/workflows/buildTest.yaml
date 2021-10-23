@@ -1,12 +1,10 @@
-name: Test if all subjects are available to build
+name: Test if all subjects are possible to build
 
 on:
-  push:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
     branches:
       - main
-    paths:
-      - "**/*.tex"
-  workflow_dispatch:
 
 jobs:
   # zjištění všech složek předmětů
