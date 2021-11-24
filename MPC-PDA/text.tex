@@ -1,0 +1,141 @@
+\section{Hierarchie výpočetní složitosti. Třídy složitosti P, NP, \#P, PSPACE, EXP, NP-těžké. Definice problému Problém batohu (Knapsnack), problém směrování vozidel (VRP), Metrický k-střed.}
+
+\subsection{Polynomická vs exponenciální časová složitost.}
+
+Algoritmy s polynomickou složitostí lze efektivně řešit, bez vynaložení velkého výpočetního výkonu. 
+S délkou vstupu \textit{n} roste lineárně potřebný čas ($n^x$) například hledání nejkratší cesty. 
+Algoritmy s exponenciální složitostí lze efektivně řešit pouze pro malé exponenty, bez potřeby velkého výpočetního výkonu. 
+S délkou vstupu \textit{n} roste exponenciálně potřebný čas ($x^n$) například problém obchodního cestujícího.
+
+\subsection{Hierarchie výpočetní složitosti.}
+
+Hierarchie výpočetní složitosti slouží k charakterizaci algoritmů u kterých lze pouze nepřímo určit asymptotickou složitost. 
+Využívá se třídní hierarchie. 
+Třídy od nejjednodušší po nejsložitější jdou v tomto pořadí: P $\subseteq$ NP $\subseteq$ \#P $\subseteq$ PSPACE $\subseteq$ EXP $\subseteq$ NP-složité $\subseteq$ unsolvable. 
+Jednoduší třída je vždy podmnožinou složitější (do složitější patří i ty jednoduší).
+
+\subsection{Třída P}
+
+Třída P obsahuje polynomiální problémy. 
+Tyto problémy se dají vyřešit v polynomiálním čase na deterministickém Turingově stroji (TS). 
+Příkladem může být nalezení nejkratší cesty, minimální kostry v grafu.
+
+\subsection{Třída NP}
+
+Třída NP obsahuje nedeterministické polynomiální problémy. 
+Tyto problémy lze řešit v polynomiálním čase na nedeterministickém TS (doposud nesestaven).
+
+\subsection{Třída NP-complete (NP-úplné)}
+
+NP-úplné (NPC) je podskupina problémů třídy NP, která se zabývá rozhodovacími problémy.
+Jejich řešení je nejtěžší a všechna známá řešení lze na deterministickém TS provést pouze s exponenciálním čase. 
+Pro polynomiální nebylo zatím nalezeno řešení, ale zároveň nebylo dokázáno, že řešení neexistuje.
+
+\textbf{Problém NPC}\,--\,pokud by se podařilo, převést jeden NPC problém na polynomiální čas tak to znamená, že každý NPC problém lze převést do polynomiálního. 
+To by vedlo k prokázání P $=$ NP.
+
+Bylo dokázáno, že každý algoritmus pro NPC problém lze použít k řešení jiného NPC problému.
+Přibližně existuje 10\,000 známých NPC problémů.
+Příkladem může být\,--\,Barvení grafů, Knapsnack (problém batohu), 3-partition problém (rozdělit množinu čísel podmnožiny o velikosti 3, které mají stejný součet)
+
+\subsection{Třída NP-těžké}
+
+O problému řekneme, že je NP-težký, jestliže se na něj redukuje NPC problém, ale zároveň nevíme jestli spadá do NP.
+Redukce znamená že se dá převést/konvertovat.
+
+\subsection{P vs NP}
+
+P je podmnožina NP jelikož každý problém lze řešit v polynomiálním čase na
+ nedeterministickém TS.
+Existuje matematický problém P $=$ NP, který dosud nebyl potvrzen nebo vyvrácen. Takže se přesně nedá určit jestli je P $=$ NP. 
+Obecně se považuje, že P $\neq$ NP.
+
+\subsection{Třída \#P}
+
+Třída \#P se nezabývá rozhodovacími problémy, ale řeší problém nalezení možných řešení NP problémů. 
+Z toho plyne, že problémy třídy \#P musí být alespoň stejně složité jako stejný NP problém.
+U této třídy se neptáme jestli existuje řešení, ale kolik řešení existuje.
+
+\textbf{Definice:} \#P je množina všech funkcí $f(x)$, kde $f(x)$ odpovídá počtu přijatelných cest nedeterministického TS v polynomiálním čase.
+
+\noindent V této třídě existují také problémy \#P-úplné.
+
+\subsection{Třída PSPACE}
+
+PSPACE je množina rozhodovacích problémů, které lze vyřešit pomocí deterministického TS v polynomiálním paměťovém prostoru.
+Neboli nezáleží, jak dlouho trvá vykonání, když je využit polynomiální (rozumné) množství paměťi. 
+PSPACE má úplné problémy, které jsou sestupně samo redukovatelné (downward self-reducible) a náhodně samo redukovatelné (random self-reducible).
+Jsou zahrnuté v EXP.
+Dle Savitchova theorému můžeme dokázat, že \textbf{P}SPACE = \textbf{NP}SPACE.
+
+\subsection{Třída EXP}
+
+Často označována jako EXPTIME.
+Je to množina rozhodovacích problémů řešitelných na deterministickém TS v exponenciálním čase.
+Časová komplexita je O($2^{p(n)}$), kde $p(n)$ je polynomická funkce $n$.
+
+Existuje také třída EXPSPACE, která je podobná EXPTIME, jen se neřeší v exponenciálním času, ale v exponenciálním paměťovém prostoru.
+
+U obou tříd se jedná o nezvládnutelné problémy, pro které neexistuje polynomiální algoritmus.
+Jejich složitost je exponenciální (například $2^n$).
+
+\subsection{Knapsnack problém}
+
+Existuje osoba (zloděj), který má batoh/zavazadlo.
+Zavazadlo má určitou maximální hmotnost/velikost.
+Zloděj se snaží do batohu vložit co nejvíce zboží v co největší hodnotě. 
+Každé toto zboží má jinou hmotnost/velikost a jinou hodnotu.
+Takže zloděj hledá co nejoptimálnější zboží, které může vložit do batohu a tím mít co největší profit.
+
+\subsection{Problém směrování vozidel (VRP)}
+
+Existuje 1 místo (sklad), která má x vozidel.
+Vozidla ze skladu musí objet všechny místa a dovést tam zboží. 
+Vozidla nemusí navštívit stejný počet míst, ale množina vozidel musí navštívit všechna místa co nejoptimálněji. 
+Při jednom vozidle podobné problému obchodního cestujícího (TSP), jen s rozdílem, že u TSP si vybíráme začátek, ale u VRP máme začátek přesně definován.
+
+\subsection{Metrický k-střed}
+
+Máme x měst a mezi těmito městy je přesně definována vzdálenost.
+Můžeme ale umístit pouze n skladišť, takže skladiště bude obstarávat více měst. 
+Do některých měst chceme umístit skladiště, které bude obstarávat dalších x měst.
+Musíme vybrat nejvhodnější města pro postavení skladu, aby maximální vzdálenost každého města ke skladu byla co nejmenší.
+
+
+\clearpage
+\section{Problém obchodního cestujícího a modifikace genetických algoritmů, Genetické programování, Optimalizace hejnem, Optimalizace mravenčí kolonií, Evoluční strategie.}
+
+
+\clearpage
+\section{Definice grafu. Incidenční matice, matice sousednosti. Handshaking lemma. Algoritmus detekce bipartitního grafu. Silně propojené komponenty. Kosarajův algoritmus. Tarjanův algoritmus.}
+
+
+\clearpage
+\section{Vlastnosti grafu: průměr, excentricita. Párování grafu. Maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Izomorfismus grafu a Ullmanův algoritmus.}
+
+
+\clearpage
+\section{Problém maximálního toku a minimálního řezu grafem. Řešení problému s více zdroji a více cíly. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.}
+
+
+\clearpage
+\section{Univerzální aproximační funkce. Dopředná neuronová síť. Maticová reprezentace NN. Gradientní sestup. Vrstva zahazování. Aktivační funkce. Softmax.}
+
+
+\clearpage
+\section{Konvoluční neuronové sítě – princip. Max pooling, Dávková normalizace. Známé architektury neuronových sítí.}
+
+
+\clearpage
+\section{Lineární regrese. Polynomiální regrese. Logistická regrese.}
+
+
+\clearpage
+\section{Rekurentní neuronové sítě. LSTM. UNet sítě. Struktury neuronových sítí.}
+
+
+\clearpage
+\section{Q-učení, srovnání s genetickými algoritmy.}
+
+\clearpage
+\section{Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu. Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.}
