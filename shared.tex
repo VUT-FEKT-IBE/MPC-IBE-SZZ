@@ -5,7 +5,7 @@
     a4paper,
     % Oboustranný tisk
     twoside,
-    % Záložky a metainformace ve výsledném  PDF budou v kódování unicode
+    % Záložky a metainformace ve výsledném PDF budou v kódování unicode
     unicode,
 ]{article}
 
@@ -45,6 +45,7 @@
 \usepackage{sectsty}
 % Formátování obsahů
 \usepackage{tocloft}
+\setcounter{tocdepth}{1}
 % Možnost odstranění mezer mezi řádky v seznamech (pomocí '[noitemsep]')
 \usepackage{enumitem}
 % Sázení správných uvozovek pomocí '\enquote{}'
@@ -65,6 +66,16 @@
 
 % Použití moderní/aktualizované sady písem
 \usepackage{lmodern}
+
+%%%%%%%%%%%
+% NADPISY %
+%%%%%%%%%%%
+
+\usepackage{titlesec}
+
+\titlespacing*{\section}{0pt}{10pt}{-0.2\baselineskip}
+\titlespacing*{\subsection}{0pt}{0.2\baselineskip}{-0.2\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{0.2\baselineskip}{-0.2\baselineskip}
 
 %%%%%%%%%%
 % ODKAZY %
