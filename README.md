@@ -85,7 +85,7 @@ Vybírají se právě dva předměty.
 
 - [ ] Režim omezení odpovědnosti poskytovatelů služeb informační společnosti typu mere conduit, caching a hosting
 - [ ] Aktivní povinnosti poskytovatelů služeb informační společnosti (monitoring, filtrování)
-- [ ] Pojem osobního údaje, titul ke zpracování osobních údajů, zvláštní kategorie osobních údajů
+- [x] Pojem osobního údaje, titul ke zpracování osobních údajů, zvláštní kategorie osobních údajů
 - [ ] Právní postavení správce a zpracovatele osobních údajů
 - [ ] Práva subjektů osobních údajů
 - [ ] Povinné subjekty dle zákona o kybernetické bezpečnosti
