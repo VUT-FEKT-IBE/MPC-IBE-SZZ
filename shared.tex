@@ -46,17 +46,23 @@
 % Formátování obsahů
 \usepackage{tocloft}
 \setcounter{tocdepth}{1}
-% Možnost odstranění mezer mezi řádky v seznamech (pomocí '[noitemsep]')
+% Odstranění mezer mezi řádky v seznamech
 \usepackage{enumitem}
+\setlist[itemize]{noitemsep}
 % Sázení správných uvozovek pomocí '\enquote{}'
 \usepackage{csquotes}
 % Vynucení umístění poznámek pod čarou vespod stránky
 \usepackage[bottom]{footmisc}
+% Automatické zarovnání textu k předcházení vdov a parchantů
+\usepackage[defaultlines=3,all=true]{nowidow}
+% Zalomení části textu pokud není na současné stránce dost místa
+\usepackage{needspace}
+% Nastavení řádkování
+\usepackage{setspace}
+\onehalfspacing
 % Změna odsazení odstavců
 \setlength{\parskip}{1em}
 \setlength{\parindent}{0em}
-\usepackage{setspace}
-\onehalfspacing
 
 % Bezpatkové sázení nadpisů
 \allsectionsfont{\sffamily}
@@ -76,6 +82,7 @@
 \titlespacing*{\section}{0pt}{10pt}{-0.2\baselineskip}
 \titlespacing*{\subsection}{0pt}{0.2\baselineskip}{-0.2\baselineskip}
 \titlespacing*{\subsubsection}{0pt}{0.2\baselineskip}{-0.2\baselineskip}
+\titlespacing*{\paragraph}{0pt}{0pt}{1em}
 
 %%%%%%%%%%
 % ODKAZY %
@@ -95,17 +102,27 @@
     urlcolor=blue
 }
 
-%%%%%%%%%%%%%%%%%%
-% OBRÁZKY, GRAFY %
-%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OBRÁZKY, GRAFY, TABULKY %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Vkládání obrázků
 \usepackage{graphicx}
+\usepackage{subfig}
 % Nastavení popisů obrázků, výpisů a tabulek
 \usepackage{caption}
+\captionsetup{justification=centering}
 % Grafy a vektorové obrázky
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
+% Složitější tabulky
+\usepackage{tabularx}
+\usepackage{multicol}
+
+% Sázení osamocených float prostředí v horní části stránky
+\makeatletter
+\setlength{\@fptop}{0pt plus 10pt minus 0pt}
+\makeatother
 
 %%%%%%%%%%%%%%
 % MATEMATIKA %
@@ -114,6 +131,8 @@
 % Sázení matematiky a matematických symbolů ('\mathbb{}')
 \usepackage{amsmath}
 \usepackage{amssymb}
+% Sázení fyzikálních veličin
+\usepackage{siunitx}
 
 % Náhrada za \mod a \pmod, které mají přehaně velký prostor před svou značkou
 \newcommand{\Mod}[1]{\ \mathrm{mod}\ #1}
