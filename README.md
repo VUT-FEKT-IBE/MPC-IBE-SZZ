@@ -1,5 +1,7 @@
 # Státnicové otázky MPC-IBE
 
+Nejnovější export je dostupný [zde](https://github.com/VUT-FEKT-IBE/MPC-IBE-SZZ/releases/latest).
+
 ## Základy informační bezpečnosti
 
 Vybírají se právě čtyři předměty.
