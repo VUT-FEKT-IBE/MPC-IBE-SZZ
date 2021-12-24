@@ -48,7 +48,13 @@
 \setcounter{tocdepth}{1}
 % Odstranění mezer mezi řádky v seznamech
 \usepackage{enumitem}
-\setlist[itemize]{noitemsep}
+\setlist{nosep}
+\setitemize{leftmargin=1em}
+\setenumerate{leftmargin=1.5em, label=\alph*)}
+\renewcommand{\labelitemi}{--}
+\renewcommand{\labelitemii}{--}
+\renewcommand{\labelitemiii}{--}
+\renewcommand{\labelitemiv}{--}
 % Sázení správných uvozovek pomocí '\enquote{}'
 \usepackage{csquotes}
 % Vynucení umístění poznámek pod čarou vespod stránky
