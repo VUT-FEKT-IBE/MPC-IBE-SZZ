@@ -251,6 +251,64 @@ Algoritmus hledající silně propojené komponenty pracující v~lineárním č
 \clearpage
 \section{Vlastnosti grafu: průměr, excentricita. Párování grafu. Maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Izomorfismus grafu a Ullmanův algoritmus.}
 
+Excentricita vrcholu $x$ grafu $G$ je maximální vzdálenost bodu od~jakéhokoliv bodu v~grafu: $\mathrm{e}(x) = \max\{ d_G(x, y) \ |\ y \in V_G\}$, kde $d_G(x,y)$ je minimální vzdálenost mezi body $x, y$.
+
+{}Pro~poloměr grafu platí $\mathrm{r}(G) = \min\{ \mathrm{e}(x)\ |\ x \in V \}$.
+\\Pro~průměr grafu platí $\mathrm{d}(G) = \max\{ \mathrm{e}(x)\ |\ x \in V \}$.
+
+\subsection{Párování grafu}
+
+Párování grafu je taková podmnožina hran grafu $M \subseteq E$, ve~které žádné dvě hrany nemají společný vrchol.
+Vrcholy, které patří do~párování, se nazývají \emph{saturované}.
+
+{}\emph{Maximální} párování má nejvíce hran (protože graf může mít párování více).
+\\\emph{Perfektní} párování pokrývá všechny vrcholy grafu.
+
+\subsubsection{Maďarský algoritmus}
+
+Vstupem je matice $m \times n$ (řádky odpovídají \enquote{pracovníkům} a~sloupce \enquote{úkolům}).
+
+\begin{enumerate}
+    \item Všem polím v~každém řádku odečtěte nejnižší hodnotu řádku.
+    \item Všem polím v~každém sloupci odečtěte nejnizší hodnotu sloupce.
+    \item Nakreslete čáru přes řádky/sloupce tak aby překrývaly všechny nuly s~co nejmenším počtem čar (= pokrytí).
+    \item Pokud je počet čar roven počtu řádků, algoritmus končí.
+    \item Najděte nejmenší nepokrytou hodnotu. Odečtěte její hodnotu od~každého odkrytého řádku a~přidejte ji ke~každé nenulové hodnotě v~zakrytému sloupci. Vraťte se na krok~3.
+\end{enumerate}
+
+Výsledkem je nějaká z~kombinací nenulových polí.
+
+\subsection{Problém časového rozvrhu}
+
+Ve~škole je $m$ učitelů a~$n$ tříd.
+Učitel $i$ musí učit v~třídě $j$ v~semestru $P_{i,j}$.
+Problémem je nalezení nejlepšího řešení.
+
+Existuje mnoho verzí tohoto problému:
+limitovaný počet učeben,
+učitelé mohou učit jen v~určité časy,
+žáci musí mít obědovou pauzu,
+v~rozvrhu by neměly být zbytečné díry,
+\dots
+
+\subsubsection{Barvení grafů}
+
+\paragraph{Largest Degree Ordering}
+
+Vrcholy grafu jsou seřazeny sestupně dle jejich stupně.
+Prochází se jimi postupně: vrchol je obarven takovou nejdřívější barvou, která se nevyskytuje u~jeho sousedů.
+
+\paragraph{Incidence Degree Ordering}
+
+Je vybrán vrchol s~nejvyšším stupněm, kterému je přiřazena první barva.
+Pro~neobarvené vrcholy je spočítán počet obarvených sousedů a k~obarvení je vybrán ten s~jejich největším počtem.
+
+\subsection{Izomorfismus grafů}
+
+Grafy $G$ a $H$ jsou izomorfní, pokud mezi nimi existuje (hrany zachovávající) bijekce (mapování).
+
+\subsubsection{Ullmanův algoritmus}
+
 \clearpage
 \section{Problém maximálního toku a minimálního řezu grafem. Řešení problému s více zdroji a více cíly. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.}
 
