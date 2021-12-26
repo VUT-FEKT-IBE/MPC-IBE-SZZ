@@ -109,10 +109,147 @@ Musíme vybrat nejvhodnější města pro postavení skladu, aby maximální vzd
 \clearpage
 \section{Definice grafu. Incidenční matice, matice sousednosti. Handshaking lemma. Algoritmus detekce bipartitního grafu. Silně propojené komponenty. Kosarajův algoritmus. Tarjanův algoritmus.}
 
+Graf je matematická struktura $G = (V, E)$: uspořádaná dvojice množin vrcholů a~hran (\emph{vertices and edges}), kde hrana je určena dvěma vrcholy a~volitelně směrem nebo váhou.
+Velké množství problémů postavených nad~grafy je NP-úplných.
+
+\subsection{Maticové reprezentace}
+
+Incidenční matice obsahuje informace o~mapování vrcholů jednotlivým hranám.
+Matice má řádek pro~každý vrchol a~sloupec pro každou hranu; pokud vrchol hraně náleží, je na~pozici jednička (pro~orientované grafy může mít výchozí vrchol hodnotu $-1$).
+
+Matice souslednosti má podobu čtvercové matice $n \times n$ (kde $n$ je počet vrcholů grafu), jejíž hodnota na~místě $a_{i,j}$ je celé číslo odpovídající počtu hran vedoucích z~vrcholu $i$ do~vrcholu $j$, prvky na~diagonále pak odpovídají počtu hran vedoucích z~vrcholu $i$ do~vrcholu $i$.
+
+Incidenční matice
+% TODO Zde by šlo obsah matice obarvit -- pro každou hranu jiná barva.
+% TODO Jak se značí když je vrchol propojený sám se sebou? Stačí tam ta jednička?
+$\left( \begin{matrix}
+1 & 1 & 1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 1 & 1 \\
+0 & 0 & 1 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+\end{matrix} \right)$ 
+i matice souslednosti
+$\left( \begin{matrix}
+2 & 1 & 0 & 0 & 1 & 0 \\
+1 & 0 & 1 & 0 & 1 & 0 \\
+0 & 1 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 & 1 & 1 \\
+1 & 1 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+\end{matrix} \right)$
+popisují vlastnosti grafu na~obrázku \ref{ilustracni-graf-matice}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[height=8em]{images/3_graf-matice-souslednosti}
+
+\caption[Ilustrační graf]{Ilustrační graf\\{\small (Chris-martin, Wikimedia Commons, volné dílo)}}
+\label{ilustracni-graf-matice}
+\end{figure}
+
+\subsection{Handshaking lemma}
+
+Handshaking lemmma je tvrzení že pro~každý konečný neorientovaný graf platí, že počet vrcholů s~lichým stupněm je sudý (formálně $\sum_{v \in V} \deg v = 2 |E|$: součet stupňů vrcholů odpovídá dvojnásobku počtu hran).
+
+V~roce 1736 byla dokázána Leonardem Eulerem v~dokumentu řešícím problém \href{https://cs.wikipedia.org/wiki/Sedm_most%C5%AF_m%C4%9Bsta_Kr%C3%A1lovce}{Sedmi mostů města Královce}.
+Graf obsahuje Eulerovskou cestu právě tehdy, když jím lze projít tak aby byla každá hrana navštívena právě jednou.
+
+\subsection{Detekce bipartitního grafu}
+
+Graf $G$ je bipartitní právě když je možné jeho vrcholy rozdělit do~dvou množin $V_1$ a~$V_2$ tak že každá hrana spojuje vrchol $V_1$ s~$V_2$.
+Bipartitní grafy s~velikostí $|V_1|=m$ a~$|V_2|=n$ se značí $K_\mathrm{m,n}$.
+
+Pro~detekci se využívá BFS:
+
+\begin{enumerate}
+\item Vyberte bod grafu.
+\item Přiřaďte mu barvu a~označte ho za~navštívený.
+\item Pokud má alespoň jeden sousední bod stejnou barvu jako aktuální bod, graf nelze obarvit dvěma barvami.
+\item Všem sousedům přiřaďte druhou barvu.
+\item Přejděte do~některého ze sousedů který ještě nebyl navštívený.
+\item Pokračujte dokud nejsou všechny body grafu obarvené.
+\end{enumerate}
+
+\subsection{Silně propojené komponenty}
+
+\emph{Graf} je silně propojený tehdy, když je každý vrchol dosažitelný z~každého jiného vrcholu.
+Silně propojené komponenty jsou podgrafy, které jsou samy o~sobě pevně propojeny.
+
+\subsubsection{Kosarajův algoritmus}
+
+Algoritmus hledající silně propojené komponenty pracující v~lineárním čase.
+% TODO Tato poznámka je sice pravdivá, ale není zřejmá z pseudokódu
+% Využívá faktu, že transponovaný graf $G^T$ má stejné silně propojené komponenty jako původní graf $G$.
+
+\begin{figure}[ht]
+\onehalfspacing
+\begin{enumerate}
+\item Označ každý vrchol grafu za~nenavštívený
+\item Vytvoř zásobník L
+\item Pro každý vrchol grafu V spusť podprogram Navštiv(V):
+    \begin{itemize}
+    \item Pokud je U nenavštívený:
+        \begin{enumerate}
+        \item Označ U jako navštívený
+        \item Pro každého souseda N zavolej Navštiv(N)
+        \item Přidej U na vrchol zásobníku
+        \end{enumerate}
+    \item Jinak nedělej nic
+    \end{itemize}
+\item Pro každý vrchol V zásobníku L spusť podprogram Přiřaď(V,V):
+    \begin{itemize}
+    \item Pokud V nepatří žádné komponentě:
+        \begin{enumerate}
+        \item Přiřaď V komponentě A
+        \item Pro každého souseda N zavolej Přiřaď(N,V)
+        \end{enumerate}
+    \item Jinak nedělej nic
+    \end{itemize}
+\end{enumerate}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Tarjanův algoritmus}
+
+Algoritmus hledající silně propojené komponenty pracující v~lineárním čase, efektivnější než Kosarajův.
+
+\begin{figure}[ht]
+\onehalfspacing
+\begin{enumerate}
+\item Označ každý vrchol grafu za~nenavštívený
+\item Vytvoř zásobník
+\item Vytvoř čítač \emph{i} a nastav ho na 0
+\item Vyber nenavštívený vrchol \emph{v} a spusť nad ním podprogram Propoj(\emph{v}):
+    \begin{enumerate}
+    \item nastav \emph{v.index} a \emph{v.lowlink} na \emph{i}
+    \item zvyš čítač \emph{i} o 1
+    \item přidej vrchol \emph{v} do zásobníku
+    \item pro každého navštívitelného souseda \emph{n}:
+        \begin{itemize}
+        \item pokud \emph{n} nebyl navštíven, nastav \emph{v.lowlink} na \emph{min(v.lowlink, n.lowlink)}
+        \item pokud je \emph{n} v~zásobníku, nastav \emph{v.lowlink} na \emph{min(v.lowlink, n.index)}
+        \end{itemize}
+    \item pokud je \emph{v.lowlink} rovný \emph{v.index}:
+        \begin{enumerate}
+        \item vytvoř propojenou komponentu ze zásobníku
+        \item vymaž zásobník
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{images/3_tarjanuv-algoritmus-animace.png}
+
+\caption[Animace Tarjanova algoritmu]{Animace Tarjanova algoritmu\\{\small (LynX, Wikimedia Commons, CC BY-SA 3.0)}}
+\end{figure}
 
 \clearpage
 \section{Vlastnosti grafu: průměr, excentricita. Párování grafu. Maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Izomorfismus grafu a Ullmanův algoritmus.}
-
 
 \clearpage
 \section{Problém maximálního toku a minimálního řezu grafem. Řešení problému s více zdroji a více cíly. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.}
