@@ -333,4 +333,277 @@ Grafy $G$ a $H$ jsou izomorfní, pokud mezi nimi existuje (hrany zachovávajíc�
 \section{Q-učení, srovnání s genetickými algoritmy.}
 
 \clearpage
-\section{Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu. Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.}
+\section{Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu.Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.}
+
+Klasicky jsou data pro strojové učení uspořádany ve vektoru (1D, 2D). 
+Využívá se k tomu nejčastěji lineární regrese nebo CNN (konvoluční neuronové sítě). 
+Pokud bychom chtěli převést stromoovu nebo grafovou strukturo do vektrou tak je to možné (pouze aproximace), ale dojde ke ztrátě některých informací. 
+Proto se využívá různých metod na převedení grafové struktury na zpracovatelné podoby pomocí embedding nodes.
+
+\subsection{Embeddings nodes}
+
+Využívá DeepWalk metodu (první metoda). 
+Ukazuje jak by vypadal graf ve 2D, kdy podobné vrcholy jsou v tomto prostoru blízko při sobě.
+
+\begin{center}
+	\includegraphics[width=\textwidth]{images/deepwalkGraph.png}
+\end{center}
+
+Cílem je zakódovat vrcholy z grafu do embedding prostoru tak že podobnost v embedding prostoru se blíží podobnosti grafu.
+Tento cíl udává rovnice:
+\[\text{similarity}(u,v)\approx \mathbf{z}_{v}^{T}\,\mathbf{z}_{u}\]
+
+Máme encoder, který mapuje vrcholy na embeddings. 
+Poté je fuknce na výpočet podobnosti (v rovnici levá strana), která měří podobnost v originálním grafu (síti). 
+Následně je decoder (pravá strana rovnice), který mapuje embeddings na hodnotu podobnosti (similarity score). 
+Nakonec se parametry encoderu optimalizují tak aby platila rovnice. 
+
+\begin{center}
+	\includegraphics[width=\textwidth]{images/similarity.png}
+\end{center}
+
+\subsection{random-walk embedding}
+
+Pravděpodobnost, že \textit{u} a \textit{v} se společně vyskytnou na náhodné cestě grafem je rovna nebo přibližná $\mathbf{z}_{v}^{T}\,\mathbf{z}_{u}$.
+
+\subsubsection{Přoč random-walk}
+
+Expressivity\,--\,podobnost vrcholů zahrnujících místní tak i high-order neighborhood informace.
+
+Efficiency\,--\,Musí se uvažovat pouze páry vrcholů, které se společně vyskytují na random-walk cestě.
+
+\subsubsection{Postup}
+
+Prvně se odhadne pravděpodobnost navštívení vrcholu \textit{v} na náhodné cestě grafem začínající v bodě \textit{u}, využívající některou random-walk strategii. 
+Následně se optimalizuje embeddings k zakódování random-walk statistik 
+
+\subsubsection{Optimalizace postup}
+
+Prvně se spustí random-walk s krátkou pevnou délkou, který startuje z každého vrcholu \textit{u} v grafu využívající nějakou random-walk strategii.
+Dále pro každý vrchol \textit{u} se sesbírá množina navštívených vrcholů pomocí na cestě (pomocí random-walk strategie) začínajících z \textit{u}.
+Nakonec se optimalizuje embeddings (pro vrchol \textit{u} dokážeme předpovědět sousedy v množině).
+
+\[\mathcal{L} = \sum_{u\in V} \sum_{v\in N_R (u)} - \log(\frac{\exp(\mathbf{z}_{u}\,\mathbf{z}_{v})}{\sum_{n\in V} \exp(\mathbf{z}_{u}\,\mathbf{z}_{n})})\]
+
+První suma značí součet přes všechny vrcholy \textit{u}.
+Druhá suma značí součt přes vrcholy \textit{v} vyskytujících se na cestě z vrcholu \textit{u}.
+Obsah logaritmu značí předpovídanou pravděpodobnost společného výskytu \textit{u} a \textit{v} na cestě.
+
+Cílem je najít $z_u$ které minimalizuje $\mathcal{L}$.
+
+
+\subsubsection{node2vec}
+
+Node2vec je velice podobný Deepwalk s tím rozdílem, že jsou jinak vybírany sousední vrcholy.
+Hlavní myšlenkou je kompromis mezi lokálním (BFS) a globálním (DFS) pohledem na graf (síť).
+Node2vec má dva parametry:
+\begin{itemize}
+	\item \textbf{p} udávajací hodnotu návratu k předchozímu vrcholu (return parameter)
+	\item \textbf{q} udavající \uv{poměr} mězi BFS a DFS (\uv{walk away} parameter)
+\end{itemize}
+
+Při zvolení $q>p$ se algoritmus zaměřuje spíše na globální pohled (bude směřovat k DFS průchodu). Při zvolení $q<p$ se algoritmus zaměří spíše na lokalní pohled (bude směřovat k BFS).
+
+\begin{center}
+	\includegraphics[width=\textwidth]{images/node2vecQandP.png}
+\end{center}
+
+Při prochocházení grafem může dojít ke třem stavům (jsme v bodu w):
+\begin{itemize}
+	\item vrátit se k předchozímu vrcholu (s1)
+	\item navštívit vedlejší vrchol, který má stejnou vzdálenost od počátečního vrcholu (s2)
+	\item navštivit vzdálenější vrchol (s3)
+\end{itemize}
+
+\begin{center}
+	\includegraphics[width=\textwidth]{images/node2vec.png}
+\end{center}
+
+\subsection{Relační induktivní zaměření}
+
+Definice: Jak algoritmus preferuje jeden model před druhým. 
+
+Existuje několik modelů:
+\begin{table}[!h]
+\centering
+\begin{tabular}{| >{\arraybackslash}m{4cm}| >{\centering\arraybackslash}m{4cm} | >{\centering\arraybackslash}m{2cm} |}
+\hline
+Komponent & Entita & Vazba (relace) \\ \hline
+Plně propojené & Units & All-to-all \\ \hline
+Konvoluční & Grid elements & Local \\ \hline
+Rekurentní & Timesteps & Sequential \\ \hline
+Graph network & Vrchol & Hrana \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{center}
+	\includegraphics[width=\textwidth]{images/RIB.png}
+\end{center}
+
+\subsection{Kombinatirická generalizace}
+
+Kombinatorická generalizace je vlastnost vytvářet nové rozhraní, predikce a chování z už známých stavebních bloků.
+
+Příkladem je vycestovat na nové místo.
+Máme známé postupy\,--\,cestovat letadlem; do Brna; dát si oběd; v menze.
+Generalizace je nalezení spojitostí mezi těmito věcmi na už známých znalostech.
+
+\subsection{Předávání zpráv}
+\tikzstyle{vertexnocolor}=[circle, draw]
+Máme graf.
+\begin{center}
+    \begin{tikzpicture}
+		\node[vertexnocolor](a) at (1, -2) {A};
+        \node[vertexnocolor](b) at (3, -1) {B};
+        \node[vertexnocolor](c) at (2, 1) {C};
+        \node[vertexnocolor](d) at (0, 0) {D};
+        \node[vertexnocolor](e) at (1, 2) {E};
+            
+        \begin{scope}[every path/.style={-}, every node/.style={inner sep=1pt}]
+        	\draw (a) -- node [anchor=east] {} (b);
+                   
+            \draw (b) -- node [anchor=east] {} (c);
+                   
+            \draw (c) -- node [anchor=east] {} (d);
+            \draw (c) -- node [anchor=east] {} (e);
+		\end{scope}
+	\end{tikzpicture}
+\end{center}
+
+Z tohoto gravu vytvoříme matici sousednosti A.
+$\left[ \begin{matrix}
+0 & 1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 \\
+0 & 1 & 0 & 1 & 1 \\
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 \\
+\end{matrix} \right]$ 
+
+Po tomto bodu záleží jakou metodu zvolíme.
+
+\subsubsection{Součet sousedních vrcholů}
+
+Zvolíme matici $H_1$. Jsou to hodnoty vrcholů, které jim přiřadíme.
+$\left[ \begin{matrix}
+1 \\
+2 \\
+3 \\
+4 \\
+5 \\
+\end{matrix} \right]$
+
+Následně provedeme vynásobení matice A maticí $H_1$ a výsledek je předávaná zpráva.
+
+\[\left[ \begin{matrix}
+0 & 1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 \\
+0 & 1 & 0 & 1 & 1 \\
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 \\
+\end{matrix} \right]
+\left[ \begin{matrix}
+1 \\
+2 \\
+3 \\
+4 \\
+5 \\
+\end{matrix} \right] = 
+\left[ \begin{matrix}
+0*1+1*2+0*3+0*4+0*5 \\
+1*1+0*2+1*3+0*4+0*5 \\
+0*1+1*2+0*3+1*4+1*5 \\
+0*1+0*2+1*3+0*4+0*5 \\
+0*1+0*2+1*3+0*4+0*5 \\
+\end{matrix} \right] = 
+\left[ \begin{matrix}
+2 \\
+4 \\
+11 \\
+3 \\
+3 \\
+\end{matrix} \right]\] 
+
+\subsubsection{Průměr sousedních vrcholů}
+
+Kromě matice sousednosti se vytvoří matice stupňů vrcholu D.
+$\left[ \begin{matrix}
+1 & 0 & 0 & 0 & 0 \\
+0 & 2 & 0 & 0 & 0 \\
+0 & 0 & 3 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 \\
+\end{matrix} \right]$
+
+Matice D se inveruje ($\frac{1}{x}$) kde x je hodnota z matice.
+$\left[ \begin{matrix}
+1 & 0 & 0 & 0 & 0 \\
+0 & 0,5 & 0 & 0 & 0 \\
+0 & 0 & 0,33 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 \\
+\end{matrix} \right]$
+
+Invertovaná matice se vynásobí s maticí sousednosti, kde vznikne matice $A_{avg}$.
+
+\[
+\left[ \begin{matrix}
+1 & 0 & 0 & 0 & 0 \\
+0 & 2 & 0 & 0 & 0 \\
+0 & 0 & 3 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 \\
+\end{matrix} \right]
+\left[ \begin{matrix}
+1 & 0 & 0 & 0 & 0 \\
+0 & 0,5 & 0 & 0 & 0 \\
+0 & 0 & 0,33 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 \\
+\end{matrix} \right] =
+\left[ \begin{matrix}
+0 & 1 & 0 & 0 & 0 \\
+0,5 & 0 & 0,5 & 0 & 0 \\
+0 & 0,33 & 0 & 0,33 & 0,33 \\
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 \\
+\end{matrix} \right]
+\]
+
+Tato výsledná matice se vynásobí z maticí $H_1$ a výsledek je předávaná zpráva.
+
+\[
+\left[ \begin{matrix}
+0 & 1 & 0 & 0 & 0 \\
+0,5 & 0 & 0,5 & 0 & 0 \\
+0 & 0,33 & 0 & 0,33 & 0,33 \\
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 \\
+\end{matrix} \right]
+\left[ \begin{matrix}
+1 \\
+2 \\
+3 \\
+4 \\
+5 \\
+\end{matrix} \right] = 
+\left[ \begin{matrix}
+2 \\
+2 \\
+3,6 \\
+3 \\
+3 \\
+\end{matrix} \right] 
+\]
+
+\subsubsection{Průměr sousedních vrcholů a sám sebe}
+
+Do matice sousednosti doplníme ještě, že každý vrchol sousedí se sebou takže výsledná matice sousednosti $\tilde{A}$ je
+$\left[ \begin{matrix}
+1 & 1 & 0 & 0 & 0 \\
+1 & 1 & 1 & 0 & 0 \\
+0 & 1 & 1 & 1 & 1 \\
+0 & 0 & 1 & 1 & 0 \\
+0 & 0 & 1 & 0 & 1 \\
+\end{matrix} \right]$ 
+
+Výsledná přenášená zpráva se vypočítá pomocí vzorce $\hat{A} = D^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}$
