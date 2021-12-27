@@ -75,7 +75,7 @@ Vybírají se právě dva předměty.
 - [ ] Problém obchodního cestujícího a modifikace genetických algoritmů, Genetické programování, Optimalizace hejnem, Optimalizace mravenčí kolonií, Evoluční strategie.
 - [x] Definice grafu. Incidenční matice, matice sousednosti. Handshaking lemma. Algoritmus detekce bipartitního grafu. Silně propojené komponenty. Kosarajův algoritmus. Tarjanův algoritmus.
 - [x] Vlastnosti grafu: průměr, excentricita. Párování grafu. Maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Izomorfismus grafu a Ullmanův algoritmus.
-- [ ] Problém maximálního toku a minimálního řezu grafem. Řešení problému s více zdroji a více cíly. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.
+- [x] Problém maximálního toku a minimálního řezu grafem. Řešení problému s více zdroji a více cíli. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.
 - [ ] Univerzální aproximační funkce. Dopředná neuronová síť. Maticová reprezentace NN. Gradientní sestup. Vrstva zahazování. Aktivační funkce. Softmax.
 - [ ] Konvoluční neuronové sítě – princip. Max pooling, Dávková normalizace. Známé architektury neuronových sítí.
 - [ ] Lineární regrese. Polynomiální regrese. Logistická regrese.
