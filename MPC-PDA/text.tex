@@ -164,12 +164,12 @@ Bipartitní grafy s~velikostí $|V_1|=m$ a~$|V_2|=n$ se značí $K_\mathrm{m,n}$
 Pro~detekci se využívá BFS:
 
 \begin{enumerate}
-\item Vyberte bod grafu.
-\item Přiřaďte mu barvu a~označte ho za~navštívený.
+\item Vyber bod grafu.
+\item Přiřaď mu barvu a~označte ho za~navštívený.
 \item Pokud má alespoň jeden sousední bod stejnou barvu jako aktuální bod, graf nelze obarvit dvěma barvami.
-\item Všem sousedům přiřaďte druhou barvu.
-\item Přejděte do~některého ze sousedů který ještě nebyl navštívený.
-\item Pokračujte dokud nejsou všechny body grafu obarvené.
+\item Všem sousedům přiřaď druhou barvu.
+\item Přejdi do~některého ze sousedů který ještě nebyl navštívený.
+\item Pokračuj dokud nejsou všechny body grafu obarvené.
 \end{enumerate}
 
 \subsection{Silně propojené komponenty}
@@ -310,8 +310,61 @@ Grafy $G$ a $H$ jsou izomorfní, pokud mezi nimi existuje (hrany zachovávajíc�
 \subsubsection{Ullmanův algoritmus}
 
 \clearpage
-\section{Problém maximálního toku a minimálního řezu grafem. Řešení problému s~více zdroji a více cíly. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.}
+\section{Problém maximálního toku a~minimálního řezu grafem. Řešení problému s~více zdroji a~více cíli. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.}
 
+\subsection{Maximální tok grafem}
+
+Maximální tok a~minimální řez jsou dva výrazy popisující stejný problém, pouze na~něj nahlíží z~jiných stran.
+
+Pracuje se s~orientovaným váženým grafem $G$ se zdrojem $s$ a~cílem $t$, kde pro~každou hranu $e$ platí $c(e) \geq 0$ (kde $c$ je kapacita hrany).
+
+Celkový tok na~vstupu se musí rovnat toku na~výstupu, každý nezdrojový a~neterminální bod musí mít shodnou kapacitu na~vstupu a~výstupu.
+
+Pokud je vstupních/terminálních bodů více, nejsnažší řešení je jejich sloučení do~virtuálního uzlu s~nekonečnou kapacitou.
+
+\subsubsection{Ford--Fulkersonova metoda}
+
+\begin{figure}[ht]
+\onehalfspacing
+\begin{enumerate}
+\item Začni s nulovým tokem
+\item Dokud existují rozšiřující cesty:
+    \begin{enumerate}
+    \item Najdi rozšiřující cestu pomocí BFS
+    \item Vypočítej úzké hrdlo pro danou cestu
+    \item Pro~každý vrchol $u \rightarrow v$ na cestě
+        \begin{enumerate}
+        \item Zvyš tok $u \rightarrow v$ o~hodnotu hrdla
+        \item Sniž tok $v \rightarrow u$ o~hodnotu hrdla
+        \end{enumerate}
+    \item Zvyš maximální tok o~hodnotu hrdla
+    \end{enumerate}
+\end{enumerate}
+\end{figure}
+
+FFM není plně specifikována; když se hovoří o~algoritmu, nazývá se Edmonds--Karpovým algoritmem.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{images/5_edmonds-karp}
+\caption[Řešení maximálního proudu Edmonds--Karpovým algoritmem]{Řešení maximálního proudu Edmonds--Karpovým algoritmem\\{\small (Cburnett, Wikimedia Commons, CC BY-SA 3.0)}}
+\end{figure}
+\FloatBarrier
+
+\subsection{Úzké hrdlo}
+
+% TODO Nutno ověřit.
+Úzké hrdlo cesty je minimální hodnota kapacity hrany na~této cestě.
+
+Úzké hrdlo mezi dvěma vrcholy je maximum z~úzkých hrdel přes všechny cesty mezi těmito vrcholy.
+
+Úzké hrdlo grafu je minimum z~úzkých hrdel cest mezi vstupem a~terminálem.
+
+\subsection{Reziduální cesta}
+
+Reziduální kapacita hrany je rozdíl kapacity a~proudu: $c_\mathrm{res}(u,v) = c(u,v) - f(u,v)$.
+
+Reziduální cesta je cesta od~terminálu ke~vstupu vytvořená reziduálními hranami.
 
 \clearpage
 \section{Univerzální aproximační funkce. Dopředná neuronová síť. Maticová reprezentace NN. Gradientní sestup. Vrstva zahazování. Aktivační funkce. Softmax.}
