@@ -476,6 +476,96 @@ Reziduální cesta je cesta od~terminálu ke~vstupu vytvořená reziduálními h
 \clearpage
 \section{Q-učení, srovnání s~genetickými algoritmy.}
 
+\subsection{Zpětnovazební učení}
+
+Zpětnovazební učení funguje na principu maximalizování výsledku bez toho aniž by věděl jak správně dosáhnout výsledku.
+Zpětnovazební učení využívá algoritmů jako je Q-učení, SARSA, TD-učení a další.
+
+\subsubsection{Rozdíl oproti genetickým algoritmům}
+
+Hlavním rozdílem je, že zpětnovazební učení se snaží dosáhnout co nejlepšího výsledku, zatím co GA hledá spíše optimální výsledek.
+Dalším rozdílem je, že GA výsledek měří dle fittnes zatímco zpětnovazební učení dle odměny (reward).
+
+\subsection{Markov Decision Process (MDP)}
+
+MDP se skládá ze čtyř částí a jedné volitelné:
+\begin{itemize}
+	\item $S$ je množina stavů (nejméně začátek a konec)
+	\item $A$ je množina akcí (jaké akce lze provést)
+	\item Transition state udává pravděpodobnost s~jakou skončím v~dalším stavu pokud jsem ve stavu $s$~a~provedu akci z~$A$. 
+	\item Reward je odměna a~počítá se stejně jako Transition state jen výsledkem není pravděpodobnost, ale odměna, může být kladá nebo záporná
+	\item $\gamma$ discount factor, je mezi $0 \leq \gamma \leq 1$ a ve výchozím stavu je 1 (volitelná)
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+	\includegraphics[height=10em]{images/10_MDP.png}
+    \caption{Princip MDP}
+    \label{mdp}
+\end{figure}
+
+\subsection{Q-učení}
+
+V~Q-učení počet možných akcí a~stavů je konečný.
+Je založeno na MDP.
+
+Výběr akce v~závislosti na aktuálním stavu se vybírá dle Q-value.
+Q-value určuje vhodnost (kvalitu) akce v~daném stavu.
+Q-value se vypočítají jako odhad dalších odměn ve zbylých krocích aktuálního příběhu.
+Příběh nebo epizoda je jedna iterace učení, jakoby pokus.
+Takže čím blíže jsme k~cíli tím víc narůstá Q-value.
+
+Q-value pro každý stav a~akci se zapíše do Q-table. 
+
+\subsubsection{Exploration vs exploitation}
+
+Exploration slouží pro prozkoumání prostředí a~nalezení informací o~něm.
+
+Exploitation slouží k~využítí znalosí o~prostředí.
+
+Ve zpětnovazebním učení se musí docílít optimalizace mezi exploration a~exploitation.
+K~této optimalizaci se využívá epsilon greedy strategy.
+Epsilon greedy strategy využívá hodnoty $\epsilon$, která slouží k~určení poměru při rozhodování.
+V~počátečních příbězích je nastaveno $\epsilon$ na 1 což značí, že se bude probíhat pouze exploration. 
+V~dalších příbězích se $\epsilon$ pomalu snižuje.
+
+\subsubsection{Aktualizace Q-value}
+
+Probíhá dle rovnice:
+
+$q^\text{new}(s,a) = (1-\alpha)q(s,a) + \alpha \left(R_{t+1} + \gamma\,\text{max}\,q(s',a')\right)$
+
+Hodnota $\alpha$ je learning rate, který určuje kolik informací z~přechozí Q-value chceme ponechat.
+Nabývá hodnot 0 až 1 ($0\leq\alpha\leq1$).
+Čím vyšší je tato hodnota tím rychleji se projeví nová hodnota Q-value. 
+
+Hodnota $q(s,a)$ určuje předchozí Q-value.
+
+Hodnota $\left(R_{t+1} + \gamma\,\text{max}\,q(s',a')\right)$ určuje momentální (novou) vypočítanou Q-value.
+
+Takže aktualizovaná Q-value je stará hodnota + nová.
+
+
+\subsubsection{Jak v krocích funguje Q-learning}
+
+\begin{enumerate}
+    \item Inicializace Q-values v~Q-table
+    \item Pro každý příběh
+    \begin{enumerate}
+    	\item Výběr mezi exploration a~exploitation (náhodná generace čísla)
+    	\item Provede se akce
+    	\item Aktualizuje se Q-value 
+    \end{enumerate}
+    \item Po ukončení příběhů je připravená Q-table
+\end{enumerate}
+
+\subsection{Q-učení vs SARSA}
+
+Sarsa používá politiku (policy) chovaní k výběru další akce.
+Q-učení nevyužívá politiku k~výběru další akce, ale odhaduje budoucí výnosu, které aktualizuje.
+
+
+
 \clearpage
 \section{Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu. Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.}
 
