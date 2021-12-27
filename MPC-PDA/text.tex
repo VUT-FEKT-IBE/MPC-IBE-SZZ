@@ -2,50 +2,50 @@
 
 \subsection{Polynomická vs exponenciální časová složitost.}
 
-Algoritmy s polynomickou složitostí lze efektivně řešit, bez vynaložení velkého výpočetního výkonu. 
+Algoritmy s~polynomickou složitostí lze efektivně řešit, bez vynaložení velkého výpočetního výkonu. 
 S délkou vstupu \textit{n} roste lineárně potřebný čas ($n^x$) například hledání nejkratší cesty. 
-Algoritmy s exponenciální složitostí lze efektivně řešit pouze pro malé exponenty, bez potřeby velkého výpočetního výkonu. 
+Algoritmy s~exponenciální složitostí lze efektivně řešit pouze pro malé exponenty, bez potřeby velkého výpočetního výkonu. 
 S délkou vstupu \textit{n} roste exponenciálně potřebný čas ($x^n$) například problém obchodního cestujícího.
 
 \subsection{Hierarchie výpočetní složitosti.}
 
-Hierarchie výpočetní složitosti slouží k charakterizaci algoritmů u kterých lze pouze nepřímo určit asymptotickou složitost. 
+Hierarchie výpočetní složitosti slouží k~charakterizaci algoritmů u kterých lze pouze nepřímo určit asymptotickou složitost. 
 Využívá se třídní hierarchie. 
-Třídy od nejjednodušší po nejsložitější jdou v tomto pořadí: P $\subseteq$ NP $\subseteq$ \#P $\subseteq$ PSPACE $\subseteq$ EXP $\subseteq$ NP-složité $\subseteq$ unsolvable. 
+Třídy od nejjednodušší po nejsložitější jdou v~tomto pořadí: P $\subseteq$ NP $\subseteq$ \#P $\subseteq$ PSPACE $\subseteq$ EXP $\subseteq$ NP-složité $\subseteq$ unsolvable. 
 Jednoduší třída je vždy podmnožinou složitější (do složitější patří i ty jednoduší).
 
 \subsection{Třída P}
 
 Třída P obsahuje polynomiální problémy. 
-Tyto problémy se dají vyřešit v polynomiálním čase na deterministickém Turingově stroji (TS). 
-Příkladem může být nalezení nejkratší cesty, minimální kostry v grafu.
+Tyto problémy se dají vyřešit v~polynomiálním čase na~deterministickém Turingově stroji (TS). 
+Příkladem může být nalezení nejkratší cesty, minimální kostry v~grafu.
 
 \subsection{Třída NP}
 
 Třída NP obsahuje nedeterministické polynomiální problémy. 
-Tyto problémy lze řešit v polynomiálním čase na nedeterministickém TS (doposud nesestaven).
+Tyto problémy lze řešit v~polynomiálním čase na~nedeterministickém TS (doposud nesestaven).
 
 \subsection{Třída NP-complete (NP-úplné)}
 
 NP-úplné (NPC) je podskupina problémů třídy NP, která se zabývá rozhodovacími problémy.
-Jejich řešení je nejtěžší a všechna známá řešení lze na deterministickém TS provést pouze s exponenciálním čase. 
+Jejich řešení je nejtěžší a všechna známá řešení lze na~deterministickém TS provést pouze s~exponenciálním čase. 
 Pro polynomiální nebylo zatím nalezeno řešení, ale zároveň nebylo dokázáno, že řešení neexistuje.
 
-\textbf{Problém NPC}\,--\,pokud by se podařilo, převést jeden NPC problém na polynomiální čas tak to znamená, že každý NPC problém lze převést do polynomiálního. 
-To by vedlo k prokázání P $=$ NP.
+\textbf{Problém NPC}\,--\,pokud by se podařilo, převést jeden NPC problém na~polynomiální čas tak to znamená, že každý NPC problém lze převést do~polynomiálního. 
+To by vedlo k~prokázání P $=$ NP.
 
-Bylo dokázáno, že každý algoritmus pro NPC problém lze použít k řešení jiného NPC problému.
+Bylo dokázáno, že každý algoritmus pro NPC problém lze použít k~řešení jiného NPC problému.
 Přibližně existuje 10\,000 známých NPC problémů.
 Příkladem může být\,--\,Barvení grafů, Knapsnack (problém batohu), 3-partition problém (rozdělit množinu čísel podmnožiny o velikosti 3, které mají stejný součet)
 
 \subsection{Třída NP-těžké}
 
-O problému řekneme, že je NP-težký, jestliže se na něj redukuje NPC problém, ale zároveň nevíme jestli spadá do NP.
+O problému řekneme, že je NP-težký, jestliže se na~něj redukuje NPC problém, ale zároveň nevíme jestli spadá do~NP.
 Redukce znamená že se dá převést/konvertovat.
 
 \subsection{P vs NP}
 
-P je podmnožina NP jelikož každý problém lze řešit v polynomiálním čase na
+P je podmnožina NP jelikož každý problém lze řešit v~polynomiálním čase na
  nedeterministickém TS.
 Existuje matematický problém P $=$ NP, který dosud nebyl potvrzen nebo vyvrácen. Takže se přesně nedá určit jestli je P $=$ NP. 
 Obecně se považuje, že P $\neq$ NP.
@@ -56,25 +56,25 @@ Třída \#P se nezabývá rozhodovacími problémy, ale řeší problém nalezen
 Z toho plyne, že problémy třídy \#P musí být alespoň stejně složité jako stejný NP problém.
 U této třídy se neptáme jestli existuje řešení, ale kolik řešení existuje.
 
-\textbf{Definice:} \#P je množina všech funkcí $f(x)$, kde $f(x)$ odpovídá počtu přijatelných cest nedeterministického TS v polynomiálním čase.
+\textbf{Definice:} \#P je množina všech funkcí $f(x)$, kde $f(x)$ odpovídá počtu přijatelných cest nedeterministického TS v~polynomiálním čase.
 
 \noindent V této třídě existují také problémy \#P-úplné.
 
 \subsection{Třída PSPACE}
 
-PSPACE je množina rozhodovacích problémů, které lze vyřešit pomocí deterministického TS v polynomiálním paměťovém prostoru.
+PSPACE je množina rozhodovacích problémů, které lze vyřešit pomocí deterministického TS v~polynomiálním paměťovém prostoru.
 Neboli nezáleží, jak dlouho trvá vykonání, když je využit polynomiální (rozumné) množství paměťi. 
 PSPACE má úplné problémy, které jsou sestupně samo redukovatelné (downward self-reducible) a náhodně samo redukovatelné (random self-reducible).
-Jsou zahrnuté v EXP.
+Jsou zahrnuté v~EXP.
 Dle Savitchova theorému můžeme dokázat, že \textbf{P}SPACE = \textbf{NP}SPACE.
 
 \subsection{Třída EXP}
 
 Často označována jako EXPTIME.
-Je to množina rozhodovacích problémů řešitelných na deterministickém TS v exponenciálním čase.
+Je to množina rozhodovacích problémů řešitelných na~deterministickém TS v~exponenciálním čase.
 Časová komplexita je O($2^{p(n)}$), kde $p(n)$ je polynomická funkce $n$.
 
-Existuje také třída EXPSPACE, která je podobná EXPTIME, jen se neřeší v exponenciálním času, ale v exponenciálním paměťovém prostoru.
+Existuje také třída EXPSPACE, která je podobná EXPTIME, jen se neřeší v~exponenciálním času, ale v~exponenciálním paměťovém prostoru.
 
 U obou tříd se jedná o nezvládnutelné problémy, pro které neexistuje polynomiální algoritmus.
 Jejich složitost je exponenciální (například $2^n$).
@@ -83,16 +83,16 @@ Jejich složitost je exponenciální (například $2^n$).
 
 Existuje osoba (zloděj), který má batoh/zavazadlo.
 Zavazadlo má určitou maximální hmotnost/velikost.
-Zloděj se snaží do batohu vložit co nejvíce zboží v co největší hodnotě. 
+Zloděj se snaží do~batohu vložit co nejvíce zboží v~co největší hodnotě. 
 Každé toto zboží má jinou hmotnost/velikost a jinou hodnotu.
-Takže zloděj hledá co nejoptimálnější zboží, které může vložit do batohu a tím mít co největší profit.
+Takže zloděj hledá co nejoptimálnější zboží, které může vložit do~batohu a tím mít co největší profit.
 
 \subsection{Problém směrování vozidel (VRP)}
 
 Existuje 1 místo (sklad), která má x vozidel.
 Vozidla ze skladu musí objet všechny místa a dovést tam zboží. 
 Vozidla nemusí navštívit stejný počet míst, ale množina vozidel musí navštívit všechna místa co nejoptimálněji. 
-Při jednom vozidle podobné problému obchodního cestujícího (TSP), jen s rozdílem, že u TSP si vybíráme začátek, ale u VRP máme začátek přesně definován.
+Při jednom vozidle podobné problému obchodního cestujícího (TSP), jen s~rozdílem, že u TSP si vybíráme začátek, ale u VRP máme začátek přesně definován.
 
 \subsection{Metrický k-střed}
 
@@ -194,7 +194,7 @@ Algoritmus hledající silně propojené komponenty pracující v~lineárním č
         \begin{enumerate}
         \item Označ U jako navštívený
         \item Pro každého souseda N zavolej Navštiv(N)
-        \item Přidej U na vrchol zásobníku
+        \item Přidej U na~vrchol zásobníku
         \end{enumerate}
     \item Jinak nedělej nic
     \end{itemize}
@@ -220,16 +220,16 @@ Algoritmus hledající silně propojené komponenty pracující v~lineárním č
 \begin{enumerate}
 \item Označ každý vrchol grafu za~nenavštívený
 \item Vytvoř zásobník
-\item Vytvoř čítač \emph{i} a nastav ho na 0
+\item Vytvoř čítač \emph{i} a nastav ho na~0
 \item Vyber nenavštívený vrchol \emph{v} a spusť nad ním podprogram Propoj(\emph{v}):
     \begin{enumerate}
-    \item nastav \emph{v.index} a \emph{v.lowlink} na \emph{i}
+    \item nastav \emph{v.index} a \emph{v.lowlink} na~\emph{i}
     \item zvyš čítač \emph{i} o 1
-    \item přidej vrchol \emph{v} do zásobníku
+    \item přidej vrchol \emph{v} do~zásobníku
     \item pro každého navštívitelného souseda \emph{n}:
         \begin{itemize}
-        \item pokud \emph{n} nebyl navštíven, nastav \emph{v.lowlink} na \emph{min(v.lowlink, n.lowlink)}
-        \item pokud je \emph{n} v~zásobníku, nastav \emph{v.lowlink} na \emph{min(v.lowlink, n.index)}
+        \item pokud \emph{n} nebyl navštíven, nastav \emph{v.lowlink} na~\emph{min(v.lowlink, n.lowlink)}
+        \item pokud je \emph{n} v~zásobníku, nastav \emph{v.lowlink} na~\emph{min(v.lowlink, n.index)}
         \end{itemize}
     \item pokud je \emph{v.lowlink} rovný \emph{v.index}:
         \begin{enumerate}
@@ -273,7 +273,7 @@ Vstupem je matice $m \times n$ (řádky odpovídají \enquote{pracovníkům} a~s
     \item Všem polím v~každém sloupci odečtěte nejnizší hodnotu sloupce.
     \item Nakreslete čáru přes řádky/sloupce tak aby překrývaly všechny nuly s~co nejmenším počtem čar (= pokrytí).
     \item Pokud je počet čar roven počtu řádků, algoritmus končí.
-    \item Najděte nejmenší nepokrytou hodnotu. Odečtěte její hodnotu od~každého odkrytého řádku a~přidejte ji ke~každé nenulové hodnotě v~zakrytému sloupci. Vraťte se na krok~3.
+    \item Najděte nejmenší nepokrytou hodnotu. Odečtěte její hodnotu od~každého odkrytého řádku a~přidejte ji ke~každé nenulové hodnotě v~zakrytému sloupci. Vraťte se na~krok~3.
 \end{enumerate}
 
 Výsledkem je nějaká z~kombinací nenulových polí.
@@ -310,7 +310,7 @@ Grafy $G$ a $H$ jsou izomorfní, pokud mezi nimi existuje (hrany zachovávajíc�
 \subsubsection{Ullmanův algoritmus}
 
 \clearpage
-\section{Problém maximálního toku a minimálního řezu grafem. Řešení problému s více zdroji a více cíly. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.}
+\section{Problém maximálního toku a minimálního řezu grafem. Řešení problému s~více zdroji a více cíly. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.}
 
 
 \clearpage
@@ -330,105 +330,114 @@ Grafy $G$ a $H$ jsou izomorfní, pokud mezi nimi existuje (hrany zachovávajíc�
 
 
 \clearpage
-\section{Q-učení, srovnání s genetickými algoritmy.}
+\section{Q-učení, srovnání s~genetickými algoritmy.}
 
 \clearpage
-\section{Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu.Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.}
+\section{Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu. Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.}
 
-Klasicky jsou data pro strojové učení uspořádany ve vektoru (1D, 2D). 
-Využívá se k tomu nejčastěji lineární regrese nebo CNN (konvoluční neuronové sítě). 
-Pokud bychom chtěli převést stromoovu nebo grafovou strukturo do vektrou tak je to možné (pouze aproximace), ale dojde ke ztrátě některých informací. 
-Proto se využívá různých metod na převedení grafové struktury na zpracovatelné podoby pomocí embedding nodes.
+Klasicky jsou data pro strojové učení uspořádana ve vektoru (1D, 2D). 
+Využívá se k~tomu nejčastěji lineární regrese nebo CNN (konvoluční neuronové sítě). 
+Pokud bychom chtěli převést stromovou nebo grafovou strukturu do~vektrou, bude to možné aproximací, a~dojde ke~ztrátě některých informací.
+Proto se využívá různých metod na~převedení grafové struktury na~zpracovatelné podoby pomocí embedding nodes.
 
 \subsection{Embeddings nodes}
 
 Využívá DeepWalk metodu (první metoda). 
-Ukazuje jak by vypadal graf ve 2D, kdy podobné vrcholy jsou v tomto prostoru blízko při sobě.
+Ukazuje jak by vypadal graf ve~2D, kdy podobné vrcholy jsou v~tomto prostoru blízko při sobě.
 
-\begin{center}
-	\includegraphics[width=\textwidth]{images/deepwalkGraph.png}
-\end{center}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{images/11_deepwalk-graf}
+    \caption{DeepWalk metoda}
+\end{figure}
 
-Cílem je zakódovat vrcholy z grafu do embedding prostoru tak že podobnost v embedding prostoru se blíží podobnosti grafu.
+Cílem je zakódovat vrcholy z~grafu do~embedding prostoru tak že podobnost v~embedding prostoru se blíží podobnosti grafu.
 Tento cíl udává rovnice:
-\[\text{similarity}(u,v)\approx \mathbf{z}_{v}^{T}\,\mathbf{z}_{u}\]
+$\text{similarity}(u,v)\approx \mathbf{z}_{v}^{T}\,\mathbf{z}_{u}$
 
-Máme encoder, který mapuje vrcholy na embeddings. 
-Poté je fuknce na výpočet podobnosti (v rovnici levá strana), která měří podobnost v originálním grafu (síti). 
-Následně je decoder (pravá strana rovnice), který mapuje embeddings na hodnotu podobnosti (similarity score). 
-Nakonec se parametry encoderu optimalizují tak aby platila rovnice. 
+Máme encoder, který mapuje vrcholy na~embeddings. 
+Poté je fuknce na~výpočet podobnosti (v~rovnici levá strana), která měří podobnost v~originálním grafu (síti).
+Následně je decoder (pravá strana rovnice), který mapuje embeddings na~hodnotu podobnosti (similarity score).
+Nakonec se parametry encoderu optimalizují tak aby platila rovnice.
 
-\begin{center}
-	\includegraphics[width=\textwidth]{images/similarity.png}
-\end{center}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[height=10em]{images/11_similarity}
+    \caption{Podobnost mezi grafem a embedding prostorem}
+\end{figure}
 
 \subsection{random-walk embedding}
 
-Pravděpodobnost, že \textit{u} a \textit{v} se společně vyskytnou na náhodné cestě grafem je rovna nebo přibližná $\mathbf{z}_{v}^{T}\,\mathbf{z}_{u}$.
+Pravděpodobnost, že $u$ a $v$ se společně vyskytnou na~náhodné cestě grafem je rovna nebo přibližná $\mathbf{z}_{v}^{T}\,\mathbf{z}_{u}$.
 
 \subsubsection{Přoč random-walk}
 
-Expressivity\,--\,podobnost vrcholů zahrnujících místní tak i high-order neighborhood informace.
-
-Efficiency\,--\,Musí se uvažovat pouze páry vrcholů, které se společně vyskytují na random-walk cestě.
+{}Expressivity: podobnost vrcholů zahrnujících místní i~high-order neighborhood informace.
+\\Efficiency: musí se uvažovat pouze páry vrcholů, které se společně vyskytují na~random-walk cestě.
 
 \subsubsection{Postup}
 
-Prvně se odhadne pravděpodobnost navštívení vrcholu \textit{v} na náhodné cestě grafem začínající v bodě \textit{u}, využívající některou random-walk strategii. 
-Následně se optimalizuje embeddings k zakódování random-walk statistik 
+Nejprve se odhadne pravděpodobnost navštívení vrcholu $v$ na~náhodné cestě grafem začínající v~bodě $u$, využívající některou random-walk strategii. 
+Následně se optimalizuje embeddings k~zakódování random-walk statistik.
 
 \subsubsection{Optimalizace postup}
 
-Prvně se spustí random-walk s krátkou pevnou délkou, který startuje z každého vrcholu \textit{u} v grafu využívající nějakou random-walk strategii.
-Dále pro každý vrchol \textit{u} se sesbírá množina navštívených vrcholů pomocí na cestě (pomocí random-walk strategie) začínajících z \textit{u}.
-Nakonec se optimalizuje embeddings (pro vrchol \textit{u} dokážeme předpovědět sousedy v množině).
+Nejprve se spustí random-walk s~krátkou pevnou délkou, který startuje z~každého vrcholu $u$ v~grafu využívající nějakou random-walk strategii.
+Dále pro každý vrchol $u$ se sesbírá množina navštívených vrcholů pomocí na~cestě (pomocí random-walk strategie) začínajících z~$u$.
+Nakonec se optimalizuje embeddings (pro vrchol $u$ dokážeme předpovědět sousedy v~množině).
 
-\[\mathcal{L} = \sum_{u\in V} \sum_{v\in N_R (u)} - \log(\frac{\exp(\mathbf{z}_{u}\,\mathbf{z}_{v})}{\sum_{n\in V} \exp(\mathbf{z}_{u}\,\mathbf{z}_{n})})\]
+$$\mathcal{L} = \sum_{u\in V} \sum_{v\in N_R (u)} - \log(\frac{\exp(\mathbf{z}_{u}\,\mathbf{z}_{v})}{\sum_{n\in V} \exp(\mathbf{z}_{u}\,\mathbf{z}_{n})})$$
 
-První suma značí součet přes všechny vrcholy \textit{u}.
-Druhá suma značí součt přes vrcholy \textit{v} vyskytujících se na cestě z vrcholu \textit{u}.
-Obsah logaritmu značí předpovídanou pravděpodobnost společného výskytu \textit{u} a \textit{v} na cestě.
+První suma značí součet přes všechny vrcholy $u$.
+Druhá suma značí součt přes vrcholy $v$ vyskytujících se na~cestě z~vrcholu $u$.
+Obsah logaritmu značí předpovídanou pravděpodobnost společného výskytu $u$ a $v$ na~cestě.
 
 Cílem je najít $z_u$ které minimalizuje $\mathcal{L}$.
 
 
 \subsubsection{node2vec}
 
-Node2vec je velice podobný Deepwalk s tím rozdílem, že jsou jinak vybírany sousední vrcholy.
-Hlavní myšlenkou je kompromis mezi lokálním (BFS) a globálním (DFS) pohledem na graf (síť).
+Node2vec je velice podobný Deepwalk s~tím rozdílem, že jsou jinak vybírany sousední vrcholy.
+Hlavní myšlenkou je kompromis mezi lokálním (BFS) a globálním (DFS) pohledem na~graf (síť).
 Node2vec má dva parametry:
 \begin{itemize}
-	\item \textbf{p} udávajací hodnotu návratu k předchozímu vrcholu (return parameter)
-	\item \textbf{q} udavající \uv{poměr} mězi BFS a DFS (\uv{walk away} parameter)
+	\item $p$ udávajací hodnotu návratu k~předchozímu vrcholu (return parameter)
+	\item $q$ udavající \enquote{poměr} mězi BFS a DFS (\enquote{walk away} parameter)
 \end{itemize}
 
-Při zvolení $q>p$ se algoritmus zaměřuje spíše na globální pohled (bude směřovat k DFS průchodu). Při zvolení $q<p$ se algoritmus zaměří spíše na lokalní pohled (bude směřovat k BFS).
+Při zvolení $q>p$ se algoritmus zaměřuje spíše na~globální pohled (bude směřovat k~DFS průchodu). Při zvolení $q<p$ se algoritmus zaměří spíše na~lokalní pohled (bude směřovat k~BFS).
 
-\begin{center}
-	\includegraphics[width=\textwidth]{images/node2vecQandP.png}
-\end{center}
+\begin{figure}[ht]
+    \centering
+	\includegraphics[width=\textwidth]{images/11_node2vec-pq}
+    \caption{Prioritizace $p$ nebo $q$ v~node2vec}
+\end{figure}
 
-Při prochocházení grafem může dojít ke třem stavům (jsme v bodu w):
+Při prochocházení grafem (viz obr.~\ref{pruchod-node2vec}) může dojít ke třem stavům (z~hlediska bodu $w$):
 \begin{itemize}
-	\item vrátit se k předchozímu vrcholu (s1)
-	\item navštívit vedlejší vrchol, který má stejnou vzdálenost od počátečního vrcholu (s2)
-	\item navštivit vzdálenější vrchol (s3)
+	\item návrat k~předchozímu vrcholu ($s1$),
+	\item navštívení vedlejšího vrcholu, který má stejnou vzdálenost od~počátečního vrcholu ($s2$)
+	\item navštívení vzdálenějšího vrcholu ($s3$)
 \end{itemize}
 
-\begin{center}
-	\includegraphics[width=\textwidth]{images/node2vec.png}
-\end{center}
+\begin{figure}
+    \centering
+	\includegraphics[height=10em]{images/node2vec.png}
+    \caption{Průchod grafem v~node2vec}
+    \label{pruchod-node2vec}
+\end{figure}
 
 \subsection{Relační induktivní zaměření}
 
 Definice: Jak algoritmus preferuje jeden model před druhým. 
 
 Existuje několik modelů:
-\begin{table}[!h]
+\begin{table}[ht]
 \centering
-\begin{tabular}{| >{\arraybackslash}m{4cm}| >{\centering\arraybackslash}m{4cm} | >{\centering\arraybackslash}m{2cm} |}
+\caption{Vlastnosti komponent}
+\begin{tabular}{|l|c|c|}
 \hline
-Komponent & Entita & Vazba (relace) \\ \hline
+Komponent & Entita & Vazba (relace) \\ \hline \hline
 Plně propojené & Units & All-to-all \\ \hline
 Konvoluční & Grid elements & Local \\ \hline
 Rekurentní & Timesteps & Sequential \\ \hline
@@ -436,22 +445,34 @@ Graph network & Vrchol & Hrana \\ \hline
 \end{tabular}
 \end{table}
 
-\begin{center}
-	\includegraphics[width=\textwidth]{images/RIB.png}
-\end{center}
+\begin{figure}[ht]
+    \centering
+	\includegraphics[width=\textwidth]{images/11_RIB}
+    \caption{Přístupy relačního induktivního zaměření}
+\end{figure}
 
 \subsection{Kombinatirická generalizace}
 
-Kombinatorická generalizace je vlastnost vytvářet nové rozhraní, predikce a chování z už známých stavebních bloků.
+Kombinatorická generalizace je vlastnost vytvářet nové rozhraní, predikce a chování z~už známých stavebních bloků.
 
-Příkladem je vycestovat na nové místo.
-Máme známé postupy\,--\,cestovat letadlem; do Brna; dát si oběd; v menze.
-Generalizace je nalezení spojitostí mezi těmito věcmi na už známých znalostech.
+Příkladem je vycestovat na~nové místo.
+Máme známé postupy -- cestovat letadlem; do~Brna; dát si oběd; v~menze.
+Generalizace je nalezení spojitostí mezi těmito věcmi na~už známých znalostech.
 
 \subsection{Předávání zpráv}
 \tikzstyle{vertexnocolor}=[circle, draw]
-Máme graf.
-\begin{center}
+
+Mějme graf $G$ (viz obr.~\ref{graf-pro-predavani-zprav}) reprezentovatelný maticí souslednosti $\mathbf{A}$: 
+$\left[ \begin{matrix}
+0 & 1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 0 \\
+0 & 1 & 0 & 1 & 1 \\
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 \\
+\end{matrix} \right]$.
+
+\begin{figure}[ht]
+    \centering
     \begin{tikzpicture}
 		\node[vertexnocolor](a) at (1, -2) {A};
         \node[vertexnocolor](b) at (3, -1) {B};
@@ -468,33 +489,28 @@ Máme graf.
             \draw (c) -- node [anchor=east] {} (e);
 		\end{scope}
 	\end{tikzpicture}
-\end{center}
-
-Z tohoto gravu vytvoříme matici sousednosti A.
-$\left[ \begin{matrix}
-0 & 1 & 0 & 0 & 0 \\
-1 & 0 & 1 & 0 & 0 \\
-0 & 1 & 0 & 1 & 1 \\
-0 & 0 & 1 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 \\
-\end{matrix} \right]$ 
+    \caption{Graf $G$.}
+    \label{graf-pro-predavani-zprav}
+\end{figure}
+\FloatBarrier
 
 Po tomto bodu záleží jakou metodu zvolíme.
 
 \subsubsection{Součet sousedních vrcholů}
 
-Zvolíme matici $H_1$. Jsou to hodnoty vrcholů, které jim přiřadíme.
+Zvolíme matici $\mathbf{H_1}$, která bude reprezentovat hodnoty vrcholů:
 $\left[ \begin{matrix}
 1 \\
 2 \\
 3 \\
 4 \\
 5 \\
-\end{matrix} \right]$
+\end{matrix} \right]$.
 
-Následně provedeme vynásobení matice A maticí $H_1$ a výsledek je předávaná zpráva.
+Vynásobíme matici $\mathbf{A}$ maticí $\mathbf{H_1}$ a~získáme předávanou zprávu.
 
-\[\left[ \begin{matrix}
+$$
+\left[ \begin{matrix}
 0 & 1 & 0 & 0 & 0 \\
 1 & 0 & 1 & 0 & 0 \\
 0 & 1 & 0 & 1 & 1 \\
@@ -509,11 +525,11 @@ Následně provedeme vynásobení matice A maticí $H_1$ a výsledek je předáv
 5 \\
 \end{matrix} \right] = 
 \left[ \begin{matrix}
-0*1+1*2+0*3+0*4+0*5 \\
-1*1+0*2+1*3+0*4+0*5 \\
-0*1+1*2+0*3+1*4+1*5 \\
-0*1+0*2+1*3+0*4+0*5 \\
-0*1+0*2+1*3+0*4+0*5 \\
+0 \cdot 1 + 1 \cdot 2 + 0 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
+1 \cdot 1 + 0 \cdot 2 + 1 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
+0 \cdot 1 + 1 \cdot 2 + 0 \cdot 3 + 1 \cdot 4 + 1 \cdot 5 \\
+0 \cdot 1 + 0 \cdot 2 + 1 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
+0 \cdot 1 + 0 \cdot 2 + 1 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
 \end{matrix} \right] = 
 \left[ \begin{matrix}
 2 \\
@@ -521,11 +537,12 @@ Následně provedeme vynásobení matice A maticí $H_1$ a výsledek je předáv
 11 \\
 3 \\
 3 \\
-\end{matrix} \right]\] 
+\end{matrix} \right]
+$$
 
 \subsubsection{Průměr sousedních vrcholů}
 
-Kromě matice sousednosti se vytvoří matice stupňů vrcholu D.
+Kromě matice sousednosti se vytvoří matice stupňů vrcholu $\mathbf{D}$:
 $\left[ \begin{matrix}
 1 & 0 & 0 & 0 & 0 \\
 0 & 2 & 0 & 0 & 0 \\
@@ -534,18 +551,18 @@ $\left[ \begin{matrix}
 0 & 0 & 0 & 0 & 1 \\
 \end{matrix} \right]$
 
-Matice D se inveruje ($\frac{1}{x}$) kde x je hodnota z matice.
+Matice $\mathbf{D}$ se invertuje ($\frac{1}{x}$) kde $x$ je hodnota z~matice:
 $\left[ \begin{matrix}
 1 & 0 & 0 & 0 & 0 \\
-0 & 0,5 & 0 & 0 & 0 \\
-0 & 0 & 0,33 & 0 & 0 \\
+0 & 0.5 & 0 & 0 & 0 \\
+0 & 0 & 0.33 & 0 & 0 \\
 0 & 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 0 & 1 \\
 \end{matrix} \right]$
 
-Invertovaná matice se vynásobí s maticí sousednosti, kde vznikne matice $A_{avg}$.
+Invertovaná matice se vynásobí s~maticí sousednosti, kde vznikne matice $\mathbf{A_\mathrm{avg}}$.
 
-\[
+$$
 \left[ \begin{matrix}
 1 & 0 & 0 & 0 & 0 \\
 0 & 2 & 0 & 0 & 0 \\
@@ -555,27 +572,27 @@ Invertovaná matice se vynásobí s maticí sousednosti, kde vznikne matice $A_{
 \end{matrix} \right]
 \left[ \begin{matrix}
 1 & 0 & 0 & 0 & 0 \\
-0 & 0,5 & 0 & 0 & 0 \\
-0 & 0 & 0,33 & 0 & 0 \\
+0 & 0.5 & 0 & 0 & 0 \\
+0 & 0 & 0.33 & 0 & 0 \\
 0 & 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 0 & 1 \\
 \end{matrix} \right] =
 \left[ \begin{matrix}
 0 & 1 & 0 & 0 & 0 \\
-0,5 & 0 & 0,5 & 0 & 0 \\
-0 & 0,33 & 0 & 0,33 & 0,33 \\
+0.5 & 0 & 0.5 & 0 & 0 \\
+0 & 0.33 & 0 & 0.33 & 0.33 \\
 0 & 0 & 1 & 0 & 0 \\
 0 & 0 & 1 & 0 & 0 \\
 \end{matrix} \right]
-\]
+$$
 
-Tato výsledná matice se vynásobí z maticí $H_1$ a výsledek je předávaná zpráva.
+Tato výsledná matice se vynásobí z~maticí $\mathbf{H_1}$ a získáme předávanou zprávu.
 
-\[
+$$
 \left[ \begin{matrix}
 0 & 1 & 0 & 0 & 0 \\
-0,5 & 0 & 0,5 & 0 & 0 \\
-0 & 0,33 & 0 & 0,33 & 0,33 \\
+0.5 & 0 & 0.5 & 0 & 0 \\
+0 & 0.33 & 0 & 0.33 & 0.33 \\
 0 & 0 & 1 & 0 & 0 \\
 0 & 0 & 1 & 0 & 0 \\
 \end{matrix} \right]
@@ -589,21 +606,22 @@ Tato výsledná matice se vynásobí z maticí $H_1$ a výsledek je předávaná
 \left[ \begin{matrix}
 2 \\
 2 \\
-3,6 \\
+3.6 \\
 3 \\
 3 \\
 \end{matrix} \right] 
-\]
+$$
 
 \subsubsection{Průměr sousedních vrcholů a sám sebe}
 
-Do matice sousednosti doplníme ještě, že každý vrchol sousedí se sebou takže výsledná matice sousednosti $\tilde{A}$ je
+Do~matice sousednosti doplníme, že každý vrchol sousedí sám se sebou a získáme $\mathbf{\tilde{A}}$:
 $\left[ \begin{matrix}
 1 & 1 & 0 & 0 & 0 \\
 1 & 1 & 1 & 0 & 0 \\
 0 & 1 & 1 & 1 & 1 \\
 0 & 0 & 1 & 1 & 0 \\
 0 & 0 & 1 & 0 & 1 \\
-\end{matrix} \right]$ 
+\end{matrix} \right]$.
 
-Výsledná přenášená zpráva se vypočítá pomocí vzorce $\hat{A} = D^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}$
+Výsledná přenášená zpráva se vypočítá pomocí vzorce
+$\mathbf{\hat{A}} = \mathbf{D}^{-\frac{1}{2}}\mathbf{\tilde{A}}\mathbf{\tilde{D}}^{-\frac{1}{2}}$.
