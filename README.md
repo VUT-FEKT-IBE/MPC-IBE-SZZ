@@ -80,7 +80,7 @@ Vybírají se právě dva předměty.
 - [ ] Konvoluční neuronové sítě – princip. Max pooling, Dávková normalizace. Známé architektury neuronových sítí.
 - [ ] Lineární regrese. Polynomiální regrese. Logistická regrese.
 - [ ] Rekurentní neuronové sítě. LSTM. UNet sítě. Struktury neuronových sítí.
-- [ ] Q-učení, srovnání s genetickými algoritmy.
+- [x] Q-učení, srovnání s genetickými algoritmy.
 - [x] Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu. Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.
 
 ### MPC-ODP
