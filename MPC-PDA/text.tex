@@ -105,6 +105,97 @@ Musíme vybrat nejvhodnější města pro postavení skladu, aby maximální vzd
 \clearpage
 \section{Problém obchodního cestujícího a modifikace genetických algoritmů, Genetické programování, Optimalizace hejnem, Optimalizace mravenčí kolonií, Evoluční strategie.}
 
+\subsection{Problém obchodního cestujícího}
+
+V~tomto NP-těžkém problému (\emph{Travelling Salesman Problem, TSP}) jde o~nalezení té nejkratší Hamiltonské cesty v~grafu $G$:
+Hamiltonská cesta $P$ je taková cesta, která navštíví každý vrchol právě jednou.
+
+Heurestické algoritmy negarantují že nalezly nejlepší řešení, ale operují v~dosažitelném čase.
+Příkladem je \href{https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm}{Nearest Neighbour} (dochází k~\enquote{slepému} propojování nejbližších bodů bez~znalosti celku), který může vrátit nejlepší i~nejhorší možný výsledek.
+
+\subsubsection{Modifikace genetických algoritmů pro~TSP}
+
+Genetické algoritmy nejdou na~TSP aplikovat přímo, protože každý z~vrcholů může být navštíven pouze jednou.
+
+\begin{itemize}
+\item přirozený výběr: fitness funkce je celková délka cesty a~nevyžaduje modifikaci
+\item mutace: prohození dvou vrcholů uvnitř chromozomu nevyžaduje modifikaci
+\item křížení: nestačí vyměnit dvě části chromozomu, je třeba ho \enquote{přefiltrovat} a~vybrat pouze takové vrcholy, které se v~chormozomu ještě neobjevily (a~tyto vyfiltrované nahradit)
+\end{itemize}
+
+\subsection{Genetické programování}
+
+Genetické programování pracuje se~stromy, ne vektory.
+Strom obsahuje pouze funkce a~terminály (které jsou pouze v~listech a nemají potomky).
+
+Náhodně generované programy využívají základní operace a~konstanty pro~rozhodovací strom s~omezenou hloubkou.
+Vybraná funkce rekurzivně generuje další stromy.
+Ekvivalent křížení je prohození podstromů.
+
+\begin{figure}[ht]
+    \centering
+    \tikzstyle{node}=[circle, draw, text centered]
+    \begin{tikzpicture}
+        \node[node](+) at (3, 3) {\texttt{+}};
+
+        \node[node](2) at (0, 2) {\texttt{2}};
+        \node[node](3) at (2, 2) {\texttt{3}};
+        \node[node](*) at (4, 2) {\texttt{*}};
+        \node[node](/) at (6, 2) {\texttt{/}};
+
+        \node[node](x) at (3, 0.5) {\texttt{x}};
+        \node[node](7) at (4, 0.5) {\texttt{7}};
+        \node[node](y) at (5, 0.5) {\texttt{y}};
+        \node[node](5) at (6, 0.5) {\texttt{5}};
+
+        \begin{scope}[every path/.style={-}, every node/.style={inner sep=1pt}]
+            \draw (2) -- node {} (+);
+            \draw (3) -- node {} (+);
+            \draw (*) -- node {} (+);
+            \draw (/) -- node {} (+);
+
+            \draw (x) -- node {} (*);
+            \draw (7) -- node {} (*);
+            \draw (y) -- node {} (/);
+            \draw (5) -- node {} (/);
+        \end{scope}
+    \end{tikzpicture}
+    \caption{Strom řešící příklad $5 + 7x + y/5 = 0$}
+\end{figure}
+\FloatBarrier
+
+\subsection{Optimalizace hejnem}
+
+Každá částice se snaží aktualizovat svou pozici $X$ v~prostoru (2D, 3D, \dots):
+
+$$X(t+1) = X(t) + V(t+1)$$
+$$V(t+1) = WV(t) + C_1 \cdot \mathrm{\texttt{rand()}} X (X_\mathrm{pbest} - X(t)) + C_2 \cdot \mathrm{\texttt{rand()}} X (X_\mathrm{gbest} - X(t))$$
+%
+kde $V(t)$ je rychlost v~čase $t$, $X(t)$ je pozice v~čase $t$, $W$ je váha, $C_1$/$C_2$ jsou učící a~akcelerační faktory, rand je reálné číslo $<0, 1>$, $X_\mathrm{pbest}$ je nejlepší osobní pozice částice a~$X_\mathrm{gbest}$ je globální nejlepší pozice.
+
+Jedna iterace algoritmu, tj. výpočet fitness funkce:
+
+\begin{enumerate}
+\item aktualizace osobního i~globálního nejlepšího výsledku,
+\item aktualizace rychlosti částic,
+\item aktualizace pozice částic.
+\end{enumerate}
+
+\subsection{Optimalizace mravenční kolonií}
+
+Simuluje mnoho nezávislých kooperujících jedinců:
+
+\begin{enumerate}
+\item vytvoření částečného řešení,
+\item přidání hrany na~základě stochastických parametrů a~feromonů,
+\item vyhledání lokálního minima,
+\item aktualizace feromonů dobrých řešení.
+\end{enumerate}
+
+\subsection{Evoluční strategie}
+
+Využívá pouze mutaci, ne křížení.
+Jednotlivci jsou většinou reprezentováni jako pár vektorů reálných čísel: $v = (x, \sigma)$, kde $x$ je souřadnice pozice a~$\sigma$ je vektor směrodatných odchylek v~daném bodu.
 
 \clearpage
 \section{Definice grafu. Incidenční matice, matice sousednosti. Handshaking lemma. Algoritmus detekce bipartitního grafu. Silně propojené komponenty. Kosarajův algoritmus. Tarjanův algoritmus.}
