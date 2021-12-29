@@ -572,9 +572,213 @@ Suma všech hodnot na~výstupech neuronů se rovná jedné.
 \clearpage
 \section{Lineární regrese. Polynomiální regrese. Logistická regrese.}
 
+\subsection{Lineární regrese}
+
+Lineární regrese představuje aproximaci hodnot přímkou.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ |p{4.5cm}||p{4.5cm}| }
+	\hline
+    x & y \\ \hline
+    Obytná plocha [$\text{m}^2$] & Cena nemovitosti [USD]\\ \hline
+    2104 & 400\,000 \\ \hline
+    1416 & 232\,000 \\ \hline
+    1534 & 315\,000 \\ \hline
+	\end{tabular}
+	\caption{Ceny nemovitostí}
+\end{table}
+
+Vezmemeli v úvahu tabulku výše kde x je vstupní proměná (feature) a y je výstup.
+Využije se lineární regrese pro jednu proměnou.
+Model této linární regrese lze reprezentovat funkcí zvanou hypothesis a má tvar $h_{\Theta}(x) = \Theta_0 + \Theta_1 x$.
+Zde $\Theta$ jsou parametry učícího se algoritmu, které upravují lineární funkci.
+
+Vybírat parametr $\Theta$ tak aby $h(x)\approx y$.
+Výběr probíhá pomocí minimalizační funkce $J(\Theta)$.
+Funkce má tvar 
+\[
+J(\Theta_0,\Theta_1) = \frac{1}{2m} \sum_{i=1}^{m}(h_0(x^{(i)})-y^{(i)})^2.
+\]
+
+Část $(h_0(x^{(i)})-y^{(i)})^2$ značí, že chceme minimalizovat čtvercový rozdíl (square difference).
+
+$h_0(x^{(i)})$ značí předpovídanou hodnotu.
+
+$y^{(i)}$ značí reálnou hodnotu.
+
+Proměná m značí velikost trénovacích dat (v případě tabulky by to bylo 3).
+
+\subsubsection{Výpočet $\Theta$}
+Vypočítat $\Theta$ lze pomocí normálové rovnice nebo algoritmu gradientního sestupu.
+
+Pomocí normálové rovnice se optimální hodnota $\Theta$ vypočítá jako $\Theta = (X^TX)^{-1}X^Ty$.
+Hodnoty $X$ a $y$ jsou vektorizovány.
+Hodnota $X^T$ je transponovaná hodnota $X$.
+
+Výhoda normálové rovnice je jednoduchá implementace, ale komplexita je O($\text{n}^3$).
+
+Jelikož pro velký počet n by výpočet byl časově náročný, využívá se algoritmu gradientního sestupu.
+Algoritmus gradientního sestupu se vypočítá dle rovnice 
+\[\Theta_j := \Theta_j - \alpha \frac{\partial}{\partial\Theta_j}J(\Theta_0,\Theta_1)\]
+
+Hodnota $\alpha$ slouží k stanovení rychlosti učení (learning rate).
+Pokud je $\alpha$ nastavená dobře tak každou iteraci by měla hodnota $J(\Theta)$ klesat pokud neklesá $\alpha$ by měla být snížena.
+
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ |p{4.5cm}|p{4.5cm}||p{4.5cm}| }
+	\hline
+    $x_1$ & $x_2$ & y \\ \hline
+    Počet místností & Obytná plocha [$\text{m}^2$] & Cena nemovitosti [USD]\\ \hline
+    5 & 2104 & 400\,000 \\ \hline
+    7 & 1416 & 232\,000 \\ \hline
+    4 & 1534 & 315\,000 \\ \hline
+	\end{tabular}
+	\caption{Ceny nemovitostí 2}
+\end{table}
+
+Vezmemeli v úvahu upravenou tabulku tak zde nepoužijeme lineární regresi pro jednu proměnou, ale pro více proměných.
+Vše funguje na stejném principu, jen s menšími změnami ve vzorcích.
+
+Hypothesis funkce se změní na $h_{\Theta}(x) = \Theta_0 + \Theta_1 x_1 + \Theta_2 x_2 + \dotsb + \Theta_n x_n$.
+Minimalizační funkce $J(\Theta)$ se nezmění jen počítáme $J(\Theta_0, \Theta_1, \dots , \Theta_n)$.
+
+Hodnoty vstupů $x$ (features) se reprezentují pomocí matice $X$. 
+Počet x vždy bude odpovídat počtu $\Theta$ s tím, že pro první $x_0$ bude vždy roven 1 a další $x_n$ budou rovny hodnotám z tabulky.
+Tuto matice lze upravovat třemi způsoby.
+
+První je škálovaní, kdy $x_1$ až $x_n$ upravíme dle vzorce $x = x/x_{\text{max}}$. 
+Hodnota $x_{\text{max}}$ se získá pro každý sloupec zvlášt s tím že je největší hodnota ve sloupci.
+
+Druhým je normalizace průměrem, kdy $x_1$ až $x_n$ upravíme dle vzorce $x = (x - \mu)/(x_{\text{max} - x_{\text{min})}}$. 
+Hodnota $x_{\text{max}}$ a $x_{\text{min}}$ je získávána stějně jako u škálování a hodnota $\mu$ je jejich průměr všech hodnot ve sloupci.
+
+Třetím je standardizace, dy $x_1$ až $x_n$ upravíme dle vzorce $x = (x - \mu)/\sigma$.
+Hodnota $\sigma$ je směrodatná odchylka.
+
+
+
+
+
+
+
+
+
+
+
+
 
 \clearpage
 \section{Rekurentní neuronové sítě. LSTM. UNet sítě. Struktury neuronových sítí.}
+
+\subsection{Struktury neuronových sítí}
+
+\begin{figure}[h]
+    \centering
+	\includegraphics[height=10em]{images/09_NN-struktura.png}
+    \caption{Struktura neuronových sítí}
+    \label{NNS}
+\end{figure}
+
+One to one -- Základní struktura. 
+Využívá to většina neuronových sítí. 
+Vstupem je objekt (obrázek, vektor, atd.) s~pevnou velikostí, poté to prochází přes skryté vrstvy, kdy poslední vrstva má jednotný výstup.
+
+One to many -- Využije se v~případě pokud máme jeden objekt (obrázek), ale výstupů má být více (jednotilivá slova na obrázku).
+
+Many to one -- Využije se v~případě pokud máme víc objektů (slova ve větě, snímky ve videu), ale má být pouze jeden výstup (jestli je věta pozitivní nebo negativní, co se dejě ve videu).
+
+Many to many 1 -- Využije se v~případě pokud má být délka vstup a~výstup proměnlivá.
+Tohoto se dá využít v~překladu z~jazyka do jazyka, kdy vstupem je věta a~výstupem je přeložená věta.
+
+Many to many 2 -- Využije se v případě, jestliže vstup má proměnlivou délku a~výstupem má být nějaké rozhodnutí pro každý objekt vstupu.
+Pokud bychom měli na vstupu snímky videa a~na pro každý tento snímek bychom chtěli vytvářet nějakou klasifikaci na výstupu.
+
+\subsection{Rekurentní neuronové sítě (RNN)}
+
+\subsubsection{Jak fungují}
+
+Skladají se ze tří částí, kterými jsou vstup \textbf{X}, výstup \textbf{Y} a buňku \textbf{RNN}.
+
+Vezme se vstup X~a~předá tento vstup do RNN, který má skrytý interní stav $h$. 
+Při každém čtení nového vstupu se tento interní stav aktualizuje a~při dalším čtení vstupu bude tento stav použit pro učení RNN (feed the model). 
+Toto způsobí, že model je spožděn o~krok. 
+Vysledkem je poté výstup z~RNN buňky.
+
+\begin{figure}[h]
+    \centering
+	\includegraphics[height=10em]{images/09_RNN.png}
+    \caption{Základní princip RNN}
+    \label{RNN}
+\end{figure}
+
+V~rovnici by to bylo zapsáno $h_t = f_W(h_{t-1},x_t)$, kde $f_W$ je nějaká funkce s~parametrem $W$, $h_t$ je nový stav, $h_{t-1}$ je předcházející stav a~$x_t$ je vstup X.
+
+\subsubsection{Unrolled RNN}
+
+Unrolled RNN je pouze převedení základního principu tak, aby to bylo pochopitelnější, viz \ref{unrolledRNN}.
+
+\begin{figure}[h]
+    \centering
+	\includegraphics[height=10em]{images/09_unrolled-RNN.png}
+    \caption{Unrolled RNN}
+    \label{unrolledRNN}
+\end{figure}
+
+\subsection{Long short term memory (LSTM)}
+
+LSTM funguje na stejném principu jako RNN, ale RNN buňka je mnohem složitější (teď nazývaná LSTM buňka).
+Má 2 interní stavy.
+Obsahuje několik vrstev, které kontrolují proud informací.
+Jsou založené na několika branách (gates).
+Tyto brány regulují kolik informací bude propuštěno a~kolik ne.
+
+\subsubsection{Jak funguje LSTM}
+
+\begin{itemize}
+	\item Zapomene nepotřebnou historii
+	\item Uloží relevantní části nové informace
+	\item Pomocí předchozích dvou kroků aktualizují vnitřní stav
+	\item Nakonec je vygenerován výstup
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+	\includegraphics[height=10em]{images/09_lstm.png}
+    \caption{LSTM buňka}
+    \label{LSTM}
+\end{figure}
+
+\subsection{U-net síťě}
+
+\subsubsection{Semantic segmentation}
+
+Využívá se při rozpoznávání objektů na obrázku.
+Chceme určit k~jaké kategorii (pejsek, tráva atd) každý pixel patří.
+Pokud máme dve stejné kategorie tak semantic segmentation mezi nimi nerozlišuje.
+
+\subsubsection{U-net}
+
+Byl vytvořen pro biomedicínu, dnes se využívá i~jinde.
+Je tvořen ze dvou hlavních částí (cest).
+První je contraction path rozlišení vstupu se zmenšuje nejšastěji o~polovinu.
+Druhou je expansion path, kde se výstup z~contraction path spojuje s~výstupem nižší vrstvy.
+
+\begin{figure}[h]
+    \centering
+	\includegraphics[height=10em]{images/09_unet.png}
+    \caption{LSTM buňka}
+    \label{LSTM}
+\end{figure}
+
+Zdroje:
+\begin{enumerate}
+    \item \url{https://www.youtube.com/watch?v=SEnXr6v2ifU}
+    \item \url{https://www.youtube.com/watch?v=6niqTuYFZLQ}
+    \item \url{https://www.youtube.com/watch?v=azM57JuQpQI}
+\end{enumerate}
 
 
 \clearpage
@@ -583,7 +787,7 @@ Suma všech hodnot na~výstupech neuronů se rovná jedné.
 \subsection{Zpětnovazební učení}
 
 Zpětnovazební učení funguje na principu maximalizování výsledku bez toho aniž by věděl jak správně dosáhnout výsledku.
-Zpětnovazební učení využívá algoritmů jako je Q-učení, SARSA, TD-učení a další.
+Zpětnovazební učení využívá algoritmů jako je Q-učení, SARSA, TD-učení a~další.
 
 \subsubsection{Rozdíl oproti genetickým algoritmům}
 
