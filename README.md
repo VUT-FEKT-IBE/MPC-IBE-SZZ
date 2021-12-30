@@ -78,7 +78,7 @@ Vybírají se právě dva předměty.
 - [x] Problém maximálního toku a minimálního řezu grafem. Řešení problému s více zdroji a více cíli. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.
 - [x] Univerzální aproximační funkce. Dopředná neuronová síť. Maticová reprezentace NN. Gradientní sestup. Vrstva zahazování. Aktivační funkce. Softmax.
 - [ ] Konvoluční neuronové sítě – princip. Max pooling, Dávková normalizace. Známé architektury neuronových sítí.
-- [ ] Lineární regrese. Polynomiální regrese. Logistická regrese.
+- [x] Lineární regrese. Polynomiální regrese. Logistická regrese.
 - [x] Rekurentní neuronové sítě. LSTM. UNet sítě. Struktury neuronových sítí.
 - [x] Q-učení, srovnání s genetickými algoritmy.
 - [x] Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu. Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.
