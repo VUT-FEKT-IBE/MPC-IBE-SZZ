@@ -460,6 +460,110 @@ Reziduální cesta je cesta od~terminálu ke~vstupu vytvořená reziduálními h
 \clearpage
 \section{Univerzální aproximační funkce. Dopředná neuronová síť. Maticová reprezentace NN. Gradientní sestup. Vrstva zahazování. Aktivační funkce. Softmax.}
 
+\subsection{Univerzální aproximační funkce}
+
+Feedforward neuronová síť je algoritmus inspirovaný biologickýmy neurony.
+Univerzální aproximační věta říká, že FFNN s~jedinou skrytou vrstvou obsahující konečný počet neuronů může aproximovat libovolnou kontinuální funkci s~libovolnou přeností.
+Neříká však nic o~způsobu konstrukce aktivační funkce.
+
+\subsection{Dopředná neuronová síť}
+
+Jde o~nejstarší a~nejjednodušší typ sítí.
+FFNN je umělá neuronová síť ve~které neurony netvoří cykly, čímž se liší od~rekurentních neuronových sítí.
+Informace prochází od~vstupu přes (volitelné) skryté vrstvy do~vstvy výstupní.
+
+Jednovrstvá síť (ve~které je vstup přímo napojen na~výstup) se nazývá \emph{perceptron}.
+Vstupy jsou sečteny na~základě vah a~tvoří výslednou hodnotu (typicky jedinou).
+Vzhledem ke~své limitaci se dokáže naučit pouze lineárně separovatelné funkce (mezi které \emph{ne}patří například XOR).
+Reálně využívané FFNN však mají skrytých vrstev více.
+
+Vícevrstvé sítě využívají různé způsoby učení a nejpopulárnější z~nich je zpětná propagace (\emph{back-propagation}).
+Výstupní hodnoty jsou porovnány se správnou odpovědí a informace je různými způsoby vracena zpátky do~sítě.
+Algoritmus takto mění váhy jednotlivých propojení mezi neurony tak aby se celková chyba o~trochu snížila.
+
+Když je tento proces opakován v~dostatečně velkém počtu cyklů, síť konverguje a její chybovost se přestane měnit.
+Tento proces se nazývá gradientní sestup.
+
+V~síti také může dojít k~přetrénování: FFNN se \enquote{moc zaměří} na~trénovací sadu a přestane zachycovat opravdové statické vlastnosti datasetu.
+
+\subsection{Maticová reprezentace NN}
+
+\begin{figure}[ht]
+    \onehalfspacing
+    \centering
+    \includegraphics[height=15em]{images/6_maticova-operace}
+    $$
+    \sigma \left( \left[ \begin{matrix}
+    1 & -2 \\
+    -1 & 1 \\
+    \end{matrix} \right] \left[ \begin{matrix}
+    1 \\
+    -1 \\
+    \end{matrix} \right] + \left[ \begin{matrix}
+    1 \\
+    0 \\
+    \end{matrix} \right] \right) =  \left[ \begin{matrix}
+    0.98 \\
+    0.12 \\
+    \end{matrix} \right]
+    $$
+    \caption{Ukázka výpočtu hodnot neuronů první skryté vrstvy}
+\end{figure}
+\FloatBarrier
+
+\subsection{Gradientní sestup}
+
+Cílem gradientního sestupu je nalezení globálního minima v~prostoru všech možných řešení.
+
+Pokud se pracuje s~velkým datasetem (který se nevejde do~VRAM na~GPU), lze ho rozdělit do~menších částí.
+Větší členění ale zpomaluje efektivní hledání cesty k~maximu.
+
+Začíná se v~náhodném bodu prostoru řešení $\theta$.
+Úpravou vah neuronů se tento bod posouvá směrem k~minimu, tj. k~optimálnímu řešení.
+Nic negarantuje že bude globální minimum nalezeno; dle vstupního bodu může funkce konvergovat k~lokálnímu optimu ze~kterého se již nedostane.
+
+Pokud je trénovací krok (\emph{learning rate}) $\eta$ moc velký, může optimum \enquote{přeskočit} a točit se kolem něj. Proto je lepší nechat algoritmus učit pomaleji.
+
+\subsection{Vrstva zahazování}
+
+\emph{Dropout} vrstva zajišťuje že nedojde k~přetrénování určité části sítě které je stimulována nejčastěji.
+
+Při~každé interaci má neuron $p$-procentní pravděpodobnost dočasného vypnutí.
+Když je vypnutý, nepodílí se na~výsledku ani mu nejsou upravovány váhy; je tak zajištěno že se síť trénuje rovnoměrně.
+
+\subsection{Aktivační funkce}
+
+Aktivační funkce přináší nelinearitu.
+
+\begin{table}[ht]
+\onehalfspacing
+\centering
+\begin{tabular}{|l|c|}
+    název & vzorec \\ \hline \hline
+    unit step & $\phi(z) = \begin{cases}
+    0 & z < 0, \\
+    0.5 & z = 0, \\
+    1 & z > 0 \\
+    \end{cases}$ \\
+    signum & $\phi(z) = \begin{cases}
+    -1 & z < 0, \\
+    0 & z = 0, \\
+    1 & z > 0 \\
+    \end{cases}$ \\
+    lineární & $\phi(z) = z$ \\
+    logistická (sigmoid) & $\phi(z) = \frac{1}{1 + e^{-z}}$ \\
+    hyperbolická & $\phi(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$ \\
+    ReLU & $\phi(z) = \max(0, z)$ \\
+\end{tabular}
+\caption{Předpisy některých aktivačních funkcí}
+\end{table}
+\FloatBarrier
+
+\subsection{Softmax}
+
+Softmax je výstupní vrstva reprezentující kategorickou distribuci.
+Každý výstupní neuron má přiřazen svůj význam (např. číslice 0--9) a pravděpodobnost (interval $\left<0, 1\right>$) s~jakou vstup odpovídá tomuto významu.
+Suma všech hodnot na~výstupech neuronů se rovná jedné.
 
 \clearpage
 \section{Konvoluční neuronové sítě – princip. Max pooling, Dávková normalizace. Známé architektury neuronových sítí.}
