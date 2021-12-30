@@ -647,7 +647,7 @@ Minimalizační funkce $J(\Theta)$ se nezmění jen počítáme $J(\Theta_0, \Th
 
 Hodnoty vstupů $x$ (features) se reprezentují pomocí matice $X$. 
 Počet x vždy bude odpovídat počtu $\Theta$ s tím, že pro první $x_0$ bude vždy roven 1 a další $x_n$ budou rovny hodnotám z tabulky.
-Tuto matice lze upravovat třemi způsoby.
+Tuto matice lze předzpracovávat třemi způsoby (preprocessing).
 
 První je škálovaní, kdy $x_1$ až $x_n$ upravíme dle vzorce $x = x/x_{\text{max}}$. 
 Hodnota $x_{\text{max}}$ se získá pro každý sloupec zvlášt s tím že je největší hodnota ve sloupci.
@@ -656,19 +656,93 @@ Druhým je normalizace průměrem, kdy $x_1$ až $x_n$ upravíme dle vzorce $x =
 Hodnota $x_{\text{max}}$ a $x_{\text{min}}$ je získávána stějně jako u škálování a hodnota $\mu$ je jejich průměr všech hodnot ve sloupci.
 
 Třetím je standardizace, dy $x_1$ až $x_n$ upravíme dle vzorce $x = (x - \mu)/\sigma$.
-Hodnota $\sigma$ je směrodatná odchylka.
+Hodnota $\sigma$ je směrodatná odchylka. 
+
+\subsection{Polynomiální regrese}
+
+Polynomiální regrese je velmi podobná lineární regresi.
+Jen nevytváříme přimku ale křivku využívající polynimiální funkci.
+
+Polynomiální regresi má cenu používat pokud máme více vstupů $x$ (feature).
+Hypothesis funkce vypadá $h_0(x) = \Theta_0 + \Theta_1 x + \Theta_2 x^2 + \dotsb + \Theta_n x^n$.
+Rovnice minimalizační funkce a gradientního sestupu se nezmění.
+
+I v případě polynomiální regrese je potřeba předzpracovat data
+
+\subsection{Regrese vs. klasifikace}
+
+Klasifikace je podobná regresi, ale předpovídané hodnoty jsou diskrétní.
+Dělíme na binární a multiclass klasifikaci.
+U binární vybíráme pouze ze dvou možností (je to pejsek nebo kočička), zatímco u multiclass se vybírá z několika možností (jaký je to objekt).
+
+Binární klasifikace využívá regresi, která ve většině případů má spatné výsledky.
+Pro zlepšení výsledků lze využít logickou regresi.
+
+\subsection{Logická regrese}
+
+Využívá se pro problémy binární klasifikace.
+Cílem je, aby hypothesis funkce byla 0 nebo 1.
+
+Funkce $h_0(x) = g(\Theta^T x) = \frac{1}{1+e^{-\Theta^T x}}$.
+
+Lze definovat logistickou (sigmoid) funkcí $g(z) = \frac{1}{1+e^{-z}}$.
+Sigmoid funkce je vykreslena na obrázku.
+\begin{center}
+	\begin{tikzpicture}
+	    \begin{axis}[
+	        height = 7.3cm,
+	        width = 11cm,
+	        axis on top = true,
+	        axis x line = bottom,
+	        axis y line = left,
+	        x axis line style = -,
+	        y axis line style = -,
+	        tick align = outside,
+	        every tick/.append style = {
+	            black,
+	            thin
+	        },
+	%       grid = major,
+	        ymin = 0,
+	        ymax = 1,
+	        xlabel = $Z$
+	    ]
+	        \addplot[
+	            blue,
+	            domain = -5:5,
+	            samples = 100
+	        ]
+	            {1/(1+exp(-x))};
+	    \end{axis}
+	\end{tikzpicture}
+\end{center}
+
+Model lze reprezentovat pomocí $h_0(x) = P(y = 1 | x ; \Theta)$. 
+Tímto získáme pravděpodobnost, že $y$ bude 1 (určitě) v závislosti na $x$ a $\Theta$.
+Neboli zde je vstup (velikost nádoru), a řekni mi jaká šance je, že nádor maligní.
+
+Pro opačný hodnotu by byla rovnice $1 - h_0(x) = P(y = 1 | x ; \Theta)$.
+
+Minimalizační funkce má tvar 
+
+\[
+J(\Theta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)}\log(h_0(x^{(i)})) + (1-y^{(i)})\log(1 - h_0(x^{(i)})) \right]
+\]
+
+Zde je $y^{(i)}\log(h_0(x^{(i)})) = 0$ když $y = 0$ a $(1-y^{(i)})\log(1 - h_0(x^{(i)})) = 0$ když $y = 1$.
+
+Logistická regrese s využitím gradietního sestupného algoritmu má tvar 
+\[
+\Theta_{i+1} := \Theta_i - \frac{\alpha}{m} X^T(g(X\Theta_i) - \vec{y})
+\]
+Zde $(g(X\Theta_i) - \vec{y})$ určuje chybu (error).
 
 
-
-
-
-
-
-
-
-
-
-
+Zdroje:
+\begin{enumerate}
+    \item \url{https://www.youtube.com/watch?v=4b4MUYve_U8}
+    \item \url{https://www.youtube.com/watch?v=het9HFqo1TQ}
+\end{enumerate}
 
 \clearpage
 \section{Rekurentní neuronové sítě. LSTM. UNet sítě. Struktury neuronových sítí.}
