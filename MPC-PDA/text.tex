@@ -568,6 +568,101 @@ Suma všech hodnot na~výstupech neuronů se rovná jedné.
 \clearpage
 \section{Konvoluční neuronové sítě – princip. Max pooling, Dávková normalizace. Známé architektury neuronových sítí.}
 
+CNN jsou inspirovány zrakovým centrem mozku zvířat.
+Jednotlivé neurony reagují pouze na~část obrazu, ne na~celek; jejich jádra (\enquote{zorná pole}) se částečně překrývají.
+CNN jsou tedy vhodné pro~zpracování dat majících mřízkové uspořádání (hodnoty v~čase (1D), obraz (2D), MRI a~CT (3D)).
+
+Velikost jádra (\emph{kernel size}) je vždy čtverec o~liché velikosti: $3\times3$, $5 \times 5$, $11 \times 11$, \dots
+
+V~konvoluční vrstě se trénují parametry jádra, v~hustě propojené vrstvě váhy.
+Každá vrstva má více jader (8, 16, 24, \dots).
+
+Jádra mohou mít různou funkci:
+rozpoznání hran $\left[ \begin{matrix}
+-1 & -1 & -1 \\
+-1 &  8 & -1 \\
+-1 & -1 & -1 \\
+\end{matrix} \right]$,
+ostření $\left[ \begin{matrix}
+ 0 & -1 &  0 \\
+-1 &  5 & -1 \\
+ 0 & -1 &  0 \\
+\end{matrix} \right]$,
+\\
+rozmazání $\frac{1}{9} \left[ \begin{matrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+\end{matrix} \right]$,
+\dots
+
+Velikost kernelu na~výstupu je menší než na~vstupu:
+$\mathbf{X} \mathbf{K} = \left[ \begin{matrix}
+0 & 1 & 2 \\
+3 & 4 & 5 \\
+7 & 8 & 9 \\
+\end{matrix} \right] \left[ \begin{matrix}
+0 & 1 \\
+2 & 3 \\
+\end{matrix} \right] = \left[ \begin{matrix}
+19 & 25 \\
+37 & 43 \\
+\end{matrix} \right]$.
+
+\emph{Zero padding} umožňuje výstupní velikost zvětšit:
+\\-- vstup ($8 \times 8$) $\rightarrow$ konvoluce ($6 \times 6$);
+\\-- vstup ($8 \times 8$) $\rightarrow$ zero padding ($10 \times 10$) $\rightarrow$ konvoluce ($8 \times 8$).
+
+\subsection{Max pooling}
+
+\begin{figure}[ht]
+\onehalfspacing
+\begin{minipage}[c]{0.68\textwidth}
+    Zmenšení dimenzionality vstupu při~zachování podstatných informací.
+    Redukce velikosti zmenšuje výpočetní i~paměťovou náročnost a~snižuje pravděpodobnost \emph{overfittingu} dat.
+
+    % Odstavce se uvnitř 'figure' chovají zvláštně
+    \vspace*{1em}
+    Overfitting nastává když síť odpovídá moc přesně vstupním datům a pro~data jiná nevrací správné výsledky, protože je moc specializovaná na~trénovací sadu.
+\end{minipage}
+%\hspace*{0.04\textwidth}
+\begin{minipage}[c]{0.30\textwidth}
+    $$
+    \left[\begin{matrix}
+    1 & 1 & 2 & 4 \\
+    5 & 6 & 7 & 8 \\
+    3 & 2 & 1 & 0 \\
+    1 & 2 & 3 & 4 \\
+    \end{matrix} \right] \rightarrow \left[\begin{matrix}
+    6 & 8 \\
+    3 & 4 \\
+    \end{matrix} \right]
+    $$
+    \caption{Max pool $2 \times 2$ zachovávající pouze nejvyšší hodnotu.}
+\end{minipage}
+\end{figure}
+\FloatBarrier
+
+\subsection{Dávková normalizace}
+
+Umisťuje se za~lineární váhy (konvoluční vrstvu).
+Zvláště v~hlubokých sítích se využívá při~trénování, protože malé rozdíly v~mělčích skrytých vrstvách mohou výrazněji ovlivnit hlubší skryté vrstvy, a zpomalit tak proces učení.
+
+\subsection{Architektury neuronových sítí}
+
+% Více na: https://cs.education-wiki.com/4130807-convolutional-neural-networks
+
+\textbf{LeNet} (1998): 7 vrstev, rozpoznání znaků v~dokumentu.
+
+\textbf{ImageNet}: 8 vrstev, tisíc kategorií s~tisícem obrázků na~kategorii.
+
+\textbf{ZF Net} (2012): popularizovala CNN.
+
+\textbf{GoogleNet} (2014): 22 vrstev
+
+\textbf{VGGNet}: 16 vrstev
+
+\textbf{ResNet} (2015): 152 vrstev, využívá dávkovou normalizaci. Používá se ve všech algoritmech hlubokého učení.
 
 \clearpage
 \section{Lineární regrese. Polynomiální regrese. Logistická regrese.}

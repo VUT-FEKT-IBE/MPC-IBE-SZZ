@@ -77,7 +77,7 @@ Vybírají se právě dva předměty.
 - [x] Vlastnosti grafu: průměr, excentricita. Párování grafu. Maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Izomorfismus grafu a Ullmanův algoritmus.
 - [x] Problém maximálního toku a minimálního řezu grafem. Řešení problému s více zdroji a více cíli. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.
 - [x] Univerzální aproximační funkce. Dopředná neuronová síť. Maticová reprezentace NN. Gradientní sestup. Vrstva zahazování. Aktivační funkce. Softmax.
-- [ ] Konvoluční neuronové sítě – princip. Max pooling, Dávková normalizace. Známé architektury neuronových sítí.
+- [x] Konvoluční neuronové sítě – princip. Max pooling, Dávková normalizace. Známé architektury neuronových sítí.
 - [x] Lineární regrese. Polynomiální regrese. Logistická regrese.
 - [x] Rekurentní neuronové sítě. LSTM. UNet sítě. Struktury neuronových sítí.
 - [x] Q-učení, srovnání s genetickými algoritmy.
