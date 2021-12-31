@@ -9,48 +9,48 @@ S délkou vstupu \textit{n} roste exponenciálně potřebný čas ($x^n$) např�
 
 \subsection{Hierarchie výpočetní složitosti.}
 
-Hierarchie výpočetní složitosti slouží k~charakterizaci algoritmů u kterých lze pouze nepřímo určit asymptotickou složitost. 
+Hierarchie výpočetní složitosti slouží k~charakterizaci algoritmů u~kterých lze pouze nepřímo určit asymptotickou složitost. 
 Využívá se třídní hierarchie. 
-Třídy od nejjednodušší po nejsložitější jdou v~tomto pořadí: P $\subseteq$ NP $\subseteq$ \#P $\subseteq$ PSPACE $\subseteq$ EXP $\subseteq$ NP-složité $\subseteq$ unsolvable. 
-Jednoduší třída je vždy podmnožinou složitější (do složitější patří i ty jednoduší).
+Třídy od nejjednodušší po nejsložitější jdou v~tomto pořadí: P $\subseteq$ NP $\subseteq$ \#P $\subseteq$ PSPACE $\subseteq$ EXP $\subseteq$ NP-složité $\subseteq$ neřešitelné. 
+Jednoduší třída je vždy podmnožinou složitější a do~složitější patří i ty jednoduší.
 
-\subsection{Třída P}
+\subsubsection{Třída P}
 
 Třída P obsahuje polynomiální problémy. 
 Tyto problémy se dají vyřešit v~polynomiálním čase na~deterministickém Turingově stroji (TS). 
 Příkladem může být nalezení nejkratší cesty, minimální kostry v~grafu.
 
-\subsection{Třída NP}
+\subsubsection{Třída NP}
 
 Třída NP obsahuje nedeterministické polynomiální problémy. 
 Tyto problémy lze řešit v~polynomiálním čase na~nedeterministickém TS (doposud nesestaven).
 
-\subsection{Třída NP-complete (NP-úplné)}
+\subsubsection{Třída NP-complete (NP-úplné)}
 
-NP-úplné (NPC) je podskupina problémů třídy NP, která se zabývá rozhodovacími problémy.
+NP-úplné (NP-C) je podskupina problémů třídy NP, která se zabývá rozhodovacími problémy.
 Jejich řešení je nejtěžší a všechna známá řešení lze na~deterministickém TS provést pouze s~exponenciálním čase. 
-Pro polynomiální nebylo zatím nalezeno řešení, ale zároveň nebylo dokázáno, že řešení neexistuje.
+Pro~polynomiální nebylo zatím nalezeno řešení, ale zároveň nebylo dokázáno, že řešení neexistuje.
 
-\textbf{Problém NPC}\,--\,pokud by se podařilo, převést jeden NPC problém na~polynomiální čas tak to znamená, že každý NPC problém lze převést do~polynomiálního. 
+\textbf{Problém NP-C}: pokud by se podařilo převést jeden NP-C problém na~polynomiální čas tak to znamená, že každý NP-C problém lze převést do~polynomiálního. 
 To by vedlo k~prokázání P $=$ NP.
 
-Bylo dokázáno, že každý algoritmus pro NPC problém lze použít k~řešení jiného NPC problému.
-Přibližně existuje 10\,000 známých NPC problémů.
-Příkladem může být\,--\,Barvení grafů, Knapsnack (problém batohu), 3-partition problém (rozdělit množinu čísel podmnožiny o velikosti 3, které mají stejný součet)
+Bylo dokázáno, že každý algoritmus pro~NP-C problém lze použít k~řešení jiného \mbox{NP-C} problému.
+Přibližně existuje 10\,000 známých NP-C problémů.
+Jde napříkald o~barvení grafů, Knapsnack (problém batohu), 3-partition problém (rozdělit množinu čísel podmnožiny o velikosti 3, které mají stejný součet), \dots
 
-\subsection{Třída NP-těžké}
+\subsubsection{Třída NP-těžké}
 
 O problému řekneme, že je NP-težký, jestliže se na~něj redukuje NPC problém, ale zároveň nevíme jestli spadá do~NP.
 Redukce znamená že se dá převést/konvertovat.
 
-\subsection{P vs NP}
+\subsubsection{P vs NP}
 
-P je podmnožina NP jelikož každý problém lze řešit v~polynomiálním čase na
+P~je podmnožina NP, jelikož každý problém lze řešit v~polynomiálním čase na
  nedeterministickém TS.
 Existuje matematický problém P $=$ NP, který dosud nebyl potvrzen nebo vyvrácen. Takže se přesně nedá určit jestli je P $=$ NP. 
 Obecně se považuje, že P $\neq$ NP.
 
-\subsection{Třída \#P}
+\subsubsection{Třída \#P}
 
 Třída \#P se nezabývá rozhodovacími problémy, ale řeší problém nalezení možných řešení NP problémů. 
 Z toho plyne, že problémy třídy \#P musí být alespoň stejně složité jako stejný NP problém.
@@ -58,9 +58,9 @@ U této třídy se neptáme jestli existuje řešení, ale kolik řešení exist
 
 \textbf{Definice:} \#P je množina všech funkcí $f(x)$, kde $f(x)$ odpovídá počtu přijatelných cest nedeterministického TS v~polynomiálním čase.
 
-\noindent V této třídě existují také problémy \#P-úplné.
+V~této třídě existují také problémy \#P-úplné.
 
-\subsection{Třída PSPACE}
+\subsubsection{Třída PSPACE}
 
 PSPACE je množina rozhodovacích problémů, které lze vyřešit pomocí deterministického TS v~polynomiálním paměťovém prostoru.
 Neboli nezáleží, jak dlouho trvá vykonání, když je využit polynomiální (rozumné) množství paměťi. 
@@ -68,39 +68,36 @@ PSPACE má úplné problémy, které jsou sestupně samo redukovatelné (downwar
 Jsou zahrnuté v~EXP.
 Dle Savitchova theorému můžeme dokázat, že \textbf{P}SPACE = \textbf{NP}SPACE.
 
-\subsection{Třída EXP}
+\subsubsection{Třída EXP}
 
 Často označována jako EXPTIME.
 Je to množina rozhodovacích problémů řešitelných na~deterministickém TS v~exponenciálním čase.
 Časová komplexita je O($2^{p(n)}$), kde $p(n)$ je polynomická funkce $n$.
+Jejich složitost je exponenciální (například $2^n$).
 
 Existuje také třída EXPSPACE, která je podobná EXPTIME, jen se neřeší v~exponenciálním času, ale v~exponenciálním paměťovém prostoru.
 
-U obou tříd se jedná o nezvládnutelné problémy, pro které neexistuje polynomiální algoritmus.
-Jejich složitost je exponenciální (například $2^n$).
+U~obou tříd se jedná o~nezvládnutelné problémy, pro~které neexistuje polynomiální algoritmus.
 
 \subsection{Knapsnack problém}
 
-Existuje osoba (zloděj), který má batoh/zavazadlo.
-Zavazadlo má určitou maximální hmotnost/velikost.
-Zloděj se snaží do~batohu vložit co nejvíce zboží v~co největší hodnotě. 
+Zloděj má pro~krádeže připravený batoh s~určitou maximální hmotností/velikostí.
+Při~krádeži se snaží do~batohu vložit co nejvíce zboží v~co největší hodnotě.
 Každé toto zboží má jinou hmotnost/velikost a jinou hodnotu.
-Takže zloděj hledá co nejoptimálnější zboží, které může vložit do~batohu a tím mít co největší profit.
+Hledá nejlepší kombinaci zboží která se mu do~batohu vejde s~cílem maximalizovat profit.
 
 \subsection{Problém směrování vozidel (VRP)}
 
-Existuje 1 místo (sklad), která má x vozidel.
-Vozidla ze skladu musí objet všechny místa a dovést tam zboží. 
-Vozidla nemusí navštívit stejný počet míst, ale množina vozidel musí navštívit všechna místa co nejoptimálněji. 
-Při jednom vozidle podobné problému obchodního cestujícího (TSP), jen s~rozdílem, že u TSP si vybíráme začátek, ale u VRP máme začátek přesně definován.
+Centrální sklad má $x$ vozidel.
+Vozidla musí objet všechna zásobovací místa, dovést tam zboží a vrátit se zpět.
+Nemusí navštívit stejný počet míst, ale dohromady musí navštívit všechna místa co nejoptimálněji.
+Pro~$x=1$ jde o~problém obdobný problému obchodního cestujícího, ale je zde navíc určen začátek cesty.
 
 \subsection{Metrický k-střed}
 
-Máme x měst a mezi těmito městy je přesně definována vzdálenost.
-Můžeme ale umístit pouze n skladišť, takže skladiště bude obstarávat více měst. 
-Do některých měst chceme umístit skladiště, které bude obstarávat dalších x měst.
-Musíme vybrat nejvhodnější města pro postavení skladu, aby maximální vzdálenost každého města ke skladu byla co nejmenší.
-
+$x$ měst má mezi sebou přesně definované vzdálenosti.
+Mezi nimi (resp. do~nějakých z~měst) lze umístit $n$ skladišť která budou všechna města obsluhovat.
+Cílem je vybrat nejvhodnější města pro~postavení skladu, aby maximální vzdálenost každého města ke~skladu byla co nejmenší.
 
 \clearpage
 \section{Problém obchodního cestujícího a modifikace genetických algoritmů, Genetické programování, Optimalizace hejnem, Optimalizace mravenčí kolonií, Evoluční strategie.}
@@ -111,7 +108,7 @@ V~tomto NP-těžkém problému (\emph{Travelling Salesman Problem, TSP}) jde o~n
 Hamiltonská cesta $P$ je taková cesta, která navštíví každý vrchol právě jednou.
 
 Heurestické algoritmy negarantují že nalezly nejlepší řešení, ale operují v~dosažitelném čase.
-Příkladem je \href{https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm}{Nearest Neighbour} (dochází k~\enquote{slepému} propojování nejbližších bodů bez~znalosti celku), který může vrátit nejlepší i~nejhorší možný výsledek.
+Příkladem je \href{https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm}{Nearest Neighbour} (dochází k~\enquote{slepému} propojování nejbližších bodů bez~znalosti celku), který může vrátit nejlepší i~velmi špatný výsledek.
 
 \subsubsection{Modifikace genetických algoritmů pro~TSP}
 
@@ -398,6 +395,8 @@ Pro~neobarvené vrcholy je spočítán počet obarvených sousedů a k~obarvení
 
 Grafy $G$ a $H$ jsou izomorfní, pokud mezi nimi existuje (hrany zachovávající) bijekce (mapování).
 
+% TODO Způsoby rozpoznání
+
 \subsubsection{Ullmanův algoritmus}
 
 \clearpage
@@ -673,120 +672,108 @@ Lineární regrese představuje aproximaci hodnot přímkou.
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{ |p{4.5cm}||p{4.5cm}| }
-	\hline
-    x & y \\ \hline
-    Obytná plocha [$\text{m}^2$] & Cena nemovitosti [USD]\\ \hline
+	\begin{tabular}{ |l|l| }
+    Obytná plocha [$\text{m}^2$] & Cena nemovitosti [USD] \\ \hline \hline
     2104 & 400\,000 \\ \hline
     1416 & 232\,000 \\ \hline
     1534 & 315\,000 \\ \hline
 	\end{tabular}
-	\caption{Ceny nemovitostí}
+	\caption{Ukázka lineární regrese na~cenách nemovitostí}
+    \label{tabulka-linearni-regrese}
 \end{table}
 
-Vezmemeli v úvahu tabulku výše kde x je vstupní proměná (feature) a y je výstup.
-Využije se lineární regrese pro jednu proměnou.
-Model této linární regrese lze reprezentovat funkcí zvanou hypothesis a má tvar $h_{\Theta}(x) = \Theta_0 + \Theta_1 x$.
-Zde $\Theta$ jsou parametry učícího se algoritmu, které upravují lineární funkci.
+Vezmeme-li v~úvahu tabulku výše kde $x$ je vstupní proměnná (\emph{feature}) a $y$ je výstup.
+Využije se lineární regrese pro~jednu proměnou.
 
-Vybírat parametr $\Theta$ tak aby $h(x)\approx y$.
-Výběr probíhá pomocí minimalizační funkce $J(\Theta)$.
-Funkce má tvar 
-\[
-J(\Theta_0,\Theta_1) = \frac{1}{2m} \sum_{i=1}^{m}(h_0(x^{(i)})-y^{(i)})^2.
-\]
+Model této linární regrese lze reprezentovat funkcí zvanou \emph{hypothesis} s~tvarem $h_\theta(x) = \theta_0 + \theta_1 x + \epsilon$
+kde $\theta_0$ je bias, $\theta_1$ úhel a $\epsilon$ chyba.
 
-Část $(h_0(x^{(i)})-y^{(i)})^2$ značí, že chceme minimalizovat čtvercový rozdíl (square difference).
+Chybová funkce $J$ má tvar
+$$J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} (h_\theta (x^{(i)}) - y^{(i)})^2$$
+kde $m$ je počet prvků trénovací množiny, $h_\theta(x^{(i)})$ je předpovězená hodnota $y$ a $y^{(i)}$ je reálná hodnota $y$.
+Část $(h_0(x^{(i)})-y^{(i)})^2$ znamená minimalizaci čtvercového rozdílu (\emph{square difference}).
+Proměná $m$ značí velikost trénovacích dat (v~případě tabulky č.~\ref{tabulka-linearni-regrese} je $m= 3$).
 
-$h_0(x^{(i)})$ značí předpovídanou hodnotu.
+\subsubsection{Výpočet $\theta$}
 
-$y^{(i)}$ značí reálnou hodnotu.
+$\theta$ lze vypočítat pomocí normálové rovnice nebo algoritmem gradientního sestupu.
 
-Proměná m značí velikost trénovacích dat (v případě tabulky by to bylo 3).
+Pomocí normálové rovnice se optimální hodnota vypočítá jako $\theta = (X^T X)^{-1} X^T y$.
+Výhodou je jednoduchá implementace, což je vykoupeno komplexitou O($n^3$).
 
-\subsubsection{Výpočet $\Theta$}
-Vypočítat $\Theta$ lze pomocí normálové rovnice nebo algoritmu gradientního sestupu.
+Jelikož by pro~velký počet $n$ byl výpočet časově náročný, využívá se algoritmu gradientního sestupu:
+$\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1)$
+kde $j$ je index váhy, $\alpha$ je rychlost učení (např. $10^{-3}$).
+Pokud s~každou iterací hodnota $J(\theta)$ neklesá, je nutné $\alpha$ snížit.
 
-Pomocí normálové rovnice se optimální hodnota $\Theta$ vypočítá jako $\Theta = (X^TX)^{-1}X^Ty$.
-Hodnoty $X$ a $y$ jsou vektorizovány.
-Hodnota $X^T$ je transponovaná hodnota $X$.
-
-Výhoda normálové rovnice je jednoduchá implementace, ale komplexita je O($\text{n}^3$).
-
-Jelikož pro velký počet n by výpočet byl časově náročný, využívá se algoritmu gradientního sestupu.
-Algoritmus gradientního sestupu se vypočítá dle rovnice 
-\[\Theta_j := \Theta_j - \alpha \frac{\partial}{\partial\Theta_j}J(\Theta_0,\Theta_1)\]
-
-Hodnota $\alpha$ slouží k stanovení rychlosti učení (learning rate).
-Pokud je $\alpha$ nastavená dobře tak každou iteraci by měla hodnota $J(\Theta)$ klesat pokud neklesá $\alpha$ by měla být snížena.
-
-
-\begin{table}[h]
+\begin{table}[ht]
 	\centering
-	\begin{tabular}{ |p{4.5cm}|p{4.5cm}||p{4.5cm}| }
-	\hline
-    $x_1$ & $x_2$ & y \\ \hline
-    Počet místností & Obytná plocha [$\text{m}^2$] & Cena nemovitosti [USD]\\ \hline
+	\begin{tabular}{ |l|l|l|}
+    Počet místností & Obytná plocha [$\text{m}^2$] & Cena nemovitosti [USD] \\ \hline \hline
     5 & 2104 & 400\,000 \\ \hline
     7 & 1416 & 232\,000 \\ \hline
     4 & 1534 & 315\,000 \\ \hline
 	\end{tabular}
-	\caption{Ceny nemovitostí 2}
+	\caption{Ukázka lineární regrese s~upravenými cenami nemovitostí}
+    \label{upravena-tabulka-linearni-regrese}
 \end{table}
 
-Vezmemeli v úvahu upravenou tabulku tak zde nepoužijeme lineární regresi pro jednu proměnou, ale pro více proměných.
-Vše funguje na stejném principu, jen s menšími změnami ve vzorcích.
+Vezmeme-li v~úvahu upravenou tabulku č.~\ref{upravena-tabulka-linearni-regrese}, nepoužijeme lineární regresi pro~jednu proměnou, ale pro~proměných více.
+Vše funguje na stejném principu, jen s~menšími změnami ve~vzorcích.
 
-Hypothesis funkce se změní na $h_{\Theta}(x) = \Theta_0 + \Theta_1 x_1 + \Theta_2 x_2 + \dotsb + \Theta_n x_n$.
-Minimalizační funkce $J(\Theta)$ se nezmění jen počítáme $J(\Theta_0, \Theta_1, \dots , \Theta_n)$.
+\emph{Hypothesis} funkce se změní na~$h_{\theta}(x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \dotsb + \theta_n x_n$.
+Minimalizační funkce $J(\theta)$ se nezmění jen počítáme $J(\theta_0, \theta_1, \dots , \theta_n)$.
 
-Hodnoty vstupů $x$ (features) se reprezentují pomocí matice $X$. 
-Počet x vždy bude odpovídat počtu $\Theta$ s tím, že pro první $x_0$ bude vždy roven 1 a další $x_n$ budou rovny hodnotám z tabulky.
-Tuto matice lze předzpracovávat třemi způsoby (preprocessing).
+Hodnoty vstupů $x$ (\emph{features}) se reprezentují pomocí matice $X$. 
+Počet $x$ vždy bude odpovídat počtu $\theta$ s~tím, že pro~první $x_0$ bude vždy roven 1 a další $x_n$ budou rovny hodnotám z~tabulky.
+Tuto matice lze předzpracovávat třemi způsoby (\emph{preprocessing}):
+\begin{itemize}
+    \item
+    Škálovaní, kdy $x_1$ až $x_n$ upravíme dle vzorce $x = x/x_{\text{max}}$. 
+    Hodnota $x_{\text{max}}$ je maximální hodnota v~daném sloupci.
 
-První je škálovaní, kdy $x_1$ až $x_n$ upravíme dle vzorce $x = x/x_{\text{max}}$. 
-Hodnota $x_{\text{max}}$ se získá pro každý sloupec zvlášt s tím že je největší hodnota ve sloupci.
+    \item
+    Normalizace průměrem, kdy $x_1$ až $x_n$ upravíme dle vzorce $x = (x - \mu)/(x_{\text{max} - x_{\text{min})}}$.
+    Hodnota $x_{\text{max}}$ a $x_{\text{min}}$ je maximální a minimální hodnota v~daném sloupci, hodnota $\mu$ je průměr všech hodnot ve~sloupci.
 
-Druhým je normalizace průměrem, kdy $x_1$ až $x_n$ upravíme dle vzorce $x = (x - \mu)/(x_{\text{max} - x_{\text{min})}}$. 
-Hodnota $x_{\text{max}}$ a $x_{\text{min}}$ je získávána stějně jako u škálování a hodnota $\mu$ je jejich průměr všech hodnot ve sloupci.
-
-Třetím je standardizace, dy $x_1$ až $x_n$ upravíme dle vzorce $x = (x - \mu)/\sigma$.
-Hodnota $\sigma$ je směrodatná odchylka. 
+    \item
+    Standardizace, kdy $x_1$ až $x_n$ upravíme dle vzorce $x = (x - \mu)/\sigma$.
+    Hodnota $\sigma$ je směrodatná odchylka.
+\end{itemize}
 
 \subsection{Polynomiální regrese}
 
-Polynomiální regrese je velmi podobná lineární regresi.
-Jen nevytváříme přimku ale křivku využívající polynimiální funkci.
+Polynomiální regrese je velmi podobná lineární regresi, jen místo přímky tvoříme křivku využívající polynomiální funkci.
 
-Polynomiální regresi má cenu používat pokud máme více vstupů $x$ (feature).
-Hypothesis funkce vypadá $h_0(x) = \Theta_0 + \Theta_1 x + \Theta_2 x^2 + \dotsb + \Theta_n x^n$.
+Polynomiální regresi má cenu používat pokud máme více vstupů $x$ (\emph{feature}).
+Pro \emph{hypothesis} platí $h_0(x) = \theta_0 + \theta_1 x + \theta_2 x^2 + \cdots + \theta_n x^n$.
 Rovnice minimalizační funkce a gradientního sestupu se nezmění.
 
-I v případě polynomiální regrese je potřeba předzpracovat data
+I~v~případě polynomiální regrese je potřeba předzpracovat data.
 
 \subsection{Regrese vs. klasifikace}
 
 Klasifikace je podobná regresi, ale předpovídané hodnoty jsou diskrétní.
-Dělíme na binární a multiclass klasifikaci.
-U binární vybíráme pouze ze dvou možností (je to pejsek nebo kočička), zatímco u multiclass se vybírá z několika možností (jaký je to objekt).
+Rozděluje se na~binární a multiclass klasifikaci.
+U~binární vybíráme ze~dvou možností, zatímco u multiclass se vybírá z~možností několika.
 
-Binární klasifikace využívá regresi, která ve většině případů má spatné výsledky.
-Pro zlepšení výsledků lze využít logickou regresi.
+Binární klasifikace využívá regresi, která má ve~většině případů špatné výsledky.
+Pro~zlepšení výsledků lze využít logickou regresi.
 
 \subsection{Logická regrese}
 
-Využívá se pro problémy binární klasifikace.
-Cílem je, aby hypothesis funkce byla 0 nebo 1.
+Kde o~klasifikační algoritmus používající sigmoid s~hodnotami $\left<0, 1\right>$:
+$h_0(x) = g(\theta^T x) = \frac{1}{1+e^{-\theta^T x}}$.
 
-Funkce $h_0(x) = g(\Theta^T x) = \frac{1}{1+e^{-\Theta^T x}}$.
+Sigmoid funkce $g(z) = \frac{1}{1+e^{-z}}$ je vykreslena na~obrázku č.\ref{logisticka-regrese-sigmoid}.
 
-Lze definovat logistickou (sigmoid) funkcí $g(z) = \frac{1}{1+e^{-z}}$.
-Sigmoid funkce je vykreslena na obrázku.
-\begin{center}
+\begin{figure}[ht]
+    \onehalfspacing
+    \centering
 	\begin{tikzpicture}
 	    \begin{axis}[
-	        height = 7.3cm,
-	        width = 11cm,
+	        height = 15em,
+	        width = 30em,
 	        axis on top = true,
 	        axis x line = bottom,
 	        axis y line = left,
@@ -797,10 +784,11 @@ Sigmoid funkce je vykreslena na obrázku.
 	            black,
 	            thin
 	        },
-	%       grid = major,
+	        % grid = major,
 	        ymin = 0,
 	        ymax = 1,
-	        xlabel = $Z$
+	        xlabel = $z$,
+            ylabel = $g(z)$,
 	    ]
 	        \addplot[
 	            blue,
@@ -810,27 +798,26 @@ Sigmoid funkce je vykreslena na obrázku.
 	            {1/(1+exp(-x))};
 	    \end{axis}
 	\end{tikzpicture}
-\end{center}
+    \caption{Sigmoid.}
+    \label{logisticka-regrese-sigmoid}
+\end{figure}
 
-Model lze reprezentovat pomocí $h_0(x) = P(y = 1 | x ; \Theta)$. 
-Tímto získáme pravděpodobnost, že $y$ bude 1 (určitě) v závislosti na $x$ a $\Theta$.
-Neboli zde je vstup (velikost nádoru), a řekni mi jaká šance je, že nádor maligní.
-
-Pro opačný hodnotu by byla rovnice $1 - h_0(x) = P(y = 1 | x ; \Theta)$.
+Model lze reprezentovat pomocí $h_0(x) = P(y = 1 | x ; \theta)$. 
+Tímto získáme pravděpodobnost, že $y$ bude 1 v~závislosti na $x$ a $\theta$
+(např. \emph{na~základě velikosti nádoru urči pravděpodobnost že je maligní (zhoubný)}).
+Pro~opačnou hodnotu má rovnice tvar $1 - h_0(x) = P(y = 1 | x ; \theta)$.
 
 Minimalizační funkce má tvar 
+$$
+J(\theta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)}\log(h_0(x^{(i)})) + (1-y^{(i)})\log(1 - h_0(x^{(i)})) \right]
+$$
+kde $y^{(i)}\log(h_0(x^{(i)})) = 0$ když $y = 0$ a $(1-y^{(i)})\log(1 - h_0(x^{(i)})) = 0$ když $y = 1$.
 
-\[
-J(\Theta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)}\log(h_0(x^{(i)})) + (1-y^{(i)})\log(1 - h_0(x^{(i)})) \right]
-\]
-
-Zde je $y^{(i)}\log(h_0(x^{(i)})) = 0$ když $y = 0$ a $(1-y^{(i)})\log(1 - h_0(x^{(i)})) = 0$ když $y = 1$.
-
-Logistická regrese s využitím gradietního sestupného algoritmu má tvar 
-\[
-\Theta_{i+1} := \Theta_i - \frac{\alpha}{m} X^T(g(X\Theta_i) - \vec{y})
-\]
-Zde $(g(X\Theta_i) - \vec{y})$ určuje chybu (error).
+Logistická regrese s~využitím gradietního sestupného algoritmu má tvar 
+$$
+\theta_{i+1} := \theta_i - \frac{\alpha}{m} X^T(g(X\theta_i) - \vec{y})
+$$
+kde $(g(X\theta_i) - \vec{y})$ určuje chybu (error).
 
 
 Zdroje:
@@ -851,30 +838,26 @@ Zdroje:
     \label{NNS}
 \end{figure}
 
-One to one -- Základní struktura. 
-Využívá to většina neuronových sítí. 
-Vstupem je objekt (obrázek, vektor, atd.) s~pevnou velikostí, poté to prochází přes skryté vrstvy, kdy poslední vrstva má jednotný výstup.
+\textbf{One to one} využívá většina neuronových sítí. 
+Vstupem je objekt (obrázek, vektor, \dots) s~pevnou velikostí, poté informace prochází přes skryté vrstvy; poslední vrstva má jednotný výstup.
 
-One to many -- Využije se v~případě pokud máme jeden objekt (obrázek), ale výstupů má být více (jednotilivá slova na obrázku).
+\textbf{One to many} se využije v~případě kdy máme jeden objekt (obrázek), ale výstupů má být více (jednotilivá slova na~obrázku).
 
-Many to one -- Využije se v~případě pokud máme víc objektů (slova ve větě, snímky ve videu), ale má být pouze jeden výstup (jestli je věta pozitivní nebo negativní, co se dejě ve videu).
+\textbf{Many to one} se využije v~případě kdy máme víc objektů (slova ve~větě, snímky ve~videu) na~vstupu, ale pouze jeden výstup (zda je věta pozitivní nebo negativní, co se dejě ve videu).
 
-Many to many 1 -- Využije se v~případě pokud má být délka vstup a~výstup proměnlivá.
-Tohoto se dá využít v~překladu z~jazyka do jazyka, kdy vstupem je věta a~výstupem je přeložená věta.
+\textbf{Many to many (1)} se využije v~případě kdy má být délka vstupu a~výstupu proměnlivá.
+Toho se dá využít v~překladu z~jazyků, kdy je vstupem věta a~výstupem věta přeložená.
 
-Many to many 2 -- Využije se v případě, jestliže vstup má proměnlivou délku a~výstupem má být nějaké rozhodnutí pro každý objekt vstupu.
-Pokud bychom měli na vstupu snímky videa a~na pro každý tento snímek bychom chtěli vytvářet nějakou klasifikaci na výstupu.
+\textbf{Many to many (2)} se využije v případě proměnlivé délky vstupu a~rozhodnutí pro~každý objekt na~výstupu.
+Např. kdybychom měli na~vstupu snímky videa a~pro každý tento snímek bychom chtěli vytvářet nějakou klasifikaci na~výstupu.
 
 \subsection{Rekurentní neuronové sítě (RNN)}
 
-\subsubsection{Jak fungují}
+Skladají se ze~tří částí, kterými jsou vstup $X$, výstup $Y$ a buňka RNN.
 
-Skladají se ze tří částí, kterými jsou vstup \textbf{X}, výstup \textbf{Y} a buňku \textbf{RNN}.
-
-Vezme se vstup X~a~předá tento vstup do RNN, který má skrytý interní stav $h$. 
-Při každém čtení nového vstupu se tento interní stav aktualizuje a~při dalším čtení vstupu bude tento stav použit pro učení RNN (feed the model). 
-Toto způsobí, že model je spožděn o~krok. 
-Vysledkem je poté výstup z~RNN buňky.
+Vstup $X$ se~předá RNN, který má skrytý interní stav $h$.
+Při~každém čtení nového vstupu se tento interní stav aktualizuje a~při dalším čtení vstupu bude  použit pro~učení RNN (\emph{feed the~model}), což způsobí že model je spožděn o~jeden krok.
+Vysledkem je výstup z~RNN buňky.
 
 \begin{figure}[h]
     \centering
@@ -883,11 +866,11 @@ Vysledkem je poté výstup z~RNN buňky.
     \label{RNN}
 \end{figure}
 
-V~rovnici by to bylo zapsáno $h_t = f_W(h_{t-1},x_t)$, kde $f_W$ je nějaká funkce s~parametrem $W$, $h_t$ je nový stav, $h_{t-1}$ je předcházející stav a~$x_t$ je vstup X.
+RNN lze matematicky zapsat jako $h_t = f_W(h_{t-1},x_t)$, kde $f_W$ je určitá funkce, $h_t$ je nový stav, $h_{t-1}$ je předcházející stav a~$x_t$ je vstup $X$.
 
 \subsubsection{Unrolled RNN}
 
-Unrolled RNN je pouze převedení základního principu tak, aby to bylo pochopitelnější, viz \ref{unrolledRNN}.
+Unrolled RNN je pouze převedení základního principu tak, aby to bylo pochopitelnější, viz obrázek č.~\ref{unrolledRNN}.
 
 \begin{figure}[h]
     \centering
@@ -896,21 +879,18 @@ Unrolled RNN je pouze převedení základního principu tak, aby to bylo pochopi
     \label{unrolledRNN}
 \end{figure}
 
-\subsection{Long short term memory (LSTM)}
+\subsection{Long Short Term Memory (LSTM)}
 
-LSTM funguje na stejném principu jako RNN, ale RNN buňka je mnohem složitější (teď nazývaná LSTM buňka).
-Má 2 interní stavy.
-Obsahuje několik vrstev, které kontrolují proud informací.
-Jsou založené na několika branách (gates).
+LSTM funguje na stejném principu jako RNN, ale buňka je mnohem složitější.
+Obsahuje několik vrstev, které kontrolují proud informací a jsou založené na~několika branách (\emph{gates}).
 Tyto brány regulují kolik informací bude propuštěno a~kolik ne.
 
-\subsubsection{Jak funguje LSTM}
-
+V~principu lze cyklus LSTM buňky zapsat následovně:
 \begin{itemize}
 	\item Zapomene nepotřebnou historii
 	\item Uloží relevantní části nové informace
-	\item Pomocí předchozích dvou kroků aktualizují vnitřní stav
-	\item Nakonec je vygenerován výstup
+	\item Pomocí předchozích dvou kroků aktualizuje vnitřní stav
+	\item Vygeneruje výstup
 \end{itemize}
 
 \begin{figure}[h]
@@ -919,21 +899,21 @@ Tyto brány regulují kolik informací bude propuštěno a~kolik ne.
     \caption{LSTM buňka}
     \label{LSTM}
 \end{figure}
+\FloatBarrier
 
 \subsection{U-net síťě}
 
 \subsubsection{Semantic segmentation}
 
-Využívá se při rozpoznávání objektů na obrázku.
-Chceme určit k~jaké kategorii (pejsek, tráva atd) každý pixel patří.
-Pokud máme dve stejné kategorie tak semantic segmentation mezi nimi nerozlišuje.
+Využívá se při rozpoznávání objektů na~obrázku a~rozdělení oblastí pixelů do~kategorií (pes, kámen, strom, \dots).
+Pokud máme dve stejné kategorie, semantic segmentation mezi nimi nerozlišuje.
 
 \subsubsection{U-net}
 
-Byl vytvořen pro biomedicínu, dnes se využívá i~jinde.
-Je tvořen ze dvou hlavních částí (cest).
-První je contraction path rozlišení vstupu se zmenšuje nejšastěji o~polovinu.
-Druhou je expansion path, kde se výstup z~contraction path spojuje s~výstupem nižší vrstvy.
+Byl vytvořen pro~biomedicínu, ale dnes se využívá i~jinde.
+Je tvořen ze~dvou hlavních částí (cest):
+\emph{contraction path}, ve~které se rozlišení vstupu zmenšuje nejčastěji o~polovinu,
+\emph{expansion path}, kde se výstup z~\emph{contraction path} spojuje s~výstupem nižší vrstvy.
 
 \begin{figure}[h]
     \centering
@@ -955,23 +935,23 @@ Zdroje:
 
 \subsection{Zpětnovazební učení}
 
-Zpětnovazební učení funguje na principu maximalizování výsledku bez toho aniž by věděl jak správně dosáhnout výsledku.
-Zpětnovazební učení využívá algoritmů jako je Q-učení, SARSA, TD-učení a~další.
+Zpětnovazební učení maximalizuje výsledek bez toho aby znal způsob jak ho správně dosáhnout.
+Využívá algoritmů jako je Q-učení, SARSA, TD-učení a~další.
 
 \subsubsection{Rozdíl oproti genetickým algoritmům}
 
-Hlavním rozdílem je, že zpětnovazební učení se snaží dosáhnout co nejlepšího výsledku, zatím co GA hledá spíše optimální výsledek.
-Dalším rozdílem je, že GA výsledek měří dle fittnes zatímco zpětnovazební učení dle odměny (reward).
+Hlavním rozdílem je fakt, že zpětnovazební učení se snaží dosáhnout co nejlepšího výsledku, zatímco GA hledá spíše optimální výsledek.
+Dalším rozdílem je, že GA výsledek měří dle \emph{fitness}, zatímco zpětnovazební učení dle odměny (\emph{reward}).
 
 \subsection{Markov Decision Process (MDP)}
 
-MDP se skládá ze čtyř částí a jedné volitelné:
+MDP se skládá ze~čtyř částí a jedné volitelné:
 \begin{itemize}
-	\item $S$ je množina stavů (nejméně začátek a konec)
-	\item $A$ je množina akcí (jaké akce lze provést)
-	\item Transition state udává pravděpodobnost s~jakou skončím v~dalším stavu pokud jsem ve stavu $s$~a~provedu akci z~$A$. 
-	\item Reward je odměna a~počítá se stejně jako Transition state jen výsledkem není pravděpodobnost, ale odměna, může být kladá nebo záporná
-	\item $\gamma$ discount factor, je mezi $0 \leq \gamma \leq 1$ a ve výchozím stavu je 1 (volitelná)
+	\item $S$ je množina stavů (nejméně začátek a konec),
+	\item $A$ je množina akcí,
+	\item \emph{transition state} udávající pravděpodobnost přesunu ze~stavu $s$ do~dalšího stavu provedením akce $a \in A$,
+	\item \emph{reward} je odměna a~počítá se stejně jako \emph{transition state}, jen výsledkem není pravděpodobnost, ale odměna (kladná nebo záporná),
+	\item (volitelně) $\gamma$ \emph{discount factor} ($0 \leq \gamma \leq 1$).
 \end{itemize}
 
 \begin{figure}[h]
@@ -983,38 +963,36 @@ MDP se skládá ze čtyř částí a jedné volitelné:
 
 \subsection{Q-učení}
 
-V~Q-učení počet možných akcí a~stavů je konečný.
-Je založeno na MDP.
+Q-učení je založeno na~MDP
+Počet možných akcí a~stavů je konečný.
 
-Výběr akce v~závislosti na aktuálním stavu se vybírá dle Q-value.
+Výběr akce v~závislosti na~aktuálním stavu se vybírá dle Q-value.
 Q-value určuje vhodnost (kvalitu) akce v~daném stavu.
-Q-value se vypočítají jako odhad dalších odměn ve zbylých krocích aktuálního příběhu.
-Příběh nebo epizoda je jedna iterace učení, jakoby pokus.
-Takže čím blíže jsme k~cíli tím víc narůstá Q-value.
 
-Q-value pro každý stav a~akci se zapíše do Q-table. 
+Q-values se vypočítají jako odhad dalších odměn ve~zbylých krocích aktuálního příběhu.
+Příběh nebo epizoda je jedna iterace učení (pokus).
+Takže čím blíže jsme k~cíli tím víc Q-value narůstá.
+
+Q-value se pro~každý stav a~akci zapíše do~Q-table.
 
 \subsubsection{Exploration vs exploitation}
 
-Exploration slouží pro prozkoumání prostředí a~nalezení informací o~něm.
+\emph{Exploration} slouží pro~prozkoumání prostředí a~nalezení informací o~něm.
 
-Exploitation slouží k~využítí znalosí o~prostředí.
+\emph{Exploitation} slouží k~využítí znalosí o~prostředí.
 
-Ve zpětnovazebním učení se musí docílít optimalizace mezi exploration a~exploitation.
-K~této optimalizaci se využívá epsilon greedy strategy.
-Epsilon greedy strategy využívá hodnoty $\epsilon$, která slouží k~určení poměru při rozhodování.
-V~počátečních příbězích je nastaveno $\epsilon$ na 1 což značí, že se bude probíhat pouze exploration. 
+Ve~zpětnovazebním učení se musí docílít optimalizace mezi exploration a~exploitation, a k~této optimalizaci se využívá \emph{Epsilon greedy strategy}.
+Ta využívá hodnoty $\epsilon$, která slouží k~určení poměru při~rozhodování.
+V~počátečních příbězích je nastaveno $\epsilon = 1$, tj. že bude probíhat pouze exploration.
 V~dalších příbězích se $\epsilon$ pomalu snižuje.
 
 \subsubsection{Aktualizace Q-value}
 
-Probíhá dle rovnice:
+Probíhá dle rovnice
+$q^\text{new}(s,a) = (1-\alpha)\, q(s,a) + \alpha \left(R_{t+1} + \gamma\,\text{max}\,q(s',a')\right)$.
 
-$q^\text{new}(s,a) = (1-\alpha)q(s,a) + \alpha \left(R_{t+1} + \gamma\,\text{max}\,q(s',a')\right)$
-
-Hodnota $\alpha$ je learning rate, který určuje kolik informací z~přechozí Q-value chceme ponechat.
-Nabývá hodnot 0 až 1 ($0\leq\alpha\leq1$).
-Čím vyšší je tato hodnota tím rychleji se projeví nová hodnota Q-value. 
+Hodnota $\alpha$ je learning rate, který určuje kolik informací z~přechozí Q-value chceme ponechat: $0 \leq\ alpha \leq 1$.
+Čím vyšší je tato hodnota tím rychleji se projeví nová hodnota Q-value.
 
 Hodnota $q(s,a)$ určuje předchozí Q-value.
 
@@ -1022,24 +1000,23 @@ Hodnota $\left(R_{t+1} + \gamma\,\text{max}\,q(s',a')\right)$ určuje momentáln
 
 Takže aktualizovaná Q-value je stará hodnota + nová.
 
-
-\subsubsection{Jak v krocích funguje Q-learning}
+\subsubsection{Jak v~krocích funguje Q-learning}
 
 \begin{enumerate}
     \item Inicializace Q-values v~Q-table
-    \item Pro každý příběh
+    \item Pro~každý příběh
     \begin{enumerate}
     	\item Výběr mezi exploration a~exploitation (náhodná generace čísla)
     	\item Provede se akce
-    	\item Aktualizuje se Q-value 
+    	\item Aktualizuje se Q-value
     \end{enumerate}
-    \item Po ukončení příběhů je připravená Q-table
+    \item Po~ukončení příběhů je připravená Q-table
 \end{enumerate}
 
 \subsection{Q-učení vs SARSA}
 
-Sarsa používá politiku (policy) chovaní k výběru další akce.
-Q-učení nevyužívá politiku k~výběru další akce, ale odhaduje budoucí výnosu, které aktualizuje.
+Sarsa používá politiku (policy) chovaní k~výběru další akce.
+Q-učení nevyužívá politiku k~výběru další akce, ale odhaduje budoucí výnosy, které aktualizuje.
 
 Zdroje:
 \begin{enumerate}
