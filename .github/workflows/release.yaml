@@ -70,6 +70,7 @@ jobs:
   # vytvoření prázdného releasu
   release:
     runs-on: ubuntu-latest
+    needs: subjects
 
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
@@ -99,7 +100,7 @@ jobs:
   addSubjects:
     runs-on: ubuntu-latest
     # potřeba listOfDirectories pro vytvoření jobs matrix
-    needs: [ listOfDirectories, subjects, release ]
+    needs: [ release, listOfDirectories ]
 
     # vytvoření samostatného jobu pro každý předmět
     strategy:
