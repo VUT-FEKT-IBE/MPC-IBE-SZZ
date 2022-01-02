@@ -6,22 +6,18 @@
 \newcommand{\corrections}{kámen u~cesty}
 
 \input{../shared}
-\clearpage
 
 % Vytváření grafů
 \usepackage{pgfplots}
-\begin{document}
 
-\pagenumbering{gobble}
-\setcounter{page}{0}
+\begin{document}
 
 \titulka{}
 
-\setcounter{tocdepth}{1}
 \tableofcontents
-\clearpage
+\thispagestyle{empty}
 
-\pagenumbering{arabic}
+\setcounter{page}{0}
 
 \include{text}
 
