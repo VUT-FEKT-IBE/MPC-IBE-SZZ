@@ -36,11 +36,11 @@ To by vedlo k~prokázání P $=$ NP.
 
 Bylo dokázáno, že každý algoritmus pro~NP-C problém lze použít k~řešení jiného \mbox{NP-C} problému.
 Přibližně existuje 10\,000 známých NP-C problémů.
-Jde napříkald o~barvení grafů, Knapsnack (problém batohu), 3-partition problém (rozdělit množinu čísel podmnožiny o velikosti 3, které mají stejný součet), \dots
+Jde napříkald o~barvení grafů, Knapsnack (problém batohu), 3-partition problém (rozdělit množinu čísel na~podmnožiny o~velikosti 3 se stejným součtem), \dots
 
 \subsubsection{Třída NP-těžké}
 
-O problému řekneme, že je NP-težký, jestliže se na~něj redukuje NPC problém, ale zároveň nevíme jestli spadá do~NP.
+O problému řekneme, že je NP-težký, jestliže se na~něj redukuje NP-C problém, ale zároveň nevíme jestli spadá do~NP.
 Redukce znamená že se dá převést/konvertovat.
 
 \subsubsection{P vs NP}
@@ -108,7 +108,7 @@ V~tomto NP-těžkém problému (\emph{Travelling Salesman Problem, TSP}) jde o~n
 Hamiltonská cesta $P$ je taková cesta, která navštíví každý vrchol právě jednou.
 
 Heurestické algoritmy negarantují že nalezly nejlepší řešení, ale operují v~dosažitelném čase.
-Příkladem je \href{https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm}{Nearest Neighbour} (dochází k~\enquote{slepému} propojování nejbližších bodů bez~znalosti celku), který může vrátit nejlepší i~velmi špatný výsledek.
+Příkladem je \href{https://en.wikipedia.org/wiki/Nearest_neighbour_algorithm}{\emph{Nearest Neighbour}} (dochází k~\enquote{slepému} propojování nejbližších bodů bez~znalosti celku), který může vrátit nejlepší i~velmi špatný výsledek.
 
 \subsubsection{Modifikace genetických algoritmů pro~TSP}
 
@@ -242,7 +242,7 @@ popisují vlastnosti grafu na~obrázku \ref{ilustracni-graf-matice}.
 Handshaking lemmma je tvrzení že pro~každý konečný neorientovaný graf platí, že počet vrcholů s~lichým stupněm je sudý (formálně $\sum_{v \in V} \deg v = 2 |E|$: součet stupňů vrcholů odpovídá dvojnásobku počtu hran).
 
 V~roce 1736 byla dokázána Leonardem Eulerem v~dokumentu řešícím problém \href{https://cs.wikipedia.org/wiki/Sedm_most%C5%AF_m%C4%9Bsta_Kr%C3%A1lovce}{Sedmi mostů města Královce}.
-Graf obsahuje Eulerovskou cestu právě tehdy, když jím lze projít tak aby byla každá hrana navštívena právě jednou.
+Graf obsahuje Eulerovskou cestu právě tehdy, když jím lze projít tak, aby byla každá hrana navštívena právě jednou.
 
 \subsection{Detekce bipartitního grafu}
 
@@ -253,7 +253,7 @@ Pro~detekci se využívá BFS:
 
 \begin{enumerate}
 \item Vyber bod grafu.
-\item Přiřaď mu barvu a~označte ho za~navštívený.
+\item Přiřaď mu barvu a~označ ho za~navštívený.
 \item Pokud má alespoň jeden sousední bod stejnou barvu jako aktuální bod, graf nelze obarvit dvěma barvami.
 \item Všem sousedům přiřaď druhou barvu.
 \item Přejdi do~některého ze sousedů který ještě nebyl navštívený.
@@ -275,23 +275,23 @@ Algoritmus hledající silně propojené komponenty pracující v~lineárním č
 \onehalfspacing
 \begin{enumerate}
 \item Označ každý vrchol grafu za~nenavštívený
-\item Vytvoř zásobník L
-\item Pro každý vrchol grafu V spusť podprogram Navštiv(V):
+\item Vytvoř zásobník $L$
+\item Pro každý vrchol grafu $u$ spusť podprogram Navštiv($u$):
     \begin{itemize}
-    \item Pokud je U nenavštívený:
+    \item Pokud je $u$ nenavštívený:
         \begin{enumerate}
-        \item Označ U jako navštívený
-        \item Pro každého souseda N zavolej Navštiv(N)
-        \item Přidej U na~vrchol zásobníku
+        \item Označ $u$ jako navštívený
+        \item Pro každého souseda $n$ zavolej Navštiv($n$)
+        \item Přidej $u$ na~vrchol zásobníku
         \end{enumerate}
     \item Jinak nedělej nic
     \end{itemize}
-\item Pro každý vrchol V zásobníku L spusť podprogram Přiřaď(V,V):
+\item Pro každý vrchol $u$ zásobníku $L$ spusť podprogram Přiřaď($u$, $u$):
     \begin{itemize}
-    \item Pokud V nepatří žádné komponentě:
+    \item Pokud $u$ nepatří žádné komponentě:
         \begin{enumerate}
-        \item Přiřaď V komponentě A
-        \item Pro každého souseda N zavolej Přiřaď(N,V)
+        \item Přiřaď $u$ komponentě $A$
+        \item Pro každého souseda $n$ zavolej Přiřaď($n$, $u$)
         \end{enumerate}
     \item Jinak nedělej nic
     \end{itemize}
@@ -308,7 +308,7 @@ Algoritmus hledající silně propojené komponenty pracující v~lineárním č
 \begin{enumerate}
 \item Označ každý vrchol grafu za~nenavštívený
 \item Vytvoř zásobník
-\item Vytvoř čítač \emph{i} a nastav ho na~0
+\item Vytvoř čítač \emph{i} a nastav ho na~1
 \item Vyber nenavštívený vrchol \emph{v} a spusť nad ním podprogram Propoj(\emph{v}):
     \begin{enumerate}
     \item nastav \emph{v.index} a \emph{v.lowlink} na~\emph{i}
@@ -364,7 +364,7 @@ Vstupem je matice $m \times n$ (řádky odpovídají \enquote{pracovníkům} a~s
     \item Najděte nejmenší nepokrytou hodnotu. Odečtěte její hodnotu od~každého odkrytého řádku a~přidejte ji ke~každé nenulové hodnotě v~zakrytému sloupci. Vraťte se na~krok~3.
 \end{enumerate}
 
-Výsledkem je nějaká z~kombinací nenulových polí.
+Výsledkem je nějaká možnost z~existujících kombinací nenulových polí.
 
 \subsection{Problém časového rozvrhu}
 
@@ -468,7 +468,7 @@ Neříká však nic o~způsobu konstrukce aktivační funkce.
 \subsection{Dopředná neuronová síť}
 
 Jde o~nejstarší a~nejjednodušší typ sítí.
-FFNN je umělá neuronová síť ve~které neurony netvoří cykly, čímž se liší od~rekurentních neuronových sítí.
+FFNN je umělá neuronová síť ve~které neurony netvoří cykly (čímž se liší od~rekurentních neuronových sítí).
 Informace prochází od~vstupu přes (volitelné) skryté vrstvy do~vstvy výstupní.
 
 Jednovrstvá síť (ve~které je vstup přímo napojen na~výstup) se nazývá \emph{perceptron}.
@@ -492,16 +492,26 @@ V~síti také může dojít k~přetrénování: FFNN se \enquote{moc zaměří} 
     \centering
     \includegraphics[height=15em]{images/6_maticova-operace}
     $$
-    \sigma \left( \left[ \begin{matrix}
-    1 & -2 \\
-    -1 & 1 \\
-    \end{matrix} \right] \left[ \begin{matrix}
-    1 \\
-    -1 \\
-    \end{matrix} \right] + \left[ \begin{matrix}
-    1 \\
-    0 \\
-    \end{matrix} \right] \right) =  \left[ \begin{matrix}
+    \sigma \left(
+    \underbrace{
+        \left[ \begin{matrix}
+        1 & -2 \\
+        -1 & 1 \\
+        \end{matrix} \right]
+    }_{\mathrm{v\acute{a}hy}}
+    \underbrace{
+        \left[ \begin{matrix}
+        1 \\
+        -1 \\
+        \end{matrix} \right]
+    }_{\mathrm{vstup}} +
+    \underbrace{
+        \left[ \begin{matrix}
+        1 \\
+        0 \\
+        \end{matrix} \right]
+    }_{\mathrm{bias}}
+    \right) = \left[ \begin{matrix}
     0.98 \\
     0.12 \\
     \end{matrix} \right]
@@ -714,11 +724,11 @@ Pokud s~každou iterací hodnota $J(\theta)$ neklesá, je nutné $\alpha$ sníž
     7 & 1416 & 232\,000 \\ \hline
     4 & 1534 & 315\,000 \\ \hline
 	\end{tabular}
-	\caption{Ukázka lineární regrese s~upravenými cenami nemovitostí}
+	\caption{Ukázka lineární regrese s~dvěma proměnnými}
     \label{upravena-tabulka-linearni-regrese}
 \end{table}
 
-Vezmeme-li v~úvahu upravenou tabulku č.~\ref{upravena-tabulka-linearni-regrese}, nepoužijeme lineární regresi pro~jednu proměnou, ale pro~proměných více.
+Vezmeme-li v~úvahu tabulku č.~\ref{upravena-tabulka-linearni-regrese}, nepoužijeme lineární regresi pro~jednu proměnou, ale pro~proměných více.
 Vše funguje na stejném principu, jen s~menšími změnami ve~vzorcích.
 
 \emph{Hypothesis} funkce se změní na~$h_{\theta}(x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \dotsb + \theta_n x_n$.
@@ -733,7 +743,7 @@ Tuto matice lze předzpracovávat třemi způsoby (\emph{preprocessing}):
     Hodnota $x_{\text{max}}$ je maximální hodnota v~daném sloupci.
 
     \item
-    Normalizace průměrem, kdy $x_1$ až $x_n$ upravíme dle vzorce $x = (x - \mu)/(x_{\text{max} - x_{\text{min})}}$.
+    Normalizace průměrem, kdy $x_1$ až $x_n$ upravíme dle vzorce $x = (x - \mu)/(x_{\text{max} - x_{\text{min}}})$.
     Hodnota $x_{\text{max}}$ a $x_{\text{min}}$ je maximální a minimální hodnota v~daném sloupci, hodnota $\mu$ je průměr všech hodnot ve~sloupci.
 
     \item
