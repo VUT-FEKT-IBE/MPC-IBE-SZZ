@@ -168,9 +168,9 @@ Každá částice se snaží aktualizovat svou pozici $X$ v~prostoru (2D, 3D, \d
 $$X(t+1) = X(t) + V(t+1)$$
 $$V(t+1) = WV(t) + C_1 \cdot \mathrm{\texttt{rand()}} X (X_\mathrm{pbest} - X(t)) + C_2 \cdot \mathrm{\texttt{rand()}} X (X_\mathrm{gbest} - X(t))$$
 %
-kde $V(t)$ je rychlost v~čase $t$, $X(t)$ je pozice v~čase $t$, $W$ je váha, $C_1$/$C_2$ jsou učící a~akcelerační faktory, rand je reálné číslo $<0, 1>$, $X_\mathrm{pbest}$ je nejlepší osobní pozice částice a~$X_\mathrm{gbest}$ je globální nejlepší pozice.
+kde $V(t)$ je rychlost v~čase $t$, $X(t)$ je pozice v~čase $t$, $W$ je váha, $C_1$/$C_2$ jsou učící a~akcelerační faktory, \texttt{rand()} je reálné číslo $\left<0, 1\right>$, $X_\mathrm{pbest}$ je nejlepší osobní pozice částice a~$X_\mathrm{gbest}$ je globální nejlepší pozice.
 
-Jedna iterace algoritmu, tj. výpočet fitness funkce:
+Jedna iterace algoritmu, tj. výpočet fitness funkce, probíhá ve~třech krocích:
 
 \begin{enumerate}
 \item aktualizace osobního i~globálního nejlepšího výsledku,
@@ -208,10 +208,10 @@ Matice má řádek pro~každý vrchol a~sloupec pro každou hranu; pokud vrchol 
 Matice souslednosti má podobu čtvercové matice $n \times n$ (kde $n$ je počet vrcholů grafu), jejíž hodnota na~místě $a_{i,j}$ je celé číslo odpovídající počtu hran vedoucích z~vrcholu $i$ do~vrcholu $j$, prvky na~diagonále pak odpovídají počtu hran vedoucích z~vrcholu $i$ do~vrcholu $i$.
 
 Incidenční matice
-% TODO Zde by šlo obsah matice obarvit -- pro každou hranu jiná barva.
-% TODO Jak se značí když je vrchol propojený sám se sebou? Stačí tam ta jednička?
+% Smyčka => 2
+% https://sciencedirect.com/topics/mathematics/incidence-matrix
 $\left( \begin{matrix}
-1 & 1 & 1 & 0 & 0 & 0 & 0 \\
+2 & 1 & 1 & 0 & 0 & 0 & 0 \\
 0 & 1 & 0 & 1 & 0 & 0 & 0 \\
 0 & 0 & 0 & 1 & 1 & 0 & 0 \\
 0 & 0 & 0 & 0 & 1 & 1 & 1 \\
@@ -357,11 +357,11 @@ Vrcholy, které patří do~párování, se nazývají \emph{saturované}.
 Vstupem je matice $m \times n$ (řádky odpovídají \enquote{pracovníkům} a~sloupce \enquote{úkolům}).
 
 \begin{enumerate}
-    \item Všem polím v~každém řádku odečtěte nejnižší hodnotu řádku.
-    \item Všem polím v~každém sloupci odečtěte nejnizší hodnotu sloupce.
-    \item Nakreslete čáru přes řádky/sloupce tak aby překrývaly všechny nuly s~co nejmenším počtem čar (= pokrytí).
+    \item Všem polím v~každém řádku odečti nejnižší hodnotu řádku.
+    \item Všem polím v~každém sloupci odečti nejnižší hodnotu sloupce.
+    \item Nakresli čáru přes řádky/sloupce tak aby byly překryty všechny nuly co nejmenším počtem čar (= pokrytí).
     \item Pokud je počet čar roven počtu řádků, algoritmus končí.
-    \item Najděte nejmenší nepokrytou hodnotu. Odečtěte její hodnotu od~každého odkrytého řádku a~přidejte ji ke~každé nenulové hodnotě v~zakrytému sloupci. Vraťte se na~krok~3.
+    \item Najdi nejmenší nepokrytou hodnotu. Odeči její hodnotu od~každého odkrytého řádku a~přidej ji ke~každé nenulové hodnotě v~zakrytému sloupci. Vrať se na~krok~3.
 \end{enumerate}
 
 Výsledkem je nějaká možnost z~existujících kombinací nenulových polí.
@@ -436,7 +436,7 @@ FFM není plně specifikována; když se hovoří o~algoritmu, nazývá se Edmon
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{images/5_edmonds-karp}
+\includegraphics[height=25em]{images/5_edmonds-karp}
 \caption[Řešení maximálního proudu Edmonds--Karpovým algoritmem]{Řešení maximálního proudu Edmonds--Karpovým algoritmem\\{\small (Cburnett, Wikimedia Commons, CC BY-SA 3.0)}}
 \end{figure}
 \FloatBarrier
@@ -490,7 +490,7 @@ V~síti také může dojít k~přetrénování: FFNN se \enquote{moc zaměří} 
 \begin{figure}[ht]
     \onehalfspacing
     \centering
-    \includegraphics[height=15em]{images/6_maticova-operace}
+    \includegraphics[height=10em]{images/6_maticova-operace}
     $$
     \sigma \left(
     \underbrace{
@@ -547,7 +547,7 @@ Aktivační funkce přináší nelinearitu.
 \begin{table}[ht]
 \onehalfspacing
 \centering
-\begin{tabular}{|l|c|}
+\begin{tabular}{|l|l|}
     název & vzorec \\ \hline \hline
     unit step & $\phi(z) = \begin{cases}
     0 & z < 0, \\
@@ -732,7 +732,7 @@ Vezmeme-li v~úvahu tabulku č.~\ref{upravena-tabulka-linearni-regrese}, nepouž
 Vše funguje na stejném principu, jen s~menšími změnami ve~vzorcích.
 
 \emph{Hypothesis} funkce se změní na~$h_{\theta}(x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \dotsb + \theta_n x_n$.
-Minimalizační funkce $J(\theta)$ se nezmění jen počítáme $J(\theta_0, \theta_1, \dots , \theta_n)$.
+Minimalizační funkce $J(\theta)$ se nezmění jen počítáme $J(\theta_0, \theta_1, \theta_2, \dots , \theta_n)$.
 
 Hodnoty vstupů $x$ (\emph{features}) se reprezentují pomocí matice $X$. 
 Počet $x$ vždy bude odpovídat počtu $\theta$ s~tím, že pro~první $x_0$ bude vždy roven 1 a další $x_n$ budou rovny hodnotám z~tabulky.
@@ -775,7 +775,7 @@ Pro~zlepšení výsledků lze využít logickou regresi.
 Kde o~klasifikační algoritmus používající sigmoid s~hodnotami $\left<0, 1\right>$:
 $h_0(x) = g(\theta^T x) = \frac{1}{1+e^{-\theta^T x}}$.
 
-Sigmoid funkce $g(z) = \frac{1}{1+e^{-z}}$ je vykreslena na~obrázku č.\ref{logisticka-regrese-sigmoid}.
+Sigmoid funkce $g(z) = \frac{1}{1+e^{-z}}$ je vykreslena na~obrázku č.~\ref{logisticka-regrese-sigmoid}.
 
 \begin{figure}[ht]
     \onehalfspacing
@@ -814,7 +814,7 @@ Sigmoid funkce $g(z) = \frac{1}{1+e^{-z}}$ je vykreslena na~obrázku č.\ref{log
 
 Model lze reprezentovat pomocí $h_0(x) = P(y = 1 | x ; \theta)$. 
 Tímto získáme pravděpodobnost, že $y$ bude 1 v~závislosti na $x$ a $\theta$
-(např. \emph{na~základě velikosti nádoru urči pravděpodobnost že je maligní (zhoubný)}).
+(např. \emph{na~základě velikosti nádoru urči pravděpodobnost že je zhoubný}).
 Pro~opačnou hodnotu má rovnice tvar $1 - h_0(x) = P(y = 1 | x ; \theta)$.
 
 Minimalizační funkce má tvar 
@@ -851,9 +851,9 @@ Zdroje:
 \textbf{One to one} využívá většina neuronových sítí. 
 Vstupem je objekt (obrázek, vektor, \dots) s~pevnou velikostí, poté informace prochází přes skryté vrstvy; poslední vrstva má jednotný výstup.
 
-\textbf{One to many} se využije v~případě kdy máme jeden objekt (obrázek), ale výstupů má být více (jednotilivá slova na~obrázku).
+\textbf{One to many} se využije v~případě kdy máme jeden objekt (obrázek), ale výstupů má být více (jednotlivá slova na~obrázku).
 
-\textbf{Many to one} se využije v~případě kdy máme víc objektů (slova ve~větě, snímky ve~videu) na~vstupu, ale pouze jeden výstup (zda je věta pozitivní nebo negativní, co se dejě ve videu).
+\textbf{Many to one} se využije v~případě kdy máme víc objektů (slova ve~větě, snímky ve~videu) na~vstupu, ale pouze jeden výstup (zda je věta pozitivní nebo negativní, co se děje ve~videu).
 
 \textbf{Many to many (1)} se využije v~případě kdy má být délka vstupu a~výstupu proměnlivá.
 Toho se dá využít v~překladu z~jazyků, kdy je vstupem věta a~výstupem věta přeložená.
@@ -922,7 +922,7 @@ Pokud máme dve stejné kategorie, semantic segmentation mezi nimi nerozlišuje.
 
 Byl vytvořen pro~biomedicínu, ale dnes se využívá i~jinde.
 Je tvořen ze~dvou hlavních částí (cest):
-\emph{contraction path}, ve~které se rozlišení vstupu zmenšuje nejčastěji o~polovinu,
+\emph{contraction path}, ve~které se rozlišení vstupu zmenšuje nejčastěji o~polovinu, a
 \emph{expansion path}, kde se výstup z~\emph{contraction path} spojuje s~výstupem nižší vrstvy.
 
 \begin{figure}[h]
@@ -973,7 +973,7 @@ MDP se skládá ze~čtyř částí a jedné volitelné:
 
 \subsection{Q-učení}
 
-Q-učení je založeno na~MDP
+Q-učení je založeno na~MDP.
 Počet možných akcí a~stavů je konečný.
 
 Výběr akce v~závislosti na~aktuálním stavu se vybírá dle Q-value.
@@ -989,9 +989,9 @@ Q-value se pro~každý stav a~akci zapíše do~Q-table.
 
 \emph{Exploration} slouží pro~prozkoumání prostředí a~nalezení informací o~něm.
 
-\emph{Exploitation} slouží k~využítí znalosí o~prostředí.
+\emph{Exploitation} slouží k~využítí znalostí o~prostředí.
 
-Ve~zpětnovazebním učení se musí docílít optimalizace mezi exploration a~exploitation, a k~této optimalizaci se využívá \emph{Epsilon greedy strategy}.
+Ve~zpětnovazebním učení se musí docílit optimalizace mezi exploration a~exploitation, a k~této optimalizaci se využívá \emph{Epsilon greedy strategy}.
 Ta využívá hodnoty $\epsilon$, která slouží k~určení poměru při~rozhodování.
 V~počátečních příbězích je nastaveno $\epsilon = 1$, tj. že bude probíhat pouze exploration.
 V~dalších příbězích se $\epsilon$ pomalu snižuje.
@@ -1025,7 +1025,7 @@ Takže aktualizovaná Q-value je stará hodnota + nová.
 
 \subsection{Q-učení vs SARSA}
 
-Sarsa používá politiku (policy) chovaní k~výběru další akce.
+Sarsa používá politiku (\emph{policy}) chovaní k~výběru další akce.
 Q-učení nevyužívá politiku k~výběru další akce, ale odhaduje budoucí výnosy, které aktualizuje.
 
 Zdroje:
@@ -1039,7 +1039,7 @@ Zdroje:
 
 Klasicky jsou data pro strojové učení uspořádana ve vektoru (1D, 2D). 
 Využívá se k~tomu nejčastěji lineární regrese nebo CNN (konvoluční neuronové sítě). 
-Pokud bychom chtěli převést stromovou nebo grafovou strukturu do~vektrou, bude to možné aproximací, a~dojde ke~ztrátě některých informací.
+Pokud bychom chtěli převést stromovou nebo grafovou strukturu do~vektrou, bude to možné aproximací a~se ztrátou některých informací.
 Proto se využívá různých metod na~převedení grafové struktury na~zpracovatelné podoby pomocí embedding nodes.
 
 \subsection{Embeddings nodes}
@@ -1055,7 +1055,8 @@ Ukazuje jak by vypadal graf ve~2D, kdy podobné vrcholy jsou v~tomto prostoru bl
 
 Cílem je zakódovat vrcholy z~grafu do~embedding prostoru tak že podobnost v~embedding prostoru se blíží podobnosti grafu.
 Tento cíl udává rovnice:
-$\text{similarity}(u,v)\approx \mathbf{z}_{v}^{T}\,\mathbf{z}_{u}$
+
+$$\text{similarity}(u,v)\approx \mathbf{z}_{v}^{T}\,\mathbf{z}_{u}$$
 
 Máme encoder, který mapuje vrcholy na~embeddings. 
 Poté je fuknce na~výpočet podobnosti (v~rovnici levá strana), která měří podobnost v~originálním grafu (síti).
@@ -1094,7 +1095,7 @@ První suma značí součet přes všechny vrcholy $u$.
 Druhá suma značí součt přes vrcholy $v$ vyskytujících se na~cestě z~vrcholu $u$.
 Obsah logaritmu značí předpovídanou pravděpodobnost společného výskytu $u$ a $v$ na~cestě.
 
-Cílem je najít $z_u$ které minimalizuje $\mathcal{L}$.
+Cílem je najít $\mathbf{z}_u$ které minimalizuje $\mathcal{L}$.
 
 
 \subsubsection{node2vec}
@@ -1111,7 +1112,7 @@ Při zvolení $q>p$ se algoritmus zaměřuje spíše na~globální pohled (bude 
 
 \begin{figure}[ht]
     \centering
-	\includegraphics[width=\textwidth]{images/11_node2vec-pq}
+	\includegraphics[height=10em]{images/11_node2vec-pq}
     \caption{Prioritizace $p$ nebo $q$ v~node2vec}
 \end{figure}
 
@@ -1157,7 +1158,7 @@ Graph network & Vrchol & Hrana \\ \hline
 
 Kombinatorická generalizace je vlastnost vytvářet nové rozhraní, predikce a chování z~už známých stavebních bloků.
 
-Příkladem je vycestovat na~nové místo.
+Příkladem je vycestování na~nové místo.
 Máme známé postupy -- cestovat letadlem; do~Brna; dát si oběd; v~menze.
 Generalizace je nalezení spojitostí mezi těmito věcmi na~už známých znalostech.
 
