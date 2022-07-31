@@ -7,7 +7,7 @@ Nejnovější export je dostupný [zde](https://github.com/VUT-FEKT-IBE/MPC-IBE-
 Vybírají se právě čtyři předměty.
 
 - [MPC-KRY](#MPC-KRY) Kryptografie
-- [MPC-PTK](#MPC-PTK) Pokročilé komunikační techniky
+- [MPC-PKT](#MPC-PKT) Pokročilé komunikační techniky
 - [MPC-CT3](#MPC-CT3) Bezpečnost ICT3
 - [MPC-PDA](#MPC-PDA) Pokročilé datové struktury a algoritmy
 - [MPC-ODP](#MPC-ODP) Odpovědnost v právu ICT
@@ -22,7 +22,7 @@ Vybírají se právě dva předměty.
 - [MPC-OSE](MPC-OSE) Optical Networks
 - [MPC-PLD](#MPC-PLD) Programovatelné logické obvody
 - [MPC-PZO](#MPC-PZO) Pokročilé techniky zpracování obrazu
-- [MPC-SSY](MPC-SSY) Bezdrátové senzorové sítě
+- [MPC-SSY](#MPC-SSY) Bezdrátové senzorové sítě
 - [MPC-SKS](#MPC-SKS) Služby komunikačních systémů
 - [MPC-UIN](#MPC-UIN) Umělá inteligence
 - [MPC-VDP](#MPC-VDP) Vyšší techniky datových přenosů
@@ -43,7 +43,7 @@ Vybírají se právě dva předměty.
 - [ ] Fyzicky neklonovatelné funkce (FNF) - k čemu lze využít, výhody a nevýhody, požadované vlastnosti, příklady.
 - [ ] Autentizační protokoly – na jakém principu pracují, využívané proměnné parametry, hodnocení jejich bezpečnosti (BAN logika).
 
-### MPC-PTK
+### MPC-PKT
 
 - [ ] TCP/IP: Vazba mezi RM ISO/OSI a TCP/IP. Filozofie vzájemného propojování sítí. Souběh aplikací a zapouzdřování přenášených dat.
 - [ ] Úloha IPv4 (Internet Protocol verze 4) vrstvy. IPv4 adresy. IPv4 datagram. IP tunelování. Protokol ICMPv4 (Internet Control Message Protocol verze 4).
