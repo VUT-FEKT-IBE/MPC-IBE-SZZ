@@ -1,5 +1,38 @@
 \section{Formální definice kryptografického systému, symetrické a asymetrické šifry. Výpočetně těžké matematické problémy pro~asymetrické šifry.}
 
+\subsection{Definice}
+
+\uline{Kryptografický systém} pro~šifrování zpráv je pětice $(\mathcal{M}, \mathcal{C}, \mathcal{K}, \mathcal{E}, \mathcal{D})$, kde
+$\mathcal{M}$ je prostor otevřených zpráv,
+$\mathcal{C}$ prostor šifrových zpráv,
+$\mathcal{K}$ prostor klíčů,
+$\mathcal{E}, \mathcal{D}$ dvojice zobrazení, které každému klíči $k \in \mathcal{K}$ přiřazují transformaci pro~zašifrování zpráv $E$ a~transformaci pro~dešifrování zpráv $D$, kde platí $D(k(E(k,m))=m \ \forall \ k \in \mathcal{K}, m \in \mathcal{M}$.
+
+\uline{Symetrická šifra} je taková šifra, kde pro~každé $k \in \mathcal{K}$ lze z~transformace zašifrování $E_k$ určit transformaci dešifrování $D_k$ a naopak.
+
+\uline{Asymetrická šifra} je taková šifra, kde pro~skoro všechna $k \in \mathcal{K}$ nelze z~transformace pro~zašifrování $E_k$ určit transformaci dešifrování $D_k$.
+Bývá zde přítomen tajný klíč $k$, ze~kterého se vhodnou transformací $G$ vygeneruje dvojice parametrů $(e, d)$, která tvoří veřejné a~privátní klíče ($k_\text{pub}$, $k_\text{priv}$).
+Ty parametrizují transformace šifrování a dešifrování.
+
+\subsection{Matematické problémy asymetrických šifer}
+
+\subsubsection{Problém diskrétního logaritmu}
+
+Rovnice $c \equiv m^n \mod p$ je výpočetně jednoduchá a rychlá, získání $m$ z~$c$ je naopak složité.
+
+DLP využívají protokoly Diffie-Hellman, ElGamal, DSA, ECDL, ECDSA, \dots
+
+Mezi algoritmy řešení patří brute-force, baby step--giant step, Pollardův $\rho$ algoritmus, funkční síto, \dots
+
+\subsubsection{Problém faktorizace}
+
+Faktorizace je proces převodu složeného čísla na~jeho prvočíselné složky.
+
+FP využívá například RSA.
+
+Mezi algoritmy řešení patří brute-force, Pollardůvo $\rho$ algoritmus, Pollardův $\rho - 1$ algoritmus, Lehmannova metoda, kvadratické síto, \dots
+
+
 \clearpage
 \section{Služby bezpečnosti zajišťované kryptografickými prostředky, kryptografické mechanismy, které tyto služby zajišťují.}
 
