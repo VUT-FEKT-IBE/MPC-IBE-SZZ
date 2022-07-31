@@ -297,6 +297,7 @@ Algoritmus hledající silně propojené komponenty pracující v~lineárním č
     \end{itemize}
 \end{enumerate}
 \end{figure}
+% TODO ^^ Blbě! https://www.youtube.com/watch?v=Jb1XlDsr46o
 \FloatBarrier
 
 \subsubsection{Tarjanův algoritmus}
@@ -438,6 +439,7 @@ FFM není plně specifikována; když se hovoří o~algoritmu, nazývá se Edmon
 \centering
 \includegraphics[height=25em]{images/5_edmonds-karp}
 \caption[Řešení maximálního proudu Edmonds--Karpovým algoritmem]{Řešení maximálního proudu Edmonds--Karpovým algoritmem\\{\small (Cburnett, Wikimedia Commons, CC BY-SA 3.0)}}
+% TODO Cesta z D->E má být E->D
 \end{figure}
 \FloatBarrier
 
@@ -866,7 +868,7 @@ Např. kdybychom měli na~vstupu snímky videa a~pro každý tento snímek bycho
 Skladají se ze~tří částí, kterými jsou vstup $X$, výstup $Y$ a buňka RNN.
 
 Vstup $X$ se~předá RNN, který má skrytý interní stav $h$.
-Při~každém čtení nového vstupu se tento interní stav aktualizuje a~při dalším čtení vstupu bude  použit pro~učení RNN (\emph{feed the~model}), což způsobí že model je spožděn o~jeden krok.
+Při~každém čtení nového vstupu se tento interní stav aktualizuje a~při dalším čtení vstupu bude  použit pro~učení RNN (\emph{feed the~model}), což způsobí že model je zpožděn o~jeden krok.
 Vysledkem je výstup z~RNN buňky.
 
 \begin{figure}[h]
@@ -927,8 +929,8 @@ Je tvořen ze~dvou hlavních částí (cest):
 
 \begin{figure}[h]
     \centering
-	\includegraphics[height=10em]{images/09_unet.png}
-    \caption{LSTM buňka}
+	\includegraphics[height=15em]{images/09_unet.png}
+    \caption{U-net architektura}
     \label{LSTM}
 \end{figure}
 
@@ -1025,7 +1027,7 @@ Takže aktualizovaná Q-value je stará hodnota + nová.
 
 \subsection{Q-učení vs SARSA}
 
-Sarsa používá politiku (\emph{policy}) chovaní k~výběru další akce.
+SARSA používá politiku (\emph{policy}) chovaní k~výběru další akce.
 Q-učení nevyužívá politiku k~výběru další akce, ale odhaduje budoucí výnosy, které aktualizuje.
 
 Zdroje:
