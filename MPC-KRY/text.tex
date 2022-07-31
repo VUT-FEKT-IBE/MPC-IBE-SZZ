@@ -36,6 +36,62 @@ Mezi algoritmy řešení patří brute-force, Pollardůvo $\rho$ algoritmus, Pol
 \clearpage
 \section{Služby bezpečnosti zajišťované kryptografickými prostředky, kryptografické mechanismy, které tyto služby zajišťují.}
 
+\subsection{Služby}
+
+\uline{Autentizace} (\emph{authentication}) je proces ověření identity entity.
+\emph{Peer Entity Authentication} ověřuje uživatele,
+\emph{Data Origin Authentication} ověřuje všechna data a eliminuje např. útoky opakováním.
+
+\uline{Řízení přístupu} (\emph{access control}) je možnost povolit či odepřít použití určitého zdroje určitému subjektu.
+
+\uline{Zabezpečení důvěrnosti dat} (\emph{data confidentiality}) je ochrana obsahu proti analýze.
+Může jít o~zajištění důvěrnosti přenosu zpráv, spojení, toku dat nebo služby selektivní důvěrnosti (které chrání pouze část informace).
+
+\uline{Zabezpečení integrity dat} (\emph{data integrity}) je ochrana proti neautorizované modifikaci.
+Slabá integrita: modifikace zprávy šumem, změna pořadí paketů, náhodná duplicita (kontrolní součet, CRC, pořadové číslo).
+Silná integrita: podvržení zprávy, úmyslné pozměnění zprávy; bez~oprav a s~opravami.
+
+\uline{Ochrana proti odmítnutí původu zprávy} (\emph{non-repudiation}) zajišťuje důkaz o~původu dat a dokazuje původ nebo doručení.
+
+\subsection{Mechanismy}
+
+Šifrování, digitální podpisy, řízení přístupu, mechanismy integrity dat, výměna autentizační informace, padding, řízení směrování, ověření třetí stranou.
+
+\begin{table}[ht]
+	\centering
+	\onehalfspacing
+
+	\begin{tabular}{|l|cccccccc|}
+		&
+		\begin{sideways}šifrování\end{sideways} &
+		\begin{sideways}podpis\end{sideways} &
+		\begin{sideways}řízení přístupu\end{sideways} &
+		\begin{sideways}integrita\end{sideways} &
+		\begin{sideways}autentizace\end{sideways} &
+		\begin{sideways}padding\end{sideways} &
+		\begin{sideways}řízení směrování\end{sideways} &
+		\begin{sideways}ověření třetí stranou\end{sideways} \\
+		\hline\hline
+		%                              š   p   ř   i   a   p   ř   o
+		autentizace spojení          & X & X &   &   & X &   &   &   \\
+		autentizace odesílatele      & X & X &   &   &   &   &   &   \\
+		řízení přístupu              &   &   & X &   &   &   &   &   \\
+		důvěrnost spojení            & X &   &   &   &   &   &   &   \\
+		důvěrnost přenosu zpráv      & X &   &   &   &   &   & X &   \\
+		selektivní důvěrnost         & X &   &   &   &   &   & X &   \\
+		důvěrnost toku dat           & X &   &   &   &   & X & X &   \\
+		integrita spojení s~opravou  & X &   &   & X &   &   &   &   \\
+		integrita spojení bez~opravy & X &   &   & X &   &   &   &   \\
+		selektivní integrita spojení & X & X &   & X &   &   &   &   \\
+		integrita přenosu zpráv      & X & X &   & X &   &   &   &   \\
+		nepopiratelnost odesílatele  & X & X &   & X &   &   &   & X \\
+		nepopiratelnost doručení     & X & X &   & X &   &   &   & X \\
+	\end{tabular}
+
+	\caption{Matice mechanismů bezpečnosti}
+\end{table}
+
+
 \clearpage
 \section{Kryptograficky bezpečné generátory náhodných čísel –- požadavky, hodnocení bezpečnosti, příklady realizace.}
 

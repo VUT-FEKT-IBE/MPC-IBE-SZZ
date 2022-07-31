@@ -33,7 +33,7 @@ Vybírají se právě dva předměty.
 ### MPC-KRY
 
 - [x] Formální definice kryptografického systému, symetrické a asymetrické šifry. Výpočetně těžké matematické problémy pro asymetrické šifry.
-- [ ] Služby bezpečnosti zajišťované kryptografickými prostředky, kryptografické mechanismy, které tyto služby zajišťují.
+- [x] Služby bezpečnosti zajišťované kryptografickými prostředky, kryptografické mechanismy, které tyto služby zajišťují.
 - [ ] Kryptograficky bezpečné generátory náhodných čísel – požadavky, hodnocení bezpečnosti, příklady realizace.
 - [ ] Hašovací funkce - požadavky, hodnocení bezpečnosti. Princip konstrukce - iterační, typu „houba“ (SHA3).
 - [ ] Kvantový přenos informace - důvody použití, příklady protokolů.
