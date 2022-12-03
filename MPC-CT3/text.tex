@@ -1,9 +1,126 @@
 \section{Bezpečnost na~vrstvě L1 (bezpečnostní opatření, klíčování, dohled nad~sítí) a bezpečnost na~vrstvě L2 (bezpečnostní opatření, příklady útoků, MACsec).}
 
+Na~fyzické vrstvě pracují technologie jako USB, Bluetooth, UTMS, 100Base-T, DSL, \dots
+
+Na~spojové vrstvě pracují protokoly Ethernet, PPP; WEP/WPA\{,2,3\}; PAP/CHAP/EAP, \dots
+
+
+\subsection{Bezpečnostní opatření na~L1}
+
+Zajištění a~izolace kabelů nebo optiky, síťových prvků, ochrana fyzických rozhraní a portů:
+\begin{itemize}
+	\item Zamezení neautorizovaného připojení do~portů.
+	\item Zamezení poškození síťového zařízení.
+	\item Umístění bezpečnosti perimetru nebo prostoru (čidla, kamery, kontrola přístupu, uzamykatelné skříně).
+	\item Pasivní ochrana: blokátory (pro~konektory a porty), klíčování (znemožnění připojení cizích skupin PatchCordů a LC konektorů).
+\end{itemize}
+
+Obfuskace komunikace (kódování, přidání bílého šumu).
+Analogové šifrování (různé modulace).
+Kvantová kryptografie (distribuce klíčů protokolem BB84).
+
+Šifrování na~první úrovni způsobuje problémy (synchronizace, komplexita, neefektivní ošetření chyb).
+
+
+\subsection{Dohled nad~L1 sítí}
+
+AIM (\emph{Automatized Infrastrucutre Management}) zajišťuje, dokumentuje a~monituruje síťovou kabeláž.
+Umožňuje detekovat vložení a odstranění propojovacích kabelů (pomocí mikrospínač nebo například měřením impedančních vlastností).
+
+IPLMS (\emph{Intelligent Physical-Layer Management Solution}) kombinuje inteligentní propojovací panely se softwarovými funkcemi a poskytuje informaceo~stavu připojení na~portech.
+
+
+\subsection{Rizika a~hrozby na~L1}
+
+Externí útoky: modifikace dat (\emph{tampering}), rušení (\emph{jamming}), odepření služeb (DoS), odposlech (\emph{sniffing}; bezdrátově, metalikou, optikou, prostorově pomocí kamery nebo mikrofonu), obejití přístupu (\emph{authentication bypass}; lámání hesel, obnovení do~továrního nastavení, nouzový režim, reboot), útok postranním kanálem (proudově, napěťově, zvukově, opticky).
+
+Interní útoky: poškození kabelů nebo zařízení, neoprávněné připojení k~portu (\emph{tap}, \emph{splitter}) a odposlech či modifikace dat.
+
+
+\subsection{Bezpečnostní opatření na~L2}
+
+Ethernet packet obsahuje pouze CRC32, nelze ho považovat za~bezpečnostní prvek.
+
+802.1x: kontrola přístupu zařízení do~sígě na~portech nebo na~bezdrátových přístupových bodech.
+Doporučuje se EAP a integrace s~AAA (Radius, Diameter).
+
+802.11: WEP i WPA obsahují mnoho chyb, WPA2 (802.11i): KRACK (2017), WPA3: zranitelnost v~Dragonfly handshake.
+
+
+\subsection{Rizika a~hrozby na~L2}
+
+DoS (vyčerpání MAC adres, kolize), odposlech, modifikace dat.
+
+Existuje množství útoků: spoofing MAC adres, \emph{ARP cache poisoning}, \emph{ARP cache flooding}, WEP/WPA zranitelnosti, VLAN útoky.
+
+% TODO Příklady útoků
+
+
+\subsection{MACSec}
+
+802.1ae je specifikace implementace SecY (\emph{MAC Security Entities}).
+Zajišťuje důvěrnost dat, autenticitu i~integritu.
+Jako takový nezajišťuje management klíčů a ustanovení bezpečné relace; existuje 802.1x-2010 jako MKA (\emph{\mbox{MACSec} Key Agreement}).
+
+802.1ae+802.1x dohromady zajišťují oboustrannou autentizaci, výměnu klíčů, šifrování, integritu a autentičnost.
+Jsou součástí Linuxového jádra 4.5+, některých CISCO přepínačů a dalších L2 prvků.
+
+Protože jde o~ochranu na~L2, chrání data jen uvnitř jednoho LAN segmentu a při~přechodu do~jiné sítě je terminován.
+Podporuje VLAN.
+
+Rámce jsou podobné Ethernet rámcům, ale obsahují navíc \emph{Security Tag} a MAC.
+Používá se AES-GCM-128 (nebo -256).
 
 
 \clearpage
 \section{Bezpečnost na~vrstvě L3 (bezpečnostní opatření, příklady útoků, IPsec, bezpečnost IPv6).}
+
+L3 je první vrstva na~které je zavádění šifrování praktické i pro~běžné použití.
+
+Zajištění autentizace/autorizace komunikujících stran (PKI, AAA, ACL), důvěrnost (VPN), bezpečnost služeb (ICMP, ARP, IGMP), QoS, bezpečnost protokolů (OSPF, RIP).
+
+
+\subsection{Bezpečnostní opatření na~L3}
+
+Zabezpečení.
+Key management (PKI), autentizace (AAA řešení, Radius, Tacacs, Kerberos), ACL, firewally.
+
+Důvěrnost a integrita.
+Bezpečnost je založena na~vyšších vrstvách (TLS, DTLS, QUIC).
+IPSec.
+
+Ochrana funkčnosti sítě.
+Směrovací protokoly nemívají možnost vzájemné autentizace (OSPFv2, RIPv2, EIGRP, BGP: zcela bez autentizace, případně MD5 PSK).
+
+
+\subsection{Rizika a~hrozby na~L3}
+
+Spoofing, IP flooding, ICMP flooding, Smurf DDoS (podvržení zdroje v~ICMP dotazu), wormhole, blackhole, sybil.
+
+U~dynamických směrovacích protokolů je možné do~sítě nasadit škodlivé zařízení které může síť ovládnout.
+
+
+\subsection{IPSec}
+
+IPSec poskytuje bezpečnost na~třetí vrstvě včetně managementu klíčů a ověření protistran.
+Jde o~sadu několika protokolů: \emph{Authentication Header} (integrita), \emph{Encapsulating Security Payloads} (šifrování), \emph{Security Associations} (parametry spojení).
+Lze ho využívat v~tunelovacím (vše šifrované, nová hlavička) nebo transportním (šifrovaná data) módu.
+Ustanovení klíče je možné přes PSK, IKE1/IKE2, Kerberos.
+
+Implementován ve~Windows, OSX, nových verzích Android, pro~Linux \{strong,libre,open\}swan.
+Alternativou k~IPSec je např. Wireguard.
+
+
+\subsection{Bezpečnost IPv6}
+
+V~IPv6 měl být IPSec původně vyžadován, dnes jde však jen o~doporučení.
+IPv6 používá nové přístupy a~protokoly které zvětšují prostor pro~možné útoky.
+Některé útoky z~v4 lze adaptovat: ARP $\rightarrow$ NDP, broadcast $\rightarrow$ multicast multiplikace, fragmentace (směrovače $\rightarrow$ uzly).
+Je možné zneužívat rozšířené hlavičky.
+
+Kvůli výrazně většímu prostoru je v6 odolná vůči skenování; 64b prefix, různé způsoby přidělování adres.
+
+% TODO Bezpečnost multicastu
 
 
 
