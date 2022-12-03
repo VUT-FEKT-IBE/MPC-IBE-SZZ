@@ -19,7 +19,7 @@ Vybírají se právě dva předměty.
 - [MPC-CSI](#MPC-CSI) Číslicové signály a systémy
 - [MPC-MPG](#MPC-MPG) Moderní počítačová grafika
 - [MPC-NAV](#MPC-NAV) Počítače a jejich periferie
-- [MPC-OSE](MPC-OSE) Optical Networks
+- [MPC-OSE](#MPC-OSE) Optical Networks
 - [MPC-PLD](#MPC-PLD) Programovatelné logické obvody
 - [MPC-PZO](#MPC-PZO) Pokročilé techniky zpracování obrazu
 - [MPC-SSY](#MPC-SSY) Bezdrátové senzorové sítě
