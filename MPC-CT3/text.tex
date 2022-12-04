@@ -127,6 +127,93 @@ Kvůli výrazně většímu prostoru je v6 odolná vůči skenování; 64b prefi
 \clearpage
 \section{Bezpečnost TCP (útoky, protiopatření), protokol TLS -- Transport Layer Security (princip, součásti, příklady útoků).}
 
+TCP hlavička obsahuje protichybový checksum.
+Při~navazování spojení se provádí třícestný handshake:
+\begin{center}
+\begin{tabular}{rcl}
+	klient & & server \\
+	\hline
+	SYN, SEQ=$X$ & $\rightarrow$ & \\
+	& $\leftarrow$ & SYN, ACK=$X+1$, SEQ=$Y$ \\
+	SEQ=$X+1$, ACK=$Y+1$ & $\rightarrow$ \\
+\end{tabular}
+\end{center}
+Při~uzavírání spojení obě strany zasílají FIN, ACK.
+Zamítavá odpověď je RST.
+
+
+\subsection{Útoky na~TCP}
+
+\textbf{Spoofing.}
+Asociační stavem se myslí kombinace portu a~inicializačního sekvenčního čísla, které lze predikovat nebo hádat.
+Ochranou je dobrá implementace TCP stacku (a PRNG v~něm), IPSec nebo např. TCP Auth Option (RFC~5925).
+
+\textbf{Skenování portů.}
+Skenováním lze zjistit jaké služby na~stanici běží, a~fingerprinting techniky umožňují detekovat i verze systému a služeb (\texttt{nmap}, \texttt{netstat}; \href{https://github.com/hackman/shijack}{\texttt{Shijack}}, \href{https://linux.die.net/man/1/hunt}{\texttt{Hunt}}).
+Přímá ochrana neexistuje, je možné skenování ztížit nasazením edge proxy která serverům a jejich službám posílá jen žádaný provoz a zbytek je terminován u~ní.
+
+\textbf{Únos TCP relace.}
+Varianta spoofingu, jde o~zastavení klienta (DoS) a odhad sekvenčních čísel jeho komunikace se~serverem.
+
+\textbf{SYN DoS.}
+Zaslání mnoha SYN paketů bez následného potvrzení navázání spojení ACK zprávou.
+Tím na~serveru zůstanou polootevřená spojení.
+Ochranou jsou SYN cookies (hashování adres, portů a času; výsledek v~sekvenčním čísle), snížení časovače, navýšení délky fronty, recyklace nejstarších polootevřených spojení, filtrace nových spojení.
+
+
+\vfill
+\subsection{Protokol TLS}
+
+\emph{Transport Layer Security}.
+Jde o~mezivrstvu zajištující bezpečný přenos L7 protokolů nad~TCP.
+Nabízí jedno- i dvoucestnou autentizaci s~využitím certifikačních autorit, obousměrnou symetricky šifrovanou konverzaci, kontrolu integrity a autentičnosti (HMAC, CMAC, AEAD).
+
+Skládá se z~protokolů \emph{Record Layer Protocol} (dělení dat, komprimace, šifrování), \emph{Handshake Protocol} (autentizace stran, dohoda algoritmů a tajemství), \emph{ChangeCipherSpec} (přechod na~jinou šifrovací sadu), \emph{Alert} (signalizace).
+
+Při~navazování se provádí čtyřcestný handshake:
+\begin{center}
+\begin{tabular}{rcl}
+	klient & & server \\
+	\hline
+	ClientHello & $\rightarrow$ & \\
+	& & ServerHello \\
+	& & Certificate \\
+	& $\leftarrow$ & ServerHelloDone \\
+	ClientKeyExchange & & \\
+	ChangeCipherSpec & & \\
+	Finished & $\rightarrow$ & \\
+	& & ChangeCipherSpec \\
+	& $\leftarrow$ & Finished \\
+\end{tabular}
+\end{center}
+Výsledná relace může obsahovat jedno nebo více TCP spojení.
+
+
+\subsection{Útoky na~TLS}
+
+\textbf{Padding Oracle} (2002).
+Chyba v~návrhu SSL (MAC-then-encrypt v~CBC).
+Server vyzrazuje jestli je padding správný.
+
+\textbf{POODLE} (Padding Oracle on Downgraded Legacy Encryption; 2014).
+Degradace na~SSL~3 a~návazný Padding Oracle.
+Ochranou je využít autentizované režimy šifer (AES-GCM), použití encrypt-then-MAC.
+
+\textbf{Renegotiation} (2009).
+Nový handshake v~rámci existujícího spojení který nahradil ten původní.
+Ochranou je ho zakázat.
+
+\textbf{CRIME} (Compression Ratio Infoleak Made Easy; 2002).
+Získání cookies v~HTTPS a SPDY spojení; kompresní metoda DEFLATE nahrazuje opakované bajty a sledováním velikostí odpovědí lze získat informace o~šifrovaném obsahu.
+Ochranou je zakázat kompresi.
+
+\textbf{BREACH} (Browser Reconnaissance and Exfiltration via Adaptive Compression of Hypertext; 2013).
+Obdoba CRIME využívající HTTP kompresi místo TLS komprese.
+
+\textbf{HeartBleed} (2014).
+Chyba v~implementaci OpenSSL, konkrétně v~heartbeat zprávě.
+Klient zasílá dotaz obsahující data a~jejich délku a server odpovídá stejnou zprávou.
+Zranitelnost HeartBleed spočívala ve~faktu že server použil zadanou délku zprávy a mohl odpovědět částí dat ze~své paměti.
 
 
 \clearpage
