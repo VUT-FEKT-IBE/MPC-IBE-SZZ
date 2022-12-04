@@ -127,7 +127,7 @@ Kvůli výrazně většímu prostoru je v6 odolná vůči skenování; 64b prefi
 \clearpage
 \section{Bezpečnost TCP (útoky, protiopatření), protokol TLS -- Transport Layer Security (princip, součásti, příklady útoků).}
 
-TCP hlavička obsahuje protichybový checksum.
+TCP hlavička obsahuje protichybový kontrolní součet.
 Při~navazování spojení se provádí třícestný handshake:
 \begin{center}
 \begin{tabular}{rcl}
@@ -219,6 +219,59 @@ Zranitelnost HeartBleed spočívala ve~faktu že server použil zadanou délku z
 \clearpage
 \section{Bezpečnost UDP (útoky, protiopatření, zabezpečení nad~protokolem UDP), bezpečnost DNS, protokol DNSSEC.}
 
+UDP je bezstavový protokol bez~garance doručení a kontroly pořadí; hlavička obsahuje pouze porty, délku a kontrolní součet.
+DTLS umožňuje data šifrovat, autentizovat i~kontrolovat.
+QUIC integruje TLS~1.3 a podporuje až 0RTT komunikaci.
+
+Záplavové a amplifikační DDoS útoky:
+DNS flood, SSDP flood, NTP flood, SNMP flood, UDP fragmentation flood, VoIP flood, \dots
+Ochranou je limitace UDP odpovědí a zahazování nevyžádaného UDP provozu ve~firewallu.
+
+\textbf{Memcrashed} (2018).
+\href{https://memcached.org}{Memcached} je cachovací systém urychlující načítání webových stránek (klíč--hodnota, na~způsob Redis).
+Šlo o~chybu implementace umožňující až 51\,000$\times$ amplifikaci (DNS amplifikace je zhruba padesátinásobná, NTP šedesátinásobná).
+
+
+\subsection{Zabezpečení nad~UDP}
+
+UDP lze balit do~TLS.
+
+IETF QUIC je protokol postavený nad~UDP.
+Vyžaduje použití TLS~1.3, součástí handshake je také TLS handshake, což umožňuje 2RTT až 1RTT komunikaci (protože součástí třetí a čtvrté zprávy již jsou i~data).
+Umožňuje dynamicky měnit adresy na~síťové a transportní vrstvě.
+
+
+
+\subsection{Bezpečnost DNS}
+
+DNS je hierarchický systém překladu doménových jmen a IP adres, používající port 53.
+Existuje třináct kořenových serverů s~vysokou globální redundancí.
+
+Ani v~současné době není ve~výchozím stavu šifrovaný kvůli důrazu na~rychlost; dochází k~únikům detailů o~provozu a ohrožení soukromí.
+Jde o~prostor pro~tunelování provozu (SSH over DNS) i útoků.
+
+Dosáhnout lepšího soukromí lze dosáhnout různými způsoby.
+Omezení rekurze (tzv. \emph{bailiwick}) záleží na~rekurzivním resolveru a ne klientech: DNS dotaz obsahuje pouze data nutná k~vyřešení dotazu (root DNS $\rightarrow$ \texttt{cz.}, DNS pro~\texttt{.cz} $\rightarrow$ \texttt{vut.cz.}, DNS pro~\texttt{vut.cz} $\rightarrow$ \texttt{fekt.vut.cz.}, \dots).
+
+DNS dotazy lze balit do~TLS nebo HTTPS paketů  (DoT, DoH), což prvkům infrastruktury znemožní sledovat DNS provoz a chování koncových stanic.
+Dochází tím ale k~nárůstu objemu dat a~času nutnému k~vyřízení požadavku.
+
+\textbf{DNS spoofing} je zaslání falešné odpovědi klientovi.
+\textbf{DNS Cache Poisoning} je otrava cache a potenciální útok na~více klientů najednou.
+
+\textbf{Zone transfer} je operace synchronizace Master a Slave DNS serverů v~rámci organizace.
+Pokud je přenos zóny nakonfigurován nedostatečně, útočník může o~zónu požádat a získat tím seznam existujících subdomén.
+
+
+\subsubsection{DNSSec}
+
+Ochrana proti podvržení a manipulaci s~DNS dotazy.
+Klient (nebo rekurzivní server) ověřuje odpovědi (původ a integritu) pomocí digitálních podpisů; nejde o~zajištění ochrany proti odposlechu nebo odepření přístupu.
+Časová razítka zajišťují ochranu proti opakování.
+
+Veřejný klíč zóny je zapsán v~doménových informacích u~nadřazené autority, čímž dochází ke~zformování řetězce důvěry.
+
+RRSIG je podpis odpovědi, DNSKEY je veřejný klíč použitý k~podpisu, DS slouží k~ověření u~nadřazené autority, NSEC a NSEC3 prokazují neexistenci požadované domény.
 
 
 \clearpage

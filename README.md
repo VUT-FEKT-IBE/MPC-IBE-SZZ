@@ -61,7 +61,7 @@ Vybírají se právě dva předměty.
 - [x] Bezpečnost na vrstvě L1 (bezpečnostní opatření, klíčování, dohled nad sítí) a bezpečnost na vrstvě L2 (bezpečnostní opatření, příklady útoků, MACsec).
 - [x] Bezpečnost na vrstvě L3 (bezpečnostní opatření, příklady útoků, IPsec, bezpečnost IPv6).
 - [x] Bezpečnost TCP (útoky, protiopatření), protokol TLS - Transport Layer Security (princip, součásti, příklady útoků).
-- [ ] Bezpečnost UDP (útoky, protiopatření, zabezpečení nad protokolem UDP), bezpečnost DNS, protokol DNSSEC.
+- [x] Bezpečnost UDP (útoky, protiopatření, zabezpečení nad protokolem UDP), bezpečnost DNS, protokol DNSSEC.
 - [ ] Zabezpečení v sítích typu Low-Power Wide Area Network (kryptografické ochrany, problémy a omezení), zabezpečení v mobilních sítích 2G - 5G (základní principy bezpečnosti pro 2G, 3G a 4G).
 - [ ] Ochrana soukromí v ICT (pojmy, typy anonymizace), kryptografické metody zajištující ochranu soukromí, síťové metody poskytující ochranu soukromí a anonymizační nástroje a systémy.
 - [ ] Forenzní analýza (hlavní cíle, základní principy, vysvětlete časové značky a časovou osu událostí).
