@@ -277,6 +277,96 @@ RRSIG je podpis odpovědi, DNSKEY je veřejný klíč použitý k~podpisu, DS sl
 \clearpage
 \section{Zabezpečení v~sítích typu Low-Power Wide Area Network (kryptografické ochrany, problémy a~omezení), zabezpečení v mobilních sítích 2G -- 5G (základní principy bezpečnosti pro~2G, 3G a 4G).}
 
+LP WAN je reakce na~narůstající počet IoT technologií.
+Jsou vhodné pro~omezené uzly (nízká spotřeba, malá cena, dlouhý dosah).
+Jejich hlavní nevýhodou je nízká úroveň zabezpečení a nízká datová propustnost.
+Jejich použití je vhodné zejména pro~smart metering, pet/property tracking, bezpečnost, smart cities, \dots
+
+Kryptograficky nejsou přenosy chráněny buď vůbec, nebo používají symetrické klíče; asymetrické algoritmy bývají pro~jejich hardware moc náročné.
+Některé sítě nabízí i~rotaci klíčů a~E2EE.
+
+
+\subsection{LP WAN}
+
+Jde o~výrazně heterogenní prostor s~velkým množstvím alternativních řešení.
+Zprávy mívají kontrolu integrity, ale chybějící nebo slabé šifrování.
+
+
+\subsubsection{LoRa}
+
+Rychlost 292~bps až 50~kbps.
+Využívá proprietární modulaci a bezlicenční pásma s~dosahem přes 10~km.
+
+Specifikace LoRaWAN je otevřená.
+Zařízení komunikují asynchronně; buď ze~své vůle nebo při~stanoveném intervalu.
+Pakety přijaté sítí jsou filtrovány proti~duplicitám, zkontrolovány a předány aplikačním serverům.
+
+Pro~zabezpečení používá symetrickou kryptografii; autentizace (Device ID), integrita (MIC), zabezpečení (AES-128-CCM, sekvenční číslo).
+
+
+\subsubsection{SigFox}
+
+
+Je vhodná pro~sběr dat a senzoriku.
+Denní limit 140 zpráv o~velikosti 12~B a čtyři potvrzovací zprávy o~velikosti 8~B.
+
+Pro~zabezpečení používá symetrickou kryptografii; autentizace (Device ID, MAC), integrita (MAC, sekvenční číslo), zabezpečení (není, případně AES-128-CTR).
+
+
+\subsubsection{NB-IoT}
+
+Úzkopásmová LTE komunikace.
+50 kbps až 250 kbps s~nízkou latencí.
+Náročnější než výše zmíněné (autentizace SIM kartou, vyšší přenosové rychlosti), vyšší cena.
+
+Bezpečnost je založena na~3GPP a LTE protokolech uvnitř SIM.
+
+
+\subsection{Mobilní sítě}
+
+SIM obsahuje 128b (od~4G 256b) předsdílený klíč.
+
+% TODO Tato část potřebuje výrazně rozšířit. Bylo by vhodné uvést některé z historických útoků a specifikovat konkrétní algoritmy.
+
+
+\subsubsection{2G: GSM}
+
+Šifrování prodouvou šifrou, autentizace jednostrannou \emph{challenge--response}, integrita nezajištěna.
+Identifikace pomocí IMSI na~SIM, pseudonymita pomocí TMSI (dočasný síťový identifikátor%
+\footnote{Při~zapnutí SIM oznámí své IMSI v~otevřeném tvaru, síť odpoví s~šifrovaným TMSI, kterým se poté zařízení identifikuje. Falešné BTS může IMSI odposlechnout a zprávy podvrhovat.}%
+).
+GSM vytvářelo okruhy, další technologie jsou již paketové.
+
+
+\subsubsection{2.5G: GPRS}
+
+Šifrování proudovými šiframi, autentizace jednostranně, integrita nezajištěna.
+
+Autentizace pomocí klíče na~SIM (algoritmy A3 a A8).
+
+
+\subsubsection{3G: UMTS}
+
+Šifrování datové komunikace i signalizace pomocí AES, oboustranná autentizace, integrita, na~čipové kartě je logická aplikace USIM.
+
+Používá se algoritmická sada Milenage: autentizace (f1, f2), generování klíčů (f3, f4, f5), šifrování (f8; AES-CTR+OFB), integrita (f9).
+
+
+\subsubsection{4G: LTE}
+
+4G je packetová síť (EPS: \emph{Evolved Packet System}) přímo na~TCP/IP: SIP, RTP, IPSec, SRTP, DTLS, TLS.
+Využívá podobný AKA protokol jako 3G (ale s~256b klíčem), proudovou šifru Snow 3G, blokovou šifru AES.
+
+
+\subsubsection{4G}
+
+V~síti existují nejen plošné, ale i~vertikální buňky (drony, letový provoz, IoV).
+
+Bezpečnost založena na~ozkoušených protokolech z~4G, oboustranná autentizace, kontrola integrity i autentičnosti, mitigace a prevence známých útoků.
+Byly odděleny a segmentovány části (snížení mitigace útoků).
+
+
+
 
 
 \clearpage
