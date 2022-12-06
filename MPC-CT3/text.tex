@@ -417,11 +417,118 @@ TODO ještě něco víc?
 \clearpage
 \section{Analýza škodlivého kódu (základní dělení analýz, cíle a metody statické a dynamické analýzy).}
 
+Hlavním cílem analýzy je poskytnutí informací, které jsou potřebné kvůli \textbf{vytvoření důkazního materiálu} a \textbf{obraně proti stejnému incidentu v~budoucnu}.  
+
+\subsection{Základní dělení}
+
+Cílem analýzy je zjistit, jak daný škodlivý kód funguje. Proto se analýza dělí na:
+
+\subsubsection{Statická analýza}
+
+Hlavním cílem je pochopit strukturu programu a jeho funkčnost bez spuštění.
+Je bezpečnější než dynamická.
+Je považována za~základní analýzu malware.
+\textbf{Skenování antivirovými programy} slouží na~určení zda je vzorek malware či nikoli, porovnáním s~databázemi.
+
+Autoři škodlivého kódu využívají různé techniky k~maskování:
+
+\begin{itemize}
+    \item Obfuskační techniky -- zmatení konstantami a podmínkami.
+    \item Šifrovací techniky - využití entropie.
+\end{itemize}
+
+Nástroje statické analýzy:
+
+\begin{itemize}
+    \item \textbf{PEiD} -- základ statické analýzy, ovládaní pomocí GUI, výsledkem je detekce .exe souborů, kompilátorů a nástrojů pro~šifrování.
+    \item \textbf{GT2} –- príkazový řádek, detekuje modifikátory a kompilátory podle binárního podpisu.
+    \item Dependency Walker, HexDrive, strings, DIE, pestudio, IDA, \dots
+\end{itemize}
+
+
+\subsubsection{Dynamická analýza}
+
+Dochází ke~spuštění programu v~kontrolovaném prostředí (\emph{sandbox}) a pozorování jeho chování.
+Detekují se změny provedené malwarem v~systému, je potřeba rozlišit normální změny a změny způsobené škodlivým kódem.
+
+
+Nástroje dynamické analýzy:
+
+\begin{itemize}
+    \item \textbf{Hook-based} -- zapíšou se do~API funkcí a zaznamenávají změny probíhající v~systému. Jsou to nástroje s~největší škálou možností.
+    Např. \textit{Process Monitor, pymon.py}.
+    \item \textbf{Difference-based} -- pořídí obraz před a po~spuštění a porovnávají změny.
+    Např. \textit{Regshot, Winanalysis}.
+    \item \textbf{Notification-based} -- zaregistrují oznámení při určité události.
+    Např. \textit{Process Monitor, Preservation}.
+\end{itemize}
+
+Metody detekce změn systému:
+
+\begin{itemize}
+    \item \textbf{Sledování API funkcí} -- zaznamenávají tok mezi programy a OS.
+    Funkce nástroje: \textit{Hook-based}.
+    \item \textbf{Logování neúspěšných akcí} -- nahlášení neúspěšných pokusů o~provádění změn.
+    Funkce nástroje: \textit{Hook-based}.
+    \item \textbf{Logování dočasných souborů} -- zaznamenání vytváření dočasných souborů.
+    Funkce nástroje: \textit{Hook-based, Notification-based}.
+    \item \textbf{Rozlišování mezi různými typy modifikací} -- zaznamenání změn souboru.
+    Nástroj \textit{Hook-based} je schopen rozpoznat, zda byla změněna velikost souboru a atributy.
+    \item \textbf{Ukázka změn v téměř reálném čase} -- nástroje \textit{Hook-based, Notification-based} ukazují změny v systému okamžitě.
+    \textit{Difference-based} vykazují změny až po vytvoření druhého otisku systému.
+    \item \textbf{Zobrazení procesů zodpovědných za provedení změn} -- pouze \textit{Hook-based} mohou identifikovat procesy (název, ID) odpovědné za~provedení změny.
+    \item \textbf{Zobrazení prováděných změn v časové ose} -- nástroje \textit{Hook-based, Notification-based} zaznamenávají aktivity v~pořadí ve~kterém k~nim dochází.
+\end{itemize}
+
+Příklady nástrojů:
+
+\begin{itemize}
+    \item
+    	\textbf{Process Monitor PM} zachycuje Windows API funkce.
+    	Je to hybrid mezi Hook-based a Notification-based.
+    	Umožňuje sledovat všechny soubory, registry a procesy na~Windows.
+    \item
+    	\textbf{Regshot} patří mezi Difference-based nástroje.
+    	Detekuje změny registrů.
+    \item
+    	\textbf{Debugger x64dbg} při spouštění a krokování vzorku dochází k~jeho reálnému spuštění.
+\end{itemize}
+
 
 
 \clearpage
 \section{Penetrační testování (rozdíly v penetračním testování realizovaným metodou Ad-hoc a pomocí metodologie, hlavní cíle ASVS metodologie, bezpečnostní úrovně).}
 
+Penetrační testování je provedení testu s~cílem identifikovat zranitelnosti, které by mohly být přítomny v~počítači, serveru, v~informačním systému, síti, aplikaci nebo v~organizaci.
+Penetrační testy odhalují zranitelnosti i~hrozby, jakými by mohla být aktiva zneužita a poskytují návod, jak snížit existující riziko.
+
+Stupnice závažností zranitelností: informační, nízká, střední, vysoká, kritická.
+
+
+\subsection{Testování metodou Ad-hoc}
+
+Jedná se o~nahodilé testování, kde tester využije své znalosti k~otestování aplikace.
+Není přesně definován průběh a rozsah testu, zadavatel testu neví, co vše bude testováno.
+Zadavatel takzvaně kupuje zajíce v pytli (řídit se může pouze referencemi a kvalifikací testera).
+
+
+\subsubsection{ASVS metodologie}
+
+\textit{Application Security Verification Standard} OWASP definuje úrovně testování (level 0 -- 3), které jasně formulují oblasti, které musí být během testu prověřeny.
+Zadavatel i~tester tak ví co bude obsahem testování.
+
+ASVS má dva cíle:
+\begin{itemize}
+    \item pomáhat organizacím vyvíjet a udržovat bezpečné aplikace,
+    \item umožnit prodejcům bezpečnostních služeb a zadavatelům jasně definovat požadavky a nabídky.
+\end{itemize}
+
+3 úrovně ověřování zabezpečení:
+\begin{itemize}
+    \item Úroveň 1 -- pro nízké úrovně zabezpečení, plně testovatelná penetrací.
+    \item Úroveň 2 -- pro aplikace, které obsahují citlivá data, která vyžadují ochranu.
+    \item Úroveň 3 -- pro nejkritičtější aplikace, které provádí transakce, obsahují citlivá lékařská data atd.
+\end{itemize}
 
 
 \clearpage
