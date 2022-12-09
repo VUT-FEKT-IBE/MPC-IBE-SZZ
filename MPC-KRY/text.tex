@@ -369,3 +369,84 @@ Vydání časového razítka
 
 \clearpage
 \section{Autentizační protokoly –- na jakém principu pracují, využívané proměnné parametry, hodnocení jejich bezpečnosti (BAN logika).}
+\subsection{Princip}
+\begin{itemize}
+    \item výzva - odpověď
+    \item mezi dvěma entitami nebo s využitím třetí důvěryhodné strany
+    \item ověřují správnost a čerstvost autentizačního požadavku
+    \item výzva musí být čerstvá - využívají náhodná čísla, sekvenční čísla nebo časová razítka
+\end{itemize}
+
+\subsection{Využívané proměnné parametry}
+\begin{itemize}
+    \item sekvenční číslo
+    \begin{itemize}
+        \item tajné, nutné ukládat poslední použité číslo
+        \item při každém použití se sekvenční číslo inkrementuje o 1
+        \item v případě desynchronizace je nutné využít nějaký autentizační protokol k synchronizaci
+    \end{itemize}
+    \item časové razítko
+    \begin{itemize}
+        \item využívá se maximálního povoleného zpoždění (acceptance-window) přijaté zprávy
+        \item přijatá časová razítka jsou ukládána pro případ, kdyby útočník chtěl provést útok přehráním v povoleném časovém okně nebo v případě změny hodin u ověřovatele
+    \end{itemize}
+    \item náhodné číslo použitelné pouze jednou (nonce = number used only once)
+    \begin{itemize}
+        \item nevyžaduje synchronizaci
+        \item ověřovatel ho zašle protstraně a ta jej použije v autentizační odpovědi
+        \item po použití je vyřazeno z databáze
+        \item pokud je nonce dostatečně velký (např. 128 b), tak náhodný výběr snižuje pravděpodobnost výběru stejného nonce na zanedbatelnou úroveň
+    \end{itemize}
+\end{itemize}
+
+\subsection{Hodnocení bezpečnosti - BAN logika}
+\begin{itemize}
+    \item BAN logika - slouží k formálnímu popisu bezpečnosti autentizačním protokolů
+    \item jedna z prvních a nejpoužívanějších logik pro formální ohodnocení autentizačních protokolů, určena pro kryptografii se sdíleným i veřejným klíčem
+    \item jedná se o epistemickou a doxastickou logiku (poddruhy modální logiky zabývající se úvahami a znalosti a víře) - logiky využívané v PC vědě a umělé inteligenci
+    \item zabývá se autentizačními protokoly na abstrajtní úrovni (neřeší konkrétní implementaci zkoumaného protokolu a problémy s tím spjaté) \\
+\end{itemize}
+
+Otázky BAN logiky
+\begin{itemize}
+    \item čeho chce zkoumaný protokol dosáhnout?
+    \item potřebuje zkoumaný protokol více předpokladů než jiný protokol?
+    \item vykonává zkoumaný protokol cokoliv nepotřebného, jenž by mohlo být vypuštěno bez ohrožení bezpečnosti?
+    \item šifruje zkoumaný protokol něco, co by mohlo být zasláno v otevřené formě bez ohrožení bezpečnosti? \\
+\end{itemize}
+
+Definované konstrukce BAN logiky
+\begin{itemize}
+    \item P věří X
+    \begin{itemize}
+        \item účastník P věří výroku X, nebo by měl být oprávněný věřit X
+        \item účastník P může jednat, jako by X bylo pravdivé
+        \item hlavní konstrukce logiky
+    \end{itemize}
+    \item P vidí X
+    \begin{itemize}
+        \item účastník P přijal zprávu obsahujcí výrok X, jenž může přečíst a zopakovat X (např. po dešifrování)
+    \end{itemize}
+    \item P vyslovil (jednou řekl) X
+    \begin{itemize}
+        \item účastník P v určitém čase zaslal zprávu obsahující výrok X. 
+        \item není známo, zda-li byla zpráva odeslána před dlouhou dobou nebo v průběu současného běhu protokolu
+        \item je však známo, že účastník P věřil X, když odesílal zprávu \\
+    \end{itemize}
+    \item pravidlo význam zprávy (message meaning)
+    \begin{itemize}
+        \item tato pravidla popisují, jakým způsobem lze odvodit důvěry o původu zpráv
+    \end{itemize}
+    \item pravidlo ověření aktuálnosti zprávy (nonce verification)
+    \begin{itemize}
+        \item využívá se ke kontrole aktuálnosti (novosti) zprávy 
+        \item příjemce může předpokládat, že odesílatel věří jejímu obsahu a můžeme mu také věřit
+        \item zajišťuje ochranu proti útoku přehráním
+    \end{itemize}
+    \item pravidlo novosti celého výroku
+    \begin{itemize}
+        \item pokud je část výroku nová (fresh), pak je celý výrok nový
+    \end{itemize}
+    \item pravidlo jurisdikce (jurisdiction)
+    \item pravidla důvěry k množině výroků
+\end{itemize}
