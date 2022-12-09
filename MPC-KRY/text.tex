@@ -94,6 +94,73 @@ Silná integrita: podvržení zprávy, úmyslné pozměnění zprávy; bez~oprav
 
 \clearpage
 \section{Kryptograficky bezpečné generátory náhodných čísel –- požadavky, hodnocení bezpečnosti, příklady realizace.}
+\subsection{Požadavky}
+\begin{itemize}
+    \item \uline{"Next-bit test"} - je-li známo prvních k bitů náhodné posloupnosti, neexistuje žádný algoritmus s polynomiální složitostí, který by dokázal předpovědět (k + 1) bit s pravděpodobností vyšší než 1/2
+    \item \uline{"State compromise"} - i když je zjištěn vnitřní stav generátoru (celý nebo z části), nelze zpětně zrekonstruovat dosavadní vygenerovanou posloupnost. Navíc, pokud do generátoru za běhu vstupuje další entrope, nemělo by být možné ze znalosti vnitřního stavu předpovědět vnitřní stav v následujících iteracích
+    \item vetšina používaných PRNG tyto požadavky splňuje jen za určitých podmínek
+\end{itemize}
+
+\subsection{Hodnocení bezpečnosti}
+Entropie
+\begin{itemize}
+    \item veličina entropie popisuje míru náhodnosti - jak obtížné je hodnotu (náhodné číslo, náhodnou posloupnost, řetězec náhodných bitů) uhodnout
+    \item míra nejistoty (nepředvídatelnosti) hodnoty a závisí na pravděpodobnostech možných výsledků procesu, který ji generuje
+    \item dána vztahem:
+\end{itemize}
+\begin{align*}
+    H(X) = - \displaystyle\sum\limits_{i-1}^n p_{i} \log_2 p_{i} 
+\end{align*}
+\begin{itemize}
+    \item X - generovaná hodnota
+    \item $p_{1},..., p_{n}$ - pravděpodobnosti všech hodnot $X_{1},..., X_{n}$, které je daný generátor schopen vygenerovat
+    \item vztahuje se k útočníkovu a jeho schopnosti předpovídat vygenerovanou hodnotu - pokud útočník následující generovanou hodnotu s jistotou zná, entropie je nulová = nulová bezpečnosti aplikace, která takto vygenerovanou náhodnou hodnotu využívá
+    \item vyjadřuje průměrný počet bitů nutných k zakódování hodnoty při použití optimálního k=odování
+    \item vyjadřuje obsažené množství informace vyjádřené v bitech
+    \item entropie generátoru je maximální, pokud se pro danou délku (počet bitů) generují všechny možné posloupnosti, každá z nich se stejnou pravděpodobností
+\end{itemize}
+
+\subsection{Příklady realizace}
+Generátor pseudonáhodných čísel (PRNG)
+\begin{itemize}
+    \item algoritmicky řešení generátory, využívají výpočetních / SW metod
+    \item základní problém - jakýkoliv v současnosti existující program je deterministický = existuje pouze jedna možnost, jak k výsledku dojít
+    \item možnost se může jevit náhodná, ale není
+    \item pro člověka pouze není snadné zjistit, jakým způsobem byla vytvořena
+    \item výhody: rychlé, snadno realizovatelné, lze nastavit odchylku rozložení
+    \item nevýhody: malá bezpečnost, periodicita \\
+\end{itemize}
+
+Kryptograficky bezpečené PRNG
+\begin{itemize}
+    \item pokud PRNG splňuje určité požadavky $\longrightarrow$ považujeme na kryptograficky bezpečné
+    \item vyžadují náhodný a tajný vstup (seed) - nelze se tedy obejít bez "skutečné náhody"
+    \item kvalita závisí na kvalitě generování hodnoty seed
+    \item entropie výstupu PRNG je dána entropií, která vstupuje (seed), algoritmus samotný nikdy nemůže entropii zvyšovat
+    \item zdroj entropie např.: sběr událostí z pohybu myši, klávesnice, HD a některých přerušení (Linux PRNG)
+    \item podmínky:
+    \begin{itemize}
+        \item Next-bit test
+        \item State compromise
+    \end{itemize}
+    \item příklady:
+    \begin{itemize}
+        \item bloková šifra v režimu čítače - náhodně se zvolí klíč / seed a počáteční hodnota čítače i. Zvoleným klíčem se postupně šifrují hodnoty i, i+1, atd. dokud nedojde k překročení velikosti bloku - perioda
+        \item hashovací funkce aplikovaná na čítač - náhodně se zvolí počáteční hodnota čítače i. Postupně se  hashují hodnoty i, i+1 atd. Nesmí dojít k prozrazení počáteční hodnoty čítače
+        \item proudové šifry - v zásadě PRNG, s jehož výstupem se provádí XOR s otevřeným textem
+        \item algoritmy založené na teorii čísel - u kterých byl proveden důkaz bezpečnosti \\
+    \end{itemize}
+\end{itemize}
+
+Generátory skutečně náhodných čísel (TRNG)
+\begin{itemize}
+    \item využívající fyzikální / HW metody
+    \item zdroj entropie - klasický nebo kvantový fyzikální jev
+    \item výhody: vysoká bezpečnost, neopakovatelnost
+    \item nevýhody: pomalé, problémy s realizací, ne vždy lze dosáhnout maximálně rovnoměrného rozložení
+\end{itemize}
+
+
 
 \clearpage
 \section{Hašovací funkce -- požadavky, hodnocení bezpečnosti. Princip konstrukce -- iterační, typu \enquote{houba} (SHA3).}
