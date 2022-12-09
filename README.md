@@ -34,14 +34,14 @@ Vybírají se právě dva předměty.
 
 - [x] Formální definice kryptografického systému, symetrické a asymetrické šifry. Výpočetně těžké matematické problémy pro asymetrické šifry.
 - [x] Služby bezpečnosti zajišťované kryptografickými prostředky, kryptografické mechanismy, které tyto služby zajišťují.
-- [ ] Kryptograficky bezpečné generátory náhodných čísel – požadavky, hodnocení bezpečnosti, příklady realizace.
-- [ ] Hašovací funkce - požadavky, hodnocení bezpečnosti. Princip konstrukce - iterační, typu „houba“ (SHA3).
+- [x] Kryptograficky bezpečné generátory náhodných čísel – požadavky, hodnocení bezpečnosti, příklady realizace.
+- [x] Hašovací funkce - požadavky, hodnocení bezpečnosti. Princip konstrukce - iterační, typu „houba“ (SHA3).
 - [ ] Kvantový přenos informace - důvody použití, příklady protokolů.
 - [ ] Postkvantová kryptografie – důvody použití, jaké těžké matematické problémy se zde využívají (kryptosystém McEliece, kryptosystém založený na mřížkách). Jednorázový podpis pomocí hašovacích funkcí (Lamport).
-- [ ] V souvislosti s nařízením eIDAS vysvětlete pojmy - elektronický podpis, zaručený elektronický podpis a kvalifikovaný elektronický podpis, elektronická pečeť, elektronické časové razítko.
+- [x] V souvislosti s nařízením eIDAS vysvětlete pojmy - elektronický podpis, zaručený elektronický podpis a kvalifikovaný elektronický podpis, elektronická pečeť, elektronické časové razítko.
 - [ ] Technologie blockchain – struktura, princip, možnosti využití.
-- [ ] Fyzicky neklonovatelné funkce (FNF) - k čemu lze využít, výhody a nevýhody, požadované vlastnosti, příklady.
-- [ ] Autentizační protokoly – na jakém principu pracují, využívané proměnné parametry, hodnocení jejich bezpečnosti (BAN logika).
+- [x] Fyzicky neklonovatelné funkce (FNF) - k čemu lze využít, výhody a nevýhody, požadované vlastnosti, příklady.
+- [x] Autentizační protokoly – na jakém principu pracují, využívané proměnné parametry, hodnocení jejich bezpečnosti (BAN logika).
 
 ### MPC-PKT
 

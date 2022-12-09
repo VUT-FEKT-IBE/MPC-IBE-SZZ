@@ -96,16 +96,16 @@ Silná integrita: podvržení zprávy, úmyslné pozměnění zprávy; bez~oprav
 \section{Kryptograficky bezpečné generátory náhodných čísel –- požadavky, hodnocení bezpečnosti, příklady realizace.}
 \subsection{Požadavky}
 \begin{itemize}
-    \item \uline{"Next-bit test"} - je-li známo prvních k bitů náhodné posloupnosti, neexistuje žádný algoritmus s polynomiální složitostí, který by dokázal předpovědět (k + 1) bit s pravděpodobností vyšší než 1/2
-    \item \uline{"State compromise"} - i když je zjištěn vnitřní stav generátoru (celý nebo z části), nelze zpětně zrekonstruovat dosavadní vygenerovanou posloupnost. Navíc, pokud do generátoru za běhu vstupuje další entrope, nemělo by být možné ze znalosti vnitřního stavu předpovědět vnitřní stav v následujících iteracích
-    \item vetšina používaných PRNG tyto požadavky splňuje jen za určitých podmínek
+    \item \uline{Next-bit test} -- je-li známo prvních $k$ bitů náhodné posloupnosti, neexistuje žádný algoritmus s~polynomiální složitostí, který by dokázal předpovědět $(k + 1)$ bit s~pravděpodobností vyšší než 1/2.
+    \item \uline{State compromise} -- i~když je zjištěn vnitřní stav generátoru (celý nebo z~části), nelze zpětně zrekonstruovat dosavadní vygenerovanou posloupnost. Navíc, pokud do~generátoru za~běhu vstupuje další entrope, nemělo by být možné ze~znalosti vnitřního stavu předpovědět vnitřní stav v~následujících iteracích
+    \item vetšina používaných PRNG tyto požadavky splňuje jen za~určitých podmínek
 \end{itemize}
 
 \subsection{Hodnocení bezpečnosti}
 Entropie
 \begin{itemize}
-    \item veličina entropie popisuje míru náhodnosti - jak obtížné je hodnotu (náhodné číslo, náhodnou posloupnost, řetězec náhodných bitů) uhodnout
-    \item míra nejistoty (nepředvídatelnosti) hodnoty a závisí na pravděpodobnostech možných výsledků procesu, který ji generuje
+    \item veličina entropie popisuje míru náhodnosti -- jak obtížné je hodnotu (náhodné číslo, náhodnou posloupnost, řetězec náhodných bitů) uhodnout
+    \item míra nejistoty (nepředvídatelnosti) hodnoty a závisí na~pravděpodobnostech možných výsledků procesu, který ji generuje
     \item dána vztahem:
 \end{itemize}
 \begin{align*}
@@ -114,30 +114,30 @@ Entropie
 \begin{itemize}
     \item X - generovaná hodnota
     \item $p_{1},..., p_{n}$ - pravděpodobnosti všech hodnot $X_{1},..., X_{n}$, které je daný generátor schopen vygenerovat
-    \item vztahuje se k útočníkovu a jeho schopnosti předpovídat vygenerovanou hodnotu - pokud útočník následující generovanou hodnotu s jistotou zná, entropie je nulová = nulová bezpečnosti aplikace, která takto vygenerovanou náhodnou hodnotu využívá
-    \item vyjadřuje průměrný počet bitů nutných k zakódování hodnoty při použití optimálního k=odování
-    \item vyjadřuje obsažené množství informace vyjádřené v bitech
-    \item entropie generátoru je maximální, pokud se pro danou délku (počet bitů) generují všechny možné posloupnosti, každá z nich se stejnou pravděpodobností
+    \item vztahuje se k~útočníkovu a jeho schopnosti předpovídat vygenerovanou hodnotu -- pokud útočník následující generovanou hodnotu s~jistotou zná, entropie je nulová = nulová bezpečnosti aplikace, která takto vygenerovanou náhodnou hodnotu využívá
+    \item vyjadřuje průměrný počet bitů nutných k~zakódování hodnoty při~použití optimálního kódování
+    \item vyjadřuje obsažené množství informace vyjádřené v~bitech
+    \item entropie generátoru je maximální, pokud se pro~danou délku (počet bitů) generují všechny možné posloupnosti, každá z~nich se stejnou pravděpodobností
 \end{itemize}
 
 \subsection{Příklady realizace}
 Generátor pseudonáhodných čísel (PRNG)
 \begin{itemize}
     \item algoritmicky řešení generátory, využívají výpočetních / SW metod
-    \item základní problém - jakýkoliv v současnosti existující program je deterministický = existuje pouze jedna možnost, jak k výsledku dojít
+    \item základní problém -- jakýkoliv v současnosti existující program je deterministický = existuje pouze jedna možnost, jak k~výsledku dojít
     \item možnost se může jevit náhodná, ale není
-    \item pro člověka pouze není snadné zjistit, jakým způsobem byla vytvořena
+    \item pro~člověka pouze není snadné zjistit, jakým způsobem byla vytvořena
     \item výhody: rychlé, snadno realizovatelné, lze nastavit odchylku rozložení
-    \item nevýhody: malá bezpečnost, periodicita \\
+    \item nevýhody: malá bezpečnost, periodicita
 \end{itemize}
 
 Kryptograficky bezpečené PRNG
 \begin{itemize}
-    \item pokud PRNG splňuje určité požadavky $\longrightarrow$ považujeme na kryptograficky bezpečné
-    \item vyžadují náhodný a tajný vstup (seed) - nelze se tedy obejít bez "skutečné náhody"
-    \item kvalita závisí na kvalitě generování hodnoty seed
-    \item entropie výstupu PRNG je dána entropií, která vstupuje (seed), algoritmus samotný nikdy nemůže entropii zvyšovat
-    \item zdroj entropie např.: sběr událostí z pohybu myši, klávesnice, HD a některých přerušení (Linux PRNG)
+    \item pokud PRNG splňuje určité požadavky $\rightarrow$ považujeme na~kryptograficky bezpečné
+    \item vyžadují náhodný a tajný vstup (\emph{seed}) -- nelze se tedy obejít bez \enquote{skutečné náhody}
+    \item kvalita závisí na~kvalitě generování hodnoty \emph{seed}
+    \item entropie výstupu PRNG je dána entropií, která vstupuje (\emph{seed}), algoritmus samotný nikdy nemůže entropii zvyšovat
+    \item zdroj entropie např.: sběr událostí z~pohybu myši, klávesnice, HD a některých přerušení (Linux PRNG)
     \item podmínky:
     \begin{itemize}
         \item Next-bit test
@@ -145,19 +145,19 @@ Kryptograficky bezpečené PRNG
     \end{itemize}
     \item příklady:
     \begin{itemize}
-        \item bloková šifra v režimu čítače - náhodně se zvolí klíč / seed a počáteční hodnota čítače i. Zvoleným klíčem se postupně šifrují hodnoty i, i+1, atd. dokud nedojde k překročení velikosti bloku - perioda
-        \item hashovací funkce aplikovaná na čítač - náhodně se zvolí počáteční hodnota čítače i. Postupně se  hashují hodnoty i, i+1 atd. Nesmí dojít k prozrazení počáteční hodnoty čítače
-        \item proudové šifry - v zásadě PRNG, s jehož výstupem se provádí XOR s otevřeným textem
-        \item algoritmy založené na teorii čísel - u kterých byl proveden důkaz bezpečnosti \\
+        \item bloková šifra v~režimu čítače -- náhodně se zvolí klíč / seed a počáteční hodnota čítače $i$. Zvoleným klíčem se postupně šifrují hodnoty $i$, $i+1$, atd. dokud nedojde k~překročení velikosti bloku -- perioda
+        \item hashovací funkce aplikovaná na~čítač -- náhodně se zvolí počáteční hodnota čítače $i$. Postupně se hashují hodnoty $i$, $i+1$ atd. Nesmí dojít k prozrazení počáteční hodnoty čítače
+        \item proudové šifry -- v~zásadě PRNG, s~jehož výstupem se provádí XOR s~otevřeným textem
+        \item algoritmy založené na~teorii čísel -- u~kterých byl proveden důkaz bezpečnosti
     \end{itemize}
 \end{itemize}
 
 Generátory skutečně náhodných čísel (TRNG)
 \begin{itemize}
     \item využívající fyzikální / HW metody
-    \item zdroj entropie - klasický nebo kvantový fyzikální jev
+    \item zdroj entropie -- klasický nebo kvantový fyzikální jev
     \item výhody: vysoká bezpečnost, neopakovatelnost
-    \item nevýhody: pomalé, problémy s realizací, ne vždy lze dosáhnout maximálně rovnoměrného rozložení
+    \item nevýhody: pomalé, problémy s~realizací, ne vždy lze dosáhnout maximálně rovnoměrného rozložení
 \end{itemize}
 
 
@@ -165,31 +165,31 @@ Generátory skutečně náhodných čísel (TRNG)
 \clearpage
 \section{Hašovací funkce -- požadavky, hodnocení bezpečnosti. Princip konstrukce -- iterační, typu \enquote{houba} (SHA3).}
 \begin{itemize}
-    \item hašovací funkce je matematická funkce (resp. algoritmus) pro převod vstupních dat do malého čísla
-    \item formálně jde o funkci h, která převádí vstupní posloupnost bitů na posloupnost pevné délky n bitů
+    \item hašovací funkce je matematická funkce (resp. algoritmus) pro~převod vstupních dat do~malého čísla
+    \item formálně jde o~funkci $h$, která převádí vstupní posloupnost bitů na~posloupnost pevné délky $n$ bitů
     \item použití:
     \begin{itemize}
-        \item tvorba digitálních podpisů - otisky zprávy
-        \item kontrola integrity, porovnání souborů - otisk souboru
+        \item tvorba digitálních podpisů -- otisky zprávy
+        \item kontrola integrity, porovnání souborů -- otisk souboru
         \item jednoznačná identifikace dat
-        \item uložení hesel - otisky hesel
-        \item uložení klíčů - otisky klíčů
+        \item uložení hesel -- otisky hesel
+        \item uložení klíčů -- otisky klíčů
         \item prokazování autorství
-        \item pseudonáhodné generátory \\
+        \item pseudonáhodné generátory
     \end{itemize}
 \end{itemize}
 
 \subsection{Požadavky}
 \begin{itemize}
-    \item k "libovolně" velkému vstupu M - pevná délka výstupu h
+    \item k~\enquote{libovolně} velkému vstupu $M$ -- pevná délka výstupu $h$
     \item jednocestnost (one-way)
     \begin{itemize}
-        \item pro danou zprávu M lze snadno spočítat h = h(M)
-        \item je-li dáno h, je velmi těžké spočítat M, ne však nemožné
+        \item pro~danou zprávu $M$ lze snadno spočítat $h = h(M)$
+        \item je-li dáno $h$, je velmi těžké spočítat $M$, ne však nemožné
     \end{itemize}
     \item bezkoliznost (collision-free)
     \begin{itemize}
-        \item je velmi těžké nalézt různá M a M' tak, aby h(M) = h(M') \\
+        \item je velmi těžké nalézt různá $M$ a $M'$ tak, aby $h(M) = h(M')$
     \end{itemize}
 \end{itemize}
 
@@ -208,22 +208,22 @@ Odolnost proti kolizím
     \end{itemize}
     \item odolnost vůči kolizím (collistion resistance)
     \begin{itemize}
-        \item nalezení dvou libovolných zpráv M a M', pro které platí h(M) = h(M') \\
+        \item nalezení dvou libovolných zpráv $M$ a $M'$, pro které platí $h(M) = h(M')$
     \end{itemize}
 \end{enumerate}
 
 \subsection{Hodnocení bezpečnosti}
 Útoky, cílem je nalezení kolize
 \begin{itemize}
-    \item hrubou silou - metoda totálních zkoušek - závisí na délce hašovacího kódu
-    \item kryptoanalýzou - zaměřená především na vnitřní strukturu haš. fce, především na kompresní funkci f
+    \item hrubou silou -- metoda totálních zkoušek -- závisí na~délce hašovacího kódu
+    \item kryptoanalýzou -- zaměřená především na vnitřní strukturu haš. fce, především na~kompresní funkci $f$
 \end{itemize}
 
 \subsection{Princip konstrukce - iterační}
 \begin{itemize}
     \item tento princip používají drtivá většina dnes používaných hashovacích funkcí
-    \item algoritmus je založený na opakovaném použití kompresní funkce f (= je jádrem hashovacích funkcí)
-    \item proces iteračního výpočtu hashového kódu h je možné vyjádřit v následujícím tvaru:
+    \item algoritmus je založený na opakovaném použití kompresní funkce $f$ (= je jádrem hashovacích funkcí)
+    \item proces iteračního výpočtu hashového kódu $h$ je možné vyjádřit v~následujícím tvaru:
 \end{itemize}
 \begin{align*}
     IV &= h_{0} \\
@@ -239,16 +239,16 @@ Odolnost proti kolizím
 
 \subsection{Pricip konstrukce - houba (SHA3)}
 \begin{itemize}
-    \item kryptografické primitivum využívající se v mnoha aplikacích
+    \item kryptografické primitivum využívající se v~mnoha aplikacích
     \item dvě fáze: absorpce a vymačkávání
-    \item původní zpráva se po bitech absorbuje v první části pomocí kompresních funkcí f
+    \item původní zpráva se po~bitech absorbuje v~první části pomocí kompresních funkcí $f$
     \item následně je vymačkávána tolikrát, dokud nemáme odpovídající velikost výstupu
     \item příklady: SHA-3 (algoritmus Keccak)
     \begin{itemize}
-        \item SHA-3 hash - digitální podpis, integrita dat, identifikace dat
-        \item SHA-3 MGF - generování klíčů, hashování v PKI
-        \item SHA-3 solená hash - ukládání hesel
-        \item SHA-3 MAC - jednodušší než HMAC
+        \item SHA-3 hash -- digitální podpis, integrita dat, identifikace dat
+        \item SHA-3 MGF -- generování klíčů, hashování v~PKI
+        \item SHA-3 solená hash -- ukládání hesel
+        \item SHA-3 MAC -- jednodušší než HMAC
         \item SHA-3 proudová šifra
     \end{itemize}
 \end{itemize}
@@ -264,16 +264,16 @@ Odolnost proti kolizím
 \section{V~souvislosti s~nařízením eIDAS vysvětlete pojmy -- elektronický podpis, zaručený elektronický podpis a kvalifikovaný elektronický podpis, elektronická pečeť, elektronické časové razítko.}
 \subsection{Elektronický podpis}
 \begin{itemize}
-    \item lze tak označit cokoliv, co je použito  jako podpis dané osoby a co má elektronikcou podobu
-    \item např. napsání našeho jména na konec mailu
-    \item je zřejmé, ž není zaručeno jednoznačné spojení s podepisující osobou
+    \item lze tak označit cokoliv, co je použito jako podpis dané osoby a co má elektronikcou podobu
+    \item např. napsání našeho jména na~konec mailu
+    \item je zřejmé, že není zaručeno jednoznačné spojení s~podepisující osobou
 \end{itemize}
 
 \subsection{Zaručený elektronický podpis}
 \begin{itemize}
-    \item musí být jednoznačně spojen s podepisující osobou a musí umožňovat její identifikaci
-    \item musí být vytvořen pomocí služeb pro vytváření elektronických podpisů - pomocí certifikátu (na ten ale nejsou kladeny žádné požadavky)
-    \item nemusí se jednat o certifikát vydaný kvalifikovaným poskytovatelem, může být jakýkoliv, i vystavený svépomocí
+    \item musí být jednoznačně spojen s~podepisující osobou a musí umožňovat její identifikaci
+    \item musí být vytvořen pomocí služeb pro~vytváření elektronických podpisů -- pomocí certifikátu (na~ten ale nejsou kladeny žádné požadavky)
+    \item nemusí se jednat o~certifikát vydaný kvalifikovaným poskytovatelem, může být jakýkoliv, i~vystavený svépomocí
 \end{itemize}
 
 \subsection{Kvalifikovaný elektronický podpis}
@@ -291,44 +291,44 @@ Odolnost proti kolizím
 
 \subsection{Elektronické časové razítko}
 \begin{itemize}
-    \item elektronický ekvivalent časového určení a místa vlastního podpisu na listině
+    \item elektronický ekvivalent časového určení a místa vlastního podpisu na~listině
     \item elektronický podpis dle znění zákona tento problém neřeší
-    \item řeší možné problémy vzniklé odvoláním certifikátu - byl el. dokument podepsán před odvoláním?
-    \item zajišťuje důkaz o existenci dokumentu v daném čase
-    \item struktura podobná certifikátu, která svazuje kontrolní součet (hash) z dokumentu s časem \\
+    \item řeší možné problémy vzniklé odvoláním certifikátu -- byl el. dokument podepsán před odvoláním?
+    \item zajišťuje důkaz o~existenci dokumentu v~daném čase
+    \item struktura podobná certifikátu, která svazuje kontrolní součet (hash) z~dokumentu s~časem
     \item nutné pro poskytování elektronických notářských služeb a zajištění dlouhodobé archivace elektronicky podepsaných dokumentů
-    \item časové razítko je elektronicky podepsáno (vydáváno) autoritou pro vydávání časových razítek - Time Stamping Authority (TSA)
+    \item časové razítko je elektronicky podepsáno (vydáváno) autoritou pro vydávání časových razítek -- Time Stamping Authority (TSA)
     \item elektronicky podepsaná struktura čas. razítka:
     \begin{itemize}
         \item jméno vydavatele (jméno TSA)
         \item jedinečné sériové číslo razítka
-        \item kontrolní součet (hash) z dokumentu a čas \\
+        \item kontrolní součet (hash) z~dokumentu a čas
     \end{itemize}
 \end{itemize}
 Požadavky na zdroj času
 \begin{itemize}
-    \item musí pocházet z oficiálního důvěryhodného zdroje - např. od náhodní časové autority
+    \item musí pocházet z oficiálního důvěryhodného zdroje -- např. od~náhodní časové autority
     \item čas nesmí být možné cestou změnit
-    \item vždy musí být možné zpětně dosledovat zdroj času, tedy celou hierarchii časových serverů \\
+    \item vždy musí být možné zpětně dosledovat zdroj času, tedy celou hierarchii časových serverů
 \end{itemize}
 Vydání časového razítka
 \begin{itemize}
     \item žádá se prostřednictvím klientské aplikace
     \item klient vytvoří a odešle žádost o časové razítko ve standardizovaném formátu 
-    \item žádost je datová struktura obsahující hash z dokumentu
-    \item TSA v případě kladné odpovědi odesílá odpověď na žádost obsahující časové razítko
+    \item žádost je datová struktura obsahující hash z~dokumentu
+    \item TSA v~případě kladné odpovědi odesílá odpověď na~žádost obsahující časové razítko
 \end{itemize}
 
 
 \clearpage
-\section{Technologie blockchain -– struktura, princip, možnosti využití.}
+\section{Technologie blockchain -- struktura, princip, možnosti využití.}
 
 \clearpage
 \section{Fyzicky neklonovatelné funkce (FNF) -- k~čemu lze využít, výhody a nevýhody, požadované vlastnosti, příklady.}
 \subsection{Využití}
 \begin{itemize}
-    \item v FNF je unikátní bitový řetězec (vektor) generován za běhu zařízení přímým výstupem ze systémových obvodů bez nutnosti jej ukládat
-    \item FNF lze využít k autentizaci (identifikaci čipu), ke generování šifrovacích klíčů, k řešení neoprávněné nadvýroby čipů třetí stranou
+    \item v~FNF je unikátní bitový řetězec (vektor) generován za~běhu zařízení přímým výstupem ze~systémových obvodů bez~nutnosti jej ukládat
+    \item FNF lze využít k~autentizaci (identifikaci čipu), ke~generování šifrovacích klíčů, k~řešení neoprávněné nadvýroby čipů třetí stranou
 \end{itemize}
 
 \subsection{Výhody a nevýhody}
@@ -336,13 +336,13 @@ Vydání časového razítka
     \item výhody:
     \begin{itemize}
         \item redukce nákladů (podle typu FNF)
-        \item zvýšení úrovně zabezpečení - FNF jsou odolné vůči zpětnému inženýrství (klíč není uložen v nevolatilní paměti)
+        \item zvýšení úrovně zabezpečení -- FNF jsou odolné vůči zpětnému inženýrství (klíč není uložen v~nevolatilní paměti)
     \end{itemize}
     \item nevýhody:
     \begin{itemize}
-        \item šum ve výstupních odpovědích
-        \item za účelem generováné šifrovacích klíčů je nutné použít korekční kód - navyšuje náklady (nevyžaduje dodatečnou paměť)
-        \item některé typy FNF jsou náchylné na modelující útoky (arbiter FNF, SRAM FNF) a útoky postranními kanály (FNF využívající kruhové oscilátory)
+        \item šum ve~výstupních odpovědích
+        \item za~účelem generováné šifrovacích klíčů je nutné použít korekční kód -- navyšuje náklady (nevyžaduje dodatečnou paměť)
+        \item některé typy FNF jsou náchylné na~modelující útoky (arbiter FNF, SRAM FNF) a útoky postranními kanály (FNF využívající kruhové oscilátory)
     \end{itemize}
 \end{itemize}
 
@@ -360,8 +360,8 @@ Vydání časového razítka
 
 \subsection{Příklady}
 \begin{itemize}
-    \item neelektronické FNF - využívají k tvorbě unikátních výstupů neelektronické technologie nebo materiály, výstup FNF je dále zpracován elektronicky
-    \item FNF využívající měření analogové elektrické nebo elektronické veličiny - napětí, odpor, kapacita, rádio-frekvenční pole
+    \item neelektronické FNF -- využívají k~tvorbě unikátních výstupů neelektronické technologie nebo materiály, výstup FNF je dále zpracován elektronicky
+    \item FNF využívající měření analogové elektrické nebo elektronické veličiny -- napětí, odpor, kapacita, rádio-frekvenční pole
     \item FNF využívající výrobní rozdíly křemíkových čipů
     \item FNF využívající zpoždění el. obvodu
     \item FNF využívající bistabilní stavy
@@ -371,8 +371,8 @@ Vydání časového razítka
 \section{Autentizační protokoly –- na jakém principu pracují, využívané proměnné parametry, hodnocení jejich bezpečnosti (BAN logika).}
 \subsection{Princip}
 \begin{itemize}
-    \item výzva - odpověď
-    \item mezi dvěma entitami nebo s využitím třetí důvěryhodné strany
+    \item výzva -- odpověď
+    \item mezi dvěma entitami nebo s~využitím třetí důvěryhodné strany
     \item ověřují správnost a čerstvost autentizačního požadavku
     \item výzva musí být čerstvá - využívají náhodná čísla, sekvenční čísla nebo časová razítka
 \end{itemize}
@@ -382,37 +382,37 @@ Vydání časového razítka
     \item sekvenční číslo
     \begin{itemize}
         \item tajné, nutné ukládat poslední použité číslo
-        \item při každém použití se sekvenční číslo inkrementuje o 1
-        \item v případě desynchronizace je nutné využít nějaký autentizační protokol k synchronizaci
+        \item při každém použití se sekvenční číslo inkrementuje o~1
+        \item v~případě desynchronizace je nutné využít nějaký autentizační protokol k~synchronizaci
     \end{itemize}
     \item časové razítko
     \begin{itemize}
         \item využívá se maximálního povoleného zpoždění (acceptance-window) přijaté zprávy
-        \item přijatá časová razítka jsou ukládána pro případ, kdyby útočník chtěl provést útok přehráním v povoleném časovém okně nebo v případě změny hodin u ověřovatele
+        \item přijatá časová razítka jsou ukládána pro~případ, kdyby útočník chtěl provést útok přehráním v~povoleném časovém okně nebo v~případě změny hodin u~ověřovatele
     \end{itemize}
     \item náhodné číslo použitelné pouze jednou (nonce = number used only once)
     \begin{itemize}
         \item nevyžaduje synchronizaci
-        \item ověřovatel ho zašle protstraně a ta jej použije v autentizační odpovědi
-        \item po použití je vyřazeno z databáze
-        \item pokud je nonce dostatečně velký (např. 128 b), tak náhodný výběr snižuje pravděpodobnost výběru stejného nonce na zanedbatelnou úroveň
+        \item ověřovatel ho zašle protstraně a ta jej použije v~autentizační odpovědi
+        \item po~použití je vyřazeno z databáze
+        \item pokud je nonce dostatečně velký (např. 128~b), tak náhodný výběr snižuje pravděpodobnost výběru stejného nonce na~zanedbatelnou úroveň
     \end{itemize}
 \end{itemize}
 
 \subsection{Hodnocení bezpečnosti - BAN logika}
 \begin{itemize}
-    \item BAN logika - slouží k formálnímu popisu bezpečnosti autentizačním protokolů
-    \item jedna z prvních a nejpoužívanějších logik pro formální ohodnocení autentizačních protokolů, určena pro kryptografii se sdíleným i veřejným klíčem
-    \item jedná se o epistemickou a doxastickou logiku (poddruhy modální logiky zabývající se úvahami a znalosti a víře) - logiky využívané v PC vědě a umělé inteligenci
-    \item zabývá se autentizačními protokoly na abstrajtní úrovni (neřeší konkrétní implementaci zkoumaného protokolu a problémy s tím spjaté) \\
+    \item BAN logika -- slouží k~formálnímu popisu bezpečnosti autentizačním protokolů
+    \item jedna z~prvních a nejpoužívanějších logik pro~formální ohodnocení autentizačních protokolů, určena pro~kryptografii se sdíleným i~veřejným klíčem
+    \item jedná se o~epistemickou a doxastickou logiku (poddruhy modální logiky zabývající se úvahami a znalosti a víře) -- logiky využívané v~PC vědě a umělé inteligenci
+    \item zabývá se autentizačními protokoly na~abstrajtní úrovni (neřeší konkrétní implementaci zkoumaného protokolu a problémy s tím spjaté)
 \end{itemize}
 
 Otázky BAN logiky
 \begin{itemize}
     \item čeho chce zkoumaný protokol dosáhnout?
     \item potřebuje zkoumaný protokol více předpokladů než jiný protokol?
-    \item vykonává zkoumaný protokol cokoliv nepotřebného, jenž by mohlo být vypuštěno bez ohrožení bezpečnosti?
-    \item šifruje zkoumaný protokol něco, co by mohlo být zasláno v otevřené formě bez ohrožení bezpečnosti? \\
+    \item vykonává zkoumaný protokol cokoliv nepotřebného, jenž by mohlo být vypuštěno bez~ohrožení bezpečnosti?
+    \item šifruje zkoumaný protokol něco, co by mohlo být zasláno v~otevřené formě bez~ohrožení bezpečnosti? \\
 \end{itemize}
 
 Definované konstrukce BAN logiky
@@ -429,17 +429,17 @@ Definované konstrukce BAN logiky
     \end{itemize}
     \item P vyslovil (jednou řekl) X
     \begin{itemize}
-        \item účastník P v určitém čase zaslal zprávu obsahující výrok X. 
-        \item není známo, zda-li byla zpráva odeslána před dlouhou dobou nebo v průběu současného běhu protokolu
+        \item účastník P v~určitém čase zaslal zprávu obsahující výrok X. 
+        \item není známo, zda-li byla zpráva odeslána před dlouhou dobou nebo v~průběu současného běhu protokolu
         \item je však známo, že účastník P věřil X, když odesílal zprávu \\
     \end{itemize}
     \item pravidlo význam zprávy (message meaning)
     \begin{itemize}
-        \item tato pravidla popisují, jakým způsobem lze odvodit důvěry o původu zpráv
+        \item tato pravidla popisují, jakým způsobem lze odvodit důvěry o~původu zpráv
     \end{itemize}
     \item pravidlo ověření aktuálnosti zprávy (nonce verification)
     \begin{itemize}
-        \item využívá se ke kontrole aktuálnosti (novosti) zprávy 
+        \item využívá se ke~kontrole aktuálnosti (novosti) zprávy
         \item příjemce může předpokládat, že odesílatel věří jejímu obsahu a můžeme mu také věřit
         \item zajišťuje ochranu proti útoku přehráním
     \end{itemize}
