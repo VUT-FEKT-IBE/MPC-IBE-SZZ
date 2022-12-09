@@ -262,6 +262,63 @@ Odolnost proti kolizím
 
 \clearpage
 \section{V~souvislosti s~nařízením eIDAS vysvětlete pojmy -- elektronický podpis, zaručený elektronický podpis a kvalifikovaný elektronický podpis, elektronická pečeť, elektronické časové razítko.}
+\subsection{Elektronický podpis}
+\begin{itemize}
+    \item lze tak označit cokoliv, co je použito  jako podpis dané osoby a co má elektronikcou podobu
+    \item např. napsání našeho jména na konec mailu
+    \item je zřejmé, ž není zaručeno jednoznačné spojení s podepisující osobou
+\end{itemize}
+
+\subsection{Zaručený elektronický podpis}
+\begin{itemize}
+    \item musí být jednoznačně spojen s podepisující osobou a musí umožňovat její identifikaci
+    \item musí být vytvořen pomocí služeb pro vytváření elektronických podpisů - pomocí certifikátu (na ten ale nejsou kladeny žádné požadavky)
+    \item nemusí se jednat o certifikát vydaný kvalifikovaným poskytovatelem, může být jakýkoliv, i vystavený svépomocí
+\end{itemize}
+
+\subsection{Kvalifikovaný elektronický podpis}
+\begin{itemize}
+    \item zaručený elektronický podpis vytvořený kvalifikovaným prostředkem pro vytváření elektronických podpisů a založen na kvalifikovaném certifikátu pro elektronické podpisy
+    \item kvalifikovaný certifikát = vydaný kvalifikovaných poskytovatelem služeb vytvořejícíh důvěru, tzn. poskytovatel, kterému orgán dohledu udělil status kvalifikovaného poskytovatele (v ČR v současnosti 3)
+\end{itemize}
+
+\subsection{Elektronická pečeť}
+\begin{itemize}
+    \item vydává se jen právnických osobám
+    \item p. o. nemůže pečetí opatřit cokoliv, ale jen to, čeho je původcem
+    \item proces pečetění totožný s podepisováním elektronických podpisem
+\end{itemize}
+
+\subsection{Elektronické časové razítko}
+\begin{itemize}
+    \item elektronický ekvivalent časového určení a místa vlastního podpisu na listině
+    \item elektronický podpis dle znění zákona tento problém neřeší
+    \item řeší možné problémy vzniklé odvoláním certifikátu - byl el. dokument podepsán před odvoláním?
+    \item zajišťuje důkaz o existenci dokumentu v daném čase
+    \item struktura podobná certifikátu, která svazuje kontrolní součet (hash) z dokumentu s časem \\
+    \item nutné pro poskytování elektronických notářských služeb a zajištění dlouhodobé archivace elektronicky podepsaných dokumentů
+    \item časové razítko je elektronicky podepsáno (vydáváno) autoritou pro vydávání časových razítek - Time Stamping Authority (TSA)
+    \item elektronicky podepsaná struktura čas. razítka:
+    \begin{itemize}
+        \item jméno vydavatele (jméno TSA)
+        \item jedinečné sériové číslo razítka
+        \item kontrolní součet (hash) z dokumentu a čas \\
+    \end{itemize}
+\end{itemize}
+Požadavky na zdroj času
+\begin{itemize}
+    \item musí pocházet z oficiálního důvěryhodného zdroje - např. od náhodní časové autority
+    \item čas nesmí být možné cestou změnit
+    \item vždy musí být možné zpětně dosledovat zdroj času, tedy celou hierarchii časových serverů \\
+\end{itemize}
+Vydání časového razítka
+\begin{itemize}
+    \item žádá se prostřednictvím klientské aplikace
+    \item klient vytvoří a odešle žádost o časové razítko ve standardizovaném formátu 
+    \item žádost je datová struktura obsahující hash z dokumentu
+    \item TSA v případě kladné odpovědi odesílá odpověď na žádost obsahující časové razítko
+\end{itemize}
+
 
 \clearpage
 \section{Technologie blockchain -– struktura, princip, možnosti využití.}
