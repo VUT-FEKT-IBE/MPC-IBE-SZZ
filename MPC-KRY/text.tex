@@ -112,6 +112,47 @@ Silná integrita: podvržení zprávy, úmyslné pozměnění zprávy; bez~oprav
 
 \clearpage
 \section{Fyzicky neklonovatelné funkce (FNF) -- k~čemu lze využít, výhody a nevýhody, požadované vlastnosti, příklady.}
+\subsection{Využití}
+\begin{itemize}
+    \item v FNF je unikátní bitový řetězec (vektor) generován za běhu zařízení přímým výstupem ze systémových obvodů bez nutnosti jej ukládat
+    \item FNF lze využít k autentizaci (identifikaci čipu), ke generování šifrovacích klíčů, k řešení neoprávněné nadvýroby čipů třetí stranou
+\end{itemize}
+
+\subsection{Výhody a nevýhody}
+\begin{itemize}
+    \item výhody:
+    \begin{itemize}
+        \item redukce nákladů (podle typu FNF)
+        \item zvýšení úrovně zabezpečení - FNF jsou odolné vůči zpětnému inženýrství (klíč není uložen v nevolatilní paměti)
+    \end{itemize}
+    \item nevýhody:
+    \begin{itemize}
+        \item šum ve výstupních odpovědích
+        \item za účelem generováné šifrovacích klíčů je nutné použít korekční kód - navyšuje náklady (nevyžaduje dodatečnou paměť)
+        \item některé typy FNF jsou náchylné na modelující útoky (arbiter FNF, SRAM FNF) a útoky postranními kanály (FNF využívající kruhové oscilátory)
+    \end{itemize}
+\end{itemize}
+
+\subsection{Požadované vlastnosti}
+\begin{itemize}
+    \item vytvořitelnost a vyhodnotitelnost
+    \item reprodukovatelnost
+    \item jedinečnost a identifikovatelnost
+    \item fyzická neklonovatelnost
+    \item nepředvídatelnost
+    \item matematcká a skutečná neklonovatelnost
+    \item jednocestnost
+    \item doložitelnost manipulace
+\end{itemize}
+
+\subsection{Příklady}
+\begin{itemize}
+    \item neelektronické FNF - využívají k tvorbě unikátních výstupů neelektronické technologie nebo materiály, výstup FNF je dále zpracován elektronicky
+    \item FNF využívající měření analogové elektrické nebo elektronické veličiny - napětí, odpor, kapacita, rádio-frekvenční pole
+    \item FNF využívající výrobní rozdíly křemíkových čipů
+    \item FNF využívající zpoždění el. obvodu
+    \item FNF využívající bistabilní stavy
+\end{itemize}
 
 \clearpage
 \section{Autentizační protokoly –- na jakém principu pracují, využívané proměnné parametry, hodnocení jejich bezpečnosti (BAN logika).}
