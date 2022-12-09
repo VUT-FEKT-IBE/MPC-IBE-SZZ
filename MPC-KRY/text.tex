@@ -97,6 +97,95 @@ Silná integrita: podvržení zprávy, úmyslné pozměnění zprávy; bez~oprav
 
 \clearpage
 \section{Hašovací funkce -- požadavky, hodnocení bezpečnosti. Princip konstrukce -- iterační, typu \enquote{houba} (SHA3).}
+\begin{itemize}
+    \item hašovací funkce je matematická funkce (resp. algoritmus) pro převod vstupních dat do malého čísla
+    \item formálně jde o funkci h, která převádí vstupní posloupnost bitů na posloupnost pevné délky n bitů
+    \item použití:
+    \begin{itemize}
+        \item tvorba digitálních podpisů - otisky zprávy
+        \item kontrola integrity, porovnání souborů - otisk souboru
+        \item jednoznačná identifikace dat
+        \item uložení hesel - otisky hesel
+        \item uložení klíčů - otisky klíčů
+        \item prokazování autorství
+        \item pseudonáhodné generátory \\
+    \end{itemize}
+\end{itemize}
+
+\subsection{Požadavky}
+\begin{itemize}
+    \item k "libovolně" velkému vstupu M - pevná délka výstupu h
+    \item jednocestnost (one-way)
+    \begin{itemize}
+        \item pro danou zprávu M lze snadno spočítat h = h(M)
+        \item je-li dáno h, je velmi těžké spočítat M, ne však nemožné
+    \end{itemize}
+    \item bezkoliznost (collision-free)
+    \begin{itemize}
+        \item je velmi těžké nalézt různá M a M' tak, aby h(M) = h(M') \\
+    \end{itemize}
+\end{itemize}
+
+Odolnost proti kolizím
+\begin{itemize}
+    \item kolize zákonitě existují, ale je oblížné je nalézt
+\end{itemize}
+\begin{enumerate}
+    \item kolize prvního řádu (preimage resistance)
+    \begin{itemize}
+        \item nalezení vzoru
+    \end{itemize}
+    \item kolize druhého řádu (second preimage resistance)
+    \begin{itemize}
+        \item k dané zprávě $M_{1}$ nalézt zprávu $M_{2}$ tak, aby platilo $h(M_{1}) = h(M_{2})$
+    \end{itemize}
+    \item odolnost vůči kolizím (collistion resistance)
+    \begin{itemize}
+        \item nalezení dvou libovolných zpráv M a M', pro které platí h(M) = h(M') \\
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Hodnocení bezpečnosti}
+Útoky, cílem je nalezení kolize
+\begin{itemize}
+    \item hrubou silou - metoda totálních zkoušek - závisí na délce hašovacího kódu
+    \item kryptoanalýzou - zaměřená především na vnitřní strukturu haš. fce, především na kompresní funkci f
+\end{itemize}
+
+\subsection{Princip konstrukce - iterační}
+\begin{itemize}
+    \item tento princip používají drtivá většina dnes používaných hashovacích funkcí
+    \item algoritmus je založený na opakovaném použití kompresní funkce f (= je jádrem hashovacích funkcí)
+    \item proces iteračního výpočtu hashového kódu h je možné vyjádřit v následujícím tvaru:
+\end{itemize}
+\begin{align*}
+    IV &= h_{0} \\
+    h_{i} &= f (h_{i-1}, M_{i}), pro 1 \leq i \leq n \\
+    h &= h_{n} \\
+\end{align*}
+\begin{itemize}
+    \item tzn. kompresní funkce má dva vstupy a jeden výstup
+    \item ypracovává aktuální blok zprávy $M_{i}$ a hodnotu $h_{i-1}$
+    \item Výstupem je určitá hodnota $h_{i-1}$ (= kontext) $\longrightarrow$ ten pak použit jako vstup do kompresní funkce v dalším kroku
+    \item počáteční hodnota kontextu $h_{0}$ - inicializační vektor IV - určuje blok bitů vstupující do první kompresní funkce a zahajuje tak vlastní hashování
+\end{itemize}
+
+\subsection{Pricip konstrukce - houba (SHA3)}
+\begin{itemize}
+    \item kryptografické primitivum využívající se v mnoha aplikacích
+    \item dvě fáze: absorpce a vymačkávání
+    \item původní zpráva se po bitech absorbuje v první části pomocí kompresních funkcí f
+    \item následně je vymačkávána tolikrát, dokud nemáme odpovídající velikost výstupu
+    \item příklady: SHA-3 (algoritmus Keccak)
+    \begin{itemize}
+        \item SHA-3 hash - digitální podpis, integrita dat, identifikace dat
+        \item SHA-3 MGF - generování klíčů, hashování v PKI
+        \item SHA-3 solená hash - ukládání hesel
+        \item SHA-3 MAC - jednodušší než HMAC
+        \item SHA-3 proudová šifra
+    \end{itemize}
+\end{itemize}
+
 
 \clearpage
 \section{Kvantový přenos informace -- důvody použití, příklady protokolů.}
