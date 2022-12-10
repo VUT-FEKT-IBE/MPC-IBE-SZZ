@@ -67,7 +67,7 @@ Vybírají se právě dva předměty.
 - [ ] Forenzní analýza (hlavní cíle, základní principy, vysvětlete časové značky a časovou osu událostí).
 - [x] Analýza škodlivého kódu (základní dělení analýz, cíle a metody statické a dynamické analýzy).
 - [x] Penetrační testování (rozdíly v penetračním testování realizovaným metodou Ad-hoc a pomocí metodologie, hlavní cíle ASVS metodologie, bezpečnostní úrovně).
-- [ ] Testování bezpečnosti webové aplikace (vysvětlete zranitelnost Path traversal, co obsahuje testování vstupu pro nahrání souboru).
+- [x] Testování bezpečnosti webové aplikace (vysvětlete zranitelnost Path traversal, co obsahuje testování vstupu pro nahrání souboru).
 
 ### MPC-PDA
 
