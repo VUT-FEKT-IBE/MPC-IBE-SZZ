@@ -411,7 +411,91 @@ TODO ještě něco víc?
 
 \clearpage
 \section{Forenzní analýza (hlavní cíle, základní principy, vysvětlete časové značky a časovou osu událostí).}
+\subsection{Hlavní cíle}
+\begin{itemize}
+    \item FA - zabývá se zajištěním podkladů pro analýzu, interpretaci nalezených info a prezentací výsledků k incidentu
+    \item cíl:
+    \begin{itemize}
+        \item poskytnout spolehlivé info
+        \item podporovat řešení bezp. incidentů
+        \item podporovat možné eskalace případů (soudy)
+    \end{itemize}
+\end{itemize}
 
+\subsection{Základní principy}
+\begin{itemize}
+    \item snaha nezměnit analyzovaný systém
+    \item zajištění stop (nebo analýza) systémů způsobí změnu stavu systému
+    \item dokumentace postupu
+    \item práce s bitovou kopí (evidence, kontrolní součty) \\
+    \item řetězec návazností (odvození) - spojení mezi výsledkem a vatupními daty, dlvěryhodonost výsledku analýzy
+    \item opakovatelnost - ověření výsledku analýzy jiným analytikem, vstupní data + popis postupu
+    \item neutralita - interpretace informací, nehodnotit, nesoudit, zaměřeno na fakta
+    \item srozumitelnost - nutná podmínka pro praktické použití, netechnické publikum (manager), vhodný způsob interpretace, logické pořadí atd. \\
+    \item definice úlohy:
+    \begin{itemize}
+        \item spec. vstupních dat
+        \item spec. výstupů (otázek, na které hledáme odpovědi)
+        \item pozn. zadavatele
+    \end{itemize}
+    \item provedení analýzy:
+    \begin{itemize}
+        \item použití vhodných nástrojů a postupů
+        \item dokumentování jednotlivých kroků
+        \item zjištění odpovědí na otázky
+    \end{itemize}
+    \item prezentace výsledků
+    \begin{itemize}
+        \item závěrečná zpráva a prezentace výsledků
+    \end{itemize}
+\end{itemize}
+
+\subsection{Časová značka}
+\begin{itemize}
+    \item většina operací v systému má čas (spuštění programu, úprava souboru, atd.)
+    \item mnoho operací zanechává stopu v souborovém systému:
+    \begin{itemize}
+        \item úprava souboru - modify čas. značka
+        \item spuštěn souboru - access čas. značka
+        \item přejmenování souboru - change čas. značka
+    \end{itemize}
+    \item souborový systém = data + metadata
+    \item disk se dělí na oddíly - soub. systém se vztahuje k jednomu oddílu
+    \item data - obsah souboru (dělení a uskupení do bloků)
+    \item metadata - info o souboru (název, velikost, umístění bloků s obsahem)
+\end{itemize}
+
+\subsection{Časová osa události}
+\begin{itemize}
+    \item timeline (časová osa)
+    \begin{itemize}
+        \item seznam událostí - seřazených podle času
+        \item manuálně vybrané analytikem
+        \item podmnožina všech událostí
+    \end{itemize}
+    \item supertimeline
+    \begin{itemize}
+        \item seznam všech událostí
+        \item vygenerované nástroji
+        \item agregace událostí z mnoha zdrojů
+        \item možná časová korelace \\
+    \end{itemize}
+    \item nástroje
+    \begin{itemize}
+        \item log2timeline
+        \item log2timeline.py
+    \end{itemize}
+    \item formáty
+    \begin{itemize}
+        \item mactime - stejný formát jako nástroj fls, snadné sloučení s událostmi soub. sytému
+        \item csv - výchozí formát, vhodné pro zpracování v CLI a prohlížení
+    \end{itemize}
+    \item časové zóny
+    \begin{itemize}
+        \item obvykle více zdrojů dat - stanice, servery, síť. provoz, místní čas vs UTC, různé časové zóny
+        \item časová synchronizace všech zdrojů dat - důležité pro sloučení, převést vše do jedné čas. zóny, nejčastěji UTC
+    \end{itemize}
+\end{itemize}
 
 
 \clearpage
