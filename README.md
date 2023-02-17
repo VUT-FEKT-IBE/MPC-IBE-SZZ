@@ -6,27 +6,36 @@ Nejnovější export je dostupný [zde](https://github.com/VUT-FEKT-IBE/MPC-IBE-
 
 Vybírají se právě čtyři předměty.
 
-- [MPC-KRY](#MPC-KRY) Kryptografie
-- [MPC-PKT](#MPC-PKT) Pokročilé komunikační techniky
-- [MPC-CT3](#MPC-CT3) Bezpečnost ICT3
+*Vybírají se maximálně čtyři předměty:*
+
 - [MPC-PDA](#MPC-PDA) Pokročilé datové struktury a algoritmy
+- [MPC-CT3](#MPC-CT3) Bezpečnost ICT3
+- [MPC-KRY](#MPC-KRY) Kryptografie
 - [MPC-ODP](#MPC-ODP) Odpovědnost v právu ICT
+
+*Vybírá se maximálně jeden předmět:*
+
+- [MPC-MOS](#MPC-MOS) Moderní síťové technologie
+- [MPC-PKT](#MPC-PKT) Pokročilé komunikační techniky
 
 ## Vybrané partie informační bezpečnosti
 
 Vybírají se právě dva předměty.
 
-- [MPC-CSI](#MPC-CSI) Číslicové signály a systémy
-- [MPC-MPG](#MPC-MPG) Moderní počítačová grafika
-- [MPC-NAV](#MPC-NAV) Počítače a jejich periferie
-- [MPC-OSE](#MPC-OSE) Optical Networks
-- [MPC-PLD](#MPC-PLD) Programovatelné logické obvody
-- [MPC-PZO](#MPC-PZO) Pokročilé techniky zpracování obrazu
-- [MPC-SSY](#MPC-SSY) Bezdrátové senzorové sítě
-- [MPC-SKS](#MPC-SKS) Služby komunikačních systémů
-- [MPC-UIN](#MPC-UIN) Umělá inteligence
-- [MPC-VDP](#MPC-VDP) Vyšší techniky datových přenosů
+*Vybírají se maximálně dva predměty:*
+
 - [MPA-KPM](#MPA-KPM) Mobile Network Communication Systems
+- [MPC-UIN](#MPC-UIN) Umělá inteligence
+- [MPC-PLD](#MPC-PLD) Programovatelné logické obvody
+- [MPC-CSI](#MPC-CSI) Číslicové signály a systémy
+- [MPC-SSY](#MPC-SSY) Bezdrátové senzorové sítě
+- [MPC-PZO](#MPC-PZO) Pokročilé techniky zpracování obrazu
+- [MPC-SKS](#MPC-SKS) Služby komunikačních systémů
+- [MPC-NAV](#MPC-NAV) Počítače a jejich periferie
+- [MPC-VDP](#MPC-VDP) Vyšší techniky datových přenosů
+- [MPC-MPG](#MPC-MPG) Moderní počítačová grafika
+- [MPC-OSE](#MPC-OSE) Optical Networks
+- [MPA-MOK](#MPA-MOK) Modern Cryptography
 
 ## Seznam předmětů a jejich otázek
 
@@ -35,13 +44,13 @@ Vybírají se právě dva předměty.
 - [x] Formální definice kryptografického systému, symetrické a asymetrické šifry. Výpočetně těžké matematické problémy pro asymetrické šifry.
 - [x] Služby bezpečnosti zajišťované kryptografickými prostředky, kryptografické mechanismy, které tyto služby zajišťují.
 - [x] Kryptograficky bezpečné generátory náhodných čísel – požadavky, hodnocení bezpečnosti, příklady realizace.
-- [x] Hašovací funkce - požadavky, hodnocení bezpečnosti. Princip konstrukce - iterační, typu „houba“ (SHA3).
-- [ ] Kvantový přenos informace - důvody použití, příklady protokolů.
+- [ ] Hašovací funkce, formální definice, požadované vlastnosti, hodnocení bezpečnosti, příklady algoritmů a použití.
+- [ ] Kryptografie nad eliptickými křivkami, principy, důvody použití, příklady algoritmů.
+- [ ] Digitální podpis, principy, standardy, metody pro distribuci veřejných klíčů (PKI).
+- [ ] Kvantová distribuce klíčů, důvody použití, příklady protokolů.
 - [ ] Postkvantová kryptografie – důvody použití, jaké těžké matematické problémy se zde využívají (kryptosystém McEliece, kryptosystém založený na mřížkách). Jednorázový podpis pomocí hašovacích funkcí (Lamport).
-- [x] V souvislosti s nařízením eIDAS vysvětlete pojmy - elektronický podpis, zaručený elektronický podpis a kvalifikovaný elektronický podpis, elektronická pečeť, elektronické časové razítko.
-- [ ] Technologie blockchain – struktura, princip, možnosti využití.
-- [x] Fyzicky neklonovatelné funkce (FNF) - k čemu lze využít, výhody a nevýhody, požadované vlastnosti, příklady.
-- [x] Autentizační protokoly – na jakém principu pracují, využívané proměnné parametry, hodnocení jejich bezpečnosti (BAN logika).
+- [x] V souvislosti s nařízením eIDAS vysvětlete pojmy - elektronický podpis, zaručený elektronický podpis a kvalifikovaný elektronický podpis. elektronická pečeť, elektronické časové razítko.
+- [x] Autentizační protokoly, principy, použití, hodnocení jejich bezpečnosti (BAN logika).
 
 ### MPC-PKT
 
@@ -62,26 +71,27 @@ Vybírají se právě dva předměty.
 - [x] Bezpečnost na vrstvě L3 (bezpečnostní opatření, příklady útoků, IPsec, bezpečnost IPv6).
 - [x] Bezpečnost TCP (útoky, protiopatření), protokol TLS - Transport Layer Security (princip, součásti, příklady útoků).
 - [x] Bezpečnost UDP (útoky, protiopatření, zabezpečení nad protokolem UDP), bezpečnost DNS, protokol DNSSEC.
-- [x] Zabezpečení v sítích typu Low-Power Wide Area Network (kryptografické ochrany, problémy a omezení), zabezpečení v mobilních sítích 2G - 5G (základní principy bezpečnosti pro 2G, 3G a 4G).
+- [ ] Zabezpečení v sítích typu Low-Power Wide Area Network (kryptografické ochrany, problémy a omezení), zabezpečení v mobilních sítích 2G - 5G (základní principy bezpečnosti pro 2G, 3G a 4G), bezpečnost a slabiny optických sítí.
 - [x] Ochrana soukromí v ICT (pojmy, typy anonymizace), kryptografické metody zajištující ochranu soukromí, síťové metody poskytující ochranu soukromí a anonymizační nástroje a systémy.
 - [ ] Forenzní analýza (hlavní cíle, základní principy, vysvětlete časové značky a časovou osu událostí).
 - [x] Analýza škodlivého kódu (základní dělení analýz, cíle a metody statické a dynamické analýzy).
-- [x] Penetrační testování (rozdíly v penetračním testování realizovaným metodou Ad-hoc a pomocí metodologie, hlavní cíle ASVS metodologie, bezpečnostní úrovně).
-- [x] Testování bezpečnosti webové aplikace (vysvětlete zranitelnost Path traversal, co obsahuje testování vstupu pro nahrání souboru).
+- [ ] Penetrační testování (rozdíly v penetračním testování realizovaným metodou Ad-hoc a pomocí metodologie, hlavní cíle ASVS metodologie, bezpečnostní úrovně) a testování bezpečnosti webové aplikace (zranitelnost Path traversal).
+- [ ] Standardy v kyberbezpečnosti (ISO, PCI DSS, FIPS, známé organizace), certifikace a hodnocení kyberbezpečnosti (Common Criteria, OWASP).
 
 ### MPC-PDA
 
-- [x] Hierarchie výpočetní složitosti. Třídy složitosti P, NP, #P, PSPACE, EXP, NP-těžké. Definice problému Problém batohu (Knapsnack), problém směrování vozidel (VRP), Metrický k-střed.
-- [x] Problém obchodního cestujícího a modifikace genetických algoritmů, Genetické programování, Optimalizace hejnem, Optimalizace mravenčí kolonií, Evoluční strategie.
-- [x] Definice grafu. Incidenční matice, matice sousednosti. Handshaking lemma. Algoritmus detekce bipartitního grafu. Silně propojené komponenty. Kosarajův algoritmus. Tarjanův algoritmus.
-- [x] Vlastnosti grafu: průměr, excentricita. Párování grafu. Maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Izomorfismus grafu a Ullmanův algoritmus.
-- [x] Problém maximálního toku a minimálního řezu grafem. Řešení problému s více zdroji a více cíli. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.
-- [x] Univerzální aproximační funkce. Dopředná neuronová síť. Maticová reprezentace NN. Gradientní sestup. Vrstva zahazování. Aktivační funkce. Softmax.
-- [x] Konvoluční neuronové sítě – princip. Max pooling, Dávková normalizace. Známé architektury neuronových sítí.
-- [x] Lineární regrese. Polynomiální regrese. Logistická regrese.
-- [x] Rekurentní neuronové sítě. LSTM. UNet sítě. Struktury neuronových sítí.
-- [x] Q-učení, srovnání s genetickými algoritmy.
-- [x] Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu. Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.
+- [ ] Hierarchie výpočetní složitosti. P, P-úplné, NP, NP-úplné, PSPACE, EXP-SPACE, HP těžké, rozhodnutelné, nerozhodnutelné. Definice problému s batohem. Definice problému k-řezu. Definice problému obchodu.
+- [ ] Optimalizace: Genetické programování, inicializace, křížení, mutace. Optimalizace rojem částic. Optimalizace mravenčí kolonií.
+- [ ] Grafy – incidenční matice, matice sousedností. Handshaking lemma. Silně propojené komponenty grafu. Silně propojené komponenty – Kosarajův algoritmus, Tarjanův algoritmus.
+- [ ] Detekce cyklů v grafu. Eulerova cesta grafem, Hamiltonovská cesta grafem. Floyd-Warhsallův algoritmus. Algoritmus rozpoznání bipartitiního grafu.
+- [ ] Párování grafu, problém maximální shody – definice, maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Isomorfismus grafu – Ullmanův algoritmus.
+- [ ] Definice tok sítí. Problém maximálního toku / minimálního řezu. Ford Fulkersonův algoritmus.
+- [ ] Univerzální aproximační teorém. Neuron, Maticová verze dopředné neuronové sítě. Rychlost učení. Dávky a minidávky a efekt na učení se. Vrstva zahazování.
+- [ ] Definice konvoluční neuronové vrstvy. Metody regularizace. Přenesené učení a známé předučené sítě.
+- [ ] Lineární a polynomiální regrese. Logistická regrese. Optimalizace s pomocí gradientního sestupu.
+- [ ] Rekurentní neuronové sítě. Popis LSTM vrstvy. Segmentace – U sítě.
+- [ ] Zpětnovazební učení, Q-učení. Průzkum vs. využití. SARSA.
+- [ ] Metody náhodného průchodu, metoda Node2Vec. Členění druhů umělé inteligence. Pojmy: kombinatorická generalizace, relační induktivní zaměření.
 
 ### MPC-ODP
 
@@ -95,8 +105,6 @@ Vybírají se právě dva předměty.
 - [ ] Procesní nástroje pro zajištování elektronických důkazů
 - [ ] Typy a znaky skutkových podstat počítačových trestných činů
 - [ ] Subjektivní a objektivní odpovědnost
-
----
 
 ### MPC-CSI
 
@@ -152,13 +160,13 @@ Vybírají se právě dva předměty.
 
 ### MPC-PLD
 
-- [ ] Základní struktura obvodů FPGA, porovnání s ASIC, SPLD a CPLD, realizace logických funkcí strukturou PROM (LUT) v FPGA. Princip implementace designu do FPGA (syntéza, mapování, PAR).
+- [ ] Struktura obvodů FPGA, porovnání s ASIC, realizace logických funkcí strukturou v FPGA (LUT). Princip implementace designu do FPGA (syntéza, mapování, PAR).
 - [ ] Kombinační a sekvenční obvody, synchronní a asynchronní systémy: principy, vlastnosti. Klopné obvody: staticky/dynamicky řízené, synchronní/asynchronní nulování/nastavení.
-- [ ] Časové parametry digitálních obvodů, statická časová analýza, metody optimalizace časových parametrů (pipelining, register retiming, register replication). Hodinové domény.
+- [ ] Časové parametry digitálních obvodů, nastavení omezujících podmínek (constraints), statická časová analýza, metody optimalizace časových parametrů (pipelining, register retiming, register replication). Hodinové domény.
 - [ ] Vlastnosti LUT a její alternativní využití v FPGA, blokové paměti, bloky pro syntézu kmitočtu a zpracování hodinových signálů, struktura I/O buňky, I/O standardy.
 - [ ] Realizace synchronních čítačů v obvodech PLD: binární, Grayův, LFSR - výhody, nevýhody, popis pomocí jazyka HDL.
 - [ ] Stavové automaty: typ Moore a Mealy - blokové schéma, typy výstupů, stavové diagramy, ekvivalentní stavy, kódování stavů v obvodech PLD a FPGA, nepracovní (nevyužité) stavy a jejich ošetření.
-- [ ] Ověření funkce navržené konstrukce, simulace, verifikace, testbench, statická časová analýza. Nastavení omezujících podmínek (constraints).
+- [ ] Ověření funkce navržené konstrukce, simulace, verifikace, testbench.
 - [ ] Jazyk VHDL: behaviorální a strukturální styl popisu, souběžné a sekvenční příkazy, proměnné, signály, porty, process, slohy.
 - [ ] Rychlá sériová komunikace a bloky pro její podporu v FPGA, multigigabitové transceivery, návrh plošných spojů, napájení obvodů FPGA. Technologie FPGA (FLASH, SRAM, Antifuse) – vlastnosti.
 - [ ] Číslicové zpracování signálů v FPGA, bloky pro podporu DSP operací, binární reprezentace čísel. Procesory v FPGA, vestavěné (embedded) systémy, systém na čipu (SoC).
@@ -233,9 +241,35 @@ Vybírají se právě dva předměty.
 - [ ] 3G cellular systems: Network architecture, handover types, modulation schemes (CDMA, WCDMA), radio interface channel architecture.
 - [ ] 4G cellular systems: Modulation schemes for LTE (OFDM, OFDMA, SC-FDMA), error-control methods (ARQ/HARQ).
 - [ ] 4G cellular systems: IP-based architecture (E-UTRAN, EPS vs. EPC), LTE radio resource grid (frame structure, slot structure). Utilization of the frequency spectrum, physical layer (physical channels, transport channels).
-- [ ] 4G cellular systems: 6) 4G cellular systems: Key blocks within the communication infrastructure (RAN, EPC), EPS communication levels with UE (AS, NAS).
+- [ ] 4G cellular systems: Key blocks within the communication infrastructure (RAN, EPC), EPS communication levels with UE (AS, NAS).
 - [ ] 4G cellular systems: EPS bearers, protocol architecture (control plane, user plane X2 interface), EPC tracking area update procedure.
 - [ ] 4G cellular systems: EPS protocol architecture (Control Plane, User Plane), S1 interface, S5/S8 interface, X2 interface,
 - [ ] 4G cellular systems: RRC states (RRC Idle, RRC Connected), EPS Connection Management (ECM Idle, ECM Connected), EPS mobility management (EMM Registered, EMM Deregistered), EPS Radio Resource Management (RRM).
-- [ ] 4G cellular system: VoLTE (architecture, principles), CSFB, SVLTE, VoWiFi, Quality of Service (QoS) mechanisms in LTE (QCi), EPS security (key hierarchy and their relations).
+- [ ] 4G cellular system: VoLTE (architecture, principles), CSFB, SVLTE, VoWiFi, Quality of Service (QoS) mechanisms in LTE (QCI), EPS security (key hierarchy and their relations).
 - [ ] Next-generation heterogeneous systems: Different types of use cases: eMBB (enhanced Mobile Broadband), URLLC (Ultra Reliable Low Latency Communications), mMTC (massive Machine Type Communications). Utilization of the frequency spectrum (sub-6GHz, millimeter wave).
+
+### MPC-MOS
+
+- [ ] Základní vlastnosti a komponenty modelu systému front. Kendallova klasifikace. Charakterizace systémů M/M/1 a M/M/1/0
+- [ ] Chování ideální a reální sítě a její reakce na rostoucí zatížení.
+- [ ] Algoritmy ochrany proti zahlcení sítě: zpětný tlak (backpressure), tlumící paket (choke packet), implicitní a explicitní signalizace zahlcení.
+- [ ] Metody řízení toku dat na úrovni linkové vrstvy, normovaná propustnost jednotlivých mechanismů.
+- [ ] Transportní protokol TCP: mechanizmus alokace kreditů, vliv velikosti okna na výkonnost protokolu TCP. Implementační detaily protokolu TCP: možnosti opakovaného vysílání, způsoby odesílání, doručení a převzetí TCP segmentů.
+- [ ] Samočasovací chování protokolu TCP. Mechanismy pro nastavení doby odezvy (RTT) a technika pomalého startu.
+- [ ] Mechanismy správy plovoucího okna: dynamické nastavení velikosti okna v případě zahlcení, rychlý opakovaný přenos, rychlé zotavení
+- [ ] Mechanismy ochrany proti zahlcení: Random Early Detection (RED) a Weighted Random Early Detection (WRED), Explicit Congestion Notification (ECN)
+- [ ] Zajišťování kvality služeb v datových sítích, dohled nad síťovým provozem, klasifikace paketů, řízené odesílání paketů
+- [ ] Zajištění kvality služeb v bezdrátových sítích řady 802.11: základní metody řízení přístupu k médiu a jejich rozšíření podle standardu 802.11e - Rozšířený distribuovaný přístup ke kanálu (EDCA), Přístup ke kanálu řízený pomocí HCF (HCCA)
+
+### MPC-MOK
+
+- [ ] Lattice: lattice definition, base of a lattice, CVP problem, SVP problem, Hadamard ratio, Babai algorithm, GGH public key cryptosystem.
+- [ ] LWE and RLWE: LWE problem, RLWE problem, Regev one-bit cryptosystem.
+- [ ] Lattice-based protocols: Module-LWE problem, LWR problem, NTT, KYBER scheme, SABER scheme.
+- [ ] Homomorphic Encryption (HE): homomorphism, HE definition, kind of HE (partially, somewhat, fully), Bootstrapping, Paillier Cyrptosystem
+- [ ] Secret Sharing: Threshold Secret Sharing, Shamir Secret Sharing, unique polynomial theorem, Interpolation problem.
+- [ ] Secure Multi-Party Computation (SMPC): SMPC definition, SMPC security requirement and adversarial behavior, e-voting, oblivious transfer
+- [ ] Blockchain and Smart Contracts: blockchain architecture, transactions and blocks, mining, forks, consensus, smart contracts, 51 % attack on blockchain.
+- [ ] Cryptocurrencies: cryptocurrency (definition, requirements), Ecash, Bitcoin, CryptoNote, proof of work in Bitcoin, Bitcoin address and wallet, Bitcoin’s transaction flow, double spending problem.
+- [ ] Data privacy 1: statistical disclosure control methods, disclosure risk, information loss, microdata, privacy categories (identifiers, quasi-identifiers, sensitive data), non-perturbative methods (sampling, global recording, suppression)
+- [ ] Data privacy 2: syntethic data, perturbative masking (noise addition, microaggregation, rank swapping), k-anonymity, record linkage
