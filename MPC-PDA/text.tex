@@ -1,13 +1,15 @@
-\section{Hierarchie výpočetní složitosti. Třídy složitosti P, NP, \#P, PSPACE, EXP, NP-těžké. Definice problému Problém batohu (Knapsnack), problém směrování vozidel (VRP), Metrický k-střed.}
+\section{Hierarchie výpočetní složitosti. P, P-úplné, NP, NP-úplné, PSPACE, EXP-SPACE, HP těžké, rozhodnutelné, nerozhodnutelné. Definice problému s~batohem. Definice problému k-řezu. Definice problému obchodu.}
 
 \subsection{Polynomická vs exponenciální časová složitost.}
 
 Algoritmy s~polynomickou složitostí lze efektivně řešit, bez vynaložení velkého výpočetního výkonu. 
-S délkou vstupu \textit{n} roste lineárně potřebný čas ($n^x$) například hledání nejkratší cesty. 
-Algoritmy s~exponenciální složitostí lze efektivně řešit pouze pro malé exponenty, bez potřeby velkého výpočetního výkonu. 
-S délkou vstupu \textit{n} roste exponenciálně potřebný čas ($x^n$) například problém obchodního cestujícího.
+S~délkou vstupu \textit{n} roste lineárně potřebný čas ($n^x$) například hledání nejkratší cesty. 
+Algoritmy s~exponenciální složitostí lze efektivně řešit pouze pro~malé exponenty, bez potřeby velkého výpočetního výkonu. 
+S~délkou vstupu \textit{n} roste exponenciálně potřebný čas ($x^n$), například v~problému obchodního cestujícího.
 
 \subsection{Hierarchie výpočetní složitosti.}
+
+% TODO Doplnit třídy ze zadání
 
 Hierarchie výpočetní složitosti slouží k~charakterizaci algoritmů u~kterých lze pouze nepřímo určit asymptotickou složitost. 
 Využívá se třídní hierarchie. 
@@ -79,28 +81,20 @@ Existuje také třída EXPSPACE, která je podobná EXPTIME, jen se neřeší v~
 
 U~obou tříd se jedná o~nezvládnutelné problémy, pro~které neexistuje polynomiální algoritmus.
 
-\subsection{Knapsnack problém}
+\subsection{Rozhodnutelnost}
+
+% TODO
+
+\subsection{Problém batohu}
 
 Zloděj má pro~krádeže připravený batoh s~určitou maximální hmotností/velikostí.
 Při~krádeži se snaží do~batohu vložit co nejvíce zboží v~co největší hodnotě.
 Každé toto zboží má jinou hmotnost/velikost a jinou hodnotu.
 Hledá nejlepší kombinaci zboží která se mu do~batohu vejde s~cílem maximalizovat profit.
 
-\subsection{Problém směrování vozidel (VRP)}
+\subsection{Problém k-řezu}
 
-Centrální sklad má $x$ vozidel.
-Vozidla musí objet všechna zásobovací místa, dovést tam zboží a vrátit se zpět.
-Nemusí navštívit stejný počet míst, ale dohromady musí navštívit všechna místa co nejoptimálněji.
-Pro~$x=1$ jde o~problém obdobný problému obchodního cestujícího, ale je zde navíc určen začátek cesty.
-
-\subsection{Metrický k-střed}
-
-$x$ měst má mezi sebou přesně definované vzdálenosti.
-Mezi nimi (resp. do~nějakých z~měst) lze umístit $n$ skladišť která budou všechna města obsluhovat.
-Cílem je vybrat nejvhodnější města pro~postavení skladu, aby maximální vzdálenost každého města ke~skladu byla co nejmenší.
-
-\clearpage
-\section{Problém obchodního cestujícího a modifikace genetických algoritmů, Genetické programování, Optimalizace hejnem, Optimalizace mravenčí kolonií, Evoluční strategie.}
+% TODO
 
 \subsection{Problém obchodního cestujícího}
 
@@ -120,6 +114,22 @@ Genetické algoritmy nejdou na~TSP aplikovat přímo, protože každý z~vrchol�
 \item křížení: nestačí vyměnit dvě části chromozomu, je třeba ho \enquote{přefiltrovat} a~vybrat pouze takové vrcholy, které se v~chormozomu ještě neobjevily (a~tyto vyfiltrované nahradit)
 \end{itemize}
 
+% \subsection{Problém směrování vozidel (VRP)}
+% 
+% Centrální sklad má $x$ vozidel.
+% Vozidla musí objet všechna zásobovací místa, dovést tam zboží a vrátit se zpět.
+% Nemusí navštívit stejný počet míst, ale dohromady musí navštívit všechna místa co nejoptimálněji.
+% Pro~$x=1$ jde o~problém obdobný problému obchodního cestujícího, ale je zde navíc určen začátek cesty.
+% 
+% \subsection{Metrický k-střed}
+% 
+% $x$ měst má mezi sebou přesně definované vzdálenosti.
+% Mezi nimi (resp. do~nějakých z~měst) lze umístit $n$ skladišť která budou všechna města obsluhovat.
+% Cílem je vybrat nejvhodnější města pro~postavení skladu, aby maximální vzdálenost každého města ke~skladu byla co nejmenší.
+
+\clearpage
+\section{Optimalizace genetickým programováním (inicializace, křížení, mutace). Optimalizace rojem částic. Optimalizace mravenčí kolonií.}
+
 \subsection{Genetické programování}
 
 Genetické programování pracuje se~stromy, ne vektory.
@@ -127,7 +137,11 @@ Strom obsahuje pouze funkce a~terminály (které jsou pouze v~listech a nemají 
 
 Náhodně generované programy využívají základní operace a~konstanty pro~rozhodovací strom s~omezenou hloubkou.
 Vybraná funkce rekurzivně generuje další stromy.
-Ekvivalent křížení je prohození podstromů.
+
+\subsubsection{Operace}
+
+Stromy se kříží prohozením podstromů.
+% TODO
 
 \begin{figure}[ht]
     \centering
@@ -161,7 +175,7 @@ Ekvivalent křížení je prohození podstromů.
 \end{figure}
 \FloatBarrier
 
-\subsection{Optimalizace hejnem}
+\subsection{Optimalizace rojem částic}
 
 Každá částice se snaží aktualizovat svou pozici $X$ v~prostoru (2D, 3D, \dots):
 
@@ -189,13 +203,13 @@ Simuluje mnoho nezávislých kooperujících jedinců:
 \item aktualizace feromonů dobrých řešení.
 \end{enumerate}
 
-\subsection{Evoluční strategie}
-
-Využívá pouze mutaci, ne křížení.
-Jednotlivci jsou většinou reprezentováni jako pár vektorů reálných čísel: $v = (x, \sigma)$, kde $x$ je souřadnice pozice a~$\sigma$ je vektor směrodatných odchylek v~daném bodu.
+% \subsection{Evoluční strategie}
+% 
+% Využívá pouze mutaci, ne křížení.
+% Jednotlivci jsou většinou reprezentováni jako pár vektorů reálných čísel: $v = (x, \sigma)$, kde $x$ je souřadnice pozice a~$\sigma$ je vektor směrodatných odchylek v~daném bodu.
 
 \clearpage
-\section{Definice grafu. Incidenční matice, matice sousednosti. Handshaking lemma. Algoritmus detekce bipartitního grafu. Silně propojené komponenty. Kosarajův algoritmus. Tarjanův algoritmus.}
+\section{Grafy -- incidenční matice, matice sousedností. Handshaking lemma. Silně propojené komponenty grafu. Kosarajův algoritmus, Tarjanův algoritmus.}
 
 Graf je matematická struktura $G = (V, E)$: uspořádaná dvojice množin vrcholů a~hran (\emph{vertices and edges}), kde hrana je určena dvěma vrcholy a~volitelně směrem nebo váhou.
 Velké množství problémů postavených nad~grafy je NP-úplných.
@@ -207,58 +221,50 @@ Matice má řádek pro~každý vrchol a~sloupec pro každou hranu; pokud vrchol 
 
 Matice souslednosti má podobu čtvercové matice $n \times n$ (kde $n$ je počet vrcholů grafu), jejíž hodnota na~místě $a_{i,j}$ je celé číslo odpovídající počtu hran vedoucích z~vrcholu $i$ do~vrcholu $j$, prvky na~diagonále pak odpovídají počtu hran vedoucích z~vrcholu $i$ do~vrcholu $i$.
 
-Incidenční matice
-% Smyčka => 2
-% https://sciencedirect.com/topics/mathematics/incidence-matrix
-$\left( \begin{matrix}
-2 & 1 & 1 & 0 & 0 & 0 & 0 \\
-0 & 1 & 0 & 1 & 0 & 0 & 0 \\
-0 & 0 & 0 & 1 & 1 & 0 & 0 \\
-0 & 0 & 0 & 0 & 1 & 1 & 1 \\
-0 & 0 & 1 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 0 & 0 & 1 \\
-\end{matrix} \right)$ 
-i matice souslednosti
-$\left( \begin{matrix}
-2 & 1 & 0 & 0 & 1 & 0 \\
-1 & 0 & 1 & 0 & 1 & 0 \\
-0 & 1 & 0 & 1 & 0 & 0 \\
-0 & 0 & 1 & 0 & 1 & 1 \\
-1 & 1 & 0 & 1 & 0 & 0 \\
-0 & 0 & 0 & 1 & 0 & 0 \\
-\end{matrix} \right)$
-popisují vlastnosti grafu na~obrázku \ref{ilustracni-graf-matice}.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[height=8em]{images/3_graf-matice-souslednosti}
-
-\caption[Ilustrační graf]{Ilustrační graf\\{\small (Chris-martin, Wikimedia Commons, volné dílo)}}
-\label{ilustracni-graf-matice}
+\begin{figure}[ht!]
+    \centering
+    \begin{minipage}{0.20\textwidth}
+        \centering
+        \includegraphics[height=8em]{images/3_graf-matice-souslednosti}
+        \caption[Ilustrační graf]{Ilustrační graf\\{\small (Chris-martin, Wikimedia Commons, volné dílo)}}
+        \label{ilustracni-graf-matice}
+    \end{minipage}%
+    %
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        $\left( \begin{matrix}
+        2 & 1 & 1 & 0 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1 & 1 & 1 \\
+        0 & 0 & 1 & 0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+        \end{matrix} \right)$ 
+        \caption[Incidenční matice]{Incidenční matice\\(vrcholy a hrany)}
+        % https://sciencedirect.com/topics/mathematics/incidence-matrix
+    \end{minipage}%
+    %
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        $\left( \begin{matrix}
+        2 & 1 & 0 & 0 & 1 & 0 \\
+        1 & 0 & 1 & 0 & 1 & 0 \\
+        0 & 1 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 & 1 & 1 \\
+        1 & 1 & 0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 1 & 0 & 0 \\
+        \end{matrix} \right)$
+        \caption[Matice souslednosti]{Matice souslednosti\\(vrcholy k~vrcholům: diagonálně symetrická)}
+    \end{minipage}
 \end{figure}
+\FloatBarrier
 
 \subsection{Handshaking lemma}
 
 Handshaking lemmma je tvrzení že pro~každý konečný neorientovaný graf platí, že počet vrcholů s~lichým stupněm je sudý (formálně $\sum_{v \in V} \deg v = 2 |E|$: součet stupňů vrcholů odpovídá dvojnásobku počtu hran).
 
-V~roce 1736 byla dokázána Leonardem Eulerem v~dokumentu řešícím problém \href{https://cs.wikipedia.org/wiki/Sedm_most%C5%AF_m%C4%9Bsta_Kr%C3%A1lovce}{Sedmi mostů města Královce}.
+V~roce 1736 byla dokázána Leonardem Eulerem v~dokumentu řešícím problém Sedmi mostů města Královce\footnote{\url{https://en.wikipedia.org/wiki/Seven_Bridges_of_Konigsberg}}.
 Graf obsahuje Eulerovskou cestu právě tehdy, když jím lze projít tak, aby byla každá hrana navštívena právě jednou.
-
-\subsection{Detekce bipartitního grafu}
-
-Graf $G$ je bipartitní právě když je možné jeho vrcholy rozdělit do~dvou množin $V_1$ a~$V_2$ tak že každá hrana spojuje vrchol $V_1$ s~$V_2$.
-Bipartitní grafy s~velikostí $|V_1|=m$ a~$|V_2|=n$ se značí $K_\mathrm{m,n}$.
-
-Pro~detekci se využívá BFS:
-
-\begin{enumerate}
-\item Vyber bod grafu.
-\item Přiřaď mu barvu a~označ ho za~navštívený.
-\item Pokud má alespoň jeden sousední bod stejnou barvu jako aktuální bod, graf nelze obarvit dvěma barvami.
-\item Všem sousedům přiřaď druhou barvu.
-\item Přejdi do~některého ze sousedů který ještě nebyl navštívený.
-\item Pokračuj dokud nejsou všechny body grafu obarvené.
-\end{enumerate}
 
 \subsection{Silně propojené komponenty}
 
@@ -271,6 +277,7 @@ Algoritmus hledající silně propojené komponenty pracující v~lineárním č
 % TODO Tato poznámka je sice pravdivá, ale není zřejmá z pseudokódu
 % Využívá faktu, že transponovaný graf $G^T$ má stejné silně propojené komponenty jako původní graf $G$.
 
+% TODO ^^ Blbě! https://www.youtube.com/watch?v=Jb1XlDsr46o
 \begin{figure}[ht]
 \onehalfspacing
 \begin{enumerate}
@@ -297,7 +304,6 @@ Algoritmus hledající silně propojené komponenty pracující v~lineárním č
     \end{itemize}
 \end{enumerate}
 \end{figure}
-% TODO ^^ Blbě! https://www.youtube.com/watch?v=Jb1XlDsr46o
 \FloatBarrier
 
 \subsubsection{Tarjanův algoritmus}
@@ -338,20 +344,49 @@ Algoritmus hledající silně propojené komponenty pracující v~lineárním č
 \end{figure}
 
 \clearpage
-\section{Vlastnosti grafu: průměr, excentricita. Párování grafu. Maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Izomorfismus grafu a Ullmanův algoritmus.}
+\section{Detekce cyklů v~grafu. Eulerova cesta grafem, Hamiltonovská cesta grafem. Floyd-Warhsallův algoritmus. Algoritmus rozpoznání bipartitiního grafu.}
 
-Excentricita vrcholu $x$ grafu $G$ je maximální vzdálenost bodu od~jakéhokoliv bodu v~grafu: $\mathrm{e}(x) = \max\{ d_G(x, y) \ |\ y \in V_G\}$, kde $d_G(x,y)$ je minimální vzdálenost mezi body $x, y$.
+\subsection{Detekce cyklů v~grafu}
 
-{}Pro~poloměr grafu platí $\mathrm{r}(G) = \min\{ \mathrm{e}(x)\ |\ x \in V \}$.
-\\Pro~průměr grafu platí $\mathrm{d}(G) = \max\{ \mathrm{e}(x)\ |\ x \in V \}$.
+\subsection{Eulerova cesta grafem}
 
-\subsection{Párování grafu}
+\subsection{Hamiltonovská cesta grafem}
 
-Párování grafu je taková podmnožina hran grafu $M \subseteq E$, ve~které žádné dvě hrany nemají společný vrchol.
-Vrcholy, které patří do~párování, se nazývají \emph{saturované}.
+\subsection{Floyd-Warshallův algoritmus}
 
-{}\emph{Maximální} párování má nejvíce hran (protože graf může mít párování více).
-\\\emph{Perfektní} párování pokrývá všechny vrcholy grafu.
+\subsection{Detekce bipartitního grafu}
+
+Graf $G$ je bipartitní právě když je možné jeho vrcholy rozdělit do~dvou množin $V_1$ a~$V_2$ tak že každá hrana spojuje vrchol $V_1$ s~$V_2$.
+Bipartitní grafy s~velikostí $|V_1|=m$ a~$|V_2|=n$ se značí $K_\mathrm{m,n}$.
+
+Pro~detekci se využívá BFS:
+
+\begin{enumerate}
+\item Vyber bod grafu.
+\item Přiřaď mu barvu a~označ ho za~navštívený.
+\item Pokud má alespoň jeden sousední bod stejnou barvu jako aktuální bod, graf nelze obarvit dvěma barvami.
+\item Všem sousedům přiřaď druhou barvu.
+\item Přejdi do~některého ze sousedů který ještě nebyl navštívený.
+\item Pokračuj dokud nejsou všechny body grafu obarvené.
+\end{enumerate}
+
+\clearpage
+\section{Párování grafu, problém maximální shody -- definice, Maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Isomorfismus grafu -- Ullmanův algoritmus.}
+
+% Excentricita vrcholu $x$ grafu $G$ je maximální vzdálenost bodu od~jakéhokoliv bodu v~grafu: $\mathrm{e}(x) = \max\{ d_G(x, y) \ |\ y \in V_G\}$, kde $d_G(x,y)$ je minimální vzdálenost mezi body $x, y$.
+% 
+% {}Pro~poloměr grafu platí $\mathrm{r}(G) = \min\{ \mathrm{e}(x)\ |\ x \in V \}$.
+% \\Pro~průměr grafu platí $\mathrm{d}(G) = \max\{ \mathrm{e}(x)\ |\ x \in V \}$.
+
+% \subsection{Párování grafu}
+% 
+% Párování grafu je taková podmnožina hran grafu $M \subseteq E$, ve~které žádné dvě hrany nemají společný vrchol.
+% Vrcholy, které patří do~párování, se nazývají \emph{saturované}.
+% 
+% {}\emph{Maximální} párování má nejvíce hran (protože graf může mít párování více).
+% \\\emph{Perfektní} párování pokrývá všechny vrcholy grafu.
+
+\subsection{Problém maximální shody}
 
 \subsubsection{Maďarský algoritmus}
 
@@ -406,7 +441,9 @@ Grafy $G$ a $H$ jsou izomorfní, pokud mezi nimi existuje (hrany zachovávajíc�
 \end{itemize}
 
 \clearpage
-\section{Problém maximálního toku a~minimálního řezu grafem. Řešení problému s~více zdroji a~více cíli. Ford Fulkersonův algoritmus. Definice úzkého hrdla. Definice reziduální cesty.}
+\section{Definice toku sítí. Problém maximálního toku/minimálního řezu. Ford--Fulkersonův algoritmus.}
+
+% TODO Tok
 
 \subsection{Maximální tok grafem}
 
@@ -464,13 +501,15 @@ Reziduální kapacita hrany je rozdíl kapacity a~proudu: $c_\mathrm{res}(u,v) =
 Reziduální cesta je cesta od~terminálu ke~vstupu vytvořená reziduálními hranami.
 
 \clearpage
-\section{Univerzální aproximační funkce. Dopředná neuronová síť. Maticová reprezentace NN. Gradientní sestup. Vrstva zahazování. Aktivační funkce. Softmax.}
+\section{Univerzální aproximační teorém. Neuron, Maticová verze dopředné neuronové sítě. Rychlost učení. Dávky a minidávky a efekt na~učení se. Vrstva zahazování.}
 
 \subsection{Univerzální aproximační funkce}
 
 Feedforward neuronová síť je algoritmus inspirovaný biologickýmy neurony.
 Univerzální aproximační věta říká, že FFNN s~jedinou skrytou vrstvou obsahující konečný počet neuronů může aproximovat libovolnou kontinuální funkci s~libovolnou přeností.
 Neříká však nic o~způsobu konstrukce aktivační funkce.
+
+\subsection{Neuron}
 
 \subsection{Dopředná neuronová síť}
 
@@ -526,6 +565,10 @@ V~síti také může dojít k~přetrénování: FFNN se \enquote{moc zaměří} 
     \caption{Ukázka výpočtu hodnot neuronů první skryté vrstvy}
 \end{figure}
 \FloatBarrier
+
+\subsection{Rychlost učení}
+
+\subsection{Dávky a minidávky a efekt na~učení se}
 
 \subsection{Gradientní sestup}
 
@@ -629,7 +672,9 @@ $\mathbf{X} \mathbf{K} = \left[ \begin{matrix}
 \\-- vstup ($8 \times 8$) $\rightarrow$ konvoluce ($6 \times 6$);
 \\-- vstup ($8 \times 8$) $\rightarrow$ zero padding ($10 \times 10$) $\rightarrow$ konvoluce ($8 \times 8$).
 
-\subsection{Max pooling}
+\subsection{Metody regularizace}
+
+\subsubsection{Max pooling}
 
 \begin{figure}[ht]
 \onehalfspacing
@@ -659,12 +704,16 @@ $\mathbf{X} \mathbf{K} = \left[ \begin{matrix}
 \end{figure}
 \FloatBarrier
 
-\subsection{Dávková normalizace}
+\subsubsection{Dávková normalizace}
 
 Umisťuje se za~lineární váhy (konvoluční vrstvu).
 Zvláště v~hlubokých sítích se využívá při~trénování, protože malé rozdíly v~mělčích skrytých vrstvách mohou výrazněji ovlivnit hlubší skryté vrstvy, a zpomalit tak proces učení.
 
-\subsection{Architektury neuronových sítí}
+\subsection{Přenesené učení}
+
+% TODO
+
+\subsubsection{Architektury neuronových sítí}
 
 % Více na: https://cs.education-wiki.com/4130807-convolutional-neural-networks
 
@@ -681,7 +730,7 @@ Zvláště v~hlubokých sítích se využívá při~trénování, protože malé
 \textbf{ResNet} (2015): 152 vrstev, využívá dávkovou normalizaci. Používá se ve všech algoritmech hlubokého učení.
 
 \clearpage
-\section{Lineární regrese. Polynomiální regrese. Logistická regrese.}
+\section{Lineární regrese. Polynomiální regrese. Logistická regrese. Optimalizace s~pomocí gradientního sestupu.}
 
 \subsection{Lineární regrese}
 
@@ -836,6 +885,9 @@ $$
 $$
 kde $(g(X\theta_i) - \vec{y})$ určuje chybu (error).
 
+\subsection{Optimalizace s~poocí gradientního sestupu}
+
+% TODO
 
 Zdroje:
 \begin{enumerate}
@@ -948,7 +1000,7 @@ Zdroje:
 
 
 \clearpage
-\section{Q-učení, srovnání s~genetickými algoritmy.}
+\section{Zpětnovazební učení, Q-učení, Průzkum vs. využití. SARSA.}
 
 \subsection{Zpětnovazební učení}
 
@@ -1042,303 +1094,305 @@ Zdroje:
 \end{enumerate}
 
 \clearpage
-\section{Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu. Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.}
+\section{Metody náhodného průchodu, metoda Node2Vec. Členění druhů umělé inteligence. Pojmy: kombinatorická generalizace, relační induktivní zaměření.}
 
-Klasicky jsou data pro strojové učení uspořádana ve vektoru (1D, 2D). 
-Využívá se k~tomu nejčastěji lineární regrese nebo CNN (konvoluční neuronové sítě). 
-Pokud bychom chtěli převést stromovou nebo grafovou strukturu do~vektrou, bude to možné aproximací a~se ztrátou některých informací.
-Proto se využívá různých metod na~převedení grafové struktury na~zpracovatelné podoby pomocí embedding nodes.
-
-\subsection{Embeddings nodes}
-
-Využívá DeepWalk metodu (první metoda). 
-Ukazuje jak by vypadal graf ve~2D, kdy podobné vrcholy jsou v~tomto prostoru blízko při sobě.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{images/11_deepwalk-graf}
-    \caption{DeepWalk metoda}
-\end{figure}
-
-Cílem je zakódovat vrcholy z~grafu do~embedding prostoru tak že podobnost v~embedding prostoru se blíží podobnosti grafu.
-Tento cíl udává rovnice:
-
-$$\text{similarity}(u,v)\approx \mathbf{z}_{v}^{T}\,\mathbf{z}_{u}$$
-
-Máme encoder, který mapuje vrcholy na~embeddings. 
-Poté je fuknce na~výpočet podobnosti (v~rovnici levá strana), která měří podobnost v~originálním grafu (síti).
-Následně je decoder (pravá strana rovnice), který mapuje embeddings na~hodnotu podobnosti (similarity score).
-Nakonec se parametry encoderu optimalizují tak aby platila rovnice.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[height=10em]{images/11_similarity}
-    \caption{Podobnost mezi grafem a embedding prostorem}
-\end{figure}
-
-\subsection{random-walk embedding}
-
-Pravděpodobnost, že $u$ a $v$ se společně vyskytnou na~náhodné cestě grafem je rovna nebo přibližná $\mathbf{z}_{v}^{T}\,\mathbf{z}_{u}$.
-
-\subsubsection{Přoč random-walk}
-
-{}Expressivity: podobnost vrcholů zahrnujících místní i~high-order neighborhood informace.
-\\Efficiency: musí se uvažovat pouze páry vrcholů, které se společně vyskytují na~random-walk cestě.
-
-\subsubsection{Postup}
-
-Nejprve se odhadne pravděpodobnost navštívení vrcholu $v$ na~náhodné cestě grafem začínající v~bodě $u$, využívající některou random-walk strategii. 
-Následně se optimalizuje embeddings k~zakódování random-walk statistik.
-
-\subsubsection{Optimalizace postup}
-
-Nejprve se spustí random-walk s~krátkou pevnou délkou, který startuje z~každého vrcholu $u$ v~grafu využívající nějakou random-walk strategii.
-Dále pro každý vrchol $u$ se sesbírá množina navštívených vrcholů pomocí na~cestě (pomocí random-walk strategie) začínajících z~$u$.
-Nakonec se optimalizuje embeddings (pro vrchol $u$ dokážeme předpovědět sousedy v~množině).
-
-$$\mathcal{L} = \sum_{u\in V} \sum_{v\in N_R (u)} - \log(\frac{\exp(\mathbf{z}_{u}\,\mathbf{z}_{v})}{\sum_{n\in V} \exp(\mathbf{z}_{u}\,\mathbf{z}_{n})})$$
-
-První suma značí součet přes všechny vrcholy $u$.
-Druhá suma značí součt přes vrcholy $v$ vyskytujících se na~cestě z~vrcholu $u$.
-Obsah logaritmu značí předpovídanou pravděpodobnost společného výskytu $u$ a $v$ na~cestě.
-
-Cílem je najít $\mathbf{z}_u$ které minimalizuje $\mathcal{L}$.
-
-
-\subsubsection{node2vec}
-
-Node2vec je velice podobný Deepwalk s~tím rozdílem, že jsou jinak vybírany sousední vrcholy.
-Hlavní myšlenkou je kompromis mezi lokálním (BFS) a globálním (DFS) pohledem na~graf (síť).
-Node2vec má dva parametry:
-\begin{itemize}
-	\item $p$ udávajací hodnotu návratu k~předchozímu vrcholu (return parameter)
-	\item $q$ udavající \enquote{poměr} mězi BFS a DFS (\enquote{walk away} parameter)
-\end{itemize}
-
-Při zvolení $q>p$ se algoritmus zaměřuje spíše na~globální pohled (bude směřovat k~BFS průchodu). Při zvolení $q<p$ se algoritmus zaměří spíše na~lokalní pohled (bude směřovat k~DFS).
-
-\begin{figure}[ht]
-    \centering
-	\includegraphics[height=10em]{images/11_node2vec-pq}
-    \caption{Prioritizace $p$ nebo $q$ v~node2vec}
-\end{figure}
-
-Při prochocházení grafem (viz obr.~\ref{pruchod-node2vec}) může dojít ke třem stavům (z~hlediska bodu $w$):
-\begin{itemize}
-	\item návrat k~předchozímu vrcholu ($s1$),
-	\item navštívení vedlejšího vrcholu, který má stejnou vzdálenost od~počátečního vrcholu ($s2$)
-	\item navštívení vzdálenějšího vrcholu ($s3$)
-\end{itemize}
-
-\begin{figure}
-    \centering
-	\includegraphics[height=10em]{images/node2vec.png}
-    \caption{Průchod grafem v~node2vec}
-    \label{pruchod-node2vec}
-\end{figure}
-
-\subsection{Relační induktivní zaměření}
-
-Definice: Jak algoritmus preferuje jeden model před druhým. 
-
-Existuje několik modelů:
-\begin{table}[ht]
-\centering
-\caption{Vlastnosti komponent}
-\begin{tabular}{|l|c|c|}
-\hline
-Komponent & Entita & Vazba (relace) \\ \hline \hline
-Plně propojené & Units & All-to-all \\ \hline
-Konvoluční & Grid elements & Local \\ \hline
-Rekurentní & Timesteps & Sequential \\ \hline
-Graph network & Vrchol & Hrana \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{figure}[ht]
-    \centering
-	\includegraphics[width=\textwidth]{images/11_RIB}
-    \caption{Přístupy relačního induktivního zaměření}
-\end{figure}
-
-\subsection{Kombinatorická generalizace}
-
-Kombinatorická generalizace je vlastnost vytvářet nové rozhraní, predikce a chování z~už známých stavebních bloků.
-
-Příkladem je vycestování na~nové místo.
-Máme známé postupy -- cestovat letadlem; do~Brna; dát si oběd; v~menze.
-Generalizace je nalezení spojitostí mezi těmito věcmi na~už známých znalostech.
-
-\subsection{Předávání zpráv}
-\tikzstyle{vertexnocolor}=[circle, draw]
-
-Mějme graf $G$ (viz obr.~\ref{graf-pro-predavani-zprav}) reprezentovatelný maticí souslednosti $\mathbf{A}$: 
-$\left[ \begin{matrix}
-0 & 1 & 0 & 0 & 0 \\
-1 & 0 & 1 & 0 & 0 \\
-0 & 1 & 0 & 1 & 1 \\
-0 & 0 & 1 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 \\
-\end{matrix} \right]$.
-
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}
-		\node[vertexnocolor](a) at (1, -2) {A};
-        \node[vertexnocolor](b) at (3, -1) {B};
-        \node[vertexnocolor](c) at (2, 1) {C};
-        \node[vertexnocolor](d) at (0, 0) {D};
-        \node[vertexnocolor](e) at (1, 2) {E};
-            
-        \begin{scope}[every path/.style={-}, every node/.style={inner sep=1pt}]
-        	\draw (a) -- node [anchor=east] {} (b);
-                   
-            \draw (b) -- node [anchor=east] {} (c);
-                   
-            \draw (c) -- node [anchor=east] {} (d);
-            \draw (c) -- node [anchor=east] {} (e);
-		\end{scope}
-	\end{tikzpicture}
-    \caption{Graf $G$.}
-    \label{graf-pro-predavani-zprav}
-\end{figure}
-\FloatBarrier
-
-Po tomto bodu záleží jakou metodu zvolíme.
-
-\subsubsection{Součet sousedních vrcholů}
-
-Zvolíme matici $\mathbf{H_1}$, která bude reprezentovat hodnoty vrcholů:
-$\left[ \begin{matrix}
-1 \\
-2 \\
-3 \\
-4 \\
-5 \\
-\end{matrix} \right]$.
-
-Vynásobíme matici $\mathbf{A}$ maticí $\mathbf{H_1}$ a~získáme předávanou zprávu.
-
-$$
-\left[ \begin{matrix}
-0 & 1 & 0 & 0 & 0 \\
-1 & 0 & 1 & 0 & 0 \\
-0 & 1 & 0 & 1 & 1 \\
-0 & 0 & 1 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 \\
-\end{matrix} \right]
-\left[ \begin{matrix}
-1 \\
-2 \\
-3 \\
-4 \\
-5 \\
-\end{matrix} \right] = 
-\left[ \begin{matrix}
-0 \cdot 1 + 1 \cdot 2 + 0 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
-1 \cdot 1 + 0 \cdot 2 + 1 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
-0 \cdot 1 + 1 \cdot 2 + 0 \cdot 3 + 1 \cdot 4 + 1 \cdot 5 \\
-0 \cdot 1 + 0 \cdot 2 + 1 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
-0 \cdot 1 + 0 \cdot 2 + 1 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
-\end{matrix} \right] = 
-\left[ \begin{matrix}
-2 \\
-4 \\
-11 \\
-3 \\
-3 \\
-\end{matrix} \right]
-$$
-
-\subsubsection{Průměr sousedních vrcholů}
-
-Kromě matice sousednosti se vytvoří matice stupňů vrcholu $\mathbf{D}$:
-$\left[ \begin{matrix}
-1 & 0 & 0 & 0 & 0 \\
-0 & 2 & 0 & 0 & 0 \\
-0 & 0 & 3 & 0 & 0 \\
-0 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 1 \\
-\end{matrix} \right]$
-
-Matice $\mathbf{D}$ se invertuje ($\frac{1}{x}$) kde $x$ je hodnota z~matice:
-$\left[ \begin{matrix}
-1 & 0 & 0 & 0 & 0 \\
-0 & 0.5 & 0 & 0 & 0 \\
-0 & 0 & 0.33 & 0 & 0 \\
-0 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 1 \\
-\end{matrix} \right]$
-
-Invertovaná matice se vynásobí s~maticí sousednosti, kde vznikne matice $\mathbf{A_\mathrm{avg}}$.
-
-$$
-\left[ \begin{matrix}
-1 & 0 & 0 & 0 & 0 \\
-0 & 2 & 0 & 0 & 0 \\
-0 & 0 & 3 & 0 & 0 \\
-0 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 1 \\
-\end{matrix} \right]
-\left[ \begin{matrix}
-1 & 0 & 0 & 0 & 0 \\
-0 & 0.5 & 0 & 0 & 0 \\
-0 & 0 & 0.33 & 0 & 0 \\
-0 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 1 \\
-\end{matrix} \right] =
-\left[ \begin{matrix}
-0 & 1 & 0 & 0 & 0 \\
-0.5 & 0 & 0.5 & 0 & 0 \\
-0 & 0.33 & 0 & 0.33 & 0.33 \\
-0 & 0 & 1 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 \\
-\end{matrix} \right]
-$$
-
-Tato výsledná matice se vynásobí z~maticí $\mathbf{H_1}$ a získáme předávanou zprávu.
-
-$$
-\left[ \begin{matrix}
-0 & 1 & 0 & 0 & 0 \\
-0.5 & 0 & 0.5 & 0 & 0 \\
-0 & 0.33 & 0 & 0.33 & 0.33 \\
-0 & 0 & 1 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 \\
-\end{matrix} \right]
-\left[ \begin{matrix}
-1 \\
-2 \\
-3 \\
-4 \\
-5 \\
-\end{matrix} \right] = 
-\left[ \begin{matrix}
-2 \\
-2 \\
-3.6 \\
-3 \\
-3 \\
-\end{matrix} \right] 
-$$
-
-\subsubsection{Průměr sousedních vrcholů a sám sebe}
-
-Do~matice sousednosti doplníme, že každý vrchol sousedí sám se sebou a získáme $\mathbf{\tilde{A}}$:
-$\left[ \begin{matrix}
-1 & 1 & 0 & 0 & 0 \\
-1 & 1 & 1 & 0 & 0 \\
-0 & 1 & 1 & 1 & 1 \\
-0 & 0 & 1 & 1 & 0 \\
-0 & 0 & 1 & 0 & 1 \\
-\end{matrix} \right]$.
-
-Výsledná přenášená zpráva se vypočítá pomocí vzorce
-$\mathbf{\hat{A}} = \mathbf{D}^{-\frac{1}{2}}\mathbf{\tilde{A}}\mathbf{\tilde{D}}^{-\frac{1}{2}}$.
-
-Zdroje:
-\begin{enumerate}
-    \item \url{https://www.youtube.com/watch?v=Xv0wRy66Big}
-    \item \url{https://www.youtube.com/watch?v=ijmxpItkRjc}
-\end{enumerate}
-
+% \clearpage
+% \section{Extrakce znalostí ze stromových a grafových struktur. Metoda náhodného průchodu. Node2Vec. Obecná umělá inteligence – relační induktivní zaměření, kombinatorická generalizace. Předávání zpráv.}
+% 
+% Klasicky jsou data pro strojové učení uspořádana ve vektoru (1D, 2D). 
+% Využívá se k~tomu nejčastěji lineární regrese nebo CNN (konvoluční neuronové sítě). 
+% Pokud bychom chtěli převést stromovou nebo grafovou strukturu do~vektrou, bude to možné aproximací a~se ztrátou některých informací.
+% Proto se využívá různých metod na~převedení grafové struktury na~zpracovatelné podoby pomocí embedding nodes.
+% 
+% \subsection{Embeddings nodes}
+% 
+% Využívá DeepWalk metodu (první metoda). 
+% Ukazuje jak by vypadal graf ve~2D, kdy podobné vrcholy jsou v~tomto prostoru blízko při sobě.
+% 
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=\textwidth]{images/11_deepwalk-graf}
+%     \caption{DeepWalk metoda}
+% \end{figure}
+% 
+% Cílem je zakódovat vrcholy z~grafu do~embedding prostoru tak že podobnost v~embedding prostoru se blíží podobnosti grafu.
+% Tento cíl udává rovnice:
+% 
+% $$\text{similarity}(u,v)\approx \mathbf{z}_{v}^{T}\,\mathbf{z}_{u}$$
+% 
+% Máme encoder, který mapuje vrcholy na~embeddings. 
+% Poté je fuknce na~výpočet podobnosti (v~rovnici levá strana), která měří podobnost v~originálním grafu (síti).
+% Následně je decoder (pravá strana rovnice), který mapuje embeddings na~hodnotu podobnosti (similarity score).
+% Nakonec se parametry encoderu optimalizují tak aby platila rovnice.
+% 
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[height=10em]{images/11_similarity}
+%     \caption{Podobnost mezi grafem a embedding prostorem}
+% \end{figure}
+% 
+% \subsection{random-walk embedding}
+% 
+% Pravděpodobnost, že $u$ a $v$ se společně vyskytnou na~náhodné cestě grafem je rovna nebo přibližná $\mathbf{z}_{v}^{T}\,\mathbf{z}_{u}$.
+% 
+% \subsubsection{Přoč random-walk}
+% 
+% {}Expressivity: podobnost vrcholů zahrnujících místní i~high-order neighborhood informace.
+% \\Efficiency: musí se uvažovat pouze páry vrcholů, které se společně vyskytují na~random-walk cestě.
+% 
+% \subsubsection{Postup}
+% 
+% Nejprve se odhadne pravděpodobnost navštívení vrcholu $v$ na~náhodné cestě grafem začínající v~bodě $u$, využívající některou random-walk strategii. 
+% Následně se optimalizuje embeddings k~zakódování random-walk statistik.
+% 
+% \subsubsection{Optimalizace postup}
+% 
+% Nejprve se spustí random-walk s~krátkou pevnou délkou, který startuje z~každého vrcholu $u$ v~grafu využívající nějakou random-walk strategii.
+% Dále pro každý vrchol $u$ se sesbírá množina navštívených vrcholů pomocí na~cestě (pomocí random-walk strategie) začínajících z~$u$.
+% Nakonec se optimalizuje embeddings (pro vrchol $u$ dokážeme předpovědět sousedy v~množině).
+% 
+% $$\mathcal{L} = \sum_{u\in V} \sum_{v\in N_R (u)} - \log(\frac{\exp(\mathbf{z}_{u}\,\mathbf{z}_{v})}{\sum_{n\in V} \exp(\mathbf{z}_{u}\,\mathbf{z}_{n})})$$
+% 
+% První suma značí součet přes všechny vrcholy $u$.
+% Druhá suma značí součt přes vrcholy $v$ vyskytujících se na~cestě z~vrcholu $u$.
+% Obsah logaritmu značí předpovídanou pravděpodobnost společného výskytu $u$ a $v$ na~cestě.
+% 
+% Cílem je najít $\mathbf{z}_u$ které minimalizuje $\mathcal{L}$.
+% 
+% 
+% \subsubsection{node2vec}
+% 
+% Node2vec je velice podobný Deepwalk s~tím rozdílem, že jsou jinak vybírany sousední vrcholy.
+% Hlavní myšlenkou je kompromis mezi lokálním (BFS) a globálním (DFS) pohledem na~graf (síť).
+% Node2vec má dva parametry:
+% \begin{itemize}
+% 	\item $p$ udávajací hodnotu návratu k~předchozímu vrcholu (return parameter)
+% 	\item $q$ udavající \enquote{poměr} mězi BFS a DFS (\enquote{walk away} parameter)
+% \end{itemize}
+% 
+% Při zvolení $q>p$ se algoritmus zaměřuje spíše na~globální pohled (bude směřovat k~BFS průchodu). Při zvolení $q<p$ se algoritmus zaměří spíše na~lokalní pohled (bude směřovat k~DFS).
+% 
+% \begin{figure}[ht]
+%     \centering
+% 	\includegraphics[height=10em]{images/11_node2vec-pq}
+%     \caption{Prioritizace $p$ nebo $q$ v~node2vec}
+% \end{figure}
+% 
+% Při prochocházení grafem (viz obr.~\ref{pruchod-node2vec}) může dojít ke třem stavům (z~hlediska bodu $w$):
+% \begin{itemize}
+% 	\item návrat k~předchozímu vrcholu ($s1$),
+% 	\item navštívení vedlejšího vrcholu, který má stejnou vzdálenost od~počátečního vrcholu ($s2$)
+% 	\item navštívení vzdálenějšího vrcholu ($s3$)
+% \end{itemize}
+% 
+% \begin{figure}
+%     \centering
+% 	\includegraphics[height=10em]{images/node2vec.png}
+%     \caption{Průchod grafem v~node2vec}
+%     \label{pruchod-node2vec}
+% \end{figure}
+% 
+% \subsection{Relační induktivní zaměření}
+% 
+% Definice: Jak algoritmus preferuje jeden model před druhým. 
+% 
+% Existuje několik modelů:
+% \begin{table}[ht]
+% \centering
+% \caption{Vlastnosti komponent}
+% \begin{tabular}{|l|c|c|}
+% \hline
+% Komponent & Entita & Vazba (relace) \\ \hline \hline
+% Plně propojené & Units & All-to-all \\ \hline
+% Konvoluční & Grid elements & Local \\ \hline
+% Rekurentní & Timesteps & Sequential \\ \hline
+% Graph network & Vrchol & Hrana \\ \hline
+% \end{tabular}
+% \end{table}
+% 
+% \begin{figure}[ht]
+%     \centering
+% 	\includegraphics[width=\textwidth]{images/11_RIB}
+%     \caption{Přístupy relačního induktivního zaměření}
+% \end{figure}
+% 
+% \subsection{Kombinatorická generalizace}
+% 
+% Kombinatorická generalizace je vlastnost vytvářet nové rozhraní, predikce a chování z~už známých stavebních bloků.
+% 
+% Příkladem je vycestování na~nové místo.
+% Máme známé postupy -- cestovat letadlem; do~Brna; dát si oběd; v~menze.
+% Generalizace je nalezení spojitostí mezi těmito věcmi na~už známých znalostech.
+% 
+% \subsection{Předávání zpráv}
+% \tikzstyle{vertexnocolor}=[circle, draw]
+% 
+% Mějme graf $G$ (viz obr.~\ref{graf-pro-predavani-zprav}) reprezentovatelný maticí souslednosti $\mathbf{A}$: 
+% $\left[ \begin{matrix}
+% 0 & 1 & 0 & 0 & 0 \\
+% 1 & 0 & 1 & 0 & 0 \\
+% 0 & 1 & 0 & 1 & 1 \\
+% 0 & 0 & 1 & 0 & 0 \\
+% 0 & 0 & 1 & 0 & 0 \\
+% \end{matrix} \right]$.
+% 
+% \begin{figure}[ht]
+%     \centering
+%     \begin{tikzpicture}
+% 		\node[vertexnocolor](a) at (1, -2) {A};
+%         \node[vertexnocolor](b) at (3, -1) {B};
+%         \node[vertexnocolor](c) at (2, 1) {C};
+%         \node[vertexnocolor](d) at (0, 0) {D};
+%         \node[vertexnocolor](e) at (1, 2) {E};
+            % 
+%         \begin{scope}[every path/.style={-}, every node/.style={inner sep=1pt}]
+%         	\draw (a) -- node [anchor=east] {} (b);
+                   % 
+%             \draw (b) -- node [anchor=east] {} (c);
+                   % 
+%             \draw (c) -- node [anchor=east] {} (d);
+%             \draw (c) -- node [anchor=east] {} (e);
+% 		\end{scope}
+% 	\end{tikzpicture}
+%     \caption{Graf $G$.}
+%     \label{graf-pro-predavani-zprav}
+% \end{figure}
+% \FloatBarrier
+% 
+% Po tomto bodu záleží jakou metodu zvolíme.
+% 
+% \subsubsection{Součet sousedních vrcholů}
+% 
+% Zvolíme matici $\mathbf{H_1}$, která bude reprezentovat hodnoty vrcholů:
+% $\left[ \begin{matrix}
+% 1 \\
+% 2 \\
+% 3 \\
+% 4 \\
+% 5 \\
+% \end{matrix} \right]$.
+% 
+% Vynásobíme matici $\mathbf{A}$ maticí $\mathbf{H_1}$ a~získáme předávanou zprávu.
+% 
+% $$
+% \left[ \begin{matrix}
+% 0 & 1 & 0 & 0 & 0 \\
+% 1 & 0 & 1 & 0 & 0 \\
+% 0 & 1 & 0 & 1 & 1 \\
+% 0 & 0 & 1 & 0 & 0 \\
+% 0 & 0 & 1 & 0 & 0 \\
+% \end{matrix} \right]
+% \left[ \begin{matrix}
+% 1 \\
+% 2 \\
+% 3 \\
+% 4 \\
+% 5 \\
+% \end{matrix} \right] = 
+% \left[ \begin{matrix}
+% 0 \cdot 1 + 1 \cdot 2 + 0 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
+% 1 \cdot 1 + 0 \cdot 2 + 1 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
+% 0 \cdot 1 + 1 \cdot 2 + 0 \cdot 3 + 1 \cdot 4 + 1 \cdot 5 \\
+% 0 \cdot 1 + 0 \cdot 2 + 1 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
+% 0 \cdot 1 + 0 \cdot 2 + 1 \cdot 3 + 0 \cdot 4 + 0 \cdot 5 \\
+% \end{matrix} \right] = 
+% \left[ \begin{matrix}
+% 2 \\
+% 4 \\
+% 11 \\
+% 3 \\
+% 3 \\
+% \end{matrix} \right]
+% $$
+% 
+% \subsubsection{Průměr sousedních vrcholů}
+% 
+% Kromě matice sousednosti se vytvoří matice stupňů vrcholu $\mathbf{D}$:
+% $\left[ \begin{matrix}
+% 1 & 0 & 0 & 0 & 0 \\
+% 0 & 2 & 0 & 0 & 0 \\
+% 0 & 0 & 3 & 0 & 0 \\
+% 0 & 0 & 0 & 1 & 0 \\
+% 0 & 0 & 0 & 0 & 1 \\
+% \end{matrix} \right]$
+% 
+% Matice $\mathbf{D}$ se invertuje ($\frac{1}{x}$) kde $x$ je hodnota z~matice:
+% $\left[ \begin{matrix}
+% 1 & 0 & 0 & 0 & 0 \\
+% 0 & 0.5 & 0 & 0 & 0 \\
+% 0 & 0 & 0.33 & 0 & 0 \\
+% 0 & 0 & 0 & 1 & 0 \\
+% 0 & 0 & 0 & 0 & 1 \\
+% \end{matrix} \right]$
+% 
+% Invertovaná matice se vynásobí s~maticí sousednosti, kde vznikne matice $\mathbf{A_\mathrm{avg}}$.
+% 
+% $$
+% \left[ \begin{matrix}
+% 1 & 0 & 0 & 0 & 0 \\
+% 0 & 2 & 0 & 0 & 0 \\
+% 0 & 0 & 3 & 0 & 0 \\
+% 0 & 0 & 0 & 1 & 0 \\
+% 0 & 0 & 0 & 0 & 1 \\
+% \end{matrix} \right]
+% \left[ \begin{matrix}
+% 1 & 0 & 0 & 0 & 0 \\
+% 0 & 0.5 & 0 & 0 & 0 \\
+% 0 & 0 & 0.33 & 0 & 0 \\
+% 0 & 0 & 0 & 1 & 0 \\
+% 0 & 0 & 0 & 0 & 1 \\
+% \end{matrix} \right] =
+% \left[ \begin{matrix}
+% 0 & 1 & 0 & 0 & 0 \\
+% 0.5 & 0 & 0.5 & 0 & 0 \\
+% 0 & 0.33 & 0 & 0.33 & 0.33 \\
+% 0 & 0 & 1 & 0 & 0 \\
+% 0 & 0 & 1 & 0 & 0 \\
+% \end{matrix} \right]
+% $$
+% 
+% Tato výsledná matice se vynásobí z~maticí $\mathbf{H_1}$ a získáme předávanou zprávu.
+% 
+% $$
+% \left[ \begin{matrix}
+% 0 & 1 & 0 & 0 & 0 \\
+% 0.5 & 0 & 0.5 & 0 & 0 \\
+% 0 & 0.33 & 0 & 0.33 & 0.33 \\
+% 0 & 0 & 1 & 0 & 0 \\
+% 0 & 0 & 1 & 0 & 0 \\
+% \end{matrix} \right]
+% \left[ \begin{matrix}
+% 1 \\
+% 2 \\
+% 3 \\
+% 4 \\
+% 5 \\
+% \end{matrix} \right] = 
+% \left[ \begin{matrix}
+% 2 \\
+% 2 \\
+% 3.6 \\
+% 3 \\
+% 3 \\
+% \end{matrix} \right] 
+% $$
+% 
+% \subsubsection{Průměr sousedních vrcholů a sám sebe}
+% 
+% Do~matice sousednosti doplníme, že každý vrchol sousedí sám se sebou a získáme $\mathbf{\tilde{A}}$:
+% $\left[ \begin{matrix}
+% 1 & 1 & 0 & 0 & 0 \\
+% 1 & 1 & 1 & 0 & 0 \\
+% 0 & 1 & 1 & 1 & 1 \\
+% 0 & 0 & 1 & 1 & 0 \\
+% 0 & 0 & 1 & 0 & 1 \\
+% \end{matrix} \right]$.
+% 
+% Výsledná přenášená zpráva se vypočítá pomocí vzorce
+% $\mathbf{\hat{A}} = \mathbf{D}^{-\frac{1}{2}}\mathbf{\tilde{A}}\mathbf{\tilde{D}}^{-\frac{1}{2}}$.
+% 
+% Zdroje:
+% \begin{enumerate}
+%     \item \url{https://www.youtube.com/watch?v=Xv0wRy66Big}
+%     \item \url{https://www.youtube.com/watch?v=ijmxpItkRjc}
+% \end{enumerate}

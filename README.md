@@ -82,15 +82,15 @@ Vybírají se právě dva předměty.
 
 - [ ] Hierarchie výpočetní složitosti. P, P-úplné, NP, NP-úplné, PSPACE, EXP-SPACE, HP těžké, rozhodnutelné, nerozhodnutelné. Definice problému s batohem. Definice problému k-řezu. Definice problému obchodu.
 - [ ] Optimalizace: Genetické programování, inicializace, křížení, mutace. Optimalizace rojem částic. Optimalizace mravenčí kolonií.
-- [ ] Grafy – incidenční matice, matice sousedností. Handshaking lemma. Silně propojené komponenty grafu. Silně propojené komponenty – Kosarajův algoritmus, Tarjanův algoritmus.
+- [x] Grafy – incidenční matice, matice sousedností. Handshaking lemma. Silně propojené komponenty grafu. Silně propojené komponenty – Kosarajův algoritmus, Tarjanův algoritmus.
 - [ ] Detekce cyklů v grafu. Eulerova cesta grafem, Hamiltonovská cesta grafem. Floyd-Warhsallův algoritmus. Algoritmus rozpoznání bipartitiního grafu.
-- [ ] Párování grafu, problém maximální shody – definice, maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Isomorfismus grafu – Ullmanův algoritmus.
-- [ ] Definice tok sítí. Problém maximálního toku / minimálního řezu. Ford Fulkersonův algoritmus.
+- [ ] Párování grafu, problém maximální shody – definice, Maďarský algoritmus. Problém časové tabule. Algoritmus barvení grafu. Isomorfismus grafu – Ullmanův algoritmus.
+- [ ] Definice toku sítí. Problém maximálního toku / minimálního řezu. Ford Fulkersonův algoritmus.
 - [ ] Univerzální aproximační teorém. Neuron, Maticová verze dopředné neuronové sítě. Rychlost učení. Dávky a minidávky a efekt na učení se. Vrstva zahazování.
 - [ ] Definice konvoluční neuronové vrstvy. Metody regularizace. Přenesené učení a známé předučené sítě.
 - [ ] Lineární a polynomiální regrese. Logistická regrese. Optimalizace s pomocí gradientního sestupu.
-- [ ] Rekurentní neuronové sítě. Popis LSTM vrstvy. Segmentace – U sítě.
-- [ ] Zpětnovazební učení, Q-učení. Průzkum vs. využití. SARSA.
+- [x] Rekurentní neuronové sítě. Popis LSTM vrstvy. Segmentace – U sítě.
+- [x] Zpětnovazební učení, Q-učení. Průzkum vs. využití. SARSA.
 - [ ] Metody náhodného průchodu, metoda Node2Vec. Členění druhů umělé inteligence. Pojmy: kombinatorická generalizace, relační induktivní zaměření.
 
 ### MPC-ODP
