@@ -263,7 +263,7 @@ Vybírají se právě dva předměty.
 
 ### MPC-MOK
 
-- [ ] Lattice: lattice definition, base of a lattice, CVP problem, SVP problem, Hadamard ratio, Babai algorithm, GGH public key cryptosystem.
+- [x] Lattice: lattice definition, base of a lattice, CVP problem, SVP problem, Hadamard ratio, Babai algorithm, GGH public key cryptosystem.
 - [ ] LWE and RLWE: LWE problem, RLWE problem, Regev one-bit cryptosystem.
 - [ ] Lattice-based protocols: Module-LWE problem, LWR problem, NTT, KYBER scheme, SABER scheme.
 - [ ] Homomorphic Encryption (HE): homomorphism, HE definition, kind of HE (partially, somewhat, fully), Bootstrapping, Paillier Cyrptosystem
