@@ -41,13 +41,13 @@ Mezi bázemi je možné (jednosměrně) převádět násobením unimodulární\f
 \subsection{Hadamardův poměr}
 
 Platí
-$$
+$
 \mathcal{H} =
 \left( \frac{
 | \text{det} \, \lat(v_1, \dots, v_n) | }{
 || v_1 ||_2 \cdot || v_2 ||_2 \cdot \dots \cdot ||v_n||_2
 } \right)^{\frac{1}{n}}
-$$
+$.
 Dobrá báze má $\mathcal{H}$ blízko jedné.
 
 % TODO Blíže vysvětlit co přesně znamená jmenovatel.
@@ -57,7 +57,6 @@ Dobrá báze má $\mathcal{H}$ blízko jedné.
 \subsection{CVP, SVP}
 
 \textbf{\emph{Shortest Vector Problem}}: pro~zadanou mřížku $\lat$ najděte nejkratší nenulový vektor $v$ z~$\lat$ s~minimální velikostí $||v||_2$.
-
 V~současnosti neexistuje žádný algoritmus s~polynomiální složitostí.
 Existují deterministické ($n^{O(n)}$)\footnotemark{} či randomizované ($2^{O(n)}$)\footnotemark{}; rychlejší nejsou pravděpodobné, protože jde o~NP-hard problém.
 \footnotetext{Kannan, Ravi (1983): Improved Algorithms for Integer Programming and Related Lattice Problems \\ \url{https://doi.org/10.1145/800061.808749}}
@@ -65,6 +64,7 @@ Existují deterministické ($n^{O(n)}$)\footnotemark{} či randomizované ($2^{O
 
 \emph{Worst-case} SVP je možné redukovat na~\emph{average-case}\footnotemark{}.
 \footnotetext{Ajtai, Miklós (1998): The shortest vector problem in L2 is NP-hard for randomized reductions. \\ \url{https://doi.org/10.1145/276698.276705}}
+Nejde o~problém dostatečně složitý pro~praktickou kryptografii.
 
 \textbf{\emph{Closest Vector Problem}}: pro~zadanou mřížku $\lat$ a vektor $t \in \mathbb{R}^n$ najděte nenulový vektor $v \in \lat$ takový abyste minimalizovali $||t - v||_2$.
 Existuje deterministický algoritmus ($n^{O(n)}$)\footnotemark{}.
@@ -131,12 +131,83 @@ Alice použije Babaiův algoritmus se~svou dobrou bází $v_1, \dots, v_n$ k~nal
 Protože používá dobrou bázi a~$r$ je malé, vypočítá $m\textbf{W}$.
 Tuto hodnotu vynásobí $\textbf{W}^{-1}$ a tím získá $m$.
 
+Jde o~schéma bezpečné, ale kvůli velikosti bezpečnostních parametrů nepraktické.
 (Převzato z~\emph{An Introduction to Mathematical Cryptography}\footnotemark{}).
 \footnotetext{\url{https://staff.emu.edu.tr/alexanderchefranov/Documents/CMSE491/CMSE491 Fall2020/Hoffstein2015 Introduction to Mathematical Cryptography 409-412 GGH.pdf}. \\ Plně dostupné na \url{https://doi.org/10.1007/978-1-4939-1711-2}}
 
 
 \clearpage
 \section{LWE and RLWE: LWE problem, RLWE problem, Regev one-bit cryptosystem.}
+
+Všechny LWE problémy jsou do~určité míry ekvivalentní (pro~rovnou bezpečnost může být nutné upravit bezpečnostní parametry).
+V~praxi proti nim neexistuje útok.
+
+Obecně jde o~řešení problému soustavy rovnic.
+Samotná matice lze řešit Gaussovskou eliminací, ale po~přidání chyby $e \in \{-1, 0, 1\}$ k~výsledkům již správný výsledek vycházet nebude.
+
+$$
+\left[
+\begin{matrix}
+1 & 5 & 3 & 2 \\
+1 & 4 & 2 & 6 \\
+2 & 1 & 3 & 1 \\
+3 & 4 & 4 & 6 \\
+\end{matrix}
+\right] \equiv \left[
+\begin{matrix}
+1 \\ 2 \\ 4 \\ 0
+\end{matrix}
+\right] \mod 7
+\hspace*{2em}
+\equiv \left[
+\begin{matrix}
+1+1=2 \\ 2+0=2 \\ 4-1=3 \\ 0-1=6 \\
+\end{matrix}
+\right] \mod 7
+$$
+
+
+\subsection{Learning with Errors}
+
+LWE lze zapsat jako $\textbf{A}s + e = b$. Obsahuje $n$ polynomů (řádu $m$), tajemství $s$ a chybu $e$.
+
+$s$ je nalezitelné linearizací pokud je $\chi$ náhodně rozložené v~$\mathbb{Z}_2$ (tj. $n=1$ a $e \in \{-1, 0, 1\}$).
+Bezpečnost tedy závisí na~volbě distribuce $\chi$.
+
+Je možné ho uplatit na~symetrické i asymetrické šifrování, výměnu klíčů, digitální podpisy, (plně) homomorfní šifrování, ZK protokoly a další.
+
+\subsection{Ring Learninig with Errors}
+
+LWE trpí velikostmi klíčů ($n^2$).
+R-LWE redukuje matici \textbf{A} na~jediný řádek, který je pokaždé horizontálně posunutý o~jednu pozici vpravo.
+Stačí tak přenášet pouze tento jeden řádek a ne~celou matici.
+Vytvořená struktura je ideální mřížka, ve~které může být grupa $\mathbb{Z}_q^n$ nahrazena polynomiálním okruhem $\mathbb{Z}_q[x]/\left<x^n+1\right>$.
+
+R-LWE lze zapsat jako $\textbf{A} + s \equiv b$. Obsahuje $n$ polynomů (řádu $m$) a tajemství $s$.
+
+Redukce na~polynomy výrazně zmenšuje velikost přenášených klíčů $\textbf{A}, s$.
+
+\subsection{Regev one-bit kryptosystém}
+
+\begin{wrapfigure}{r}{16em}
+    \centering
+    \includegraphics[width=13em]{regev}
+\end{wrapfigure}
+
+Schéma stavící na~LWE.
+Privátním klíčem je $s$, $e$, veřejným $A$, $b$.
+
+Chceme zašifrovat jednobitovou zprávu $m$.
+V~určité grupě ($\mathbb{Z}_{17}$) můžeme zvolit $p$ takové aby $c = p+m$ šumem nepřerušilo zprávu.
+
+V~našem konkrétním případě $\mathbb{Z}_{17}$ může být šum maximálně $\pm \frac{17}{4}$.
+Dešifrováno bude $\begin{cases}
+1: & p \in \left<5, 11\right> \\
+0: & p \in \left<-4, 3\right> \\
+\end{cases}$.
+
+% NOTE Zde je možné přidat schéma/obrázek z prezentace (Post-Quantum Cycles, slide 28)
+
 
 \clearpage
 \section{Lattice-based protocols: Module-LWE problem, LWR problem, NTT, KYBER scheme, SABER scheme.}
