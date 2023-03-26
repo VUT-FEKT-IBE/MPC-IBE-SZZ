@@ -375,7 +375,119 @@ Byl to kandidát třetího kola PQC NIST.
 
 
 \clearpage
-\section{Homomorphic Encryption (HE): homomorphism, HE definition, kind of HE (partially, somewhat, fully), Bootstrapping, Paillier Cyrptosystem}
+\section{Homomorphic Encryption (HE): homomorphism, HE definition, kind of HE (partially, somewhat, fully), Bootstrapping, Paillier Cryptosystem}
+
+Homomorfismus je zobrazení z~jedné algebraické struktury do~jiné stejného typu, které zachovává důležitou strukturu.
+y
+Šifrovací schéma $E$ je homomorfní pokud platí $f(E(x)) = E(f(x))$:
+\begin{align*}
+    E_k(a) \oplus_c E_k(b) &= E_k (a \oplus_p b)
+    \\
+    E_k(a) \otimes_c E_k(b) &= E_k(a \otimes_p b)
+\end{align*}
+\noindent
+kde $(P, \oplus_p, \otimes_p)$ a $(C, \oplus_c, \otimes_c)$ jsou \emph{plaintext} a \emph{ciphertext} prostory a $a, b \in P$ dvě zprávy.
+
+Umožňuje provádět operace s~daty bez~toho aby bylo nutné je dešifrovat (tj. bez znalosti privátního klíče); dešifrováním se získá výsledek operací, který by byl získán i~kdyby operace proběhly nad~dešifrovanými daty.
+
+\subsection{Druhy homomorfního šifrování}
+
+\textbf{Částečně homomorfní šifrování} (\emph{Partially Homomorphic Encryption}) podporuje pouze jednu z~operací (sčítání nebo násobení).
+Cesarova šifra umožňuje homomorfické sčítání, RSA a ElGamal (v~surové matematické formě) umožňují homomorfické násobení.
+
+\textbf{Celkem homomorfní šifrování} (\emph{Somewhat Homomorphic Encryption}) podporuje obě operace, ale pouze pro~omezený počet operací.
+
+\textbf{Vyrovnané plně homomorfní šifrování} (\emph{Leveled Fully Homomorphic Encryption}) podporuje více operací do~předem daného počtu operací.
+
+\textbf{Plně homomorfní šifrování} (\emph{Fully Homomorphic Encryption}) podporuje více operací při~libovolném počtu operací.
+
+\subsection{Bootstraping}
+
+Při~provádění operací roste šum. Šumem je malé číslo $r$ díky kterému není kryptosystém náchylný na~rozbití GCD (protože $c_1 = pq_1 + 2r_1 + m$ a $c_2 = pq_2 + 2r_2 + m$ sdílí $p$ jako GCD):
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lcr}
+    \textbf{Vytvoření klíčů} && \\
+    $p \in_\mathbb{N} [2^{k-1}, 2^k]$ \\
+    & $\stackrel{p}{\rightarrow}$ & \\
+    && \textbf{Šifrování} \\
+    && zpráva $m \in \{0,1\}$ \\
+    && $q \in \mathbb{N}$ \\
+    && $r \in_\mathbb{R} [2^{k-1}, 2k], |2r| < |\frac{p}{2}|$ \\
+    && $c = pq + 2r + m$ \\
+    & $\stackrel{c}{\leftarrow}$ & \\
+    \textbf{Dešifrování} && \\
+    $m = (c \mod p) \mod 2$ && \\
+    \end{tabular}
+\end{table}
+\FloatBarrier
+
+Šum je $2x$-násobný po~sčítání a $x^2$-násobný po~násobení:
+\\XOR: $c_1 + c_2 = p(q_1 + q_2) + 2(r_1 + r_2) + (m_1 + m_2)$
+\\AND: $c_1 c_2 = p(c_2 q_1 + c_1 q_2 - q_1 q_2) + 2(r_1 r_2 + r_1 m_2 + r_2 m_1) + m_1 m_2$
+
+
+\emph{Bootstrapping} je operace kterou se dá z~šifrového textu s~velkým chybovým vektorem získat nový šifrový text s~malou chybou.
+Této operaci se také říká \emph{squashing the~decryption circuit}.
+
+Provádí se opětovným zašifrováním: $c_\text{new} = E(c, E(s_k))$.
+
+\subsection{Paillier}
+
+PES (\emph{Paillier Encryption Scheme}) je probabilistický šifrovací algoritmus s~veřejnými klíči.
+
+Je založený na~předpokladu $n$-té zbytkové třídy (\emph{Decisional Composite Residuosity Assumption}): při~složeném čísle $n$ a čísle $z$ je obtížné rozhodnout zda existuje $y$ takové aby $z = y^n \mod n^2$.
+
+DJN (\emph{Damgård--Jurik}) krytposystém je zjednodušením/zobecněním (používá modulo $n^{s+1}$).
+
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \caption*{Paillier}
+
+        \begin{tabular}{lcr}
+        \textbf{Vytvoření klíčů} && \\
+        $p, q \in_\mathbb{R}$ && \\
+        $n = pq$ && \\
+        $\lambda = \varphi(n)$ && \\
+        $g = n+1$ && \\
+        $\mu = \varphi(n)^{-1} \mod n$ && \\
+        & $\stackrel{n, g}{\rightarrow}$ & \\
+        && \textbf{Šifrování} \\
+        && $m \in \mathbb{Z}_n$ \\
+        && $r \in_\mathbb{R} \mathbb{Z}_n$ \\
+        && $c = g^m r^n \mod n^2$ \\
+        & $ \stackrel{c}{\leftarrow}$ & \\
+        \textbf{Dešifrování} && \\
+        \multicolumn{3}{l}{$m = \left( \frac{c^{\lambda} - 1}{n} \mod n^2 \right) \mu \mod n$} \\
+        \end{tabular}
+    \end{minipage}\hfill\begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \caption*{\color{gray}Damgård--Jurik}
+
+        \color{gray}
+        \begin{tabular}{lcr}
+        \textbf{Vytvoření klíčů} && \\
+        $p, q \in_\mathbb{R}$ && \\
+        $n = pq$ && \\
+        $\lambda = \varphi(n)$ && \\
+        \multicolumn{3}{l}{$d: d \mod n \in \mathbb{Z}_n^* \wedge d \equiv 0 \mod \lambda(n)$} \\
+        && \\
+        & $\stackrel{n, g}{\rightarrow}$ & \\
+        && \textbf{Šifrování} \\
+        && $m \in \mathbb{Z}_{n^s}$ \\
+        && $r \in_\mathbb{R} \mathbb{Z}_n^*$ \\
+        \multicolumn{3}{r}{$c = (n+1)^m r^{n^s} \mod n^{s+1}$} \\
+        & $ \stackrel{c}{\leftarrow}$ & \\
+        \textbf{Dešifrování} && \\
+        \multicolumn{3}{l}{$m = \frac{c^d}{d} = \frac{(n+1)^{md \mod n^s}}{d} \mod n^s$} \\
+        \end{tabular}
+    \end{minipage}
+\end{figure}
+
+
 
 \clearpage
 \section{Secret Sharing: Threshold Secret Sharing, Shamir Secret Sharing, unique polynomial theorem, Interpolation problem.}
