@@ -266,7 +266,7 @@ Vybírají se právě dva předměty.
 - [x] Lattice: lattice definition, base of a lattice, CVP problem, SVP problem, Hadamard ratio, Babai algorithm, GGH public key cryptosystem.
 - [x] LWE and RLWE: LWE problem, RLWE problem, Regev one-bit cryptosystem.
 - [x] Lattice-based protocols: Module-LWE problem, LWR problem, NTT, KYBER scheme, SABER scheme.
-- [ ] Homomorphic Encryption (HE): homomorphism, HE definition, kind of HE (partially, somewhat, fully), Bootstrapping, Paillier Cyrptosystem
+- [x] Homomorphic Encryption (HE): homomorphism, HE definition, kind of HE (partially, somewhat, fully), Bootstrapping, Paillier Cryptosystem
 - [ ] Secret Sharing: Threshold Secret Sharing, Shamir Secret Sharing, unique polynomial theorem, Interpolation problem.
 - [ ] Secure Multi-Party Computation (SMPC): SMPC definition, SMPC security requirement and adversarial behavior, e-voting, oblivious transfer
 - [ ] Blockchain and Smart Contracts: blockchain architecture, transactions and blocks, mining, forks, consensus, smart contracts, 51 % attack on blockchain.
