@@ -72,7 +72,7 @@ Existuje deterministický algoritmus ($n^{O(n)}$)\footnotemark{}.
 
 Jinými slovy jde o~prohledávání okolí vektoru a~nalezení bázového vektoru který je k~hledanému nejbližší.
 Jde o~generalizaci SVP.
-CVP$_\gamma$: vzdálenost může být nejvýše $\gamma$.
+CVP$_\gamma$: vzdálenost může být nejvýše $\gamma$ (tzv. aproximační faktor).
 Platí že $\gamma$-GapCVP' je NP-hard pro~$\gamma \ge 1$\footnotemark{}.
 \footnotetext{Arora, S., L. Babai, J. Stern, and E.Z. Sweedyk (1997). The hardness of approximate optima in lattices, codes, and systems of linear equations}
 
@@ -211,6 +211,168 @@ Dešifrováno bude $\begin{cases}
 
 \clearpage
 \section{Lattice-based protocols: Module-LWE problem, LWR problem, NTT, KYBER scheme, SABER scheme.}
+
+\subsection{M-LWE}
+
+Modul je generalizace tělesa, ve~kterém je těleso\footnotemark{} nahrazeno okruhem\footnotemark{}.
+\footnotetext{Těleso je okruh který obsahuje inverzní prvky vzhledem k~násobení.}
+\footnotetext{Okruh je uzavřený, asociativní, komutativní, distributivní, obsahuje nulový a inverzní prvky vzhledem ke~sčítání.}
+M-LWE je jednodušší struktura než R-LWE a je rychlejší než LWE.
+
+Pro~M-LWE platí, že je obtížné získat tajný vektor $s$ při~znalosti matice \textbf{A} a~vektoru $b$, kde
+$$
+b =
+\textbf{A}s + e =
+\left(\begin{matrix}
+a_{11}(x) & a_{12}(x) & a_{13}(x) \\
+a_{11}(x) & a_{12}(x) & a_{13}(x) \\
+a_{11}(x) & a_{12}(x) & a_{13}(x) \\
+\end{matrix}\right) \left(\begin{matrix}
+s_{11}(x) \\ s_{21}(x) \\ s_{31}(x) \\
+\end{matrix}\right) + \left(\begin{matrix}
+e_{11}(x) \\ e_{21}(x) \\ e_{31}(x) \\
+\end{matrix}\right)
+$$
+
+Chyba $e$ je vytvořena násobením nebo zaokrouhlováním.
+% TODO Vysvětlit do větších detailů
+
+% TODO Vysvětlit co se zde děje, je to šifrování?
+% TODO V čem je důležité to že je to polynomiální modulus?
+Nechť $q$ je polynomiální modulus a $p < q$.
+Poté $b = \lfloor \frac{p}{q} \textbf{A}s \rfloor$.
+Zaokrouhlováním dolů se chyba stává deterministická.
+Pokud jsou $p$ a $q$ mocniny dvou, operace násobení a zaokrouhlování jsou velmi rychlé.
+
+% TODO Jak dešifrovat?
+
+\subsection{LWR}
+% Learning with Rounding, Revisited. New Reduction, Properties and Applications
+%  https://www.iacr.org/archive/crypto2013/80420212/80420212.pdf
+
+\emph{Learning with Rounding} je varianta LWE, kde je náhodná chyba nahrazena deterministickým zaokrouhlováním.
+Jde o~problém postavený na~Regev a je stejně těžký jako LWE.
+
+Pro~$p < q$ rozdělíme prvky $\mathbb{Z}_q$ do~$p$ sousedících intervalů (každých velkých zhruba $q/p$), a definujeme funkci zaokrouhlení $\lfloor \cdot \rfloor_p$: $\mathbb{Z}_q \rightarrow \mathbb{Z}_p$ která mapuje $x \in \mathbb{Z}_q$ na~index intervalu do~kterého $x$ patří.
+
+LWR tvrdí že $(\textbf{A}, \lfloor \textbf{A} \cdot s \rfloor_p)$ je výpočetně nerozlišitelné od~$(\textbf{A}, \lfloor b \rfloor_p)$, kde $b$ je veřejný vektor.
+
+% TODO Nalinkovaný paper obsahuje spoustu informací o bezpečnosti parametrů, hodilo by se tu něco z toho mít?
+
+\subsection{NTT}
+
+\emph{Number Theoretic Transform} je specializace diskrétní Fourierovy transformace na~okruhu.
+Inverzní NTT odpovídá rekonstrukci původního polynomu při~znalosti několika jeho bodů:
+
+$$
+b(x):
+\left[\begin{matrix}
+3 \\ 0 \\ 0
+\end{matrix}\right] = \left[\begin{matrix}
+1 & 1 & 1 \\ 4 & 2 & 1 \\ 1 & 4 & 1 \\
+\end{matrix}\right]
+\hspace*{1em}
+\mathrel{\mathop{\longrightarrow}^{\text{deg}(b)=5}_{\in \, \mathbb{Z}_5[x]}}
+\hspace*{1em}
+b(x) = x^2 - x + 3
+$$
+
+\subsection{Dohoda na~sdíleném klíči v~LWE schématu}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{ccc}
+    Alice & & Bob \\
+    \hline
+    vytvoření $s_a$, $e_a$ & & vytvoření $s_b$, $e_b$ \\
+    $b_a = As_a + e_a$ & & $b_b = A^Ts_b + e_b$ \\
+    & $\stackrel{b_a}{\longrightarrow} \ \ \stackrel{b_b}{\longleftarrow}$ & \\
+    $v_a = s_a^T b_b$ & & $v_b = s_b^T b_a$ \\
+    & $v_a \approx v_b^T$ & \\
+    \end{tabular}
+\end{table}
+\FloatBarrier
+
+\subsection{KYBER}
+
+CRYSTALS-Kyber je KEM schéma založené na~mřížkách.
+Je založené na M-LWE a je post-kvantově bezpečné.
+Je to (jediný) výherce třetího kola soutěže PQC NIST.
+
+Náročnost (\emph{security levels}) lze upravovat změnou velikosti \textbf{A} (počtu polynomů) a náhodného rozložení.
+Pokud je chyba moc velká, dešifrování se nemusí podařit, ale pravděpodobnost takového stavu je pouze malá ($< 2^{100}$).
+
+\subsection{SABER}
+
+Saber je KEM schéma založené na~mřížkách.
+Je založené na~M-LWE a je post-kvantově bezpečné.
+Byl to kandidát třetího kola PQC NIST.
+
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \caption*{KYBER}
+
+        \begin{tabular}{lcr}
+        \textbf{Vytvoření klíčů} && \\
+        $s_a \leftarrow \text{random()}$ && \\
+        $\textbf{A} = \text{gen}(s_a)$ && \\
+        $s = \text{gen()}$ && \\
+        $e = \text{gen()}$ && \\
+        $b = \textbf{A}^T s + e$ && \\
+        & $\stackrel{s_a, b}{\longrightarrow}$ & \\
+        && \textbf{Šifrování} \\
+        && $\text{zpráva}\ m$ \\
+        && $\textbf{A} = \text{gen}(s_a)$ \\
+        && $s' = \text{gen()}$ \\
+        && $e' = \text{gen()}$ \\
+        && $b' = \textbf{A}s' + e'$ \\
+        && $c = b^Ts' + \frac{q}{2}m$ \\
+        & $\stackrel{b', c}{\longleftarrow}$ & \\
+        \textbf{Dešifrování} && \\
+        $v = b'^T s$ && \\
+        $m = \frac{2}{q}(c - v)$ && \\
+        \end{tabular}
+    \end{minipage}\hfill\begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \caption*{SABER}
+
+        \begin{tabular}{lcl}
+        \textbf{Vytvoření klíčů} && \\
+        $s_a \leftarrow \text{random()}$ && \\
+        $\textbf{A} = \text{gen}(s_a)$ && \\
+        $s = \text{gen()}$ && \\
+        $b = \lfloor \frac{p}{q} \textbf{A}^T s \rceil$ && \\
+        & $\stackrel{s_a, b}{\longrightarrow}$ & \\
+        && \textbf{Šifrování} \\
+        && $\text{zpráva}\ m$ \\
+        && $\textbf{A} = \text{gen}(s_a)$ \\
+        && $s' = \text{gen()}$ \\
+        && $b' =\lfloor \frac{p}{q} \textbf{A} s' \rceil$ \\
+        && $c = \lfloor \frac{T}{q} b^T s' + \frac{T}{2} m \rceil$ \\
+        & $\stackrel{b', c}{\longleftarrow}$ & \\
+        \textbf{Dešifrování} && \\
+        $v = b'^T s$ && \\
+        $m = \lfloor \frac{2}{q} (v - \frac{p}{T} c) \rceil$ && \\
+        \end{tabular}
+    \end{minipage}
+
+    \vspace*{1em}
+    V~ukázkách výše všechny polynomy náleží do~$\mathbb{Z}_q[x]/(x^{256}+1)$.
+\end{figure}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|l|l|}
+    \textbf{Kyber} & \textbf{Saber} \\
+    \hline \hline
+    prvočíselné modulo & modulo mocniny dvou \\
+    je vyžadován NTT solver & flexibilní multiplikační algoritmus \\
+    softwarově efektivní & hardwarově efektivní \\
+    \end{tabular}
+\end{table}
+
 
 \clearpage
 \section{Homomorphic Encryption (HE): homomorphism, HE definition, kind of HE (partially, somewhat, fully), Bootstrapping, Paillier Cyrptosystem}
