@@ -267,7 +267,7 @@ Vybírají se právě dva předměty.
 - [x] LWE and RLWE: LWE problem, RLWE problem, Regev one-bit cryptosystem.
 - [x] Lattice-based protocols: Module-LWE problem, LWR problem, NTT, KYBER scheme, SABER scheme.
 - [x] Homomorphic Encryption (HE): homomorphism, HE definition, kind of HE (partially, somewhat, fully), Bootstrapping, Paillier Cryptosystem
-- [ ] Secret Sharing: Threshold Secret Sharing, Shamir Secret Sharing, unique polynomial theorem, Interpolation problem.
+- [x] Secret Sharing: Threshold Secret Sharing, Shamir Secret Sharing, unique polynomial theorem, Interpolation problem.
 - [ ] Secure Multi-Party Computation (SMPC): SMPC definition, SMPC security requirement and adversarial behavior, e-voting, oblivious transfer
 - [ ] Blockchain and Smart Contracts: blockchain architecture, transactions and blocks, mining, forks, consensus, smart contracts, 51 % attack on blockchain.
 - [ ] Cryptocurrencies: cryptocurrency (definition, requirements), Ecash, Bitcoin, CryptoNote, proof of work in Bitcoin, Bitcoin address and wallet, Bitcoin’s transaction flow, double spending problem.
