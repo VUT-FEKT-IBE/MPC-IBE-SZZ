@@ -262,6 +262,7 @@ LWR tvrdí že $(\textbf{A}, \lfloor \textbf{A} \cdot s \rfloor_p)$ je výpočet
 % TODO Nalinkovaný paper obsahuje spoustu informací o bezpečnosti parametrů, hodilo by se tu něco z toho mít?
 
 \subsection{NTT}
+\label{sec:ntt}
 
 \emph{Number Theoretic Transform} je specializace diskrétní Fourierovy transformace na~okruhu.
 Inverzní NTT odpovídá rekonstrukci původního polynomu při~znalosti několika jeho bodů:
@@ -490,9 +491,92 @@ DJN (\emph{Damgård--Jurik}) krytposystém je zjednodušením/zobecněním (pou�
 \end{figure}
 
 
-
 \clearpage
-\section{Secret Sharing: Threshold Secret Sharing, Shamir Secret Sharing, unique polynomial theorem, Interpolation problem.}
+\section{Secret Sharing: Threshold Secret Sharing, Shamir Secret Sharing, Unique Polynomial Theorem, Interpolation Problem.}
+
+Tradiční způsob protekce dat je jejich duplikování.
+Ale je také možné data rozdělit na~menší části tak, aby k~rekonstrukci stačilo určité množství těchto částí.
+Naopak útočník musí ukrást nebo zničit určité množství této informace.
+
+% TODO Existují lepší, zavedené české ekvivalenty?
+\emph{Secret Sharing} je kryptografický nástroj, který je používán jako stavební kámen mnoha rodin primitiv, jako jsou sdílené výpočty (\emph{multiparty computation}), utajený přenos (\emph{generalized oblivious transfer}) nebo atributové šifrování (\emph{attribute-based encryption}).
+
+\subsection{Treshold Secret Sharing}
+
+Obecné schéma obsahuje Vlastníka (vlastní tajemství) a Účastníky.
+Vlastník rozdělí tajemství $s$ na~díly, a pouze kvalifikovaná podmnožina Účastníků může toto tajemství získat.
+
+Toto schéma je korektní (\emph{Correctness}: tajemství $s$ může být dekódováno libovolnou autorizovanou podmnožinou Účastníků) a zahovává dokonalé soukromí (\emph{Perfect Privacy}: neautorizovaná množina účastníků se o~sdíleném tajemství nemůže nic dozvědět).
+
+Minimální počet dílů nutný k~rekonstrukci se nazývá práh (\emph{treshold}).
+Ve~schématu $(t,n)$ rozděluje Vlastník tajemství $s$ na~$n$ dílů tak, aby ho bylo možné rekonstruovat s~použitím $t$ dílů.
+
+\subsection{Shamir Secret Sharing}
+\label{sec:sharmir-secret-sharing}
+
+Mějme funkci $f(x) = x^3 + 2x^2 + 10x + 9 \mod 11$.
+Vyberme pět hodnot $x$ ve~kterých se funkce vyhodnotí; získáme pět bodů (\emph{shares}): $\{(1,0),(2,1),(3,7),(4,2),(5,3)\}$.
+Stupeň polynomu určuje minimální počet Účastníků: polynom o~stupni $n$ vyžaduje alespoň $n+1$ dílů.
+V~případě této funkce $f$ jsou nutné alespoň čtyři díly.
+
+Tyto samotné body je možné použít ke~zpětnému rekonstrukování (viz kapitola \ref{sec:ntt}):
+
+$$\left[\begin{matrix}
+ a &  b &  c & d & | & 0 \\
+8a & 4b & 2c & d & | & 1 \\
+5a & 9b & 3c & d & | & 7 \\
+9a & 5b & 4c & d & | & 2
+\end{matrix}\right] \sim \left[\begin{matrix}
+ a &    &    &   & | & 1 \\
+   &  b &    &   & | & 2 \\
+   &    &  c &   & | & 10 \\
+   &    &    & d & | & 9
+\end{matrix}\right] \pmod {11}$$
+
+Aby Účastníci nemuseli sdělovat svá tajemství, lze provést tzv. Zaslepení (\emph{Blinding}).
+To vyžaduje distribuci veřejných klíčů ke~všem Účastníkům podílejícím se na~rekonstrukci.
+Následující rovnice popisují zaslepení $b$ v~bodě $x$ a následnou rekonstrukci pomocí zaslepených bodů.
+
+\begin{align*}
+    f_\text{blind}({\color{red}x}) &= \sum_{j=1}^t y_j \prod_{m=1, m \neq j}^t \frac{x_m - {\color{red}f(x)}}{x_m - x_j} \pmod n
+    \\
+    s = f(0) &= \sum_{j=1}^t y_j \prod_{m=1, m \neq j}^t \frac{x_m}{x_m - x_j} \pmod n
+\end{align*}
+
+\begin{mdframed}
+$s=12 \rightarrow f(x) = 3x^2 + 14x + 12 \pmod {19}$
+
+Tajemství $s$ je rozděleno mezi čtyři Účastníky:\\
+$s_1 = (4, 2),\ s_2=(3, 5),\ s_3=(2, 14),\ s_4=(1, 10)$.
+
+Díly jsou zaslepeny\\
+$s_1' = 2 \cdot 13 \equiv 7$, $s_3' = -28 \equiv 10$, $s_4' = \frac{10 \cdot 8}{3} \equiv 14$ (všechny $\text{mod}\, {19}$)
+
+a~poté mohou být použity k~rekonstrukci:\\
+${\color{red} y_1(\frac{x_3}{x_3-x_1})(\frac{x_4}{x_4-x_1})} + {\color{orange} y_3(\frac{x_1}{x_1-x_3})(\frac{x_4}{x_4-x_3})} + {\color{blue} y_4(\frac{x_1}{x_3-x_4})(\frac{x_3}{x_3-x_4})} =$\\
+$= s_1' + s_3' + s_4' = 7 + 10 + 14 \equiv 12 \pmod{19}$.
+
+Protože je $f$ řádu 2, stačili tři Účastníci: 1, 3 a 4.
+\end{mdframed}
+
+
+\subsection{Teorie unikátního polynomu}
+
+Pro~reálná rozdílná čísla $x_0, x_1, \dots, x_n$ a reálná rozdílná čísla $y_0, y_1, \dots, y_n$ platí, že existuje pouze jeden polynom $p_n$ řádu nejvýše $n$ takový, že
+
+$$p_n(x_i) = y_i$$
+
+\noindent
+kde $0 \leq i \leq n$.
+
+\subsection{Problém interpolace}
+
+% TODO Jde zde o něco víc?
+
+Nalezněte polynom řádu $n$ při~znalosti alespoň $n+1$ souřadnic bodů ležících na~tomto polynomu.
+
+Ukázka řešení je v~kapitole~\ref{sec:sharmir-secret-sharing}.
+
 
 \clearpage
 \section{Secure Multi-Party Computation (SMPC): SMPC definition, SMPC security requirement and adversarial behavior, e-voting, oblivious transfer}
