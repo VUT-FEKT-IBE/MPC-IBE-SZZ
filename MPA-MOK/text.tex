@@ -488,6 +488,7 @@ DJN (\emph{Damgård--Jurik}) krytposystém je zjednodušením/zobecněním (pou�
         \multicolumn{3}{l}{$m = \frac{c^d}{d} = \frac{(n+1)^{md \mod n^s}}{d} \mod n^s$} \\
         \end{tabular}
     \end{minipage}
+    \label{fig:paillier-djn}
 \end{figure}
 
 
@@ -580,6 +581,153 @@ Ukázka řešení je v~kapitole~\ref{sec:sharmir-secret-sharing}.
 
 \clearpage
 \section{Secure Multi-Party Computation (SMPC): SMPC definition, SMPC security requirement and adversarial behavior, e-voting, oblivious transfer}
+
+Nechť $P_1, \dots, P_n$ je množina $n$ účastníků držících tajné hodnoty $x_1, \dots, x_n$, které chtějí vyhodnotit funkcí $f(x_1, \dots, x_n)$.
+Problém bezpečného počítání s~více stranami je nalezení protokolu který umožní $P_1, \dots, P_n$ dohromady vypočítat hodnotu $f$ aniž by odhalili $x_1, \dots, x_n$.
+
+\subsection{Bezpečnostní podmínky}
+
+\begin{itemize}
+\item Bezpečnost (\emph{privacy}): je znám pouze výsledek, nic víc.
+\item Správnost (\emph{correctness}): účastníci dojdou ke~správnému výsledku i když někteří podvádí.
+\item Nezávislost vstupů (\emph{input independence}): účastníci si nemohou zvolit své vstupy tak aby byly závislé na~vstupech jiných účastníků.
+\item Spravedlnost (\emph{fairness}): pokud se jeden účastník dozví výsledek, dozví se ho všichni.
+\item Garance doručení (\emph{guaranteed output delivery}): všichni poctiví účastníci se dozví výsledek.
+\end{itemize}
+
+V~\textbf{reálném modelu} účastníci provádí opravdový protokol bez~nutnosti třetí strany.
+V~\textbf{ideálním modelu} účastníci odešlou své vstupy důvěryhodné třetí straně, která provede funkci a distribuuje výsledky.
+
+$\mathcal{A}$ je útočník v~reálném modelu, $\mathcal{S}$ je útočník v~ideálním modelu.
+Rozlišovač $\mathcal{D}$ (\emph{distinguisher}) určuje vstupy účastníků, získává jejich výsledky a hádá který model je reálný a který ideální.
+Protokol $\pi$ bezpečně počítá $f$ pokud $\forall \ \mathcal{A} \ \exists \ \mathcal{S}$ kde $\forall \ \mathcal{D}$ je pravděpodobnost rozlišení reálného a ideálního modelu zanedbatelná.
+Reálný a ideální model jsou poté výpočetně nerozlišitelné (\emph{computationally indistinguishable}).
+
+\subsection{Komponenty SMPC}
+
+\textbf{Funkcionalita}: Co chceme počítat?
+
+\textbf{Bezpečnostní kategorie} (\emph{security type}):
+
+\begin{itemize}
+\item Výpočetní (\emph{computational}): Probabilistický polynomiální rozlišovač; reálný a ideální svět jsou výpočetně nerozlišitelné.
+\item Statistická (\emph{statistical}): Všemocný rozlišovač s~malou šancí omylu; reálný a ideální svět jsou si statisticky podobné.
+\item Perfektní (\emph{perfect}): Všemocný rozlišovač s~nulovou šancí omylu; reálný a ideální svět jsou identické.
+\end{itemize}
+
+\textbf{Síťový model} (\emph{network model}):
+
+\begin{itemize}
+\item \emph{point-to-point}: plně propojená síť;
+\item \emph{broadcast}: sdílený vysílací kanál.
+\end{itemize}
+
+Doručování zpráv může být:
+\begin{itemize}
+\item synchronní: protokol pracuje v~krocích, každá zpráva přichází v~předpokládaném časovém intervalu;
+\item asynchronní: útočník může zprávu pozdržet konečnou dobu;
+\item plně asynchronní: útočník má plnou kontrolu nad~sítí a může zprávy zahazovat.
+\end{itemize}
+
+\textbf{Model útočníka} (\emph{adversarial model}): viz níže.
+
+\subsection{Model útočníka}
+
+Chování útočníka lze rozlišit na:
+\begin{itemize}
+\item zvídavý (\emph{semi-honest}, \emph{honest-but-curious}): účastníci postupují dle protokolu, ale mohou se zkoušet dozvědět více informací;
+\item nedokončující (\emph{fail stop}): jako zvídavý, ale nepoctivé strany mohou předčasně skončit;
+\item škodlivý (\emph{malicious}): nepoctivé strany se mohou libovolně od~protokolu odklonit.
+\end{itemize}
+
+Počet útočníků lze rozlišit na:
+\begin{itemize}
+\item hraniční: může se vyskytnout pouze $t \le n$ stran:
+    \begin{itemize}
+    \item bez poctivé většiny: například při~dvou účastnících;
+    \item poctivá většina: například $t \le \frac{n}{2}$;
+    \item poctivé dvě třetiny: například $t \le \frac{n}{3}$;
+    \end{itemize}
+\item obecný: může se vyskytnout libovolný počet nepoctivých stran.
+\end{itemize}
+
+\subsection{Elektronické volby}
+
+Předpokládejme Ano--Ne hlasování v~režimu výpočetní bezpečnostní kategorie, zvídavém modelu a \emph{broadcast} sítí.
+Pro~bezpečnostní podmínky platí způsobilost (\emph{eligibility}; pouze způsobilí účastníci můžou hlasovat nejvýše jednou), soukromí (\emph{privacy}; hlas je neveřejný), univerzální ověřitelnost (\emph{universal verifability}; výsledek může být ověřen), robustnost (\emph{robustness}; podvádějící účastník je detekován a vyřazen).
+
+\begin{mdframed}
+Hlas účastníka $V_i$ pro~volbu Ne je $m_i = 0$ a pro~volbu Ano $m_i = 1$.
+$\mathcal{E}$ a $\mathcal{D}$ reprezentují šifrování a dešifrování v~DJN schématu (viz stranu~\pageref{fig:paillier-djn}).
+
+\begin{enumerate}
+\item Autorita $\mathcal{A}$ zvolí $n = pq$ a $d: d \mod n \in \mathbb{Z}_n^* \ \wedge \ d \equiv 0 \mod \lambda(n)$.
+\item Každý volič $V_i$ hlasuje hlasem $m_i$:
+    \begin{enumerate}
+    \item $m_i \in \{0, 1\}$,
+    \item $r \in_R \mathbb{Z}_n^*$,
+    \item $c_i = \mathcal{E}(m_i, r_i)$,
+    \item a zveřejní $c_i$.
+    \end{enumerate}
+\item Autorita $\mathcal{A}$ vypočítá:
+    \begin{enumerate}
+    \item $c = \Pi_{i=1}^k c_i$,
+    \item $m = \mathcal{D}(d, c)$,
+    \item a zveřejní $m$ a $c$.
+    \end{enumerate}
+\end{enumerate}
+\end{mdframed}
+
+% TODO V přednášce jsou slajdy s (t,n)-hraničním schématem, Pollard-λ metodou a ElGamalem, měly by tu být obsaženy?
+%  Zdá se mi to už dost podrobné.
+%  Nebo je možné tu ukázat jen konkrétní příklad ze slajdu 33-34
+
+% TODO Existují lepší překlady?
+\subsection{Neznalý přenos}
+
+\emph{Oblivious transfer} je alternativní přístup k~bezpečnému počítání s~více stranami.
+Odesílatel se nedozví jakou hodnotu přijímatel dostal.
+Je možné ho odvodit např. z~ElGamal schématu:
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lcr}
+    $P_1$ & prostředí & $P_2$ \\
+    $x_0, x_1 \in \{0,1\}$ & klíče $(x, h = g^x)$ & $s \in \{0,1\}$ \\
+    \hline
+    & & $u \leftarrow_R \mathbb{Z}_{\phi(p)}$ \\
+    & & $h_s = g^u$ \\
+    & & $h_{1-s} = h / g^u$ \\
+    & $\stackrel{h_0, h_1}{\longleftarrow}$ & \\
+    $u_0, u_1 \leftarrow_R \mathbb{Z}_{\phi(p)}$ & & \\
+    $(A_0, B_0) = (g^{u_0}, h_0^{u_0} \cdot g^{x_0})$ & & \\
+    $(A_1, B_1) = (g^{u_1}, h_1^{u_1} \cdot g^{x_1})$ & & \\
+    & $\stackrel{(A_0, B_0), (A_1, B_1)}{\longrightarrow}$ & \\
+    & & $x_s = \log_g \left( \frac{B_s}{A_s^u} \right)$
+    \end{tabular}
+
+    \vspace*{3em}
+
+    \begin{tabular}{lcr}
+    $P_1$ & prostředí v~$\mathbb{Z}_{11}^*$ s~$g=2$ & $P_2$ \\
+    $x_0 = 1, x_1 = 1 \in \{0,1\}$ & klíče $(x = 3, h = 2^3 = 8)$ & $s = 1\in \{0,1\}$ \\
+    \hline
+    & & $u = 2 \leftarrow_R \mathbb{Z}_{10}$ \\
+    & & $h_1 = g^u = 4$ \\
+    & & $h_0 = h / g^u = 2$ \\
+    & $\stackrel{h_0 = 2, h_1 = 4}{\longleftarrow}$ & \\
+    $u_0 = 4, u_1 = 5 \leftarrow_R \mathbb{Z}_{10}$ & & \\
+    \multicolumn{2}{l}{$(A_0, B_0) = (2^{4} = 5, 2^{4} \cdot 2^{1} = 4) \pmod {11}$} & \\
+    \multicolumn{2}{l}{$(A_1, B_1) = (2^{5} = 10, 4^{5} \cdot 2^{1} = 2) \pmod {11}$} & \\
+    & $\stackrel{(A_0 = 5, B_0 = 4), (A_1 = 10, B_1 = 2)}{\longrightarrow}$ & \\
+    & \multicolumn{2}{r}{$x_0 = \log_g \left( \frac{B_0}{A_0^u} \right) = \log_2 \left( \frac{4}{5^2} \right) = \log_2 5 = \dots$} \\
+    & \multicolumn{2}{r}{$x_1 = \log_g \left( \frac{B_1}{A_1^u} \right) = \log_2 \left( \frac{2}{10^2} \right) = \log_2 2 = 1$} \\
+    \end{tabular}
+    \caption*{OT protokol na~bázi ElGamal}
+    \label{fig:ot-elgamal}
+\end{table}
+\FloatBarrier
+
 
 \clearpage
 \section{Blockchain and Smart Contracts: blockchain architecture, transactions and blocks, mining, forks, consensus, smart contracts, 51 \% attack on blockchain.}
