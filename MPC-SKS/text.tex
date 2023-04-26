@@ -1,0 +1,363 @@
+\section{Služby komunikačních systémů – obecný rozbor, signalizační systém SS7, Telecommunication Management Network - TMN, telekomunikační služby z pohledu ekonomiky.}
+
+\subsection{Služby komunikačních systémů}
+
+\subsubsection{Základní prvky}
+\begin{itemize}
+    \item \textbf{vysílač} –- příprava, zpracování a vložení informace do komunikačního kanálu pomocí signálu.
+ \item \textbf{přenosové médium} –- prvky vytvářející přenosové prostředí pro přenos informace v požadované podobě signálu – elektromagnetické, rádiové, kabelové, optické.
+ \item \textbf{přijímač} –- příjem informace, signálu z přenosového prostředí a jeho zpracování pro předání cílovému subjektu.
+\end{itemize}
+
+\subsubsection{Kategorizace}
+\begin{enumerate}
+    \item Podle typu zpracování informace:
+        \begin{itemize}
+            \item \textbf{analogové} –- telefonní síť, terestiální analogové vysílání atp. (v dnešní době postupně zanikající služby, nahrazované digitálními technologiemi).
+            \item \textbf{digitální} –- datová síť - většina dnes nabízených služeb.
+        \end{itemize}
+    \item Podle regulace:
+        \begin{itemize}
+            \item \textbf{rezervované služby} –- jedná se o služby telefonního charakteru,
+            \item \textbf{oblasti regulované licenčními podmínkami} –- televizní a rádiové vysílání, mobilní komunikace,
+            \item \textbf{oblasti volného působení za dodržení norem a předpisů} –- služby uživatelského charakteru. 
+        \end{itemize}
+    \item Podle potřeb uživatelů:
+    \begin{itemize}
+        \item \textbf{základní a rozšířené telefonní služby} – telefonní hovory, datové služby ISDN, doplňkové služby ke zdokonalení základní služby, jako je například přenos telefonního čísla, volání na účet volaného, roamingové služby, textové a hlasové zprávy apod,
+        \item \textbf{telematické datové služby} – využívající stávající telekomunikační sítě v infrastruktuře dopravy v ČR,
+        \item \textbf{multimediální datové služby} – IPTV internetové televizní vysílání, VoIP – – internetová telefonie, ISP – poskytování služeb internetu a podobně, jsou kladeny vyšší nároky na přenosová média z hlediska zpracování a rychlosti doručení informace.
+    \end{itemize}
+    \item Podle počtu současně komunikujících účastníků:
+    \begin{itemize}
+        \item \textbf{bod-bod: point to point} – komunikace pouze dvou uživatelů, bodů, na přenosovém médiu,
+        \item \textbf{bod-více bodů: point to multipoint} – (centralizované) komunikace jednoho uživatele s více, TV, IPTV, rozšířené telefonní služby a rádiové vysílání, některé služby ISP,
+        \item \textbf{více bodů-více bodů: multipoint to multipoint} – (decentralizované) – videokonference, sdílení sítí a výpočetních prostředků na síti, P2P, PC hry a podobně.
+    \end{itemize}
+    \item Podle dosažitelnosti služeb:
+    \begin{itemize}
+        \item \textbf{pevné} – digitální integrované služby ISDN, služby asynchronních sítí ATM, služby sítí LAN, služby internetového charakteru,
+        \item \textbf{mobilní} – služby bezdrátových paketových sítí, služby GSM standardů.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{SS7 – Signalling System Number}
+Signalizační systém č.7. -- sada signalizačních protokolů, které jsou použity v mobilních telefonních sítích, v pozemních digitálních telefonních
+sítích a pro mezi ústřednovou signalizaci. Signalizační informace (informace k uskutečnění a ukončení telefonních hovorů -- překlad telefonních čísel, účtování, zasílání zpráv) jsou předávány odděleně od ostatních informací. Slouží také zasílání krátkých textových zpráv SMS, účtování, překlady telefonních čísel. 
+
+Signalizační zprávy:
+\begin{itemize}
+    \item MSU
+    \item Stavová signalizační zpráva LSSU (Link Status Signal Unit)
+    \item Výplňová signalizační zpráva FISU (Fill-in Signal Unit)
+\end{itemize}
+
+\subsection{TMN}
+TMN má podporovat požadavky na řízení, správu, plánování, zabezpečování, instalaci, údržbu a provoz telekomunikačních sítí a služeb. Koncepčně je TMN zvláštní sítí, která je s telekomunikační sítí propojena pouze na speciálních rozhraních, přes která telekomunikační síť řídí. TMN však může využívat částí telekomunikačních sítě pro vlastní komunikaci.
+\begin{itemize}
+    \item sledování kvality služeb (Performance
+    \item sledování a odstraňování poruch (Fault Management-FM)
+    \item řízení konfigurace telekomunikačních zařízení a sítí (Configuration Management-CM)
+    \item vedení účtování služeb (Acounting Management-AM)
+    \item zajištění bezpečnosti TMN (Security Management-SM)
+\end{itemize}
+
+
+\subsection{Telekomunikační služby}
+Přenos informací v podobě signálů. Signály nesou textovou, zvukovou nebo obrazovou informaci pomocí telekomunikačního systému. Schopnost uspokojit dohodnuté požadavky a potřeby. 
+Přístupové sítě -- metalické (telefonní), datové (xDSL, ISDN), optické (PON), bezdrátové (mobilní GSM)
+
+
+\newpage
+\section{Integrované služby digitální sítě – ISDN, základní a primární přístup, referenční model účastnické přípojky ISDN, strukturu rámce na rozhraní S a U, napájení terminálů.}
+Umožňuje přenos digitalizovaného hovorového signálu spolu s daty Internetu. Je založena na digitální spojovací technice telefonní sítě.
+Pro přenos využity tzv. B. kanály jako bearer, nosič) s přenosovou rychlostí 64 kbit/s.
+Dva základní typy ISDN přípojek:
+\begin{itemize}
+    \item BRI (Basic Rate Interface) – Účastnická přípojka pro 8 koncových zařízení (telefon, fax, modem). Označována jako 2B + D (dva kanály pro vlastní datovou zátěž s rychlostí 64 kb/s).
+    \item PRI (Primary Rate Interface) - Přípojka je určena k připojení pobočkových ústředen. Označována jako 30B + D E1-PRI (třicet kanálů s rychlostí 64 kb/s) v Austrálii a Evropě.
+\end{itemize}
+
+ISDN H-kanály jsou určeny pro rychlou datovou komunikaci, rychlé faxové služby, telekonference a vysoce kvalitní přenos zvuku. Komunikace v kanále oddělena od signalizace.
+
+\subsection{Referenční model}
+Využívá z referenčního modelu OSI první tři vrstvy:
+\begin{itemize}
+    \item síťovou vrstvu : kanál D: signalizační protokol Q.931 (DSS1), kanál B: IP/IPX,
+    \item spojovací vrstvu: kanál D: signalizační protokol Q.921 (LAPD), kanál B: HDLC, FR, PPP, LAPB,
+    \item fyzickou vrstvu: protokol I.431 – PRI a I.430 – BRI/ANSI T1.601 pro oba kanály D i B. 
+\end{itemize}
+
+\subsection{Rozhraní}
+Mezi ISDN sítí a zařízením NT (jednotka ukončení sítě na straně ISDN, na kterou se při základním přístupu připojuje až 8 koncových
+zařízení) je použito rozhraní U. Mezi TE (koncové digitální zařízeníbez rozlišení zda slouží pro hlasovou nebo datovou komunikaci) a NT2 (umožňuje připojit několik koncových zařízení současně, což je realizováno sběrnicí, statickým slupovačem nebo i pobočkovou ústřednou.) jsou spojena rozhraním S. 
+
+\subsubsection{Struktura rámce S}
+Každý rámec obsahuje signalizační informace, pomocné bity, uživatelská data a synchronizaci.
+\begin{itemize}
+    \item F (Framing Bit) – bity začátku rámce.
+    \item L (Balancing Bit) – vyvažovací bit pro odstranění stejnosměrné složky.
+    \item D (Channel Bit) – bit D kanálu.
+    \item E (Echo Channel Bit) – bit echo kanálu.
+    \item S – rezervováno pro budoucí využití a je nastaveno na hodnotu 0.
+    \item A – bit použitý pro protokoly aktivace.
+    \item B1,B2 – bity kanálů B1 a B2
+\end{itemize}
+V kanálu E Slouží k řízení přístupu k D a B kanálům jednotlivým koncovýmzařízením.V případě B kanálu přístup k médiu řídí ústředna. 
+
+\subsubsection{Struktura rámce U}
+
+
+\newpage
+\section{Asynchronní přepravní způsob – ATM, buňka ATM, synchronizace, virtuální cesta a virtuální kanál, třídy služeb, ATM vrstvový model, síťové prvky ATM.}
+Standard pro síťovou vysokorychlostní architekturu v 80. a 90. letech. Zajišťuje kvalitu služby QoS především pro přenos hlasu a videa. Pracuje s buňkami konstantní délky. ATM je kvalitní technologie, ale pro svou složitost je to technologie drahá, proto je většinou nahrazeno mnohem levnějším Ethernetem. Používá statické multiplexování a směrování po virtuálních kanálech. Umožňuje přenosy dat v řádech Gb/s. Asynchronní není však přenos, ale nepravidelný výskyt buňěk během spojení. ATM tedy definuje rozhraní mezi uživatelem a sítí tzv. UNI a mezi přepínači v síti tzv. NNI.
+
+\subsection{Buňka v ATM}
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{snimky/ATM bunka.png}
+    \label{fig:uml}
+\end{figure}
+
+\subsubsection{Formát hlavičky buňky}
+\begin{itemize}
+    \item VPI Virtual Path Identifier
+    \item VCI Virtual Circuit Identifier
+    \item PT – Payload Type
+    \item CLP – Cell Loss Priority
+    \item HEC – Header Error Control
+\end{itemize}
+
+Rozlišují se dva základní druhy rozhraní:
+\begin{itemize}
+    \item UNI (User Network Interface) – rozhraní „účastník-síť“,
+    \item NNI (Network Node Interface) – rozhraní mezi ATM ústřednami.
+\end{itemize}
+
+\subsubsection{Synchronizace}
+Ke generování jednotlivých buně dochází podle potřeby, zda zdroj má vysílat informace. V opačném případě se přenášejí prázdné buňky. Takto se dosáhne
+plynulého toku jednotlivých buněk. Jedná se o asynchronní přenos a to proto, že přenosová bitová rychlost, kterou zdroj vyžaduje je nezávislá na celkové přenosové rychlosti.  Vlastní přenos bitů probíhá synchronně. 
+
+\subsection{Virtuální cesty a kanály}
+K jedné virtuální cestě VP (Virtual Path) je možno přiřadit několik virtuálních kanálů VC. (Virtual Channel). Takovýmto přiřazením VC jsou propojeny virtuální cesty.
+
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{snimky/VC.png}
+    \label{fig:uml}
+\end{figure}
+
+V síti ATM je rozlišováno několika prvků, které zajišťují datový přenos:
+\begin{itemize}
+    \item digitální rozvaděč ATM (ATM Cross-Connect),
+    \item koncentrátor ATM,
+    \item ústředna ATM.
+\end{itemize}
+
+
+\subsection{Vrstvový model ATM}
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{snimky/ATM model.png}
+    \label{fig:uml}
+\end{figure}
+Vrstvy:
+\begin{itemize}
+    \item \textbf{Fyzická vrstva} -- rozdělena do dvou částí:
+    \begin{itemize}
+        \item PMD (Physical Medium Dependent) podvrstva – synchronizuje vysílánía příjem, určuje fyzické médium včetně typů konektorů a kabeláže.
+        \item TC(Transmission Convergence) podvrstva – má čtyři funkce: vyčleňování buněk, kontrolu záhlaví pomocí (HEC) sekvence, přizpůsobení přenosu rámců.
+    \end{itemize}
+    \item \textbf{ATM vrstva} -- Poskytuje následující funkce -- generic Flow Control (GFC)( řešení vícenásobného přístupu na UNI),přiřazuje hodnoty VPI a VCI každé buňce a poskytuje překlady VCI/VPI, multiplex buněk.
+    \item \textbf{Adaptační vrstva ATM}
+    \begin{itemize}
+        \item AAL1 -- poskytuje spojově orientovanou službu a provádí emulaci okruhů pro aplikace, jako jsou například hlasové nebo videokonference. Požaduje synchronizaci zdroje a vysílače. Tato vrstva je závislá na typu média, které musí podporovat taktování.
+        \item AAL2 -- poskytuje efektivní přidělování šířky pásma, obsahuje krátké a variabilní pakety
+        \item AAL3/4 -- poskytuje jak spojově orientovanou službu, tak i spojově neorientovanou službu. 
+        \item AAL5 -- primární vrstvou pro data AAL a definuje jak spojově orientovanou službu, tak i spojově neorientovanou.
+    \end{itemize}
+\end{itemize}
+
+
+\newpage
+\section{Digitální účastnická přípojka xDSL, HDSL, ADSL, spojení, referenční model, modulace, rušivé vlivy, přeslechy.}
+\subsection{xDSL - Digital Subscriber Line}
+Využívá stávajícího vedení telefonní sítě k uživateli. Jednotlivé typy DSL se liší použitým frekvenčním pásmem, přenosovou
+rychlostí a možným dosahem. Obecně platí, že čím horším je vedení od ústředny k uživateli (kvalita
+rozvodu a délka), tím menší je přenosová rychlost. Nejčastějším typem DSL je stále ještě ADSL, postupně je však nahrazováno
+sofistikovanějšími a rychlejšími technologiemi. ADSL, VDSL, HDSL a další jsou označované pod souhrnným názvem xDSL. Jsou rozlišovány dvě základní verze xDSL technologie:
+\begin{itemize}
+    \item Symetrická -- symetrická řešení poskytují jak v dopředném, tak i v opačném směru synchronní přenos dat.
+    \item Asymetrická -- ADSL
+\end{itemize}
+
+\subsubsection{Metody zabezpečení proti chybám v DSL}
+\begin{itemize}
+    \item Detekce chyb pomocí cyklického kódu CRC
+    \item Dopředná chybová korekce FEC -- Spolu s prokládáním poskytuje FEC ochranu hlavně proti shlukům chyb. Skramblování neslouží k opravě chyb, ale rozrušuje dlouhé posloupnosti jedniček a nul a tak zabezpečí lepší synchronizaci na přijímací straně.
+    \item Interleaving -- ochrana zabezpečení dat při přenosu v prostředí, zarušené především impulsním šumem. Zvyšuje odolnost přenosu, ale vnáší do přenosu větší zpoždění.
+\end{itemize}
+
+\subsection{ADSL}
+Zajišťuje datový přenos vyššími rychlostmi po symetrickém vedení. Na obou koncích vedení instalovány transceivery, a to s modulacemi DMT, QAM či CAP. Používá existující dvoudrátové vedení pro vysokorychlostní přenos dat se zachováním služby POTS, přenos je full duplex.
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=1\textwidth]{snimky/ADSL model.png}
+    \label{fig:uml}
+\end{figure}
+
+Hlavní komponenty sítě:
+\begin{itemize}
+    \item DSLAM (DSL Access Multiplexer) -- slučuje hlasový provoz a DSL provoz na jednu telefonní linku (dvoudrát),pracuje na L2 vrstvě jako switch, funkce tzv. přístupového koncentrátoru, k jednomu DLSAMu lze připojit až několik tisíc uživatelů, záleží na počtu portů dané karty.
+    \item ADSL modem -- modem pro přípojku, k PC se připojuje přes Ethernet, popř. USB.
+\end{itemize}
+
+\subsubsection{Modulace}
+Využíva se kvadraturní amplitudová modulace QAM, amplitudová fázová modulace bez nosné CAP, diskrétní vícetónová modulace DMT.
+\begin{itemize}
+    \item QAM -- používaná ve velké řadě aplikací (např. modemy v základním pásmu, mikrovlnné radiové systémy aj.). Modulace se provádí pomocí digitálního kvadraturního (ortogonálního) modulátoru se sinusovou a kosinusovou směšovací funkcí. Díky této ortogonalitaě (nosných signálů) se umožní následná detekce dat v přijímači.
+    \item CAP -- podobná QAM. Používá stejné dvourozměrné přenosové schéma a má stejný typ výkonového spektra. Modulace se provádí pomocí digitálních transverzálních pásmových filtrů. Impulsní odezva těchto filtrů má stejnou amplitudovou charakteristiku, ale fázová charakteristika se navzájem liší o 90°. 
+    \item \textbf{DMT} -- jeví se v systémech ADSL jako velmi perspektivní a výrobci podporovaná. Modulace s více nosnými MCM. Je založena na diskrétní Fourierově transformaci, resp. na rychlé Fourierově transformaci FFT (Fast Fourier Transform). Velkou výhodou této metody modulace je plně digitální realizace a poměrně nízká složitost. Pomocí DMT lze efektivněji řešit negativní vlivy nedokonalé přenosové cesty a také rušící vliv okolí na užitečný signál při přenosu symetrickým párem v metalické přístupové síti
+\end{itemize}
+
+\subsubsection{Rušivé vlivy}
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{snimky/ADSL ruch.png}
+    \label{fig:uml}
+\end{figure}
+\begin{itemize}
+    \item Vnější rušivé vlivy
+    \item Impulsní rušení – impulsive noise
+    \item Vf rušení – RFI (Radio Frequency Interference)
+    \item Vnitřní rušivé vlivy
+    \item NEXT (Near And cross talk)
+    \item FEXT (Far End cross Talk)
+    \item AWGN (Additive White Gausian Noise)
+\end{itemize}
+
+\subsubsection{Přeslechy}
+NEXT, FEXT
+Aditivní bílý šum (Tepelný šum, Výstřelový šum, Kvantizační šum, Zbytkový odrazový šum)
+
+\subsection{HDSL}
+V případě varianty T1 používá 2 páry telefonního vedení, každý o rychlosti 784 kb/s. V případě E1 varianty 1168 kb/s na každý pár. Používají se modulace 2B1Q a CAP. Jednotlivá maximální délka vedení mezi HDLS je 3,7 km v případě modulace 2B1Q nebo 4,2 km
+
+\newpage
+\section{IPv6, návaznost na IPv4, kvalita služeb QoS, referenční model OSI versus síťová architektura TCP/IP.}
+
+\subsection{IPv6}
+Nahrazuje dosluhující protokol verze 4. Masivní rozšíření adresního prostoru. Zdokonalení vysokorychlostního přenášení dat. Pro uživatele není nutná žádná specifická příprava. Nutná podpora ze strany sítě. IPv6 nahrazuje formát IP datagramů. Velikost hlavičky je 40 bajtů a Payload 64 KB. Pro adresaci v IPv6 se používá adresování založené na CIDR (Classless Inter-Domain Routing). 
+
+Typy adres:
+\begin{itemize}
+    \item Unicast – unikátní – adresace rozhraní
+    \item Anycast – speciální typ adresy, kterým je definováno více rozhraní, ale provoz je směrován pouze jednomu, většinou nejbližšímu rozhraní z logického pohledu
+    \item Multicast – vícesměrová adresa
+\end{itemize}
+
+\subsubsection{Návaznost IPv6 na IPv4 protokol}
+Základním rozdílem protokolu IPv4 a IPv6 je v rozsahu použitelných adres v síti pro jednotlivá rozhraní, zařízení. Technické funkce fungování sítí zůstávají stejné a obě verze jsou provozovány současně. IPv4 - adresní rozsah 32 bitový, IPv6 128 bitový.
+
+\subsection{Quality of Services}
+K základním metrikám (požadavkům) patří \textbf{komunikační zpoždění} (paketové, rámcove, zpoždění kódováním), \textbf{jitter} (nežádoucí odchylku periodického signálu a vyjadřuje nestabilitu zdroje), \textbf{šířka pásma, ztráta rámců a paketů} (důvodu rušení přenosové linky, nebo zahlcením jednotlivých kapacit prvků sítě, které mají omezenou schopnost odbavovat provoz a po naplnění jednotlivých vstupních front začnou provoz zahazovat), míra pravděpodobnosti blokování (vyjádřeno modely Erlang), \textbf{kvantovací šum} (vázán na zdrojové kódování a jeho vzorkovací
+a kvantovací procesy), \textbf{objektivní a subjektivní testování} ( měří a vyjadřuje se v jednotkách MOS (Mean of Services) vnímání kvality služby uživatelem takovéto služby).
+
+\subsubsection{Služby}
+\begin{itemize}
+    \item Služby „Best Effort“– jedná se o typ služby s maximálním úsilím o přenos v síti, bez specielního nastavení QoS v takovéto síti. Nejlépe je charakterizováno pomocí plánování front metodou FIFO (First In First Out).
+    \item Služby integrované „IntServ“– takovýto model QoS rezervuje požadavky síťového provozu po celou dobu trvání přenosu. Aplikace si sami určují nároky na přenos (oznamují je síťovým prostředkům, jako jsou směrovače). Je zde využito například protokolu RSVP (Resource Reservation Protocol).
+    \item Služby diferencované „DiffServ“– v tomto modelu poskytování QoS dochází již ke klasifikaci jednotlivých přenosů. Je zde použito metod QoS jako je například metoda WFQ (Weighted Fair Queueing), WRED (Weighted Random Early Detection). Požadavky na QoS neurčují aplikace, ale zařízení v síti.
+\end{itemize}
+
+\subsubsection{QoS IPv6}
+V IPv4 je obvykle provozována služba „Best Effort“ tedy nejlepší snaha o přenos informační jednotky. Fragmentace paketů je v IPv4 hlavním zdrojem zpoždění paketů nebo jejich vysoké latence. IPv6 používá sofistikovanější přístup k zpracování dat. IPv6 má dvě pole týkající se QoS, a to 20 bitové pole „Flow Label“ a 8 bitové pole „Traffic Class“.
+
+
+\subsection{Referenční model OSI}
+Sedm vrstev k zajištění protokolové komunikaci mezi zařízeními. Základní myšlenkou je, že každá z vrstev komunikuje pouze s vrstvou
+vlastní horizontálně pomocí jednotek PDU (Packet Data Unit). Mezi jednotlivými vrstvami jsou stanovená pevně definovaná rozhraní
+komunikující ve vertikálním směru provádějící servisní operace mezi vrstvami nazývané SDU (Service Data Unit). Každá z nižších vrstev přidá své PDI (Protocol Control Information) k datům, která převzala od vrstvy vyšší. 
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{snimky/osi.png}
+    \label{fig:uml}
+\end{figure}
+
+\begin{itemize}
+    \item fyzická vrstva – zajišťuje spojení mezi zařízeními na fyzické úrovni, poskytuje služby zpracování signálu. Definuje základní zpracování a přenos informací v signálové části a přizpůsobení se fyzickému médiu. Základní jednotka \textit{bit}.
+    \item linková vrstva – zajišťuje přenos a zpracování \textbf{rámců} v rámci segmentu. Pro vyšší vrstvu zajišťuje bezporuchovou službu a spojení mezi dvěma síťovými prvky.
+    \item síťová vrstva – zajišťuje směrování \textbf{paketů} a její úlohou je najít nejvhodnější cestu v síti pro přenos informace.
+    \item transportní vrstva – zajišťuje řízení komunikace mezi odesílatelem a příjemcem a poskytuje přenos a zpracování jednotek \textbf{TCP segmentů} a \textbf{UDP datagramů}.
+    \item relační vrstva – zajišťuje navázání, udržování a ukončení relací mezi jednotlivými účastníky spojení. Při navazování spojení si vyžádá od transportní vrstvy vytvoření relace. \textbf{Data}
+    \item prezenční vrstva – zajišťuje kódování, překlad, konverzi, šifrování a kompresi přenášených informací. Je zde zaveden společný jazyk pro konverzi údajů ASN.1. (Abstract Syntax Notation One). Dále se sem řadí protokoly TLS, starší SSL. \textbf{Data}
+    \item aplikační vrstva – provádí správu aplikačních systémů a programů. Mezi protokoly řadící se do této vrstvy patří HTTP, FTP, POP3, SNMP, AIM, DHCP a jiné. \textbf{Data}
+\end{itemize}
+
+\subsection{Síťová architektura TCP/IP}
+
+
+\newpage
+\section{Pasivní optické sítě (topologie sítě a způsob komunikace sestupný/vzestupný směr).}
+
+\newpage
+\section{Vývoj pasivních optických sítí a jejich rozdíly z pohledu fyzické a přenosové vrstvy.}
+
+\newpage
+\section{Aktivační proces koncové jednotky v síti GPON.}
+V současné době je GPON jedním z nejslibnějších řešení pro přístupové sítě (z pohledu ceny). GPON byl první standard, který podporoval přenos/zapouzdření ATM buněk i Ethernet rámců. 
+
+Aktivační proces:
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{snimky/proces.png}
+    \label{fig:uml}
+\end{figure}
+
+
+\newpage
+\section{Využití celočíselného programování v současných sítích, síť jako graf, rozdělení zátěže z pohledu ceny přenosu.}
+\textbf{Lineární programování} je obor matematiky, stejně jako matematika sama. \textbf{Lineární program} je maximalizace nebo minimalizace lineární funkce podléhající lineárním omezením (např. Lineární rovnice nebo lineární nerovnosti). Optimalizační problém s funkcí, která má být maximalizována nebo minimalizována, se nazývá \textbf{matematický program}. Pokud jsou proměnné v matematickém programu omezeny na nezáporná celá čísla, matematický program se nazývá \textbf{celočíselný program}.
+
+\subsection{Využití}
+Maximalizace toku, minimálni cena toku?
+
+
+\newpage
+\section{IP přenos sítí wavelength division multiplexing (WDM), CWDM, DWDM, TDM versus WDM, problematika přiřazování vlnových délek (RWA).}
+\subsection{Vlnový multiplex WDM}
+
+\subsection{Vlnový multiplex CWDM }
+Označovaný jako „hrubý“, umožňuje v jediném optickém vlákně přenášet najednou až 18 nezávislých optických signálů s různou vlnovou délkou. Každý přenášený optický signál o dané vlnové délce může nést odlišnou informaci s různou přenosovou rychlostí.
+Mezi výhody CWDM technologie patří:
+\begin{itemize}
+    \item nižší pořizovací cena oproti DWDM,
+    \item snadná realizace na stávajících optických trasách,
+    \item nižší energetické a prostorové nároky v porovnání s DWDM,
+    \item jednoduchý management,
+    \item velká nabídka vysílačů,
+    \item tolerance střední vlnové délky kanálu 6–7 nm.
+\end{itemize}
+
+\subsection{Vlnový multiplex DWDM}
+Označovaný jako „hustý“, patří mezi nejdokonalejší technologie. Umožňuje přenášet v jednom optickém vlákně desítky kanálů. Kanály jsou optickým vláknem přenášeny paralelně a nezávisle na sobě, co několikanásobně zvyšuje přenosovou kapacitu optického spoje. Technologie využívá především laserů DFB (Distributed FeedBack) laser s extrémně úzkou spektrální čarou, dále EDFA (Erbium Doped Fiber Amplifier) zesilovače a vysoce selektivní
+spektrální filtry. Tato zařízení jsou velice citlivá na kmitočtovou a teplotní stabilitu. To je jedním z důvodů, proč je tato technologie velmi nákladná
+Mezi výhody DWDM patří: 
+\begin{itemize}
+    \item umožnují přenosovou rychlost 2,5 až 10 Gbit/s v jednom optickém kanále,
+    \item na jednom optickém vlákně dokáže přenést více než 96 datových kanálů,
+    \item velký dosah do 100 km bez nutnosti zesílení signálu,
+    \item snadná rozšiřitelnost o další datové kanály.
+\end{itemize}
+
+\subsection{TDM vs. WDM}
+Díky neustálému požadavku na šířku pásma při výstavbě infrastruktury a provozování služeb je relativně drahé položit nová vlákna a dále je
+spravovat. Proto jsou nezbytné techniky vícenásobného využití vlákna.
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{snimky/TDMvsWDM.png}
+    \label{fig:uml}
+\end{figure}
+
+\subsection{Problematika přiřazení vlnových délek (RWA)}
+Klasické datové sítě pracují s pakety, které jsou předávány mezi aktivními prvky. Výsledkem je přijetí paketu, kontrola cílové IP adresy a jeho následné odeslání přes zvolené rozhraní. Na druhou stranu optické sítě jsou data přenášená přes optické „crossconnect“, jenž každý přepíná optický signál, který je přenášen na různé vlnové délce do zvoleného směru.
