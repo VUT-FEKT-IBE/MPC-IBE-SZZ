@@ -95,16 +95,16 @@ Vybírají se právě dva předměty.
 
 ### MPC-ODP
 
-- [ ] Režim omezení odpovědnosti poskytovatelů služeb informační společnosti typu mere conduit, caching a hosting
+- [x] Režim omezení odpovědnosti poskytovatelů služeb informační společnosti typu mere conduit, caching a hosting
 - [ ] Aktivní povinnosti poskytovatelů služeb informační společnosti (monitoring, filtrování)
 - [x] Pojem osobního údaje, titul ke zpracování osobních údajů, zvláštní kategorie osobních údajů
 - [ ] Právní postavení správce a zpracovatele osobních údajů
 - [ ] Práva subjektů osobních údajů
-- [ ] Povinné subjekty dle zákona o kybernetické bezpečnosti
-- [ ] Bezpečnostní opatření, varování, reaktivní opatření a ochranná opatření dle zákona o kybernetické bezpečnosti
+- [x] Povinné subjekty dle zákona o kybernetické bezpečnosti
+- [x] Bezpečnostní opatření, varování, reaktivní opatření a ochranná opatření dle zákona o kybernetické bezpečnosti
 - [ ] Procesní nástroje pro zajištování elektronických důkazů
-- [ ] Typy a znaky skutkových podstat počítačových trestných činů
-- [ ] Subjektivní a objektivní odpovědnost
+- [x] Typy a znaky skutkových podstat počítačových trestných činů
+- [x] Subjektivní a objektivní odpovědnost
 
 ### MPC-CSI
 

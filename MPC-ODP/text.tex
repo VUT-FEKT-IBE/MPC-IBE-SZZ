@@ -12,16 +12,16 @@ Tyto principy vychází především z~faktu, že ISP nemohou za~obsah odpovída
 Kdy služba spoluzodpovídá je stanoveno v~autorském zákoně, v~občanském zákoníku a~dalších relevantních zdrojích; Směrnice upravuje kdy poskytovatelé odpovědní nejsou.
 
 \subsection{Mere Conduit (Prostý přenos)}
-
+Patří sem -- poskytovatel připojení (např. wifi VUT).
 Poskytovatel není odpovědný, pokud
 (a) není původcem přenosu,
 (b) nevolí příjemce přenášené informace a
-(c) nevolí a~nezmění obsah přenášené informace.
+(c) nevolí a~nezmění obsah přenášené informace (data jen přenáší).
 
-Jednotlivé členské státy mohou přikázat konkrétní komunikaci přerušit (v~ČR jde například o~nelicencované hazardní hry online).
+Jednotlivé členské státy mohou přikázat konkrétní komunikaci přerušit (v~ČR jde například o~nelicencované hazardní hry online), ale nesmí přikázat prohlížet obsah posílaných správ a tím kontrolovat aktivitu.
 
 \subsection{Caching, mirroring (Ukládání v~mezipaměti)}
-
+Jedná se o ISP, který má 1 server v Amerika a v Európe druhý na cachování.
 Poskytovatel není odpovědný, pokud
 (a) informaci nezměnil,
 (b) vyhovuje podmínkám přístupu k~informaci,
@@ -29,9 +29,11 @@ Poskytovatel není odpovědný, pokud
 (d) nepřekročí povolené používání technologie obecně uznávané a~používané v~průmyslu s~cílem získat údaje o~užívání a
 (e) ihned přijme opatření vedoucí k~odstranění jím uložené informace.
 
+V případe, že jsou na hlavním serveri protiprávní data, je nutno je odstranit i v cachi.
+
 \subsection{Hosting (Shromažďování informací)}
 
-Hosting je služba pracující s~daty generovanými uživateli.
+Hosting je služba pracující s~daty generovanými uživateli (facebook, twittter\dots).
 
 Poskytovatel \emph{je} odpovědný, pokud se seznámí s~protiprávním jednáním a~přesto nekoná: jde o~princip \emph{Notice -- Takedown}.
 Musí konat okamžitě (\emph{expediciously}) jakmile se o~problematickém stavu dozví%
@@ -86,7 +88,7 @@ Pod~tuto kategorii spadají například čísla kontaktů v~telefonu nebo podpis
 \footnote{V~době zavádění GDPR se šířily poplašné zprávy, že není možné zveřejňovat autory výkresů v~mateřských školách.}.
 
 \subsection{Zvláštní kategorie osobních údajů}
-
+Např. údaje o zdravotním stavu, informace o očkování -- souhlas na zpracování musí být\textbf{výslovný} (explicitně daný).
 Zvláštní kategorie osobních údajů by dle důvodu č.~53 měly být zpracovávány pouze
 
 \begin{itemize}
@@ -116,21 +118,91 @@ Tento zákaz neplatí, pokud se uplatní jeden z~následujících případů (vi
 
 \clearpage
 \section{Právní postavení správce a zpracovatele osobních údajů}
+\subsection*{Správce}
+Osoba, která určuje účel zpracování osobních údajů. Musí definovat, jaké údaje, na základě čeho (titul), proč (účel), jako (proces). Všechny informace musí být řádně zdokumentovány.
+
+Soud potvrdil, že i Google je správce osobních údajů.
+
+\subsection*{Zpracovatel}
+Subjekt, který je  pověřen správcem na zpracování osobních údajů. V IT se jedná o provozovatele.
 
 \clearpage
 \section{Práva subjektů osobních údajů}
+Subjekt údajů ==> \uv{člověk}
+Práva subjektů:
+\begin{itemize}
+        \item právo na informace (jaký je účel? jaký je rozsah zpracování?).
+        \item přístup, opravu (když jsou údaje chybné).
+        \item vymazání (právo byť zapomenutý => i když se dodržuje právní důvod na uchovaní, když to subjekt už více nechce,  je silnější).
+        \item omezení zpracování, přenos, námitka.
+\end{itemize}
 
 \clearpage
 \section{Povinné subjekty dle zákona o kybernetické bezpečnosti}
+Kategorie povinných subjektů dle směrnice NIS:
+
+\subsubsection*{Kritická informační infrastruktura} -- systémy, na kterých je závislá informační struktura (český velký kravín, DNS).
+\subsubsection*{Významné informační systémy} -- systémy, které kdyby nefungovali, způsobili by významnější problémy (informační systém VŠ).
+\subsubsection*{Významné sítě} -- kritérium zahraniční konektivity.
+\subsubsection*{Základní služby} -- plynovody se soukromým vlastníkem, nemocnice (nejsou tak velké, aby byli v kritické).
+\subsubsection*{Služby a sítě elektronické komunikace} -- mají za povinnost nahlásit kontaktní údaje, plnit direktiva NUKIBU v případe problému.
+\subsubsection*{Digitální služby} -- digitální trhoviště, cloudové služby, vyhledávač. Povinnost hlásit fatální incidenty, nemusí zavést kybernetická opatření.
+%TODO možnost dodělání obrazeku venovych diagramů
 
 \clearpage
 \section{Bezpečnostní opatření, varování, reaktivní opatření a ochranná opatření dle zákona o kybernetické bezpečnosti}
+Nástroje NUKIBU :
+\subsection*{Bezpečnostní opatření}
+Standard, který musí zajistit povinný subjekt (pomocí performativních pravidel); proškolení zaměstnanci, řízené vztahy s dodavatelem. Státní orgán nemůže udělit pokutu a nápravu, protože NEEXISTUJE ideální řešení, podle kterého se povinný subjekt musí řídit (je to jeho volba). ASI? :D
+
+\subsection*{Varování}
+Nezakládá žádnou povinnost, jenom upozorňuje na bezpečnostní riziko. Když je ale vydané varovaní pro povinné subjekty, subjekt ho ignoroval a vznikne mu škoda s tým související, je za to odpovědný (prevenční povinnost).
+
+\subsection*{Ochranné opatření}
+Je vydané na základě zhodnocení bezpečnostního incidentu ==> do budoucnosti, aby se ochránili systémy.
+
+\subsection*{Reaktivní opatření}
+Bezprostřední reakce na incident. Rozhodnutí má svého adresáta, musí se ihned vykonat. Může mít vzor OOP (opatření obecné povahy) -- právní předpis neurčitého druhu, např. dopravná značka.
+
+\subsection*{Opatření k nápravě}
+Obecný nástroj správného práva, ukládá se když přídě úřad na kontrolu a zjistí nedostatky. Má formu rozhodnutí. Může vstoupit do vztahu mezi ministerstvem (správce) a dodavatelem (ministerstva mají často zle nastavené smlouvy s dodavateli, kteří to lépe zabezpečit nevědí nebo chtějí moc peněz).
 
 \clearpage
 \section{Procesní nástroje pro zajištování elektronických důkazů}
 
 \clearpage
 \section{Typy a znaky skutkových podstat počítačových trestných činů}
+Při spáchání trestného činu je nutné dokázat všechny znaky skutkové podstaty:
+
+\subsection*{Subjekt}
+Subjekt musí být právně způsobilý, což znamená, že je právně uznán jako subjekt, např. podle věku dítě není způsobilé (pachatel).
+
+\subsection*{Objekt}
+Sem patří právo (např. vlastnické právo) a právem chráněný zájem, který musí být právem uznán jako chráněný objekt (to co je chráněné TZ). \textit{Meč v hře je také uznán za chráněný, ne podle vlastnického práva, ale je jeho "majitelem" považován za cenný.}
+
+\subsection*{Objektivní stránka}
+Co bylo spácháno, jaké to mělo následky:
+\begin{itemize}
+    \item Škodlivý následek - škoda nastává v případě, že se dá empiricky vyčíslit, po prokázání mám nárok na náhradu, např. ušlý zisk. Nemateriální újma (odškodnění), např. psychická, újma dobré pověsti = nedají se empiricky vyčíslit.
+    \item Protiprávní jednání - projev vůle, kterým subjekt porušuje příkazy nebo zákazy (právní povinnost) stanovené právní normou nebo vyplývající ze závazku, a s nímž se spojují právní následky (např. uložení trestu, náhrada škody, zánik práva, atd.).
+    \item Kauzální nexus - příčinná souvislost mezi protiprávním jednáním a škodlivým následkem. Jeden proces (příčina) vyvolává druhý proces (následek nebo účinek).
+\end{itemize}
+
+\subsection*{Subjektivní stránka}
+Týká se otázky, zda je možné prokázat zavinění. V trestním právu je potřebný úmysl:
+\begin{itemize}
+        \item úmysl - chtěl jsem jednat protiprávně:
+        \begin{itemize}
+             \item přímý - vražda je pouze na základě přímého úmyslu.
+            \item nepřímý - chtěl jsem ho jen vylekat a nechtěně jsem ho přitom zabil, v tomto případě se nejedná o vraždu.
+        \end{itemize}
+        \item nedbalost:
+        \begin{itemize}
+            \item vědomá -- vím že se při mém jednání mohlo stát něco protiprávního ale neudělal jsem nic abych tomu zabránil.
+            \item nevědomá -- nevěděl jsem, že mé jednání je protiprávní i když jsem to měl vědět.
+            \item hrubá -- pokud profesionál v oboru ví o nějaké skutečnosti ale stejně na to nedbal.
+        \end{itemize}
+    \end{itemize}
 
 \clearpage
 \section{Subjektivní a objektivní odpovědnost}
