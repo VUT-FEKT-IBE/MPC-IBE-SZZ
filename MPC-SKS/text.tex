@@ -68,7 +68,7 @@ Přenos informací v podobě signálů. Signály nesou textovou, zvukovou nebo o
 Přístupové sítě -- metalické (telefonní), datové (xDSL, ISDN), optické (PON), bezdrátové (mobilní GSM)
 
 
-\newpage
+\clearpage
 \section{Integrované služby digitální sítě – ISDN, základní a primární přístup, referenční model účastnické přípojky ISDN, strukturu rámce na rozhraní S a U, napájení terminálů.}
 Umožňuje přenos digitalizovaného hovorového signálu spolu s daty Internetu. Je založena na digitální spojovací technice telefonní sítě.
 Pro přenos využity tzv. B. kanály jako bearer, nosič) s přenosovou rychlostí 64 kbit/s.
@@ -78,7 +78,12 @@ Dva základní typy ISDN přípojek:
     \item PRI (Primary Rate Interface) - Přípojka je určena k připojení pobočkových ústředen. Označována jako 30B + D E1-PRI (třicet kanálů s rychlostí 64 kb/s) v Austrálii a Evropě.
 \end{itemize}
 
-ISDN H-kanály jsou určeny pro rychlou datovou komunikaci, rychlé faxové služby, telekonference a vysoce kvalitní přenos zvuku. Komunikace v kanále oddělena od signalizace.
+ISDN H-kanály jsou určeny pro rychlou datovou komunikaci, rychlé faxové služby, telekonference a vysoce kvalitní přenos zvuku. Komunikace v kanále oddělena od signalizace. H-kanály se využívají v rámci primárního přístupu.
+\begin{itemize}
+    \item H0 -- rychlost 384\,kb/s, lze kombinovat s dalšími H0 kanály a D64 kanály
+    \item H11 -- rychlost 1536\,kb/s
+    \item H12 -- rychlost 1920\,kb/s
+\end{itemize}
 
 \subsection{Referenční model}
 Využívá z referenčního modelu OSI první tři vrstvy:
@@ -107,9 +112,16 @@ V kanálu E Slouží k řízení přístupu k D a B kanálům jednotlivým konco
 
 \subsubsection{Struktura rámce U}
 
+Tvořené dvoudrátovým vedením s plně duplexním provozem. Vedení má maximálně 8km a obsahuje zdroj a opakovač s rozhraním U. Dva druhy kódování:
+\begin{itemize}
+    \item 4B/3T -- 4 bity do se kódují do 3 ternálních signálů
+    \item 2B/1Q -- 2 bity se kódují do jedné značky
+\end{itemize}
 
-\newpage
+
+\clearpage
 \section{Asynchronní přepravní způsob – ATM, buňka ATM, synchronizace, virtuální cesta a virtuální kanál, třídy služeb, ATM vrstvový model, síťové prvky ATM.}
+
 Standard pro síťovou vysokorychlostní architekturu v 80. a 90. letech. Zajišťuje kvalitu služby QoS především pro přenos hlasu a videa. Pracuje s buňkami konstantní délky. ATM je kvalitní technologie, ale pro svou složitost je to technologie drahá, proto je většinou nahrazeno mnohem levnějším Ethernetem. Používá statické multiplexování a směrování po virtuálních kanálech. Umožňuje přenosy dat v řádech Gb/s. Asynchronní není však přenos, ale nepravidelný výskyt buňěk během spojení. ATM tedy definuje rozhraní mezi uživatelem a sítí tzv. UNI a mezi přepínači v síti tzv. NNI.
 
 \subsection{Buňka v ATM}
@@ -121,11 +133,11 @@ Standard pro síťovou vysokorychlostní architekturu v 80. a 90. letech. Zajiš
 
 \subsubsection{Formát hlavičky buňky}
 \begin{itemize}
-    \item VPI Virtual Path Identifier
-    \item VCI Virtual Circuit Identifier
-    \item PT – Payload Type
-    \item CLP – Cell Loss Priority
-    \item HEC – Header Error Control
+    \item VPI -- Virtual Path Identifier
+    \item VCI -- Virtual Circuit Identifier
+    \item PT –- Payload Type
+    \item CLP –- Cell Loss Priority
+    \item HEC –- Header Error Control
 \end{itemize}
 
 Rozlišují se dva základní druhy rozhraní:
@@ -139,20 +151,19 @@ Ke generování jednotlivých buně dochází podle potřeby, zda zdroj má vys�
 plynulého toku jednotlivých buněk. Jedná se o asynchronní přenos a to proto, že přenosová bitová rychlost, kterou zdroj vyžaduje je nezávislá na celkové přenosové rychlosti.  Vlastní přenos bitů probíhá synchronně. 
 
 \subsection{Virtuální cesty a kanály}
-K jedné virtuální cestě VP (Virtual Path) je možno přiřadit několik virtuálních kanálů VC. (Virtual Channel). Takovýmto přiřazením VC jsou propojeny virtuální cesty.
+K jedné virtuální cestě VP (Virtual Path) je možno přiřadit několik virtuálních kanálů VC. (Virtual Channel). Takovýmto přiřazením VC jsou propojeny virtuální cesty. V síti ATM je rozlišováno několika prvků, které zajišťují datový přenos:
+
+\begin{itemize}
+    \item digitální rozvaděč ATM (ATM Cross-Connect) -- vyhodnocuje identifikátor VPI a VCI
+    \item koncentrátor ATM -- vyhodnocuje identifikátory VPI a VCI pro koncentraci provozu
+    \item ústředna ATM -- propojuje virtuální spoje v závislosti na VPI a VCI
+\end{itemize}
 
 \begin{figure} [h]
     \centering
     \includegraphics[width=0.8\textwidth]{snimky/VC.png}
     \label{fig:uml}
 \end{figure}
-
-V síti ATM je rozlišováno několika prvků, které zajišťují datový přenos:
-\begin{itemize}
-    \item digitální rozvaděč ATM (ATM Cross-Connect),
-    \item koncentrátor ATM,
-    \item ústředna ATM.
-\end{itemize}
 
 
 \subsection{Vrstvový model ATM}
@@ -179,9 +190,10 @@ Vrstvy:
 \end{itemize}
 
 
-\newpage
+\clearpage
 \section{Digitální účastnická přípojka xDSL, HDSL, ADSL, spojení, referenční model, modulace, rušivé vlivy, přeslechy.}
 \subsection{xDSL - Digital Subscriber Line}
+
 Využívá stávajícího vedení telefonní sítě k uživateli. Jednotlivé typy DSL se liší použitým frekvenčním pásmem, přenosovou
 rychlostí a možným dosahem. Obecně platí, že čím horším je vedení od ústředny k uživateli (kvalita
 rozvodu a délka), tím menší je přenosová rychlost. Nejčastějším typem DSL je stále ještě ADSL, postupně je však nahrazováno
@@ -243,7 +255,7 @@ Aditivní bílý šum (Tepelný šum, Výstřelový šum, Kvantizační šum, Zb
 \subsection{HDSL}
 V případě varianty T1 používá 2 páry telefonního vedení, každý o rychlosti 784 kb/s. V případě E1 varianty 1168 kb/s na každý pár. Používají se modulace 2B1Q a CAP. Jednotlivá maximální délka vedení mezi HDLS je 3,7 km v případě modulace 2B1Q nebo 4,2 km
 
-\newpage
+\clearpage
 \section{IPv6, návaznost na IPv4, kvalita služeb QoS, referenční model OSI versus síťová architektura TCP/IP.}
 
 \subsection{IPv6}
@@ -294,38 +306,181 @@ komunikující ve vertikálním směru provádějící servisní operace mezi vr
     \item aplikační vrstva – provádí správu aplikačních systémů a programů. Mezi protokoly řadící se do této vrstvy patří HTTP, FTP, POP3, SNMP, AIM, DHCP a jiné. \textbf{Data}
 \end{itemize}
 
-\subsection{Síťová architektura TCP/IP}
 
-
-\newpage
+\clearpage
 \section{Pasivní optické sítě (topologie sítě a způsob komunikace sestupný/vzestupný směr).}
+Pasivní optické sítě (PON) se skládají z:
+\begin{itemize}
+    \item OLT -- je řídící jednotka, která řídí celou funkcionalitu PON pro obousměrnou komunikaci.
+    \item ONU -- optická síťová jednotka realizující převod z optického signálu na elektrický signál nebo naopak.
+    \item Splitter -- rozděluje optický signál na více signálů
+\end{itemize}
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=\textwidth]{snimky/PONTopologie.png}
+    \label{fig:pon}
+\end{figure}
 
-\newpage
+Komunikace probíhá v sestupném směru jako broadcast, kdy splitter rozesílá data na všechny jednotky ONU v poměru 1:N. ONU jednotka zkontroluje identifikátor (nejspíše ONU-ID) přijatého rámce a pokud se identifikátor shoduje s přiřazeným identifikátorem tak data příjme. V opačném případě data zahodí. Tyto data se poté přenáší k cílové OLT kdy jsou spojována do jednoho signálu. Viz obrázek.
+
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=\textwidth]{snimky/upDownPON.png}
+\end{figure}
+
+\clearpage
 \section{Vývoj pasivních optických sítí a jejich rozdíly z pohledu fyzické a přenosové vrstvy.}
 
-\newpage
+\subsection{ATM PON (APON) a BPON}
+Rychlost v symetrické variantě 155,52\,MB/s a v asymetrické 622,8/155,52\,MB/s. BPON vylo pouze rozšíření a zvyšovala symetrickou rychlost na 622.8\,MB/s a přidávala nové funkce jako dynamickou distribuci pásma, vlnový multiplex (WDM).
+
+\subsection{GPON}
+GPON je nejpoužívanější v ČR. Využívá linkový kód NRZ (Non-return-to-zero) a podporuje plně ethernetové rámce se zapouzdřením do rámců GEM (Gigabit Passive Optical Network Encapsulation Mode) viz obrázek. Přenosové rychlosti závisí na použité variantě (symetrická/asymetrická).
+
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=\textwidth]{snimky/gemFrame.png}
+\end{figure}
+
+\subsection{EPON}
+Odvozen od standardního Ethernet protokolu. Využívá linkový kód 8B/10B, tj. ke každému bloku 8 bitů jsou přidány 2 paritní bity. Pro přenos se využívá Ethernet rámců viz obrázek. Předchází kolizi paketů v síti pomocí MPCP (MultiPoint Control Protocol). Funguje na principu detekce ONU a ustanovení provozních parametrů, kdy na konci je mu přiděleno LLID. 
+
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{snimky/EPONframe.png}
+\end{figure}
+
+\begin{itemize}
+    \item SPD obsahuje informace o hodinovém signálu
+    \item Reserved jsou tři byty pro budoucí účely
+    \item LLID je identifikátor ONU
+    \item FCS -- informace o detekci chyb
+\end{itemize}
+
+\clearpage
+
+\begin{table}[ht]
+    \centering
+    \caption{GPON vs EPON (nevím jestli je ta přenosová vrstva správně)}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        & GPON & EPON \\\hline\hline
+        \textbf{Fyzická vrstva} & & \\\hline\hline
+        Downstream [Gb/s] & 1,244/2,488 & 1,25 \\\hline
+        Upstream [Gb/s] & 1,244/2,488 & 1,25 \\\hline
+        Downstream vlnová délka [nm] & 1480\,--\,1500 & 1480\,--\,1500 \\\hline
+        Upstream vlnová délka [nm] & 1260\,--\,1360 & 1260\,--\,1360 \\\hline\hline
+        \textbf{Přenosová vrstva} & & \\\hline\hline
+        Protokol & GEM & Ethernet \\\hline
+        Linkové kodovaní & NRZ & 8B/10B \\\hline
+        Zabezpečení & downstream & obousměrně \\\hline
+        Max dělící poměr & 1:64 & 1:32 \\\hline
+        Max dosah sítě [km] & 20 & 20 \\\hline
+    \end{tabular}
+\end{table}
+
+\subsection{XG-PON a XG(S)-PON}
+
+XG-PON vylepšuje GPON, hlavně v nově použitém protokulu XGEM. 
+
+XGS-PON je pouze rozšíření XG-PON, kdy hlaví změnou je nově navržená TC (Transmission Convergence) vrstva, která je odvozena od standardu NG-PON2.
+
+\subsection{10G-EPON}
+
+Navazují standard na EPON s cílem možnosti provozovat 10G-EPON v souběhu s EPON na stejné optické distribuční síti.
+
+\subsection{NG-PON2}
+
+NG-PON2 umožnuje rychlost 40\,Gb/s s možností škálování až k hranici 80\,Gb/s. Využívá TWDM. TWDM pro vzestupný směr využívá tří typů pásem 1524-1544 (široké), 1528-1540 (zúžené) a 1532-1540 (úzké).
+
+\begin{table}[ht]
+    \centering
+    \caption{XG(S)-PON vs 10G-EPON vs NG-PON2}
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        & XG(S)-PON & 10G-EPON & NG-PON2 \\\hline\hline
+        \textbf{Fyzická vrstva} & & & \\\hline\hline
+        Downstream [Gb/s] & 9,9533 & 10,3125 & 40 \\\hline
+        Upstream [Gb/s] & 2,4883(9,9533) & 10,3125 & 10(asymetrický)/40(symetrický) \\\hline
+        Downstream vlnová délka [nm] & 1575\,--\,1580 & 1575\,--\,1580 & 1596\,--\,1603 \\\hline
+        Upstream vlnová délka [nm] & 1260\,--\,1280 & 1260\,--\,1280 & 1524/1528/1533\,--\,1544/1540/1540 \\\hline\hline
+        \textbf{Přenosová vrstva} & & & \\\hline\hline
+        Protokol & XGEM & Ethernet & XGEM \\\hline
+        Linkové kodovaní & NRZ & 64B/66B & NRZ \\\hline
+        Zabezpečení & obousměrně & obousměrně & obousměrně \\\hline
+        Max dělící poměr & 1:64 & 1:32 & 1:64\\\hline
+        Max dosah sítě [km] & 20 & 20 & 20 \\\hline
+    \end{tabular}
+\end{table}
+
+\clearpage
 \section{Aktivační proces koncové jednotky v síti GPON.}
 V současné době je GPON jedním z nejslibnějších řešení pro přístupové sítě (z pohledu ceny). GPON byl první standard, který podporoval přenos/zapouzdření ATM buněk i Ethernet rámců. 
 
 Aktivační proces:
 \begin{figure} [h]
     \centering
-    \includegraphics[width=0.6\textwidth]{snimky/proces.png}
+    \includegraphics[width=0.63\textwidth]{snimky/proces.png}
     \label{fig:uml}
 \end{figure}
 
+Jednotka ONU komunikuje s OLT pomocí PLOAM zpráv, kdy typy zpráv a průběh komunikace je vidět níže.
 
-\newpage
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{snimky/aktivaceONU.png}
+\end{figure}
+
+
+\clearpage
 \section{Využití celočíselného programování v současných sítích, síť jako graf, rozdělení zátěže z pohledu ceny přenosu.}
 \textbf{Lineární programování} je obor matematiky, stejně jako matematika sama. \textbf{Lineární program} je maximalizace nebo minimalizace lineární funkce podléhající lineárním omezením (např. Lineární rovnice nebo lineární nerovnosti). Optimalizační problém s funkcí, která má být maximalizována nebo minimalizována, se nazývá \textbf{matematický program}. Pokud jsou proměnné v matematickém programu omezeny na nezáporná celá čísla, matematický program se nazývá \textbf{celočíselný program}.
 
-\subsection{Využití}
-Maximalizace toku, minimálni cena toku?
+\textbf{Realizovatelným/možným řešením} je řešení lineárního programu, které splňuje všechny omezení. Sada všech možných řešení se nazývá prostor pro řešení. Jestli že má lineární program realizovatelné řešení tak říkáme že je proveditelné jinak je neuskutečnitelné.
+
+\subsection{Maximalizace toku}
+Problém maximalizace toku hledá toky provozu, které maximalizují objem přenosu ze zdrojového uzlu do cílového, s omezením že není překročena kapacita spoje.
+
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{snimky/ilpModel.png}
+\end{figure}
+
+Max v představuje objektivní funkci, která maximalizuje objem provozu od uzlu 1 do uzlu 4. Rovnice 2 -- 9 jsou omezení funkce, kdy rovnice 2 -- 4 ukazují zachování průtoku.
+
+Rovnice 2 ($x_{12} + x_{13} = v$) je omezení udržování toků v uzlu zdroje. Odchozí objem provozu z uzlu 1 je roven $v$.
+
+Rovnice 3 ($x_{12} - x_{23} - x_{24} = 0$) je omezení k udržení toků v uzlu 2. Příchozí objem do uzlu 2 je roven odchozímu provozu z uzlu 2.
+
+Rovnice 4 ($x_{13} + x_{23} - x_{34} = 0$) je omezení k udržení toků v uzlu 3. Příchozí objem do uzlu 3 se rovná odchozímu objemu provozu z uzlu 3.
+
+V případě úlohy na obrázku bude $v = 28$, kdy se bude skládat ze tří cest. První cesta ($1\xrightarrow{}2\xrightarrow{}4$) má maximální tok 10, druhá cesta ($1\xrightarrow{}2\xrightarrow{}3\xrightarrow{}4$) má maximální tok 4 a třetí cesta ($1\xrightarrow{}3\xrightarrow{}4$) má maximální tok 14.
+
+\subsection{Minimální cena toku}
+
+Problematika minimální ceny toku se snaží najít toky, jejich cena je minimalizována tak, aby splňovala že objem provozu nepřekračuje kapacitu spoje (maximalizace toku).
+
+\begin{figure} [h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{snimky/MinCena.png}
+\end{figure}
+
+Na obrázku dvojice čísel u hran představuje cenu, kapacitu. Definice rovnic na obrázku jsou stejné jako v případě maximálního toku. Jen zde se hledá výsledná minimální cena.
+
+V případě úlohy na obrázku bude $v = 12$ a celková cena je 161, kdy se bude skládat ze tří cest. První cesta ($1\xrightarrow{}2\xrightarrow{}4$) má maximální tok 2, druhá cesta ($1\xrightarrow{}2\xrightarrow{}3\xrightarrow{}4$) má maximální tok 3 a třetí cesta ($1\xrightarrow{}3\xrightarrow{}4$) má maximální tok 7.
 
 
-\newpage
+
+\clearpage
 \section{IP přenos sítí wavelength division multiplexing (WDM), CWDM, DWDM, TDM versus WDM, problematika přiřazování vlnových délek (RWA).}
+
 \subsection{Vlnový multiplex WDM}
+
+Přenos více signálů jedním optickým vláknem v rozdílných vlnových délkách. Je základem pro všechny rozšiřující vlnové multiplexy.
+
+\subsubsection{IP přes WDM}
+
+Slouží k přenosu IP protokolu v optické síti s podporou WDM. IP jako technologie síťové vrstvy spoléhá na vrstvu datového spojení poskytující rámcování, detekci chyb, obnovení chyb (opakování požadavku při chybě). Motivace pro IP/WDM může být, že za využití stávající infrastruktury, lze pomocí WDM zvýšit šířku pásma vláken. Většina přenosů mezi sítěmi využívá IP a zároveň většina uživatelských aplikací podporuje IP.
 
 \subsection{Vlnový multiplex CWDM }
 Označovaný jako „hrubý“, umožňuje v jediném optickém vlákně přenášet najednou až 18 nezávislých optických signálů s různou vlnovou délkou. Každý přenášený optický signál o dané vlnové délce může nést odlišnou informaci s různou přenosovou rychlostí.

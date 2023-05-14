@@ -199,16 +199,16 @@ Vybírají se právě dva předměty.
 
 ### MPC-SKS
 
-- [ ] Komunikační služby, kategorizace, Internet a telekomunikační služby, kvalita služby QoS, integrované a diferencované služby, Resource ReSerVation Protocol RSVP.
-- [ ] IPv6, návaznost na IPv4. Kvalita služeb QoS v IPv6.
-- [ ] Integrované služby digitální sítě – ISDN, rozhraní S a U, doporučení pro ISDN, signalizace v ISDN.
-- [ ] Asynchronní přepravní způsob – ATM, buňky ATM, synchronizace, virtuální cesta a virtuální kanál, třídy služeb, ATM referenční model, síťové prvky ATM, ATM spínání.
-- [ ] Digitální účastnická linka xDSL, HDSL, ADSL, spojení, referenční model, modulace, přeslechy, další typy xDSL.
-- [ ] Referenční OSI model, síťová architektura TCP/IP, multimediální služby v IPv6.
-- [ ] Multimediální sítě, směrovací protokoly EGP, BGP, H.323, Ethernet over SDH/Sonet - EoS, Multiplrotocol Label Switching MPLS, MPLS versus ATM, MPLS a Virtual Private Network (VPN).
-- [ ] Pasivní optické sítě PON, přístupové sítě a jejich nasazení, rizika, zkušenosti.
-- [ ] Využití celočíselného programování v současných sítích, síť jako graf, uplatnění celočíselného dělení pro řešení nejkratší cesty, rozdělení zátěže.
-- [ ] IP přenos sítí Wavelength division multiplexing (WDM), CWDM, DWDM, TDM versus WDM, Routing and Wavelength Assignment (RWA).
+- [x] Komunikační služby, kategorizace, Internet a telekomunikační služby, kvalita služby QoS, integrované a diferencované služby, Resource ReSerVation Protocol RSVP.
+- [x] IPv6, návaznost na IPv4. Kvalita služeb QoS v IPv6.
+- [x] Integrované služby digitální sítě – ISDN, rozhraní S a U, doporučení pro ISDN, signalizace v ISDN.
+- [x] Asynchronní přepravní způsob – ATM, buňky ATM, synchronizace, virtuální cesta a virtuální kanál, třídy služeb, ATM referenční model, síťové prvky ATM, ATM spínání.
+- [x] Digitální účastnická linka xDSL, HDSL, ADSL, spojení, referenční model, modulace, přeslechy, další typy xDSL.
+- [x] Referenční OSI model, síťová architektura TCP/IP, multimediální služby v IPv6.
+- [x] Multimediální sítě, směrovací protokoly EGP, BGP, H.323, Ethernet over SDH/Sonet - EoS, Multiplrotocol Label Switching MPLS, MPLS versus ATM, MPLS a Virtual Private Network (VPN).
+- [x] Pasivní optické sítě PON, přístupové sítě a jejich nasazení, rizika, zkušenosti.
+- [x] Využití celočíselného programování v současných sítích, síť jako graf, uplatnění celočíselného dělení pro řešení nejkratší cesty, rozdělení zátěže.
+- [x] IP přenos sítí Wavelength division multiplexing (WDM), CWDM, DWDM, TDM versus WDM, Routing and Wavelength Assignment (RWA).
 
 ### MPC-UIN
 
