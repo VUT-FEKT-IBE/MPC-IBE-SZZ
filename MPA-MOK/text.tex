@@ -395,6 +395,8 @@ Umožňuje provádět operace s~daty bez~toho aby bylo nutné je dešifrovat (tj
 
 \subsection{Druhy homomorfního šifrování}
 
+% https://dspace.cvut.cz/handle/10467/101730, str 6
+
 \textbf{Částečně homomorfní šifrování} (\emph{Partially Homomorphic Encryption}) podporuje pouze jednu z~operací (sčítání nebo násobení).
 Cesarova šifra umožňuje homomorfické sčítání, RSA a ElGamal (v~surové matematické formě) umožňují homomorfické násobení.
 
@@ -692,6 +694,7 @@ Je možné ho odvodit např. z~ElGamal schématu:
 \begin{table}[ht]
     \centering
     \begin{tabular}{lcr}
+    & \textbf{princip} & \\
     $P_1$ & prostředí & $P_2$ \\
     $x_0, x_1 \in \{0,1\}$ & klíče $(x, h = g^x)$ & $s \in \{0,1\}$ \\
     \hline
@@ -709,6 +712,7 @@ Je možné ho odvodit např. z~ElGamal schématu:
     \vspace*{3em}
 
     \begin{tabular}{lcr}
+    & \textbf{ukázka} & \\
     $P_1$ & prostředí v~$\mathbb{Z}_{11}^*$ s~$g=2$ & $P_2$ \\
     $x_0 = 1, x_1 = 1 \in \{0,1\}$ & klíče $(x = 3, h = 2^3 = 8)$ & $s = 1\in \{0,1\}$ \\
     \hline
@@ -723,7 +727,6 @@ Je možné ho odvodit např. z~ElGamal schématu:
     & \multicolumn{2}{r}{$x_0 = \log_g \left( \frac{B_0}{A_0^u} \right) = \log_2 \left( \frac{4}{5^2} \right) = \log_2 5 = \dots$} \\
     & \multicolumn{2}{r}{$x_1 = \log_g \left( \frac{B_1}{A_1^u} \right) = \log_2 \left( \frac{2}{10^2} \right) = \log_2 2 = 1$} \\
     \end{tabular}
-    \caption*{OT protokol na~bázi ElGamal}
     \label{fig:ot-elgamal}
 \end{table}
 \FloatBarrier
