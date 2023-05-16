@@ -738,8 +738,144 @@ Je možné ho odvodit např. z~ElGamal schématu:
 \clearpage
 \section{Cryptocurrencies: cryptocurrency (definition, requirements), Ecash, Bitcoin, CryptoNote, proof of work in Bitcoin, Bitcoin address and wallet, Bitcoin’s transaction flow, double spending problem.}
 
+
+
 \clearpage
 \section{Data privacy 1: statistical disclosure control methods, disclosure risk, information loss, microdata, privacy categories (identifiers, quasi-identifiers, sensitive data), non-perturbative methods (sampling, global recording, suppression)}
 
+Tradiční způsoby ochrany informací zajišťují omezený přístup k~soukromým datům.
+Zveřeňování dat zachovávající soukromí ho chrání a zároveň umožňuje publikovat použitelné informace.
+
+Data mohou být \emph{číselná} nebo \emph{kategorická} (tj. výběr z~konečného počtu možností).
+
+
+\subsection{Kategorie}
+
+\emph{Identifikátory} jsou taková data která jednoznačně identifikují jedince.
+\emph{Kvazi-identifikátory} jsou taková data která mohou pomocí re-identifikovat jedince nebo jejich část za~pomoci dalších dat, nebo mohou jedince identifikovat částečně.
+\emph{Citlivé údaje} jsou taková data která mají zůstat skryta.
+
+Při~\emph{odhalení totožnosti} (\emph{Identity disclosure}) dochází k~plné identifikaci jedince.
+Při~\emph{odhalení atributu} (\emph{Attribute disclosure}) dochází k~odhalení nových informací o~jedinci.
+
+
+\subsection{Rizika zveřejňování informací, ztráta informací}
+
+Riziko zveřejnění vzniká ve~chvíli kdy jsou data zveřejněna, ztráta informací popisuje úbytek konkrétních údajů.
+Platí že čím větší je maskování dat, tím větší je ochrana údajů a zároveň i~informační úbytek.
+
+
+\subsection{Statistické metody kontroly zveřejňování informací}
+
+Metody zveřejňování zajišťují statistickou pravdivost při~zachování soukromí.
+
+\emph{Privacy-first} metodami garantujeme že data byla anonymizována, informativní hodnota dat je na~druhém místě.
+Např. \emph{$k$-anonymity}, \emph{differential privacy}.
+
+\emph{Utility-first} metodami zajišťujeme že zveřejněná data mohou být použita pro~další výzkum, rizika jsou zvažována na~druhém místě.
+Neporuchové (\emph{non-perturbative}) metody vybírají data k~publikování, poruchové (\emph{perturbative}) metody data přes publikací upravují.
+Syntetická data jsou generována tak aby statisticky odpovídala nasbíraným datům a jsou zveřejněna namísto dat opravdových.
+
+
+\subsection{Mikrodata}
+
+Mikrodata je série záznamů.
+Maskovaná mikrodata mají identifikující data odebrána.
+Externí informace je jakákoliv informace, známá externí entitě, která je spojena s~některými jedinci v~mikrodatech.
+
+
+\subsection{Neporuchové maskování dat}
+
+\emph{Non-perturbative} maskování neprovádí změny původních dat.
+Pouze je lokálně utlumují nebo redukují jejich detaily.
+
+
+\subsubsection*{Vzorkování}
+
+\emph{Sampling}.
+Záznamy jsou vybírány náhodně, buď se stejnou nebo s~jinou pravděpodobností (\emph{probability $\times$ non-probability sampling}).
+
+% TODO Jaké jsou rozdíly mezi clusterováním a stratified samplingem?
+\emph{Simple random sampling}: každý záznam má stejnou pravděpodobnost.
+\emph{Cluster sampling}: populace je rozdělena do~clusterů na~základě jejich parametrů.
+\emph{Systematic sampling}: záznamy jsou vybírány v~konstantních intervalech.
+\emph{Stratified random sampling}: populace je rozdělena do~menších částí které se nepřekvývají, ale které reprezentují celou populaci.
+
+
+\subsubsection*{Generalizace}
+
+\emph{Global recording}.
+Konkrétní data jsou kombinována do~obecnějších.
+
+Čísla: zaokrouhlování.
+Kategorie: hierarchický strom (spalničky $\rightarrow$ virové onemocnění).
+
+
+\subsubsection*{Ořezávání}
+
+\emph{Top and Bottom Coding}.
+Extrémní hodnoty (nad a pod určitými úrovněmi) jsou spojeny dohromady.
+
+
+\subsubsection*{Potlačení}
+
+\emph{Local suppresion}.
+Určité hodnoty jsou potlačeny a nejsou zveřejněny.
+Pokud by došlo k~moc velké ztrátě výpovědní hodnoty, mohou být potlačeny konkrétní záznamy.
+
+
+
 \clearpage
 \section{Data privacy 2: syntethic data, perturbative masking (noise addition, microaggregation, rank swapping), k-anonymity, record linkage}
+
+
+\subsection{Poruchové maskování dat}
+
+\emph{Perturbative masking} je většinou realizováno maticovým maskováním.
+Pro~matici mikrodat $\mathbf{X}$ můžeme vytvořit maskovaná data $\textbf{Z} = \textbf{A} \times \textbf{X} \times \mathbf{B} + \textbf{C}$, kde \textbf{A} je matice transformací záznamů, \textbf{B} matice transformací hodnot a \textbf{C} matice šumu/posunu.
+
+
+\subsubsection*{Zašumění}
+
+Aditivní: šum $\epsilon_j$ je přidán k~původní hodnotě $x_j$.
+Může být korelován i nekorelován k~původním hodnotám atributu $X_j$.
+Korelovaný šum také zachovává průměry: $\sum_j \epsilon_j = 0$.
+
+Multiplikativní: šum $\epsilon_j$ je vynásoben s~původní hodnotou $x_j$.
+
+
+\subsubsection*{Mikroagregace}
+
+Prvky atributu $X_j$ jsou rozděleny do~konečného počtu skupin.
+Ve~skupině se vyskytnou prvky které jsou si vzájemně velmi podobné, a hodnota prvků každé skupiny je nahrazena centroidem (průměrem).
+
+
+\subsubsection*{Výměna pozic}
+
+
+Prvky atributu $X_j$ jsou seřazeny a jsou prohozeny s~jinými prvky (do~určité vzdálenosti).
+
+
+\subsection{Syntetická data}
+
+Jsou vygenerována nová data, která statisticky odpovídají datům původním.
+Pokud jde o~moc přesnou statistickou podobnost, v~novém datasetu se mohou vyskytnout prvky shodné s~prvky v~datasetu původním.
+
+
+\subsection{$k$-anonymita}
+
+Dataset splňuje $k$-anonymitu pro $k > 1$ pokud pro~každou kombinaci kvazi-identifikátorů platí že alespoň $k$ záznamů v~datasetu sdílí tuto kombinaci.
+
+
+\subsection{Propojování záznamů}
+
+\emph{Record Linkage} je používáno k~určení zda dva záznamy popisují jednoho jedince.
+Používá se k~hodnocení rizik zveřejnění, organizaci datasetu nebo při~kombinování více datasetů.
+
+Deterministické propojování probíhá napřímo mezi konkrétními záznamy.
+Probabilistické propojování probíhá přes výpočet vah propojení shodných hodnot.
+
+Jde o~složitý proces, protože se v~datech objevují
+chyby, variace a nebo díry,
+rozdíly dané sběrem a uchováním dat,
+dynamikou dat (například změna příjmení).

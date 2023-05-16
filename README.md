@@ -271,5 +271,5 @@ Vybírají se právě dva předměty.
 - [x] Secure Multi-Party Computation (SMPC): SMPC definition, SMPC security requirement and adversarial behavior, e-voting, oblivious transfer
 - [ ] Blockchain and Smart Contracts: blockchain architecture, transactions and blocks, mining, forks, consensus, smart contracts, 51 % attack on blockchain.
 - [ ] Cryptocurrencies: cryptocurrency (definition, requirements), Ecash, Bitcoin, CryptoNote, proof of work in Bitcoin, Bitcoin address and wallet, Bitcoin’s transaction flow, double spending problem.
-- [ ] Data privacy 1: statistical disclosure control methods, disclosure risk, information loss, microdata, privacy categories (identifiers, quasi-identifiers, sensitive data), non-perturbative methods (sampling, global recording, suppression)
-- [ ] Data privacy 2: syntethic data, perturbative masking (noise addition, microaggregation, rank swapping), k-anonymity, record linkage
+- [x] Data privacy 1: statistical disclosure control methods, disclosure risk, information loss, microdata, privacy categories (identifiers, quasi-identifiers, sensitive data), non-perturbative methods (sampling, global recording, suppression)
+- [x] Data privacy 2: syntethic data, perturbative masking (noise addition, microaggregation, rank swapping), k-anonymity, record linkage
