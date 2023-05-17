@@ -266,9 +266,97 @@ Odolnost proti kolizím
 \clearpage
 \section{Kvantová distribuce klíčů, důvody použití, příklady protokolů.}
 
+QKD (\emph{Quantum Key Distribution}) používá pro~komunikaci kvantové jevy, např. spin fotonu.
+
+Z~důvodu Heisenbergova principu neurčitosti není možné vytvořit kopii neznámého kvantového stavu: čtení zprávy ovlivňuje její obsah.
+
+Qubit může nabývat libovolné hodnoty z~intervalu $\left<0,1\right>$, ale měřením lze získat nejvýše jeden bit klasické informace.
+Qubity mohou být realizovány jakýmkoliv dvojrozměrným kvantovým systémem: foton (polarizace, fázový posun), elektron (spin), atom (spin).
+
+
+\subsection{Důvody použití}
+
+Protokoly distribuce klíčů postavené na~klasické kryptografii (např. DH) jsou kvantově zlomitelné.
+QKD staví bezpečnost na~fyzikálních principech které není možné kvantově obejít.
+
+Foton nelze rozdělit a ani není možné vytvořit jeho přesnou kopii.
+Eva, stojící mezi Alicí a Bobem, nezná polarizační bázi, a v~přenosu tedy způsobí přibližně 50\,\% chyb.
+Stálý odposlech tedy způsobí přibližně 25\% chybovost.
+
+
+\subsection{QKD protokoly}
+
+\begin{table}[ht]
+\subsubsection*{BB84}
+\centering
+\onehalfspacing
+\begin{tabular}{lll}
+Alice & \verb@1111100101000010000100000@ & výběr zprávy \\
+      & \verb@x+xxxxx+xx++++xx++x++xx++@ & polarizace náhodnou bází \\
+      & \verb@/-///\\-\/||||/\||\-|\\||@ & přenositelná zpráva ve~čtyřech možných orientacích \\
+Bob   & \verb@++x+xx+x+x++xx+xx+x+x+++x@ & dekódování qubitů v~náhodných bázích \\
+      & \verb@ 111100 11000 000001 1 01@ & (některé bity byly ztraceny při~přenosu) \\
+\hline
+Bob   & \verb@ +x+xx+ +x++x +xx+x+ + +x@ & poslání bází Alici \\
+Alice & \verb@ .. ..   ...   . ...   . @ & potvrzení správně vybraných bází \\
+      & \verb@ 11 10   100   0 001   0 @ & \dots je materiál klíče \\
+\hline
+      & \verb@    10   10    0 00    0 @ & \dots je klíč po~obětování bitů \\
+\end{tabular}
+\caption{
+Bity 0, 1 jsou kódovány do~kvantových stavů polarizovaných fotonů.
+Jde o~dvě navzájem kolmé lineární polarizace ve~dvou bázích vůči sobě otočených o~45\textdegree. \\
+\texttt{+|} $\rightarrow$ 0, \texttt{+-} $\rightarrow$ 1; \texttt{x\textbackslash} $\rightarrow$ 0, \texttt{x/} $\rightarrow$ 1}
+\end{table}
+\FloatBarrier
+
+\begin{table}[ht]
+\subsubsection*{B92}
+\centering
+\onehalfspacing
+\begin{tabular}{lll}
+Alice & \verb@0100101111010100010001110@ & výběr zprávy \\
+      & \verb@-/--/-////-/-/---/---///-@ & polarizace náhodnou bází \\
+Bob   & \verb@xx+++x+x++xx+xx+xx++xx++x@ & náhodné zvolení bází \\
+      & \verb@\/--|/|/ -\/- /-\/--//-|/@ & polarizace přijatých bází \\
+      & \verb@0???1?1? ?0?? ??0??????1?@ & \dots přijatý výsledek \\
+\hline
+Bob   & \verb@.   . .   .     .      . @ & poslání pozic dekódovaných quibitů \\
+      & \verb@    1           0        @ & obětování bitů odesláním \\
+Alice & \verb@    .           .        @ & potvrzení správnosti \\
+\hline
+      & \verb@0     1    0    0      1 @ & \dots je klíč \\
+\end{tabular}
+\caption{
+Alice si vybírá jednu polarizaci v~každé bázi; jedna báze reprezentuje~0, druhá~1. \\
+\texttt{-} $\rightarrow$ 0; \texttt{/} $\rightarrow$ 1}
+\end{table}
+\FloatBarrier
+
+\subsubsection*{Šestistavový protokol}
+
+Vychází z~BB84, ale používá polarizaci v~šesti směrech (\enquote{plus}, \enquote{kříž}, rotatce).
+
+Všechny obětují část dohodnutého klíče a veřejným kanálem se informují o~přijatých hodnotách.
+Tuto komunikaci je nutné autentizovat.
+Při~obětování $n$ bitů je pravděpodobnost detekce soustavného odposlechu $1 - \left(\frac{1}{4}\right)^n$.
+
+\subsubsection*{EPR}
+
+Využívá kvantově provázaný pár fotonů.
+
+\subsubsection*{\emph{Coherent One Way} (COW) protokol}
+
+Bity kóduje do~koherentních pulzů.
+Koherence se při~odposlechu i~přenosu velmi lehce naruší, na~což reaguje detektor.
+
+Neexistuje obecný důkaz bezpečnosti COW.
+
 
 \clearpage
 \section{Postkvantová kryptografie -- důvody použití, jaké těžké matematické problémy se zde využívají (kryptosystém McEliece, kryptosystém založený na mřížkách). Jednorázový podpis pomocí hašovacích funkcí (Lamport).}
+
+
 
 
 \clearpage

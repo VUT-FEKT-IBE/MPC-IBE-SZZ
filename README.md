@@ -47,7 +47,7 @@ Vybírají se právě dva předměty.
 - [x] Hašovací funkce, formální definice, požadované vlastnosti, hodnocení bezpečnosti, příklady algoritmů a použití.
 - [ ] Kryptografie nad eliptickými křivkami, principy, důvody použití, příklady algoritmů.
 - [ ] Digitální podpis, principy, standardy, metody pro distribuci veřejných klíčů (PKI).
-- [ ] Kvantová distribuce klíčů, důvody použití, příklady protokolů.
+- [x] Kvantová distribuce klíčů, důvody použití, příklady protokolů.
 - [ ] Postkvantová kryptografie – důvody použití, jaké těžké matematické problémy se zde využívají (kryptosystém McEliece, kryptosystém založený na mřížkách). Jednorázový podpis pomocí hašovacích funkcí (Lamport).
 - [x] V souvislosti s nařízením eIDAS vysvětlete pojmy - elektronický podpis, zaručený elektronický podpis a kvalifikovaný elektronický podpis. elektronická pečeť, elektronické časové razítko.
 - [x] Autentizační protokoly, principy, použití, hodnocení jejich bezpečnosti (BAN logika).
