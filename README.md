@@ -44,7 +44,7 @@ Vybírají se právě dva předměty.
 - [x] Formální definice kryptografického systému, symetrické a asymetrické šifry. Výpočetně těžké matematické problémy pro asymetrické šifry.
 - [x] Služby bezpečnosti zajišťované kryptografickými prostředky, kryptografické mechanismy, které tyto služby zajišťují.
 - [x] Kryptograficky bezpečné generátory náhodných čísel – požadavky, hodnocení bezpečnosti, příklady realizace.
-- [ ] Hašovací funkce, formální definice, požadované vlastnosti, hodnocení bezpečnosti, příklady algoritmů a použití.
+- [x] Hašovací funkce, formální definice, požadované vlastnosti, hodnocení bezpečnosti, příklady algoritmů a použití.
 - [ ] Kryptografie nad eliptickými křivkami, principy, důvody použití, příklady algoritmů.
 - [ ] Digitální podpis, principy, standardy, metody pro distribuci veřejných klíčů (PKI).
 - [ ] Kvantová distribuce klíčů, důvody použití, příklady protokolů.
