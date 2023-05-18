@@ -356,7 +356,74 @@ Neexistuje obecný důkaz bezpečnosti COW.
 \clearpage
 \section{Postkvantová kryptografie -- důvody použití, jaké těžké matematické problémy se zde využívají (kryptosystém McEliece, kryptosystém založený na mřížkách). Jednorázový podpis pomocí hašovacích funkcí (Lamport).}
 
+PQC (\emph{Post-Quantum Cryptography}) využívá matematické problémy které kvantové počítače nezvládají řešit o~nic rychleji než klasické.
 
+DH (Diffie-Hellman), DLP (problém diskrétního logaritmu), FP (problém faktorizace), ECC (kryptografie nad~eliptickými křivkami) jsou kvantově řešitelné v~polynomiálních či polylogaritmických časech.
+Pomocí Shorova (kvantová faktorizace), Groverova (kvantové prohledávání) a dalších algoritmů aplikovaných na~reálném kvantovém hardware se současná asymetrická kryptografie stává nedostatečně bezpečnou.
+
+Mezi problémy postkvantově bezpečné patří například:
+
+\begin{itemize}
+\item mřížky (\emph{lattices}): matice o~mnoha dimenzích určující vektorovu mřížku,
+\item polynomiální rovnice (\emph{multivariate equations}),
+\item systémy založené na~hashích (\emph{hash-based systems}),
+\item systémy založené na~kódech (\emph{code-based systems}): systémy postavené nad~protichybovým kódováním,
+\item \emph{supersingular elliptic curve isogenies}: křivka ($k_\text{pub}$) a její morfismus na~jinou ($k_\text{priv}$).
+\end{itemize}
+
+
+\subsection{Mřížky}
+
+Mřížka je množina bodů v~$n$-dimenzionálním prostoru v~periodické struktuře.
+V~2D ji lze pomocí kartézských souřadnic $(x, y)$ definovat jako
+$\mathcal{L} = \mathcal{L}(b_1, b_2) = \{x_i b_1 + x_i b_2 : x_i \in \mathbb{Z}\}$.
+
+$n$-dimenzionální mřížka $\mathcal{L}$ je množina všech celočíselných kombinací $n$-lineárně nezávislých vektorů (generátorů) $b_1, \dots, b_n \in \mathbb{R}^n$:
+$\mathcal{L} = \left\{ \sum_{i=1}^n x_i b_i : x_i \in \mathbb{Z} \right\}$.
+$\mathcal{B} = \{b_1, \dots, b_n\}$ se nazývá Báze mřížky.
+Při~bázi $\mathcal{B}$ mřížky $\mathcal{L}$ je každý vektor $v \in L$ vyjádřitelný jako unikátní lineární kombinace bázových vektorů, tj. $v = a_1 b_1 + \dots + a_n b_n$.
+
+Obtížnost je obecně definována jako složitost nalezení dobré mřížky (tj. ortogonální) z~mřížky špatné (tvořené vektory s~umělými chybami).
+Dobrá mřížka je soukromý klíč, špatná mřížka veřejný.
+
+V~mřížkách jsou definovány problémy nejkratšího a nejbližšího vektoru.
+SVP (\emph{Shortest Vector Problem}): Nejkratší vektor se v~neortogonální bázi hledá obtížně.
+CVP (\emph{Closest Vector Problem}): Vektor nejbližší k~bodu mimo mřížku se hledá obtížně.
+Oba jsou prokazatelně NP-těžké.
+
+Mřížky se používají buď s chybami (\emph{Learning with Errors}), R-LWE (\emph{Ring-LWE}), M-LWE (\emph{Module-LWE}) nebo se~zaokrouhlováním (\emph{LWR}).
+Jejich využití je především v~asymetrickém šifrování, výměně klíčů, digitálních podpisech, homomorfním šifrování nebo v~důkazech nulových znalostí.
+
+Mezi praktické příklady patří kryptosystémy Kyber, Saber (KEM) a Dilithium (Sig).
+
+\subsection{McEliece}
+
+Jde o~asymetrický systém postavený nad~protichybovým kódováním (\emph{binary Goppa code}) s~NP-těžkou obtížností.
+Tvoří se náhodnou binární regulární maticí $\textbf{S}_{k \times k}$, generující maticí $\textbf{G}_{k \times n}$, náhodnou permutační maticí $\textbf{P}_{n \times n}$ a výslednou maticí $\textbf{G'}_{k \times n} = \textbf{SGP}$.
+
+(Pravděpodobnostní) šifrování: $c = m\textbf{G'} + z$; (deterministické) dešifrování: $m' = D(c\textbf{P}^{-1})\textbf{S}^{-1}$ (kde $D$ je dekódovací algoritmus).
+Privátním klíčem je~dekódovací algoritmus.
+Proti RSA jde o~systém rychlejší, ale k~praktickému využití vyžaduje výrazně větší klíče ($| k_\text{pub} | \geq$ 512~Kb; resp. $\geq$ 6~Mb--8~Mb pro~postkvantovou bezpečnost).
+
+\subsection{Lamport One Time Signature}
+
+V~principu jde o~podepisování jednoho bitu $[0,1]$.
+Jsou vygenerovány dva náhodné řetězce (privátní klíče S0, S1), ze~kterých jsou spočítány hashe (veřejné klíče H0, H1), které jsou zveřejněny.
+Pro~podepsání jednobitové zprávy $0$ je zveřejněn S0; pro~ověření je z~ní spočítán hash a~porovnán s~veřejným H0.
+
+Toto schéma je možné rozšířit na $n$-bitové zprávy.
+Privátní klíče S0, S1 budou řetězce S0-1, S1-1, S0-2, S1-2, \dots, S0-$n$, S1-$n$;
+k~nim odpovídající veřejné klíče jsou H0-1, H1-1, \dots, H0-$n$, H1-$n$.
+Každý bit zprávy je podepsán oddelěně, tzn. veřejný i~soukromý klíč mají velikost $2n^2$ bitů.
+Příkladem podpisu zprávy $m = 001\dots{}n$ je sekvence S0-1, S0-2, S1-3, S0-3, \dots, S1-$n$.
+
+Paměťovou náročnost lze zmírnit použitím Merkleho stromu.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{img/hash-merkle-tree}
+    \caption[Merkleho strom pro~hashe]{Merkleho strom pro~veřejné klíče. Je zveřejněn pouze vršek stromu. S~podpisem L2 se zveřejní pouze ty hashe které jsou nutné k~ověření vrcholu (0-0, 1).}
+\end{figure}
 
 
 \clearpage
