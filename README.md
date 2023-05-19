@@ -199,16 +199,16 @@ Vybírají se právě dva předměty.
 
 ### MPC-SKS
 
-- [x] Komunikační služby, kategorizace, Internet a telekomunikační služby, kvalita služby QoS, integrované a diferencované služby, Resource ReSerVation Protocol RSVP.
-- [x] IPv6, návaznost na IPv4. Kvalita služeb QoS v IPv6.
-- [x] Integrované služby digitální sítě – ISDN, rozhraní S a U, doporučení pro ISDN, signalizace v ISDN.
-- [x] Asynchronní přepravní způsob – ATM, buňky ATM, synchronizace, virtuální cesta a virtuální kanál, třídy služeb, ATM referenční model, síťové prvky ATM, ATM spínání.
-- [x] Digitální účastnická linka xDSL, HDSL, ADSL, spojení, referenční model, modulace, přeslechy, další typy xDSL.
-- [x] Referenční OSI model, síťová architektura TCP/IP, multimediální služby v IPv6.
-- [x] Multimediální sítě, směrovací protokoly EGP, BGP, H.323, Ethernet over SDH/Sonet - EoS, Multiplrotocol Label Switching MPLS, MPLS versus ATM, MPLS a Virtual Private Network (VPN).
-- [x] Pasivní optické sítě PON, přístupové sítě a jejich nasazení, rizika, zkušenosti.
-- [x] Využití celočíselného programování v současných sítích, síť jako graf, uplatnění celočíselného dělení pro řešení nejkratší cesty, rozdělení zátěže.
-- [x] IP přenos sítí Wavelength division multiplexing (WDM), CWDM, DWDM, TDM versus WDM, Routing and Wavelength Assignment (RWA).
+- [x] Služby komunikačních systémů – obecný rozbor, signalizační systém SS7, Telecommunication Management Network - TMN, telekomunikační služby z pohledu ekonomiky.
+- [x] Integrované služby digitální sítě – ISDN, základní a primární přístup, referenční model účastnické přípojky ISDN, strukturu rámce na rozhraní S a U, napájení terminálů.
+- [x] Asynchronní přepravní způsob – ATM, buňka ATM, synchronizace, virtuální cesta a virtuální kanál, třídy služeb, ATM vrstvový model, síťové prvky ATM.
+- [x] Digitální účastnická přípojka xDSL, HDSL, ADSL, spojení, referenční model, modulace, rušivé vlivy, přeslechy.
+- [x] IPv6, návaznost na IPv4, kvalita služeb QoS, referenční model OSI versus síťová architektura TCP/IP.
+- [x] Pasivní optické sítě (topologie sítě a způsob komunikace sestupný/vzestupný směr).
+- [x] Vývoj pasivních optických sítí a jejich rozdíly z pohledu fyzické a přenosové vrstvy.
+- [x] Aktivační proces koncové jednotky v síti GPON.
+- [x] Využití celočíselného programování v současných sítích, síť jako graf, rozdělení zátěže z pohledu ceny přenosu.
+- [x] IP přenos sítí wavelength division multiplexing (WDM), CWDM, DWDM, TDM versus WDM, problematika přiřazování vlnových délek (RWA).
 
 ### MPC-UIN
 
@@ -226,14 +226,14 @@ Vybírají se právě dva předměty.
 
 - [ ] Komunikační řetězec, vrstvový model datového přenosu, základní operace při zpracování signálu u digitálního komunikačního systému. Úrovně signálu a vztažné hodnoty, absolutní a relativní úroveň, útlum, zisk, odstup signálu od šumu, výkonová spektrální hustota, přenosová kapacita kanálu.
 - [ ] Princip zvyšování odolnosti přenášené zprávy proti chybám, informační poměr kódu, Hammingova vzdálenost, podmínky možnosti detekce a korekce chyb.
-- [ ] Vlastnosti ovlivňující návrh protichybového kódového systému. ARQ systémy
+- [ ] Vlastnosti ovlivňující návrh protichybového kódového systému. ARQ systémy.
 - [ ] Rozdělení protichybových kódů. Schéma realizace procesu kódování blokových kódů a stromových kódů. RM kódy, jejich základní parametry. Obecné blokové schéma kodéru turbokódu, význam jeho částí, dekódování turbokódů. Přehled možností používaných pro zabezpečení proti dlouhým shlukům chyb.
 - [ ] Kryptografické metody zabezpečení datových přenosů, architektura bezpečnosti, služby bezpečnosti, mechanizmy bezpečnosti.
-- [ ] Telekomunikační síť, struktura, způsoby komunikace, přenosové prostředky.
 - [ ] Metalická vedení, náhradní schéma homogenního vedení, primární parametry, sekundární parametry jednotky a vzájemné vztahy. Konstrukce symetrických kabelových vedení používaných v přístupové síti, DM a x čtyřky. Modely elektrických parametrů kabelových vedení určené pro simulaci DSL.
-- [ ] DSL systémy, vlastnosti, referenční konfigurace, typické uspořádání přípojky, možnosti využití. Základní charakteristiky jednotlivých systémů xDSL, IDSL, HDSL, SDSL, ADSL, VDSL, vlastnosti, možnosti použití. DSL použité kódy a modulace, 2B1Q, QAM, TCM,DMT, CAP.
+- [ ] DSL systémy, vlastnosti, referenční konfigurace, typické uspořádání přípojky, možnosti využití. Základní charakteristiky jednotlivých systémů ADSL, VDSL, vlastnosti, použití.
 - [ ] Vliv rušení na provoz xDSL, kategorizace, dosažitelná přenosová rychlost, model přeslechů (NEXT, FEXT), princip výpočtu přeslechů. Spektrální vlastnosti DSL přenosových systémů, správa spektra, cíle, metody.
-- [ ] PLC systémy, princip, základní parametry, použité modulace, vazební členy, začlenění do sítě.
+- [ ] PLC systémy - praktické využití v energetice - limity technologie, datové objemy, rušení a opakovače. Chytré elektroměry - DLMS protokol a OBIS objekty.
+- [ ] IoT technologie - LoRa, SigFox, NB-IoT.
 
 ### MPA-KPM
 
