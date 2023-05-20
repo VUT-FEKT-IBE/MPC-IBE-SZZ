@@ -52,6 +52,29 @@ V~USA to musí být ten jehož práva jsou dotčena.
 
 \clearpage
 \section{Aktivní povinnosti poskytovatelů služeb informační společnosti (monitoring, filtrování)}
+% Snad je to dobře kekw
+Není možné chtít dohled nad daty (fyzicky i ekonomicky). Vznikla opatření kdy není odpovědnost (viz 1.). ISP tedy neodpovídá za obsah.
+Členské státy nesmí uložit ISP typu mere conduit, ... obecnou povinnost dohlížet na jimi přenášené či ukládané informace nebo obecnou povinnost vyhledávat skutečnosti a okolnosti poukazující na protiprávní činnost. Zákaz se netýká zvláštního dohledu (Rolex vs ricardo.de, dohled nad jedním uživatelem apod.).
+Obecný dohled je takový, jenž probíhal:
+\begin{itemize}
+    \item na všech přenášených či ukládaných datech
+    \item vůči všem uživatelům bez rozdílu
+    \item preventivně
+    \item výlučně na náklady poskytovatele
+    \item bez časového omezení
+\end{itemize}
+
+Jedná se o zásah do práv ISP (právo na svobodu podnikání) a do práv třetích osob/uživatelů (svoboda projevu a ochrana soukromí).
+
+Česko, článek 15 odst. 1 směrnice
+ISP nejsou povinni:
+\begin{itemize}
+    \item dohlížet na obsah jimi přenášených nebo ukládaných informaci, ani
+    \item aktivně vyhledávat skutečnosti a okolnosti poukazující na protiprávní obsah informace
+\end{itemize}
+Je tedy zakázán jakýkoliv dohled, včetně zvláštního. Dohled jen pokud ISP sám chce.
+Dohled je technický (automatizovaný) a manuální (lidský faktor)
+Notice-takedown, pokud je ISP upozorněn na protiprávní obsah, musí ho řešit.
 
 \clearpage
 \section{Pojem osobního údaje, titul ke zpracování osobních údajů, zvláštní kategorie osobních údajů}
@@ -147,7 +170,23 @@ Kategorie povinných subjektů dle směrnice NIS:
 \subsubsection*{Základní služby} -- plynovody se soukromým vlastníkem, nemocnice (nejsou tak velké, aby byli v kritické).
 \subsubsection*{Služby a sítě elektronické komunikace} -- mají za povinnost nahlásit kontaktní údaje, plnit direktiva NUKIBU v případe problému.
 \subsubsection*{Digitální služby} -- digitální trhoviště, cloudové služby, vyhledávač. Povinnost hlásit fatální incidenty, nemusí zavést kybernetická opatření.
-%TODO možnost dodělání obrazeku venovych diagramů
+
+\subsection{Definice v zákoně o kybernetické bezpečnosti}
+
+Orgány a osobami, kterým se ukládají povinnosti v oblasti kybernetické bezpečnosti, jsou
+
+\begin{enumerate}[label=\alph*)]
+\item poskytovatel služby elektronických komunikací a subjekt zajišťující síť elektronických komunikací1), pokud není orgánem nebo osobou podle písmene b),
+\item orgán nebo osoba zajišťující významnou síť, pokud nejsou správcem nebo provozovatelem komunikačního systému podle písmene d),
+\item správce a provozovatel informačního systému kritické informační infrastruktury,
+\item správce a provozovatel komunikačního systému kritické informační infrastruktury,
+\item správce a provozovatel významného informačního systému,
+\item správce a provozovatel informačního systému základní služby, pokud nejsou správcem nebo provozovatelem podle písmene c) nebo d),
+\item provozovatel základní služby, pokud není správcem nebo provozovatelem podle písmene f), a
+\item poskytovatel digitální služby.
+\end{enumerate}
+a ještě
+Orgán veřejné moci využívající služeb poskytovatelů cloud computingu
 
 \clearpage
 \section{Bezpečnostní opatření, varování, reaktivní opatření a ochranná opatření dle zákona o kybernetické bezpečnosti}
@@ -167,24 +206,62 @@ Bezprostřední reakce na incident. Rozhodnutí má svého adresáta, musí se i
 \subsection*{Opatření k nápravě}
 Obecný nástroj správného práva, ukládá se když přídě úřad na kontrolu a zjistí nedostatky. Má formu rozhodnutí. Může vstoupit do vztahu mezi ministerstvem (správce) a dodavatelem (ministerstva mají často zle nastavené smlouvy s dodavateli, kteří to lépe zabezpečit nevědí nebo chtějí moc peněz).
 
+
 \clearpage
 \section{Procesní nástroje pro zajištování elektronických důkazů}
+\subsection{Zjednodušeně}
 
-\subsection*{Obecná součinnost §8}
+K zajišťování se často používají nepříliš vhodné nástroje (zastaralý trestní řád). Může tedy dojít k tomu, že je důkaz nevyužitelný. Důkazy mohou být absolutně a relativně neúčinné.
+
+K počítačovým datům se lze dostam třemi základními způsoby:
+\begin{itemize}
+    \item Zajištění zařízení, nebo datových nosičů, na kterých jsou počítačová data uchovávána
+    \item Získání přímého přístupu k počítačovým datům uchovaným v počítačových systémech
+    \item Získání počítačových dat od poskytovatele služeb
+\end{itemize}
+
+\subsubsection{Zajištění zařízení, nebo datových nosičů}
+Jedna z nejefektivnějších metod získání přístupu k datům. Existuje povinnost vydat věc, pokud je důležitá pro trestní řízení a je ji nutné zajistit. Věc musí vydat ten kdo ji momentálně drží, ne jen majitel. Je nutné držitele poučit o následcích neuposlechnutí. Pokud i tam věc nevydá, může být na základě rozhodnutí odňata. Odnětí musí být přítomna nezúčastněná osoba a musí být sepsán protokol.
+
+Věc je možné zajistit také v rámci domovní prohlídky nebo prohlídky jiných prostor (oprávnění k prohlídce). Musí být přítomen znalec a sepsán protokol.
+
+\subsubsection{Získání přístupu k vzdáleným datům}
+
+Pokud jsou informace volně dostupné na internetu, je možné je použít a pořizovat z nich důkazní materiál. Jsou jisté pravidla a musí se sepsat protokol.
+
+Pokud jsou data zabezpečena, lze k nim přistoupit pomocí přístupových údajů, které byly vydány dobrovolně v rámi výslechu či vysvětlení nebo jiným způsobem. Zabezpečená data jsou chápána jako písemnosti a záznamy uchovávané v soukromí. Bez přístupových údajů je možné přistoupit jen po povolení soudce a musí být sepsán protokol.
+
+Pokud není možný odklad, lze k datům přistoupit ihned a podat žádost zpětně. Pokud povolení není do 48 hodin, data musí být zničena.
+
+Data z mailů, chatů se berou jako odposlech.
+
+\subsubsection{Získání dat od ISP}
+Rozděluje se poskytovatel telekomunikačních služeb (data telekomunikačního provozu - telekomunikační tajemství, odposlech za daných podmínek) a poskytovatel služeb informační společnosti.
+
+Dále se rozlišuje i charakter dat, různé typy dat vyžadují různé nástroje.
+
+Data bez povinnosti mlčenlivosti musí vydat kdokoliv. Je povinné vyhovět dožádání orgánů činným v trestním řízení (často to co uživatel zveřejnil, informace o účtech, logy, metadata).
+
+Zabezpečená data se berou jako záznamy uchovávané v soukromí.
+
+Na dožádání můžou být data zachována po určitou dobu. Některé řízení trvá dlouho a hrozí tedy smazaná dat, na požádání poskytovatel data uchová.
+
+\subsection{Detailněji rozebrané jednotlivé možnosti}
+\subsubsection*{Obecná součinnost §8}
 Státní orgány, fyzické a právní osoby a dálší relevantní subjekty mají povinnost vyhovovat na
 dožádání - OČTŘ chce informaci a tak provede dožádání a daný subjekt by na tuto žádost měl
 vyhovět - pokud existuje specifická právní úprava musí se použít ta - plus soudy pak řeší
 proporcionalitu se zásahem do práv suběktu - zjišťování nejzákladnějších informací (obvykle v
 rekognoskační fázy) - pro utajované informace je potřeba příkaz(souhlas) soudce (§8/5 "paragraf 8
 odstavec 5)
-\subsection*{Freezing §7b}
+\subsubsection*{Freezing §7b}
 Vyžaduje to po nás Úmluva o kyberkriminalitě - 2 procesní nástroje
 \begin{itemize}
     \item \textit{freezing} -- hrozí ztráta zníčení nebo pozměnění dat důležitých pro třestní řízení, lze nařídít osobě která je drží, aby je uchovala v nezměněné podobě pro potřeby dálšího vydání vyšetřovatelům (při phishingu zamrznutí nasbírané databáze)
     \item \textit{blocking} -- příkaz na provozovatele služby, aby zablokoval přístup užívatele k daný datům (max 90 dnů), poskytovately služby (ten kdo freezing provádí) musí být vysvětleno co má být zmraženo, proč a na jak dlouhou dobu
 \end{itemize}
 
-\subsection*{Odposlech a záznam telekomunikačního provozu §88}
+\subsubsection*{Odposlech a záznam telekomunikačního provozu §88}
 při vedení TŘ pro zločin s odnětím svobody min. 8 let nebo pro vyjmenované TČ nebo pro
 umyslné TČ k jehož stíhání nás zavazuje mezinárodní smlouva
 \begin{itemize}
@@ -198,20 +275,20 @@ jiné úkony) - potřeba příkaz soudu - nebo i bez soudu se souhlasem uživate
 vydat i dobudoucna (i když OČTŘ neví zda TČ probíhá) musí to však být stále dobře odůvodněné
 \end{itemize}
 
-\subsection*{Zajištění provozních a lokalizačních údajů §88a odst. 1}
+\subsubsection*{Zajištění provozních a lokalizačních údajů §88a odst. 1}
 metadata k tekoucí komunikaci - na základe příkazu soudu - pokud úmyslný TČ min 3 roky nebo
 vyjmenované nebo TČ vyhlášený mezinározní smlouvou - pokud učelu nelze dosáhnout jinak -
 nutno zajistit aby tyto údaje byly uloženy poskytovatelem - na to máme úpravu Zákona o
 elektronických komunikacích
 
-\subsection*{Data retention §97 - Zákon o elektronické komunikaci (ZoEK)}
+\subsubsection*{Data retention §97 - Zákon o elektronické komunikaci (ZoEK)}
 ZoEK říká co jsou provozní a lokalizační údaje:
 \begin{itemize}
     \item \textbf{metadata o komunikaci} - údaje by neměli nic říkat o přenášených datech (poskytovatel by třeba měl odfiltrovat data obsažená v URL třeba z formulářů)
     \item  poskytovatel je na základě data retention povinen uchovávat provozní a lokalizační údaje po dobu 6 měsíců od doby uskutečnení daného komunikačního provozu (za to poskytovatel dostává peníze), nesmí být poskytovatelem zneužita. Pokud nejsou po 6 měsících vyšetřovately požadovana musí je tekomunikační operátor zkartovat
 \end{itemize}
 
-\subsection*{Sledování osob a věcí 158d trestního řádu}
+\subsubsection*{Sledování osob a věcí 158d trestního řádu}
 Pátrací prostředek - primárně určen pro zajištění operativních informací -> zjistit co se
 stalo, ale jé na zjištění důkazů pro soud (tak tomu bylo původně)
 
@@ -224,7 +301,7 @@ zajištění el. dat jako důkazů. Postup:
 \end{enumerate}
 O vydání příkazu o sledování osob a věcí rozhoduje státní zástupce prostřednictvím povolení - pokud jsou to ale soukromá nebo utajovaná data je potřeba předchozí povolení soudce - dá se udělat neodkladný úkol (získám telefon a neodkladně se kouknu na data uložená na vzdálené službě) pokud pětně bude soud souhlasit.
 
-\subsection*{Domovní prohlídka a prohlídka jiných prostor}
+\subsubsection*{Domovní prohlídka a prohlídka jiných prostor}
 Postup:
 \begin{itemize}
     \item Soudce vydá příkaz k realizaci domovní prohlídky
@@ -242,13 +319,13 @@ Procesní podmínky za kterých může být domovní prohlídka realizovaná:
 Aby přistihly zločince se zapnutím PC a přihlášením do vzdálené služby - dá se přizvat znalec pro specifickou
 činnost se specifickým vybavením - musí se dodržovat specifické postupy aby nebyly důkazy znehodnocovány - zapečetění, zabalení do pytle za přítomnosti nezúčastněné osoby.
 
-\subsection*{Výdání a odnětí věci}
+\subsubsection*{Výdání a odnětí věci}
 Nástroj pro zajištění věci od člověka - každý má Ediční povinnost (na požádání musí vydat drženou věc) - OČTŘ ho vyzvou k předložení věci - pokud odmítně věc vydat může mu být odejmuta (pořádkové opatřené) stačí rozhodnutí státního zástupce - při odejmutí věci by měla být přítomna nezúčastněná osoba - pořizuje se protokol - osobě se dá potvrzení o odejmutí - pokud jsou na zařízení data o kterých je povinná mlčenlivost (utajované informace, advokátní tajemství) je specifický postup - pouze věci né data - ovšem pokud je vydán např telefon tak naněm může být provedena forenzní analýza a tedy je možno se dostat k datům uloženým na zařízení
 
-\subsection*{Osobní prohlídka}
+\subsubsection*{Osobní prohlídka}
 domnívám (jako OČTŘ) se že daná osoba má u sebe věc důležitou pro TŘ, ale nevím to jistě -> zahájím osobní prohlídku - na základě rozhodnutí soudu nebo státního zástupce - pokud je to neopakovatelný úkon můžu osobní prohlídku provéset i bez příkazu (zatknu osobu co utíká z místa činu a mám podezření že u sebe má zbraň se kterou páchal TČ) musím pak ale souhlas zpětně získat - je to zhojitelná vada neučinného důkazu - úkonu by měl předcházet předchozí výslech (jako u domovní prohlídky) což bych osobu měl požádat zda věč/předmět u sebe má a zda mi ho nevydá.
 
-\subsection*{Ohledání věci}
+\subsubsection*{Ohledání věci}
 pozorování a sbírání informací za účelem objasnění věci - protokol co bylo vypozorováno a jak - typicky při domovních a osobních prohlídkách - na místě najdu spuštěný počítač a na místě chci provést jeho ohledání - v takovém případě s kamerou nebo foťákem provádím záznam toho co jsem objevil.
 
 Nemůžu provést obecné ohledání věci - např. když ohledávám na místě zaplé PC a bude tam probíhající komunikace a já bych ji chtěl sledovat (odposlech má větší zásah do práv), tak to nemůžu udělat jen na základě ohledání věci (generovalo by to neúčinný důkaz) - avšak policie si proto může předem připravit příkazy- například existují příkazy k domovní prohlídce, odposlechu a sledování osob a věcí a tím pádem může získávat všechno na místě.
