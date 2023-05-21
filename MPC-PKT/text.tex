@@ -140,7 +140,7 @@ Protokol ICMP je servisní protokol (nepřenáší žádná uživatelská data).
 
 
 \clearpage
-\section{Protokoly transportní vrstvy a jejich srovnání: UDP (User Datagram Protocol), Protokol TCP (Transmission Control Protocol), SCTP (Stream Control Transmission Protocol).}
+\section{Protokoly transportní vrstvy a jejich srovnání: UDP (User Datagram Protocol), Protokol TCP (Transmission Control Protocol), SCTP (Stream Control Transmission Protocol), protokol QUIC.}
 
 \subsection{UDP user datagram protocol}
 
@@ -253,11 +253,36 @@ Ukončování spojení probíhá pomocí 3-way handshake a ukončuje se obousmě
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.7\textwidth]{obrazky/034.png}
+    \includegraphics[width=0.6\textwidth]{obrazky/034.png}
 \end{figure}
 
+\subsection{QUIC}
+
+Protokol QUIC je podobný TCP a SCTP.
+Umožňuje pracovat se spojením které vytváří, udržuje a ukončuje a zároveň během tohoto spojení umí přenášet více nezávislých proudů dat.
+QUIC umožňuje řídit datový tok jak na úrovni celého spojení tak na úrovni jednotlivých proudů.
+Počet proudů se nemusí ustanovit na začátku spojení.
+
+Dále se snaží snížit čas, který souvisí s režií navazování spojení před skutečným zahájením přenosu dat.
+Při navazování spojení spojuje dohromady navazování spojení a ustanovení kryptografického přenosového kanálu.
+
+QUIC se umí vyrovnat se změnou adres na síťové nebo transportní vrstvě během existence spojení.
+Nakonec velikost datové části paketu je menší jak u TCP, jelikož využívá protokol UDP a snaží se vyhnout fragmentaci.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{obrazky/035.png}
+\end{figure}
+
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.55\textwidth]{obrazky/036.png}
+\end{figure}
+
+
 \clearpage
-\section{Jmenný systém DNS (Domain Name System): důvody existence, popis fungování protokolu, úloha resolveru, kořenové servery DNS. Protokoly MDNS (Multicast DNS) a LLMNR (Link-Local Multicast Name Resolution).}
+\section{Jmenný systém DNS (Domain Name System): důvody existence, popis fungování protokolu, úloha resolveru, kořenové servery DNS, DNSsec. Protokoly MDNS (Multicast DNS) a LLMNR (Link-Local Multicast Name Resolution).}
 
 \subsection{Důvody existence}
 Překládá těžko zapamatovatelné IP adresy na~jednodušeji zapamatovatelná jména v~podobě řetězce znaků.
@@ -310,6 +335,17 @@ Jejich hlavním úkolem je přesměrování DNs dotazů na jednotlivé DNS serve
     \centering
     \includegraphics[width=0.7\textwidth]{obrazky/040.png}
 \end{figure}
+
+\subsection{DNSsec}
+
+DNSsec poskytuje rozšíření DNS o systém pro ověření autentičnosti obdržených záznamů.
+Záznamy jsou digitálně podepisovány, takže pokud důvěřujeme autorovi podpisu, tak můžeme důvěřovat i poskytnuté informaci.
+Data nejsou šifrována pouze podepsána.
+DNSsec přidává doplňující informace v záznamech jako jsou RRSIG (Resource Record Signature, dig. podpis), DNSKEY (DNS Public Key), DS (Delegation or Designated Signer) a NSEC/NSEC3 sloužící jako záznam zasílaný v odpovědi zpět v případě, že doména je DNS serveru neznámá.
+
+
+
+
 
 \subsection{MDNS Multicast DNS}
 
@@ -842,7 +878,7 @@ Na rozdíl od tranzitu, kdy přes toto spojení může procházet i přenos smě
 
 
 \clearpage
-\section{Teorie konečných automatů a její použití v oblasti komunikačních protokolů, způsoby reprezentace.}
+\section{Teorie konečných automatů a její použití v oblasti komunikačních protokolů, způsoby grafické reprezentace.}
 
 Každý systém lze popsat pomocí stavů vstupních veličin X, kde X se mění v závislosti na čase a pomocí výstupních veličin Y, jejich hodnoty jsou zpravidla závislé na vstupních veličinách.
 Zároveň se dá předpokládat že v systému existují vnitřní stavy označované jako Q.
