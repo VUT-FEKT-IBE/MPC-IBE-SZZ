@@ -394,16 +394,19 @@ Oba jsou prokazatelně NP-těžké.
 Mřížky se používají buď s chybami (\emph{Learning with Errors}), R-LWE (\emph{Ring-LWE}), M-LWE (\emph{Module-LWE}) nebo se~zaokrouhlováním (\emph{LWR}).
 Jejich využití je především v~asymetrickém šifrování, výměně klíčů, digitálních podpisech, homomorfním šifrování nebo v~důkazech nulových znalostí.
 
-Mezi praktické příklady patří kryptosystémy Kyber, Saber (KEM) a Dilithium (Sig).
+Mezi praktické příklady patří kryptosystémy GGH (Enc, Sig), Dilithium (Sig), Kyber, Saber (KEM).
+
 
 \subsection{McEliece}
 
-Jde o~asymetrický systém postavený nad~protichybovým kódováním (\emph{binary Goppa code}) s~NP-těžkou obtížností.
+Jde o~asymetrický systém $[n;k;t]$ postavený nad~protichybovým kódováním (\emph{binary Goppa code}) s~NP-těžkou obtížností.
 Tvoří se náhodnou binární regulární maticí $\textbf{S}_{k \times k}$, generující maticí $\textbf{G}_{k \times n}$, náhodnou permutační maticí $\textbf{P}_{n \times n}$ a výslednou maticí $\textbf{G'}_{k \times n} = \textbf{SGP}$.
+Veřejným klíčem je $[\textbf{G'}, t]$, soukromým $[S, G, P]$.
 
 (Pravděpodobnostní) šifrování: $c = m\textbf{G'} + z$; (deterministické) dešifrování: $m' = D(c\textbf{P}^{-1})\textbf{S}^{-1}$ (kde $D$ je dekódovací algoritmus).
 Privátním klíčem je~dekódovací algoritmus.
 Proti RSA jde o~systém rychlejší, ale k~praktickému využití vyžaduje výrazně větší klíče ($| k_\text{pub} | \geq$ 512~Kb; resp. $\geq$ 6~Mb--8~Mb pro~postkvantovou bezpečnost).
+
 
 \subsection{Lamport One Time Signature}
 
@@ -424,6 +427,8 @@ Paměťovou náročnost lze zmírnit použitím Merkleho stromu.
     \includegraphics[width=\textwidth]{img/hash-merkle-tree}
     \caption[Merkleho strom pro~hashe]{Merkleho strom pro~veřejné klíče. Je zveřejněn pouze vršek stromu. S~podpisem L2 se zveřejní pouze ty hashe které jsou nutné k~ověření vrcholu (0-0, 1).}
 \end{figure}
+
+% TODO Možná ještě Winternitz OTS?
 
 
 \clearpage
