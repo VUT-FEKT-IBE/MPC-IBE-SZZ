@@ -54,16 +54,16 @@ Vybírají se právě dva předměty.
 
 ### MPC-PKT
 
-- [ ] TCP/IP: Vazba mezi RM ISO/OSI a TCP/IP. Filozofie vzájemného propojování sítí. Souběh aplikací a zapouzdřování přenášených dat.
-- [ ] Úloha IPv4 (Internet Protocol verze 4) vrstvy. IPv4 adresy. IPv4 datagram. IP tunelování. Protokol ICMPv4 (Internet Control Message Protocol verze 4).
-- [ ] Protokoly transportní vrstvy a jejich srovnání: UDP (User Datagram Protocol), Protokol TCP (Transmission Control Protocol), SCTP (Stream Control Transmission Protocol).
-- [ ] Jmenný systém DNS (Domain Name System): důvody existence, popis fungování protokolu, úloha resolveru, kořenové servery DNS. Protokoly MDNS (Multicast DNS) a LLMNR (Link-Local Multicast Name Resolution).
-- [ ] Princip protokolů zálohování výchozí brány. Protokoly HSRP (Hot Standby Router Protocol) a VRRP (Virtual Router Redundancy Protocol).
-- [ ] Multicastový přenos dat, adresování, protokoly, směrování multicastu.
-- [ ] IPv6 (Internet Protocol verze 6): vlastnosti protokolu a důvody existence, přechodové mechanizmy, datagram a systém rozšiřujících záhlaví, adresace.
-- [ ] IPv6 (Internet Protocol verze 6): funkce ICMPv6 protokolu, popis automatické konfigurace v IPv6 síti, fungování multicastu v IPv6.
-- [ ] Autonomní systémy. Protokoly IGP (Interior Gateway Protocol) a EGP (Exterior Gateway Protocol). Základní charakteristika protokolu BGP (Border Gateway Protocol). Multihoming, peering a tranzit.
-- [ ] Teorie konečných automatů a její použití v oblasti komunikačních protokolů, způsoby reprezentace.
+- [x] TCP/IP: Vazba mezi RM ISO/OSI a TCP/IP. Filozofie vzájemného propojování sítí. Souběh aplikací a zapouzdřování přenášených dat.
+- [x] Úloha IPv4 (Internet Protocol verze 4) vrstvy. IPv4 adresy. IPv4 datagram. IP tunelování. Protokol ICMPv4 (Internet Control Message Protocol verze 4).
+- [x] Protokoly transportní vrstvy a jejich srovnání: UDP (User Datagram Protocol), Protokol TCP (Transmission Control Protocol), SCTP (Stream Control Transmission Protocol).
+- [x] Jmenný systém DNS (Domain Name System): důvody existence, popis fungování protokolu, úloha resolveru, kořenové servery DNS. Protokoly MDNS (Multicast DNS) a LLMNR (Link-Local Multicast Name Resolution).
+- [x] Princip protokolů zálohování výchozí brány. Protokoly HSRP (Hot Standby Router Protocol) a VRRP (Virtual Router Redundancy Protocol).
+- [x] Multicastový přenos dat, adresování, protokoly, směrování multicastu.
+- [x] IPv6 (Internet Protocol verze 6): vlastnosti protokolu a důvody existence, přechodové mechanizmy, datagram a systém rozšiřujících záhlaví, adresace.
+- [x] IPv6 (Internet Protocol verze 6): funkce ICMPv6 protokolu, popis automatické konfigurace v IPv6 síti, fungování multicastu v IPv6.
+- [x] Autonomní systémy. Protokoly IGP (Interior Gateway Protocol) a EGP (Exterior Gateway Protocol). Základní charakteristika protokolu BGP (Border Gateway Protocol). Multihoming, peering a tranzit.
+- [x] Teorie konečných automatů a její použití v oblasti komunikačních protokolů, způsoby reprezentace.
 
 ### MPC-CT3
 
