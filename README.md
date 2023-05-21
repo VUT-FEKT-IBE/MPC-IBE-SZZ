@@ -98,8 +98,8 @@ Vybírají se právě dva předměty.
 - [x] Režim omezení odpovědnosti poskytovatelů služeb informační společnosti typu mere conduit, caching a hosting
 - [x] Aktivní povinnosti poskytovatelů služeb informační společnosti (monitoring, filtrování)
 - [x] Pojem osobního údaje, titul ke zpracování osobních údajů, zvláštní kategorie osobních údajů
-- [ ] Právní postavení správce a zpracovatele osobních údajů
-- [ ] Práva subjektů osobních údajů
+- [x] Právní postavení správce a zpracovatele osobních údajů
+- [x] Práva subjektů osobních údajů
 - [x] Povinné subjekty dle zákona o kybernetické bezpečnosti
 - [x] Bezpečnostní opatření, varování, reaktivní opatření a ochranná opatření dle zákona o kybernetické bezpečnosti
 - [x] Procesní nástroje pro zajištování elektronických důkazů

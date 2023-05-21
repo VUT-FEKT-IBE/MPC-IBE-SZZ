@@ -11,37 +11,45 @@ Tyto principy vychází především z~faktu, že ISP nemohou za~obsah odpovída
 
 Kdy služba spoluzodpovídá je stanoveno v~autorském zákoně, v~občanském zákoníku a~dalších relevantních zdrojích; Směrnice upravuje kdy poskytovatelé odpovědní nejsou.
 
-\subsection{Mere Conduit (Prostý přenos)}
-Patří sem -- poskytovatel připojení (např. wifi VUT).
-Poskytovatel není odpovědný, pokud
-(a) není původcem přenosu,
-(b) nevolí příjemce přenášené informace a
-(c) nevolí a~nezmění obsah přenášené informace (data jen přenáší).
 
-Jednotlivé členské státy mohou přikázat konkrétní komunikaci přerušit (v~ČR jde například o~nelicencované hazardní hry online), ale nesmí přikázat prohlížet obsah posílaných správ a tím kontrolovat aktivitu.
+\subsection{Mere Conduit (Prostý přenos)}
+
+Především poskytovatele připojení (ISP, veřejná nebo firemní Wi-Fi).
+Poskytovatel \emph{není} odpovědný, pokud
+\begin{enumerate}[label=\alph*)]
+\item není původcem přenosu,
+\item nevolí příjemce přenášené informace a
+\item nevolí a~nezmění obsah přenášené informace (data jen přenáší).
+\end{enumerate}
+
+Jednotlivé členské státy mohou přikázat konkrétní komunikaci přerušit (v~ČR jde například o~nelicencované hazardní hry online), ale nesmí přikázat prohlížet obsah posílaných dat a tím kontrolovat aktivitu.
 
 \subsection{Caching, mirroring (Ukládání v~mezipaměti)}
-Jedná se o ISP, který má 1 server v Amerika a v Európe druhý na cachování.
-Poskytovatel není odpovědný, pokud
-(a) informaci nezměnil,
-(b) vyhovuje podmínkám přístupu k~informaci,
-(c) dodržuje pravidla o~aktualizaci informace,
-(d) nepřekročí povolené používání technologie obecně uznávané a~používané v~průmyslu s~cílem získat údaje o~užívání a
-(e) ihned přijme opatření vedoucí k~odstranění jím uložené informace.
 
-V případe, že jsou na hlavním serveri protiprávní data, je nutno je odstranit i v cachi.
+Jedná se především o~CDN nebo globálně dostupné služby (cloud storage).
+Poskytovatel \emph{není} odpovědný, pokud
+\begin{enumerate}[label=\alph*)]
+\item informaci nezměnil,
+\item vyhovuje podmínkám přístupu k~informaci,
+\item dodržuje pravidla o~aktualizaci informace,
+\item nepřekročí povolené používání technologie obecně uznávané a~používané v~průmyslu s~cílem získat údaje o~užívání a
+\item ihned přijme opatření vedoucí k~odstranění jím uložené informace.
+\end{enumerate}
+
+Data smazaná na~hlavním serveru musí být odstraněna i~z~cachí a mezipamětí.
 
 \subsection{Hosting (Shromažďování informací)}
 
-Hosting je služba pracující s~daty generovanými uživateli (facebook, twittter\dots).
+Hosting je služba pracující s~daty generovanými uživateli (Facebook, Twittter, diskusní fórum, veřejný cloud, \dots).
 
-Poskytovatel \emph{je} odpovědný, pokud se seznámí s~protiprávním jednáním a~přesto nekoná: jde o~princip \emph{Notice -- Takedown}.
+Poskytovatel \emph{je} odpovědný, pokud se seznámí s~protiprávním jednáním a~přesto nekoná: jde o~princip \emph{notice--takedown}.
 Musí konat okamžitě (\emph{expediciously}) jakmile se o~problematickém stavu dozví%
 \footnote{
-	V~Německu je \emph{okamžitě} chápáno z~hlediska poskytovatele.
+	V~Německu je \emph{okamžitě} chápáno z~hlediska poskytovatele (např.~odpovědná osoba na~dovolené se do~času nepočítá).
 	U~nás se takový případ ještě k~soudu nedostal.
 }%
 .
+
 V~Itálii a~Španělsku musí protiprávní skutečnost oznámit stát, ve~většině členských států to může udělat kdokoliv.
 V~USA to musí být ten jehož práva jsou dotčena.
 
@@ -50,31 +58,33 @@ V~USA to musí být ten jehož práva jsou dotčena.
 % Delfi AS v. Estonia ("Posuzuje se doba od protiprávního jednání, ne od jeho nahlášení, protože provozovatel musel o urážlivých komentářích vědět.")
 % eBay, Uber & Airbnb a jejich umístění na škále zprostředkovatel--poskytovatel
 
+
 \clearpage
 \section{Aktivní povinnosti poskytovatelů služeb informační společnosti (monitoring, filtrování)}
-% Snad je to dobře kekw
-Není možné chtít dohled nad daty (fyzicky i ekonomicky). Vznikla opatření kdy není odpovědnost (viz 1.). ISP tedy neodpovídá za obsah.
-Členské státy nesmí uložit ISP typu mere conduit, ... obecnou povinnost dohlížet na jimi přenášené či ukládané informace nebo obecnou povinnost vyhledávat skutečnosti a okolnosti poukazující na protiprávní činnost. Zákaz se netýká zvláštního dohledu (Rolex vs ricardo.de, dohled nad jedním uživatelem apod.).
-Obecný dohled je takový, jenž probíhal:
+
+Není možné požadovat aktivní dohled poskytovatele nad daty, ani přikázat vyhledávat skutečnosti a okolnosti poukazující na~protiprávní činnost.
+Tento zákaz se ale netýká zvláštního dohledu (případ Rolex v. ricardo.de, dohled nad~jedním uživatelem, \dots).
+
+Obecný dohled probíhá:
 \begin{itemize}
-    \item na všech přenášených či ukládaných datech
-    \item vůči všem uživatelům bez rozdílu
-    \item preventivně
-    \item výlučně na náklady poskytovatele
-    \item bez časového omezení
+    \item na~všech přenášených či ukládaných datech,
+    \item vůči všem uživatelům bez rozdílu,
+    \item preventivně,
+    \item výlučně na náklady poskytovatele,
+    \item bez~časového omezení.
 \end{itemize}
+Jedná se o zásah do~práv ISP (právo na~svobodu podnikání) a do~práv třetích stran (svoboda projevu a ochrana soukromí).
 
-Jedná se o zásah do práv ISP (právo na svobodu podnikání) a do práv třetích osob/uživatelů (svoboda projevu a ochrana soukromí).
-
-Česko, článek 15 odst. 1 směrnice
-ISP nejsou povinni:
+U~nás (čl. 15, odst.~1) ISP nejsou povinni:
 \begin{itemize}
     \item dohlížet na obsah jimi přenášených nebo ukládaných informaci, ani
     \item aktivně vyhledávat skutečnosti a okolnosti poukazující na protiprávní obsah informace
 \end{itemize}
-Je tedy zakázán jakýkoliv dohled, včetně zvláštního. Dohled jen pokud ISP sám chce.
-Dohled je technický (automatizovaný) a manuální (lidský faktor)
-Notice-takedown, pokud je ISP upozorněn na protiprávní obsah, musí ho řešit.
+
+Není tedy možné nakázat jakýkoliv dohled, včetně zvláštního; ISP sám ale dohled (ať už automatizovaný nebo manuální) realizovat může.
+
+Protože se odpovědnost řídí principem \emph{notice--takedown}, pokud je ISP upozorněn na~protiprávní obsah, musí ho řešit.
+
 
 \clearpage
 \section{Pojem osobního údaje, titul ke zpracování osobních údajů, zvláštní kategorie osobních údajů}
@@ -90,7 +100,7 @@ Jde například o~jméno, identifikační číslo, lokační údaje, síťový i
 
 \subsection{Zpracování osobních údajů}
 
-Článek 6 vymezuje zákonné tituly -- podmínky, ze~kterých alespoň jedna musí být platná, aby se jednalo o~zpracovnání dle~GDPR:
+Článek 6 Nařízení vymezuje zákonné tituly -- podmínky, ze~kterých alespoň jedna musí být platná, aby se jednalo o~zpracovnání dle~GDPR:
 
 \begin{enumerate}[label=\alph*)]
 \item subjekt udělil souhlas se~zpracováním,
@@ -106,21 +116,24 @@ Musí být shromažďovány pro~určité, výslovně vyjádřené legitimní ú�
 Musí být přiměřené, relevantní a~omezené na~nezbytný rozsah ve~vztahu k~účelu pro~který jsou zpracovávány (tzv. \emph{minimalizace údajů}).
 Nesmí být zpracovávány po~dobu delší než nezbytnou pro~účely, pro~které jsou zpracovávány.
 
-Zpracování pro~osobní potřebu se pod~Nařízení nevztahuje (viz důvod č.~18).
-Pod~tuto kategorii spadají například čísla kontaktů v~telefonu nebo podpisy na~výsledcích tvorby umělecké činnosti%
+Dle~důvodu 18 Nařízení se nevztahuje zpracování pro~osobní potřebu.
+Pod~tento důvod spadají například čísla kontaktů v~telefonu nebo podpisy na~výsledcích tvorby umělecké činnosti%
 \footnote{V~době zavádění GDPR se šířily poplašné zprávy, že není možné zveřejňovat autory výkresů v~mateřských školách.}.
 
 \subsection{Zvláštní kategorie osobních údajů}
-Např. údaje o zdravotním stavu, informace o očkování -- souhlas na zpracování musí být\textbf{výslovný} (explicitně daný).
-Zvláštní kategorie osobních údajů by dle důvodu č.~53 měly být zpracovávány pouze
 
-\begin{itemize}
+Jde o~údaje o~zdravotním stavu (očkování, zdravotní historie).
+Souhlas musí být výslovný a explicitní, nestačí mít zákonný důvod.
+
+Zvláštní kategorie osobních údajů by dle důvodu~53 Nařízení měly být zpracovávány pouze
+
+\begin{enumerate}[label=\alph*)]
 \item pro~zdravotní účely, je-li jich třeba k~dosáhnutí prospěchu fyzických osob nebo společnosti jako celku,
 \item pro~účely monitorování a~varování nebo pro~účely archivace ve~veřejném zájmu,
 \item pro~účely vědeckého či~historickéhov výzkumu,
 \item pro~statistické účely na~základě práva Unie nebo členského státu,
 \item pro~studie prováděné ve~veřejném zájmu v~oblasti veřejného zdraví.
-\end{itemize}
+\end{enumerate}
 
 Zakazuje se zpracování osobních údajů, které vypovídají o~rasovém či etnickém původu, politických názorech, náboženském vyznání či filozofickém přesvědčení [\dots], a~zpracování genetických údajů, biometrických údajů za~účelem jedinečné identifikace fyzické osoby a~údajů o~zdravotním stavu či o~sexuálním životě nebo sexuální orientaci fyzické osoby.
 
@@ -141,198 +154,325 @@ Tento zákaz neplatí, pokud se uplatní jeden z~následujících případů (vi
 
 \clearpage
 \section{Právní postavení správce a zpracovatele osobních údajů}
-\subsection*{Správce}
-Osoba, která určuje účel zpracování osobních údajů. Musí definovat, jaké údaje, na základě čeho (titul), proč (účel), jako (proces). Všechny informace musí být řádně zdokumentovány.
 
-Soud potvrdil, že i Google je správce osobních údajů.
+{}Relevantní právní předpisy:
+\\\href{https://eur-lex.europa.eu/legal-content/CS/ALL/?uri=CELEX:32016R0679#d1e3011-1-1
+}{Nařízení 2016/679 (GDPR), kapitola IV: Správce a zpracovatel}
 
-\subsection*{Zpracovatel}
-Subjekt, který je  pověřen správcem na zpracování osobních údajů. V IT se jedná o provozovatele.
+\subsection{Správce}
+
+Správce je osoba (fyzická, právnická, orgán veřejné moci), která určuje účel zpracování osobních údajů.
+Více správců může spravovat jedna data; každý z~nich zodpovídá sám za~sebe.
+
+Musí definovat jaké údaje sbírá, na~základě čeho (titul), proč (účel) a~jak (proces).
+Všechny tyto informace musí být řádně zdokumentovány.
+Mohou být zpracovávány pouze osobní údaje nezbytně nutné pro konkrétní účel zpracování.
+Tyto údaje nesmí být standardně bez zásahu člověka zpřístupněny neomezenému počtu fyzických osob.
+
+V~okamžiku získání osobních údajů správce (dle článku 13 Nařízení) poskytne:
+
+\begin{itemize}
+    \item totožnost a~kontaktní údaje správce (a~jeho zástupce), případně kontaktní údaje pověřence pro~ochranu osobních údajů,
+    \item účely zpracování a~jejich právní základ,
+    \item příjemce nebo kategorie příjemců osobních údajů,
+    \item úmysl předat osobní údaje do~třetí země nebo mezinárodní organizaci,
+    \item dobu, po~kterou budou osobní údaje uloženy, případně kritéria pro~stanovení takové doby,
+    \item existenci práva požadovat přístup k~osobním údajům týkajícím se subjektu údajů,
+    \item existenci práva odvolat souhlas, podat stížnost u~dozorového úřadu,
+    \item jestli jde o~zákonný nebo smluvní požadavek, zda má subjekt možnost údaje neposkytnout a~důsledky neposkytnutí.
+\end{itemize}
+
+Správce je odpovědný za~dodržení zásad zpracování, dodržení povinností upravených nařízením a~za~zabezpečení údajů.
+Má povinnost aplikovat standardní ochrany osobních údajů, hlásit případy porušení zabezpečení údajů příslušnému úřadu a postiženým osobám nebo vést záznamy o~svých činnostech.
+
+
+\subsection{Zpracovatel}
+
+Zpracovatel je subjekt, který je pověřen správcem na~zpracování osobních údajů.
+Nemusí existovat, nebo jich může být více.
+Pokud začne rozhodovat o~účelu dat sám, stává se správcem.
+Mezi těmito entitami musí být vždy sepsána písemná smlouva ve~které je stanoven předmět a doba trvání zpracování, povaha a~účel zpracování, typ a~kategorie údajů, práva a~povinnosti.
+
+Zpracovatel je povinný zpracovávat údaje pouze na~základě pokynů správce, zajistit mlčenlivost osob zpracovávající údaje, zabezpečovat údaje stejně jako správce, při~rozhodnutí správce (nebo při~ukončení služeb) údaje smaže či vrátí správci.
+
+Existují výjimky při~kterých je možné osobní údaje zpracovávat bez souhlasu subjektu:
+\begin{itemize}
+    \item plnění smlouvy, právní povinnosti (uchování faktury),
+    \item výkon veřejné moci,
+    \item ochrana~životně důležitých zájmů subjektu údajů nebo jiné FO (lékař uschovává informace o~léčbě),
+    \item plnění úkolu prováděného ve~veřejném zájmu,
+    \item plnění nezbytné pro~účely oprávněných zájmů příslušného správce (půjčování peněz).
+\end{itemize}
+
 
 \clearpage
 \section{Práva subjektů osobních údajů}
-Subjekt údajů ==> \uv{člověk}
-Práva subjektů:
-\begin{itemize}
-        \item právo na informace (jaký je účel? jaký je rozsah zpracování?).
-        \item přístup, opravu (když jsou údaje chybné).
-        \item vymazání (právo byť zapomenutý => i když se dodržuje právní důvod na uchovaní, když to subjekt už více nechce,  je silnější).
-        \item omezení zpracování, přenos, námitka.
-\end{itemize}
 
-\clearpage
-\section{Povinné subjekty dle zákona o kybernetické bezpečnosti}
-Kategorie povinných subjektů dle směrnice NIS:
+{}Relevantní právní předpisy:
+\\\href{https://eur-lex.europa.eu/legal-content/CS/ALL/?uri=CELEX:32016R0679#d1e2150-1-1
+}{Nařízení 2016/679 (GDPR), kapitola III: Subjekt}
 
-\subsubsection*{Kritická informační infrastruktura} -- systémy, na kterých je závislá informační struktura (český velký kravín, DNS).
-\subsubsection*{Významné informační systémy} -- systémy, které kdyby nefungovali, způsobili by významnější problémy (informační systém VŠ).
-\subsubsection*{Významné sítě} -- kritérium zahraniční konektivity.
-\subsubsection*{Základní služby} -- plynovody se soukromým vlastníkem, nemocnice (nejsou tak velké, aby byli v kritické).
-\subsubsection*{Služby a sítě elektronické komunikace} -- mají za povinnost nahlásit kontaktní údaje, plnit direktiva NUKIBU v případe problému.
-\subsubsection*{Digitální služby} -- digitální trhoviště, cloudové služby, vyhledávač. Povinnost hlásit fatální incidenty, nemusí zavést kybernetická opatření.
+Subjektem údajů je člověk.
 
-\subsection{Definice v zákoně o kybernetické bezpečnosti}
 
-Orgány a osobami, kterým se ukládají povinnosti v oblasti kybernetické bezpečnosti, jsou
+\paragraph{Informování}
+
+Subjekt má právo být informován o~sběru osobních údajů (čl.~13, 14), na~přístup k~údajům (čl.~15) a na~opravu nepřesných a na~doplnění neúplných osobních údajů (čl.~16).
+
+
+\paragraph{Výmaz a~omezení, přenos}
+
+Subjekt má právo na~výmaz (\enquote{právo být zapomenut}) dle čl.~17, pokud
 
 \begin{enumerate}[label=\alph*)]
-\item poskytovatel služby elektronických komunikací a subjekt zajišťující síť elektronických komunikací1), pokud není orgánem nebo osobou podle písmene b),
-\item orgán nebo osoba zajišťující významnou síť, pokud nejsou správcem nebo provozovatelem komunikačního systému podle písmene d),
+\item jeho údaje již nejsou potřebné pro~deklarované účely,
+\item subjekt odvolává souhlas,
+\item subjekt vznese námitku proti~zpracování,
+\item údaje subjektu jsou zpracovávány protiprávně.
+\end{enumerate}
+
+Toto právo se neuplatní, pokud je zpracování nezbytené pro~výkon práva na~svobodu projevu a~informace, pro~splnění právní povinnosti nebo pro~splnění úkolu provedeného ve~veřejném zájmu nebo při~výkonu veřejné moci nebo pro~určení, výkon nebo obhajobu právních nároků.
+
+Dle čl.~18 má právo na~omezení zpracování, pokud
+
+\begin{enumerate}[label=\alph*)]
+\item subjekt popírá přesnost osobních údajů (to na~dobu potřebnou k~ověření přesnosti správcem),
+\item zpracování je~protiprávní a~subjekt odmítá výmaz osobních údajů,
+\item nebo správce údaje nepotřebuje, ale subjekt je požaduje pro výkon právních nároků.
+\end{enumerate}
+
+Dle čl.~20 má právo na~přenositelnost údajů jinému správci údajů.
+
+\paragraph{Marketing, profilování a~automatické zpracování}
+
+Dle článku 21 má právo vznést námitku proti~zpracování včetně profilování.
+Subjekt má vždy právo vznést námitku proti~zpracování pro~účely marketingu.
+
+Subjekt má právo nebýt předmětem rozhodnutí založeného výhradně na~automatizovaném zpracování.
+Toto právo se nepoužije pokud to není nezbytné k~uzavření nebo plnění smlouvy, pokud je to povoleno právem Unie/členského státu nebo pokud je založeno na~výslovném souhlasu subjektu.
+
+
+\clearpage
+\section{Povinné subjekty dle zákona o~kybernetické bezpečnosti}
+
+{}Relevantní právní předpisy:
+\\\href{https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=uriserv:OJ.L_.2016.194.01.0001.01.CES
+}{Směrnice 2016/1148 (NIS) o~opatřeních k~zajištění vysoké společné úrovně bezpečnosti sítí a~informačních systémů}
+\\\href{https://www.zakonyprolidi.cz/cs/2014-181}{Zákon 181/2014 Sb. o~kybernetické bezpečnosti}
+
+Kategorie povinných subjektů dle Zákona jsou:
+
+\begin{itemize}
+\item kritická informační infrastruktura: systémy na~kterých je závislá informační infrastruktura,
+\item významné informační systémy: systémy které by při~výpadku způsobily významnější problémy (informační systém vysoké školy, interní vládní systém),
+\item významné sítě: sítě se~zahraniční kontektivitou, sítě propojující kritickou infrastrukturu,
+\item základní služby: jejich poskytování je závislé na~internetu a výpadek by mohl mít významný společenský nebo ekonomický dopad: energetika, doprava, bankovnictví, finanční trh, zdravotnictví, \dots
+\item digitální služby: digitální tržiště, cloudové služby, vyhledávače.
+\end{itemize}
+
+Orgány a osoby, kterým se ukládají povinnosti v~oblasti kybernetické bezpečnosti, jsou dle Zákona:
+
+\begin{enumerate}[label=\alph*)]
+\item poskytovatel služby elektronických komunikací a subjekt zajišťující síť elektronických komunikací,
+\item orgán nebo osoba zajišťující významnou síť,
 \item správce a provozovatel informačního systému kritické informační infrastruktury,
 \item správce a provozovatel komunikačního systému kritické informační infrastruktury,
 \item správce a provozovatel významného informačního systému,
-\item správce a provozovatel informačního systému základní služby, pokud nejsou správcem nebo provozovatelem podle písmene c) nebo d),
-\item provozovatel základní služby, pokud není správcem nebo provozovatelem podle písmene f), a
+\item správce a provozovatel informačního systému základní služby,
+\item provozovatel základní služby,
 \item poskytovatel digitální služby.
 \end{enumerate}
-a ještě
-Orgán veřejné moci využívající služeb poskytovatelů cloud computingu
 
-\clearpage
-\section{Bezpečnostní opatření, varování, reaktivní opatření a ochranná opatření dle zákona o kybernetické bezpečnosti}
-Nástroje NUKIBU :
-\subsection*{Bezpečnostní opatření}
-Standard, který musí zajistit povinný subjekt (pomocí performativních pravidel); proškolení zaměstnanci, řízené vztahy s dodavatelem. Státní orgán nemůže udělit pokutu a nápravu, protože NEEXISTUJE ideální řešení, podle kterého se povinný subjekt musí řídit (je to jeho volba). ASI? :D
-
-\subsection*{Varování}
-Nezakládá žádnou povinnost, jenom upozorňuje na bezpečnostní riziko. Když je ale vydané varovaní pro povinné subjekty, subjekt ho ignoroval a vznikne mu škoda s tým související, je za to odpovědný (prevenční povinnost).
-
-\subsection*{Ochranné opatření}
-Je vydané na základě zhodnocení bezpečnostního incidentu ==> do budoucnosti, aby se ochránili systémy.
-
-\subsection*{Reaktivní opatření}
-Bezprostřední reakce na incident. Rozhodnutí má svého adresáta, musí se ihned vykonat. Může mít vzor OOP (opatření obecné povahy) -- právní předpis neurčitého druhu, např. dopravná značka.
-
-\subsection*{Opatření k nápravě}
-Obecný nástroj správného práva, ukládá se když přídě úřad na kontrolu a zjistí nedostatky. Má formu rozhodnutí. Může vstoupit do vztahu mezi ministerstvem (správce) a dodavatelem (ministerstva mají často zle nastavené smlouvy s dodavateli, kteří to lépe zabezpečit nevědí nebo chtějí moc peněz).
+a orgán veřejné moci využívající služeb poskytovatelů cloud computingu
 
 
 \clearpage
-\section{Procesní nástroje pro zajištování elektronických důkazů}
+\section{Bezpečnostní opatření, varování, reaktivní opatření a ochranná opatření dle zákona o~kybernetické bezpečnosti}
+
+{}Relevantní právní předpisy:
+\\\href{https://www.zakonyprolidi.cz/cs/2014-181}{Zákon 181/2014 Sb. o~kybernetické bezpečnosti}
+
+Jde o~prevenční a reaktivní nástroje NÚKIBu.
+Kybernetická bezpečnostní \emph{událost} vykazuje znaky, \emph{incident} je událost s~prokázanými důsledky.
+
+\paragraph{Bezpečnostní opatření}
+
+Jde o~realizaci performativních pravidel, tj. implementace standardů.
+Performativní pravidla jsou ze~své definice nejistá: dopředu nelze vědět zda jde o~dostačující opatření.
+Úřad může udělit sankci tehdy, pokud je to opak zákonného stavu (tj. nedodržení jedné z povinností stanovených samotným subjektem).
+Jde například o~vnitřní normy, proškolení zaměstnanců nebo řízení vztahů s~dodavateli.
+
+\paragraph{Varování}
+
+Nezakládá žádnou povinnost, jenom upozorňuje na bezpečnostní riziko.
+Když je ale vydané varovaní pro~povinné subjekty, subjekt ho ignoruju a vznikne mu škoda s~tím související, je za to odpovědný, protože porušil prevenční povinnost.
+
+\paragraph{Ochranné opatření}
+
+Je vydané na~základě zhodnocení bezpečnostního incidentu do~budoucnosti.
+
+\paragraph{Reaktivní opatření}
+
+Bezprostřední reakce na incident, má svého konkrétního adresáta a musí se vykonat ihned.
+Opatření obecné povahy je naopak vládní předpis směřující k~nekonkrétnímu počtu subjektů.
+
+\paragraph{Opatření k~nápravě}
+
+Jde o~nástroj správního práva ve~formě adresného rozhodnutí.
+Ukládá se v~případech kdy Úřad zjistí nedostatky při~kontrole subjektu (např. nařízení šifrování, proškolení, zamykání, \dots)
+
+
+\clearpage
+\section{Procesní nástroje pro~zajištování elektronických důkazů}
+
+{}Relevantní právní předpisy:
+\\\href{https://www.zakonyprolidi.cz/cs/1961-141}{Zákon 141/1961 Sb., trestní řád}
+\\\href{https://www.zakonyprolidi.cz/cs/2005-127}{Zákon 127/2005 Sb. o~elektronických komunikacích}
+
+Důkaz je jakákoliv informace která vyvrací nebo potvrzuje libovolnou skutkovou okolnost.
+Základními zásadami dokazování jsou:
+\vspace*{-1em}\begin{itemize}
+\item presumpce neviny,
+\item zásada ústnosti (důkazy se soudci předávají ústně a prezenčně),
+\item zásada veřejnosti,
+\item zásada bezprostřednosti (soudce je s~důkazy seznámen bezprostředně),
+\item zásada materiální pravdy,
+\item zásada vyhledávací,
+\item zásada volného hodnocení (důležitost důkazu je vždy subjektivní),
+\item zásada zdrženlivosti (minimalizace škod, např. při~zajišťování důkazů při~domovní prohlídce).
+\end{itemize}
+
 \subsection{Zjednodušeně}
 
-K zajišťování se často používají nepříliš vhodné nástroje (zastaralý trestní řád). Může tedy dojít k tomu, že je důkaz nevyužitelný. Důkazy mohou být absolutně a relativně neúčinné.
+Neexistuje specifická úprava pro~práci s~elektronickými důkazy, používají se standardní nástroje procesního trestního práva.
+Také se špatně přenáší do~vnímatelného zachycení a je nutná interpretace (soudci neumí interpretovat zdrojový kód nebo metadata).
+Může také dojít k~tomu, že je důkaz nevyužitelný.
 
-K počítačovým datům se lze dostam třemi základními způsoby:
-\begin{itemize}
-    \item Zajištění zařízení, nebo datových nosičů, na kterých jsou počítačová data uchovávána
-    \item Získání přímého přístupu k počítačovým datům uchovaným v počítačových systémech
-    \item Získání počítačových dat od poskytovatele služeb
-\end{itemize}
+K~počítačovým datům se lze dostam třemi základními způsoby:
+\begin{enumerate}[label=\alph*)]
+    \item zajištění zařízení, nebo datových nosičů, na kterých jsou počítačová data uchovávána,
+    \item získání přímého přístupu k počítačovým datům uchovaným v počítačových systémech,
+    \item získání počítačových dat od poskytovatele služeb.
+\end{enumerate}
 
-\subsubsection{Zajištění zařízení, nebo datových nosičů}
-Jedna z nejefektivnějších metod získání přístupu k datům. Existuje povinnost vydat věc, pokud je důležitá pro trestní řízení a je ji nutné zajistit. Věc musí vydat ten kdo ji momentálně drží, ne jen majitel. Je nutné držitele poučit o následcích neuposlechnutí. Pokud i tam věc nevydá, může být na základě rozhodnutí odňata. Odnětí musí být přítomna nezúčastněná osoba a musí být sepsán protokol.
+\subsubsection{Zajištění zařízení nebo datových nosičů}
 
-Věc je možné zajistit také v rámci domovní prohlídky nebo prohlídky jiných prostor (oprávnění k prohlídce). Musí být přítomen znalec a sepsán protokol.
+Jedná se o~jednu z~nejefektivnějších metod získání přístupu k~datům, protože existuje povinnost vydat věc která je důležitá pro~trestní řízení.
 
-\subsubsection{Získání přístupu k vzdáleným datům}
+Danou věc musí vydat ten kdo ji momentálně drží, ne (pouze) její majitel; musí být poučen o~následcích neuposlechnutí; na~základě rozhodnutí mu může být odňata (k~tomu musí být přítomna nezávislá osoba a musí být sepsán protokol).
 
-Pokud jsou informace volně dostupné na internetu, je možné je použít a pořizovat z nich důkazní materiál. Jsou jisté pravidla a musí se sepsat protokol.
+K~zajištění věci je také možné využít domovní prohlídku nebo oprávnění k~prohlídce jiných prostor (k~tomu musí být přítomen znalec a musí být sepsán protokol).
 
-Pokud jsou data zabezpečena, lze k nim přistoupit pomocí přístupových údajů, které byly vydány dobrovolně v rámi výslechu či vysvětlení nebo jiným způsobem. Zabezpečená data jsou chápána jako písemnosti a záznamy uchovávané v soukromí. Bez přístupových údajů je možné přistoupit jen po povolení soudce a musí být sepsán protokol.
 
-Pokud není možný odklad, lze k datům přistoupit ihned a podat žádost zpětně. Pokud povolení není do 48 hodin, data musí být zničena.
+\subsubsection{Získání přístupu k~vzdáleným datům}
 
-Data z mailů, chatů se berou jako odposlech.
+Pokud jsou informace volně dostupné na internetu, je možné je použít a pořizovat z nich důkazní materiál (je nutné postupovat dle pravidel a musí být sepsán protokol).
+
+Pokud jsou data zabezpečena, lze k nim přistoupit pomocí přístupových údajů, které byly vydány dobrovolně v~rámci výslechu či vysvětlení nebo jiným způsobem.
+Zabezpečená data jsou chápána jako písemnosti a~záznamy uchovávané v~soukromí.
+Bez přístupových údajů je možné přistoupit jen po~povolení soudce a musí být sepsán protokol.
+
+Pokud není možný odklad, lze k~datům přistoupit ihned a podat žádost zpětně.
+Pokud povolení není získáno do~48 hodin, data musí být zničena.
+Data z~mailů či chatů se berou jako odposlech.
+
 
 \subsubsection{Získání dat od ISP}
-Rozděluje se poskytovatel telekomunikačních služeb (data telekomunikačního provozu - telekomunikační tajemství, odposlech za daných podmínek) a poskytovatel služeb informační společnosti.
 
-Dále se rozlišuje i charakter dat, různé typy dat vyžadují různé nástroje.
+Rozděluje se poskytovatel telekomunikačních služeb (data telekomunikačního provozu: telekomunikační tajemství, odposlech za~daných podmínek) a poskytovatel služeb informační společnosti.
+Dále se rozlišuje i~charakter dat: různé typy dat vyžadují různé nástroje.
 
-Data bez povinnosti mlčenlivosti musí vydat kdokoliv. Je povinné vyhovět dožádání orgánů činným v trestním řízení (často to co uživatel zveřejnil, informace o účtech, logy, metadata).
+Data bez~povinnosti mlčenlivosti musí vydat kdokoliv.
+Je povinné vyhovět dožádání orgánů činným v~trestním řízení (často to co uživatel zveřejnil, informace o~účtech, logy, metadata).
+Zabezpečená data se berou jako záznamy uchovávané v~soukromí.
 
-Zabezpečená data se berou jako záznamy uchovávané v soukromí.
+Na~dožádání můžou být data zachována po~určitou dobu.
+Některá řízení mohou trvat dlouho a hrozí tedy smazání dat, na~požádání poskytovatel data musí uschovat.
 
-Na dožádání můžou být data zachována po určitou dobu. Některé řízení trvá dlouho a hrozí tedy smazaná dat, na požádání poskytovatel data uchová.
 
 \subsection{Detailněji rozebrané jednotlivé možnosti}
-\subsubsection*{Obecná součinnost §8}
-Státní orgány, fyzické a právní osoby a dálší relevantní subjekty mají povinnost vyhovovat na
-dožádání - OČTŘ chce informaci a tak provede dožádání a daný subjekt by na tuto žádost měl
-vyhovět - pokud existuje specifická právní úprava musí se použít ta - plus soudy pak řeší
-proporcionalitu se zásahem do práv suběktu - zjišťování nejzákladnějších informací (obvykle v
-rekognoskační fázy) - pro utajované informace je potřeba příkaz(souhlas) soudce (§8/5 "paragraf 8
-odstavec 5)
-\subsubsection*{Freezing §7b}
-Vyžaduje to po nás Úmluva o kyberkriminalitě - 2 procesní nástroje
-\begin{itemize}
-    \item \textit{freezing} -- hrozí ztráta zníčení nebo pozměnění dat důležitých pro třestní řízení, lze nařídít osobě která je drží, aby je uchovala v nezměněné podobě pro potřeby dálšího vydání vyšetřovatelům (při phishingu zamrznutí nasbírané databáze)
-    \item \textit{blocking} -- příkaz na provozovatele služby, aby zablokoval přístup užívatele k daný datům (max 90 dnů), poskytovately služby (ten kdo freezing provádí) musí být vysvětleno co má být zmraženo, proč a na jak dlouhou dobu
+
+\subsubsection{Obecná součinnost (§8 TŘ)}
+
+Státní orgány, FO, PO a dálší relevantní subjekty mají povinnost žádosti vyhovět.
+Může se žádat pouze o~neutajované informace, utajované jedině se~soudním příkazem; subjekt má povinnost mlčenlivosti.
+
+
+\subsubsection{Freezing (§7b TŘ)}
+
+\emph{Freezing}: pokud hrozí ztráta, zničení nebo pozměnění důležitých dat, lze osobě držící data aby je uchovala v~nezměněné podobě pro~potřeby vydání vyšetřovatelům.
+
+\emph{Blocking}: osobě držící data lze nařídit zablokování přístupu uživateli k~datům (maximálně 90~dní).
+
+\subsubsection{Odposlech a záznam telekomunikačního provozu (§88 TŘ)}
+
+Při~vedení trestního řízení pro určité zločiny a trestné činy může být vydán příkaz k~zajištění obsahu telekomunikačního provozu (data, e-mail, telefon).
+Útvar zvláštních činností mívá v~sítích nainstalována zařízení které odposlech umožňují; je tedy realizován ve~spolupráci s~operátory.
+
+Odposlech schvaluje uživatel nebo přikazuje soud.
+Pokud nelze účelu dosáhnout jinak nebo pokud by to bylo moc komplikované, odposlech může být vydán i~když OČTŘ neví zda trestná činnost probíhá.
+
+
+\subsubsection{Zajištění provozních a lokalizačních údajů (§88a odst. 1 TŘ)}
+
+Při~vedení trestního řízení pro určité zločiny a trestné činy může být vydán příkaz k~zajištění metadat o~komunikaci.
+
+\subsubsection{Data retention (§97 ZoEK)}
+
+Poskytovatel je na základě \emph{data retention} povinen uchovávat provozní a lokalizační údaje po~dobu 6 měsíců od~doby uskutečnení daného komunikačního provozu (za~finanční odměnu), které jím nesmí být zneužity.
+Pokud nejsou po~6 měsících vyžádány, musí být zničeny.
+
+
+\subsection{Prohlídka, odnětí věci}
+
+\subsubsection{Sledování osob a~věcí (§158d TŘ)}
+
+Jde o~pátrací prostředek určený pro~zajištění operativních informací, ne~důkazů k~soudu.
+Pokud je nutné u~soudu takto získané informace získat, musí o~nich být vypracován protokol.
+
+O~vydání příkazu o~sledování osob a~věcí rozhoduje státní zástupce prostřednictvím povolení; pokud jde o~soukromá nebo utajovaná data, je nutné povolení soudce.
+Při~zpětném souhlasu soudu lze provést neodkladný úkol (např. získání dat na~vzdálené službě prostřednictvím telefonu).
+
+\subsubsection{Domovní prohlídka a~prohlídka jiných prostor}
+
+Žádost k~ohledání musí obsahovat zdůvodnění relevantnosti místa k~trestnímu stíhání, včetně zdůvodnění proč takové informace nelze získat jiným způsobem.
+Soudce žádost posoudí a~vydání či~zamítnutí odůvodní (nelze se odvolat, ale stát ručí za~případné škody způsobené nesprávným vydáním příkazu).
+
+Prohlídka může být realizovaná pouze pokud:
+\vspace*{-1em}\begin{itemize}
+\item je~přiměřená: důkaz není třeba odvážet pokud může být na~místě prozkoumán vyšetřovatelem nebo znalcem,
+\item je majitel přítomen nebo alespoň informován,
+\item je přítomna nezůčastněná osoba, která kontroluje že nedochází k~porušení zákona,
+\item je vypracován protokol (video, fotografie) který všichni zúčastnění podepisují.
 \end{itemize}
 
-\subsubsection*{Odposlech a záznam telekomunikačního provozu §88}
-při vedení TŘ pro zločin s odnětím svobody min. 8 let nebo pro vyjmenované TČ nebo pro
-umyslné TČ k jehož stíhání nás zavazuje mezinárodní smlouva
-\begin{itemize}
-    \item může být vydán příkaz (úkon) pro zajištění obsahu telekomunikačního provozu (tekoucí data, e-maily telefonáty) - zajištěno \textbf{Útvarem zvláštních činností}
-    \begin{itemize}
-        \item mívají nainstalované zařízení, které umožnuje tento odposlech
-        \item odposlech realizují ve spolupráci s operátorama a ti za to dostávají peníze
-    \end{itemize}
-    \item pokud nelze sledovaného účelu dosáhnout jinak nebo pokud by to bylo moc složité (preferují se
-jiné úkony) - potřeba příkaz soudu - nebo i bez soudu se souhlasem uživatele - odposlech možný
-vydat i dobudoucna (i když OČTŘ neví zda TČ probíhá) musí to však být stále dobře odůvodněné
-\end{itemize}
+Znalec i vyšetřovatel musí dodržet specifické postupy aby nedošlo ke~znehodnocení důkazů (zapečetění, zabelení do~pytle).
 
-\subsubsection*{Zajištění provozních a lokalizačních údajů §88a odst. 1}
-metadata k tekoucí komunikaci - na základe příkazu soudu - pokud úmyslný TČ min 3 roky nebo
-vyjmenované nebo TČ vyhlášený mezinározní smlouvou - pokud učelu nelze dosáhnout jinak -
-nutno zajistit aby tyto údaje byly uloženy poskytovatelem - na to máme úpravu Zákona o
-elektronických komunikacích
+\subsubsection{Vydání a odnětí věci}
 
-\subsubsection*{Data retention §97 - Zákon o elektronické komunikaci (ZoEK)}
-ZoEK říká co jsou provozní a lokalizační údaje:
-\begin{itemize}
-    \item \textbf{metadata o komunikaci} - údaje by neměli nic říkat o přenášených datech (poskytovatel by třeba měl odfiltrovat data obsažená v URL třeba z formulářů)
-    \item  poskytovatel je na základě data retention povinen uchovávat provozní a lokalizační údaje po dobu 6 měsíců od doby uskutečnení daného komunikačního provozu (za to poskytovatel dostává peníze), nesmí být poskytovatelem zneužita. Pokud nejsou po 6 měsících vyšetřovately požadovana musí je tekomunikační operátor zkartovat
-\end{itemize}
+OČTŘ vyzývají k~předložení věci (při~odmítnutí může být odejmuta po~svolení státního zástupce).
+Při~odejmutí musí být přítomna nezávislá osoba, musí být sepsán protokol a osoba musí dosta potvrzení o~odejmutí.
 
-\subsubsection*{Sledování osob a věcí 158d trestního řádu}
-Pátrací prostředek - primárně určen pro zajištění operativních informací -> zjistit co se
-stalo, ale jé na zjištění důkazů pro soud (tak tomu bylo původně)
+% TODO Je to třeba? Nešlo by to jasněji?
+% pokud jsou na zařízení data o kterých je povinná mlčenlivost (utajované informace, advokátní tajemství) je specifický postup - pouze věci né data - ovšem pokud je vydán např telefon tak naněm může být provedena forenzní analýza a tedy je možno se dostat k datům uloženým na zařízení
 
-Pokud chci zjištěné informace použít jako důkaz u soudu musím o tom vypracovat protokol - dnes se to používá i pro
-zajištění el. dat jako důkazů. Postup:
-\begin{enumerate}
-    \item vyšetřovatel potřebuje data z uložiště -> zahájím sledování osob a věcí
-    \item jako součinnost si vyžádám spolupráci od poskytovatele služby, který data uchovává -> a v rámci té součinnosti mi poskytně i ty data, která chci
-    \item když udělám protokol o tom jak jsme získal danou spolupráci, kdo mě poskytnul součinnost, jak jsem postupoval a jaká data jsem získal -> mužu daná data použít jako el. důkaz u soudu
-\end{enumerate}
-O vydání příkazu o sledování osob a věcí rozhoduje státní zástupce prostřednictvím povolení - pokud jsou to ale soukromá nebo utajovaná data je potřeba předchozí povolení soudce - dá se udělat neodkladný úkol (získám telefon a neodkladně se kouknu na data uložená na vzdálené službě) pokud pětně bude soud souhlasit.
+\subsubsection{Osobní prohlídka}
 
-\subsubsection*{Domovní prohlídka a prohlídka jiných prostor}
-Postup:
-\begin{itemize}
-    \item Soudce vydá příkaz k realizaci domovní prohlídky
-    \item  policejní orgán tam provádí ohledání věcí relevantní k trestnímu stíhání - policejní orgán musí soudci dostatečně vysvětli proč se domnívá že v příslušných prostorách jsou veci důležité pro TŘ
-    \item soudní zástupce sepíše podání na soud ve kterém žádá o vydání příkazu k domovní prohlídce ve které uvede co je cílem a proč a proč si myslím že to tam bude a oduvodním že to nejde jiným nástrojem
-    \item  soud to posoudí a v rámci rozhodnutí pak vypíše informace na základě kterých se rozhodoval a tím oduvodní vydání daného příkazu - nedá se odvolat, ale stát ručí za škody způsobené nesprávným vydáním příkazu o domovní prohlídce
-\end{itemize}
-Procesní podmínky za kterých může být domovní prohlídka realizovaná:
-\begin{itemize}
-    \item přiměřenost -  odborná péče buď vyšetřovatel nebo znalec (když to dokážou ohledat na místě nemusí se to odvážet)
-    \item potřeba přítomnosti majítele prostor nebo musí být aspoň informován o tom co se tam děje
-    \item nezúčastněná osoba (někdo externí, soused) kdo zkontroluje že nedochází k porušení zákona při prohlídce
-    \item vypracovává se protokol (videozáznam, foto) - všichni kdo se zučastní ho podepisují i nezúčastněná osoba
-\end{itemize}
-Aby přistihly zločince se zapnutím PC a přihlášením do vzdálené služby - dá se přizvat znalec pro specifickou
-činnost se specifickým vybavením - musí se dodržovat specifické postupy aby nebyly důkazy znehodnocovány - zapečetění, zabalení do pytle za přítomnosti nezúčastněné osoby.
+Pokud jde o~neopakovatelný úkon (podezřelý utíká z~místa činu), lze osobní prohlídku provést i bez~soudního příkazu (který je ale poté nutné získat).
+Úkonu by měl předcházet výslech (stejně jako u~domovní prohlídky) s~žádostí o~dobrovolné vydání věci či předmětu.
 
-\subsubsection*{Výdání a odnětí věci}
-Nástroj pro zajištění věci od člověka - každý má Ediční povinnost (na požádání musí vydat drženou věc) - OČTŘ ho vyzvou k předložení věci - pokud odmítně věc vydat může mu být odejmuta (pořádkové opatřené) stačí rozhodnutí státního zástupce - při odejmutí věci by měla být přítomna nezúčastněná osoba - pořizuje se protokol - osobě se dá potvrzení o odejmutí - pokud jsou na zařízení data o kterých je povinná mlčenlivost (utajované informace, advokátní tajemství) je specifický postup - pouze věci né data - ovšem pokud je vydán např telefon tak naněm může být provedena forenzní analýza a tedy je možno se dostat k datům uloženým na zařízení
 
-\subsubsection*{Osobní prohlídka}
-domnívám (jako OČTŘ) se že daná osoba má u sebe věc důležitou pro TŘ, ale nevím to jistě -> zahájím osobní prohlídku - na základě rozhodnutí soudu nebo státního zástupce - pokud je to neopakovatelný úkon můžu osobní prohlídku provéset i bez příkazu (zatknu osobu co utíká z místa činu a mám podezření že u sebe má zbraň se kterou páchal TČ) musím pak ale souhlas zpětně získat - je to zhojitelná vada neučinného důkazu - úkonu by měl předcházet předchozí výslech (jako u domovní prohlídky) což bych osobu měl požádat zda věč/předmět u sebe má a zda mi ho nevydá.
+\subsubsection{Ohledání věci}
 
-\subsubsection*{Ohledání věci}
-pozorování a sbírání informací za účelem objasnění věci - protokol co bylo vypozorováno a jak - typicky při domovních a osobních prohlídkách - na místě najdu spuštěný počítač a na místě chci provést jeho ohledání - v takovém případě s kamerou nebo foťákem provádím záznam toho co jsem objevil.
+Pozorování a~sbírání informací za~účelem objasnění věci je typicky prováděno při~domovních a~osobních prohlídkách.
 
-Nemůžu provést obecné ohledání věci - např. když ohledávám na místě zaplé PC a bude tam probíhající komunikace a já bych ji chtěl sledovat (odposlech má větší zásah do práv), tak to nemůžu udělat jen na základě ohledání věci (generovalo by to neúčinný důkaz) - avšak policie si proto může předem připravit příkazy- například existují příkazy k domovní prohlídce, odposlechu a sledování osob a věcí a tím pádem může získávat všechno na místě.
+Sledování konverzace na~obrazovce nelze na~základě povolení k~domovní prohlídce provádět, je nutné mít souhlas k~odposlechu.
+Pokud je získán dopředu, je možné ho použít jako důkaz.
 
 
 \clearpage
 \section{Typy a znaky skutkových podstat počítačových trestných činů}
+
 Při spáchání trestného činu je nutné dokázat všechny znaky skutkové podstaty:
 
 \subsection*{Subjekt}
