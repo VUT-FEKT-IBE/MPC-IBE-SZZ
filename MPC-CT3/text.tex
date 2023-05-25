@@ -616,4 +616,132 @@ ASVS má dva cíle:
 
 
 \clearpage
-\section{Standardy v~kyberbezpečnosti (ISO, PCI DSS, FIPS, známé organizace), certifikace a hodnocení kyberbezpečnosti (Common Criteria, OWASP).}
+\section{Standardy v kyberbezpečnosti (ISO, PCI DSS, FIPS, známé organizace), certifikace a hodnocení kyberbezpečnosti (Common Criteria, OWASP).}
+
+\subsection{Standardy v kyberbezpečnosti}
+Standardizace a normy v oblasti bezpečnosti ustanovují hlavně:
+\begin{itemize}
+    \item International Organization for Standardization (ISO) a International Electrotechnical Commission (IEC)
+    \item Národní organizace (NIST, BSI, BS, ...)
+\end{itemize}
+
+\subsubsection{ISO}
+Norma – standard ISO/IEC 27001:
+\begin{itemize}
+    \item Součást rodiny ISO/IEC 27000.
+    \item Definuje požadavky na systém managementu bezpečnosti informací, především pak řízení bezpečnosti důvěry informací pro zaměstnance, procesy, IT systémy a strategii firmy.
+    \item Samostatná specifikace systému bezpečnosti informací (tzv. ISMS).
+\end{itemize}
+
+\subsubsection{PSI DSS}
+Bezpečnostní standard PCI DSS (Payment Card Industry Data Security Standard) představuje mezinárodní pravidla, definující podmínky nakládání s údaji držitelů platebních karet, které jsou obsaženy na platebních kartách.
+
+Cílem PCI DSS je omezit rizika úniků dat a snížit jejich zneužití.
+
+PCI DSS charakteristika:
+\begin{itemize}
+    \item modelový rámec pro zajištění bezpečnosti
+    \item nejvhodnější postupy k minimalizaci rizika odcizení dat
+    \item vyžadováno kartovými asociacemi a společnostmi, které zpracovávají, přenášejí nebo uchovávají data držitelů platebních karet
+\end{itemize} 
+
+PCI DSS specifikuje 12 požadavků pro splnění, které jsou organizovány do 6 základních skupin:
+
+1. Vytvořit a udržovat bezpečnou síť a systémy.
+
+2. Chránit data uživatele karty.
+
+3. Udržovatel program managementu zranitelností.
+
+4. Implementovat silné metody kontroly přístupu.
+
+5. Pravidelně monitorovat a testovat sítě.
+
+6. Udržovat bezpečnostní politiku informačních systémů
+
+12 požadavků PCI DSS:
+
+1. Instalace a údržba konfigurace firewallu pro ochranu dat uživatelů karet (tj. uživatelská data).
+
+2. Nepoužívat defaultní hesla a jiné parametry nastavené prodejcem/dodavatelem komponent.
+
+3. Ochrana uložených dat uživatelů karet.
+
+4. Šifrování přenosu uživatelských dat přes otevřené spoje a veřejné sítě.
+
+5. Celková ochrana všech systémů proti malware včetně pravidelných updatů AV programů.
+
+6. Vývoj a údržba bezpečnostních systémů a aplikací.
+
+7. Omezení přístupu k uživatelským datům na potřebné minimum nutného k provedení služby.
+
+8. Identifikace a autentizace přístupu k systémovým komponentům.
+
+9. Omezení fyzického přístupu k uživatelským datům.
+
+10. Sledování a monitorování všech přístupů k síťovým zdrojům a uživatelským datům.
+
+11. Pravidelné bezpečnostní testování systémů a procesů
+
+12. Zajištění pravidel adresující informační bezpečnost pro fyzické osoby. 
+
+\subsubsection{FIPS}
+FIPS 140-2 (FIPS PUB 140-2) je standard, který definuje bezpečnostní požadavky a standardy na kryptografické moduly a jejich SW a HW komponenty.
+
+FIPS 140-2 definuje 4 úrovně bezpečnosti (Security Level):
+\begin{itemize}
+    \item Level 1 – nejnižší úroveň bezpečnosti. Základní bezpečnostní požadavky pro moduly. Bez specifikace fyzické bezpečnosti.
+    \item Level 2 – nad levelem 1 specifikuje i požadavky na fyzickou bezpečnost modulu (např. ochrany proti manipulaci, tamper-evident ochrany, zabezpečení úložiště klíčů atp.)
+    \item Level 3 – nad levelem 2 specifikuje i požadavky na bezpečnost kritických bezpečnostních parametrů v modulu. Zajištění smazaní parametrů při detekci průniků atd.
+    \item Level 4 – nejvyšší úroveň, nad levelem 3, kompletní fyzická bezpečnost proti aktivním útočníkům.
+\end{itemize}
+
+\subsubsection{Známé organizace}
+Známé národní organizace pro bezpečnost:
+\begin{itemize}
+    \item NIST (National Institute of Standards and Technology) - USA
+    \item American National Standards Institute (ANSI) - USA
+    \item British Standards Institution (BSI) - UK
+    \item German Federal Office for Information Security (BSI) – DE
+    \item Federal Information Processing Standards (FIPS) – USA
+\end{itemize}
+
+\subsection{certifikace a hodnocení kyberbezpečnosti}
+
+\subsubsection{Common Criteria}
+Jedná se o mezinárodní standard (ISO/IEC 15408) pro certifikaci a hodnocení produktů počítačové bezpečnosti.
+
+
+CC vzniklo ze tří standardů: ITSEC (EU), CTCPEC (CA) a TCSE (USA).
+
+Common Criteria dává jistotu, že proces specifikace, implementace a hodnocení produktu počítačové bezpečnosti se bude řídit přísným a standardizovaným způsobem:
+\begin{itemize}
+    \item Požadavky na specifikaci mohou snášet samotní uživatelé (komunity), bezpečnostní atributy a implementaci zajišťují výrobci produktů.
+    \item Testovací laboratoře musí vyhovět ISO 17025 (kontrolováno národní schvalovací autoritou, např. BSI nebo NIST).
+\end{itemize}
+
+Výsledkem CC je EAL:
+
+Úroveň ohodnocení bezpečnosti ujištění - Evaluation Assurance Level (EAL) - specifikuje hloubku (úroveň) ohodnocení. Každá úroveň EAL odpovídá balíčku SAR, který pokrývá kompletní vývoj produktu s danou úrovní přísnosti. CC určuje 7 úrovní EAL, od nejzákladnější EAL 1 (nejlevnější na implementaci a hodnocení), končí nejpřísnější EAL 7 (nejdražší). Nově i tzv. „+“ úrovně (14 úrovní).
+    
+\subsubsection{OWASP}
+OWASP = Open Web Application Security Project.
+
+Celosvětová nezisková organizace zaměřená na softwarovou bezpečnost.
+
+Veškeré dokumenty a SW jsou volně dostupné.
+
+Hlavní nástroje:
+\begin{itemize}
+    \item Zed Attack Proxy (ZAP) - skener zranitelností u web. aplikací.
+    \item Web Testing Environment (WTE) – sada nástrojů pro zajištění bezpečnosti web. aplikací.
+\end{itemize}
+
+Dokumentační projekty:
+\begin{itemize}
+    \item OWASP Application Security Verification Standard - pro testování a bezpečný vývoj web. aplikací.
+    \item OWASP AppSensor - framework a metodologie pro implementaci detekce průniku.
+    \item OWASP Software Assurance Maturity Model (SAMM) - open framework pro organizace pro zajištění software security.
+    \item OWASP Top Ten - awareness dokument pro bezpečnost web. aplikací.
+    \item OWASP Testing Guide - "best practice" penetration testing framework.
+\end{itemize}
