@@ -145,7 +145,7 @@ Zamítavá odpověď je RST.
 \subsection{Útoky na~TCP}
 
 \textbf{Spoofing.}
-Asociační stavem se myslí kombinace portu a~inicializačního sekvenčního čísla, které lze predikovat nebo hádat.
+Asociačním stavem se myslí kombinace portu a~inicializačního sekvenčního čísla, které lze predikovat nebo hádat.
 Ochranou je dobrá implementace TCP stacku (a PRNG v~něm), IPSec nebo např. TCP Auth Option (RFC~5925).
 
 \textbf{Skenování portů.}
@@ -401,101 +401,74 @@ Privátní spojení a překlad adres: TLS, DoT/DoH.
 VPN, Proxy.
 Tor.
 
+Anonymní profily prohlížečů.
+Rozšíření prohlížečů limitující sledování (blokování cookies, reklam, rozšíření sociálních sítí).
+
 
 \subsection{Anonymizační nástroje a systémy}
 
-TODO ještě něco víc?
-
-
+VPN, Proxy.
+Tor.
+TAILS, Whonix, QubesOS.
 
 
 \clearpage
 \section{Forenzní analýza (hlavní cíle, základní principy, vysvětlete časové značky a časovou osu událostí).}
 \subsection{Hlavní cíle}
-\begin{itemize}
-    \item FA - zabývá se zajištěním podkladů pro analýzu, interpretaci nalezených info a prezentací výsledků k incidentu
-    \item cíl:
-    \begin{itemize}
-        \item poskytnout spolehlivé info
-        \item podporovat řešení bezp. incidentů
-        \item podporovat možné eskalace případů (soudy)
-    \end{itemize}
-\end{itemize}
+
+Forenzní analýza se zabývá zajištěním podkladů pro~analýzu a interpretaci nalezených informací a prezentací vysledků incidentu.
+
 
 \subsection{Základní principy}
-\begin{itemize}
-    \item snaha nezměnit analyzovaný systém
-    \item zajištění stop (nebo analýza) systémů způsobí změnu stavu systému
-    \item dokumentace postupu
-    \item práce s bitovou kopí (evidence, kontrolní součty) \\
-    \item řetězec návazností (odvození) - spojení mezi výsledkem a vatupními daty, dlvěryhodonost výsledku analýzy
-    \item opakovatelnost - ověření výsledku analýzy jiným analytikem, vstupní data + popis postupu
-    \item neutralita - interpretace informací, nehodnotit, nesoudit, zaměřeno na fakta
-    \item srozumitelnost - nutná podmínka pro praktické použití, netechnické publikum (manager), vhodný způsob interpretace, logické pořadí atd. \\
-    \item definice úlohy:
-    \begin{itemize}
-        \item spec. vstupních dat
-        \item spec. výstupů (otázek, na které hledáme odpovědi)
-        \item pozn. zadavatele
-    \end{itemize}
-    \item provedení analýzy:
-    \begin{itemize}
-        \item použití vhodných nástrojů a postupů
-        \item dokumentování jednotlivých kroků
-        \item zjištění odpovědí na otázky
-    \end{itemize}
-    \item prezentace výsledků
-    \begin{itemize}
-        \item závěrečná zpráva a prezentace výsledků
-    \end{itemize}
-\end{itemize}
+
+Je nutné nezměnit analyzovaný systém (tj. disk naklonovat a potom pracovat pouze s~kopií).
+Každý krok se musí dokumentovat.
+Každý nález musí být identifikován, zaznamenán, každý důležitý soubor by měl být označený hashem.
+
+Cílem je získat plný řetězec návazností: spojení vstupních dat s~výsledkem je zdrojem důvěryhodnosti celkové analýzy.
+Závěry musí být ověřitelné i~dalším nezávislým analytikem.
+
+Dokumentace musí být neutrální, zaměřena pouze na~fakta a~jejich interpretaci, nesmí hodnotit nebo soudit.
+Výsledek musí být srozumitelný i pro~ne zcela technické publikum, musí být vhodně interpretován a logicky organizován.
+
+\begin{table}[ht]
+\centering
+\onehalfspacing
+\begin{tabular}{ll}
+definice úlohy
+& specifikace vstupních dat \\
+& specifikace výstupních dat (odpovědí na~otázky) \\
+& poznámky zadavatele \\
+\hline
+provedení analýzy
+& použité nástroje a~postupy \\
+& dokumentace jednotlivých kroků \\
+& zjištění odpovědí na~otázky \\
+\hline
+prezentace výsledků
+& závěrečná zpráva \\
+& zhodnocení \\
+& prezentace výsledků \\
+\end{tabular}
+\caption{Struktura odevzdávané dokumentace.}
+\end{table}
+\FloatBarrier
+
 
 \subsection{Časová značka}
-\begin{itemize}
-    \item většina operací v systému má čas (spuštění programu, úprava souboru, atd.)
-    \item mnoho operací zanechává stopu v souborovém systému:
-    \begin{itemize}
-        \item úprava souboru - modify čas. značka
-        \item spuštěn souboru - access čas. značka
-        \item přejmenování souboru - change čas. značka
-    \end{itemize}
-    \item souborový systém = data + metadata
-    \item disk se dělí na oddíly - soub. systém se vztahuje k jednomu oddílu
-    \item data - obsah souboru (dělení a uskupení do bloků)
-    \item metadata - info o souboru (název, velikost, umístění bloků s obsahem)
-\end{itemize}
+
+Většina operací v~operačním systému je svázána s~konkrétním časem (spuštění programu, úprava nebo přístup k~souboru, \dots).
+V~souborovém systému i žurnálu tak zůstává mnoho stop po~operacích: spuštění programu, úprava souboru, log běžící služby.
+
+Každý souborový systém obsahuje vedle dat i~metadata o~nich (název, velikost, typ, časové značky modifikace a přístupu, vlastníci).
+
 
 \subsection{Časová osa události}
-\begin{itemize}
-    \item timeline (časová osa)
-    \begin{itemize}
-        \item seznam událostí - seřazených podle času
-        \item manuálně vybrané analytikem
-        \item podmnožina všech událostí
-    \end{itemize}
-    \item supertimeline
-    \begin{itemize}
-        \item seznam všech událostí
-        \item vygenerované nástroji
-        \item agregace událostí z mnoha zdrojů
-        \item možná časová korelace \\
-    \end{itemize}
-    \item nástroje
-    \begin{itemize}
-        \item log2timeline
-        \item log2timeline.py
-    \end{itemize}
-    \item formáty
-    \begin{itemize}
-        \item mactime - stejný formát jako nástroj fls, snadné sloučení s událostmi soub. sytému
-        \item csv - výchozí formát, vhodné pro zpracování v CLI a prohlížení
-    \end{itemize}
-    \item časové zóny
-    \begin{itemize}
-        \item obvykle více zdrojů dat - stanice, servery, síť. provoz, místní čas vs UTC, různé časové zóny
-        \item časová synchronizace všech zdrojů dat - důležité pro sloučení, převést vše do jedné čas. zóny, nejčastěji UTC
-    \end{itemize}
-\end{itemize}
+
+Časová osa agreguje všechny zajímavé události (nebo jejich vybranou podmnožinu) na~jednom místě pro~účely zjištění korelací.
+
+Protože může jít o~data z~více zdrojů (stanice, servery, síť), je nutné všechna zařízení udržovat co nejblíže časově, aby byla korelace možná.
+Velmi často je také nutné vše převést na~UTC, protože zařízení moho být v~různých časových pásmech.
 
 
 \clearpage
@@ -581,7 +554,7 @@ Příklady nástrojů:
 
 
 \clearpage
-\section{Penetrační testování (rozdíly v penetračním testování realizovaným metodou Ad-hoc a pomocí metodologie, hlavní cíle ASVS metodologie, bezpečnostní úrovně).}
+\section{Penetrační testování (rozdíly v penetračním testování realizovaným metodou Ad-hoc a pomocí metodologie, hlavní cíle ASVS metodologie, bezpečnostní úrovně) a testování bezpečnosti webové aplikace (zranitelnost Path traversal).}
 
 Penetrační testování je provedení testu s~cílem identifikovat zranitelnosti, které by mohly být přítomny v~počítači, serveru, v~informačním systému, síti, aplikaci nebo v~organizaci.
 Penetrační testy odhalují zranitelnosti i~hrozby, jakými by mohla být aktiva zneužita a poskytují návod, jak snížit existující riziko.
@@ -613,6 +586,33 @@ ASVS má dva cíle:
     \item Úroveň 2 -- pro aplikace, které obsahují citlivá data, která vyžadují ochranu.
     \item Úroveň 3 -- pro nejkritičtější aplikace, které provádí transakce, obsahují citlivá lékařská data atd.
 \end{itemize}
+
+
+\subsection{Testování webových aplikací}
+
+Manuální testování je zdlouhavé a drahé, ale nezbytné pro~zjištění co nejvíce informací.
+Využívá znalostí provádějící osoby a hledají se bezpečnostní zranitelnosti.
+
+K~pokrytí běžných nedostatků se používá automatické testování, které nejde tolik do~hloubky.
+
+Ideálně se využívá obou metod, napřed automatizované testování pro~zjištění známých a~naskriptovaných nedostatků systému.
+Poté se využije znalosti testera v~manuálním testováním.
+
+\subsubsection{Automatizace}
+
+Automatizační nástroje jsou rychlé a levné, ale mají nízkou pravděpodobnost nalezení opravdových nedostatků, mohou vyvolávat falešný pocit bezpečí.
+Kvůli svým technickým omezením většinou nemohou nalézt
+zero-days zranitelnosti,
+chyby v~logice,
+nedostatečnou autorizaci,
+chyby které se projevují na~jiných místech nebo
+chyby které lze vyvolat pouze složitým testovacím scénářem.
+
+\subsubsection{Path traversal}
+
+Zranitelnost, která umožňuje útočníkovi pohybovat se v~adresářích souborového systému serveru, na~kterém běží aplikace.
+
+Pomocí sekvence znaků \texttt{../} se lze dostat až do~kořenového adresáře a přistupovat tak k~souborům na~disku.
 
 
 \clearpage
