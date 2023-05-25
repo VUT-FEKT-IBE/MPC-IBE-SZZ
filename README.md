@@ -71,12 +71,12 @@ Vybírají se právě dva předměty.
 - [x] Bezpečnost na vrstvě L3 (bezpečnostní opatření, příklady útoků, IPsec, bezpečnost IPv6).
 - [x] Bezpečnost TCP (útoky, protiopatření), protokol TLS - Transport Layer Security (princip, součásti, příklady útoků).
 - [x] Bezpečnost UDP (útoky, protiopatření, zabezpečení nad protokolem UDP), bezpečnost DNS, protokol DNSSEC.
-- [ ] Zabezpečení v sítích typu Low-Power Wide Area Network (kryptografické ochrany, problémy a omezení), zabezpečení v mobilních sítích 2G - 5G (základní principy bezpečnosti pro 2G, 3G a 4G), bezpečnost a slabiny optických sítí.
+- [x] Zabezpečení v sítích typu Low-Power Wide Area Network (kryptografické ochrany, problémy a omezení), zabezpečení v mobilních sítích 2G - 5G (základní principy bezpečnosti pro 2G, 3G a 4G), bezpečnost a slabiny optických sítí.
 - [x] Ochrana soukromí v ICT (pojmy, typy anonymizace), kryptografické metody zajištující ochranu soukromí, síťové metody poskytující ochranu soukromí a anonymizační nástroje a systémy.
-- [ ] Forenzní analýza (hlavní cíle, základní principy, vysvětlete časové značky a časovou osu událostí).
+- [x] Forenzní analýza (hlavní cíle, základní principy, vysvětlete časové značky a časovou osu událostí).
 - [x] Analýza škodlivého kódu (základní dělení analýz, cíle a metody statické a dynamické analýzy).
-- [ ] Penetrační testování (rozdíly v penetračním testování realizovaným metodou Ad-hoc a pomocí metodologie, hlavní cíle ASVS metodologie, bezpečnostní úrovně) a testování bezpečnosti webové aplikace (zranitelnost Path traversal).
-- [ ] Standardy v kyberbezpečnosti (ISO, PCI DSS, FIPS, známé organizace), certifikace a hodnocení kyberbezpečnosti (Common Criteria, OWASP).
+- [x] Penetrační testování (rozdíly v penetračním testování realizovaným metodou Ad-hoc a pomocí metodologie, hlavní cíle ASVS metodologie, bezpečnostní úrovně) a testování bezpečnosti webové aplikace (zranitelnost Path traversal).
+- [x] Standardy v kyberbezpečnosti (ISO, PCI DSS, FIPS, známé organizace), certifikace a hodnocení kyberbezpečnosti (Common Criteria, OWASP).
 
 ### MPC-PDA
 
@@ -147,16 +147,16 @@ Vybírají se právě dva předměty.
 
 ### MPC-OSE
 
-- [ ] Přenosové vlastnosti optických vláken, vlákna mnohovidová a jednovidová, polymerová optická vlákna (POF).
-- [ ] Výroba optických vláken, druhy vláken a kabelů (standardy UIT – T, G xxx), spojování optických vláken a kabelů, optické konektory.
-- [ ] Zdroje a detektory záření - jejich charakteristiky.
-- [ ] Teoretické problémy přenosu optickou sítí - vlnová optika a geometrická optika. Nelineární vlivy u optických vláken.
-- [ ] Vlnové délky a pásma využívaná pro přenos, útlum a disperze vláken, disperze chromatická - CD a polarizační – PMD, doporučení UIT. Metody potlačování dispersních vlivů.
-- [ ] Optické opakovače a zesilovače.
-- [ ] Optické přístupové sítě - FTTx, optické transportní sítě, globální sítě. Výhledy sítí FTTH.
-- [ ] Optické linkové zakončení, optické linkové kódy, dosah optického spoje. Optoelektronické linkové trakty. Příklady sítí různých provozovatelů.
-- [ ] Multiplexování u optických přenosů - WDM, DWDM, CWDM.
-- [ ] Transmisní a reflektometrická (OTDR) metoda měření optických vláken. Metody měření CD a PMD. Dohled (monitoring) optických telekomunikačních sítí.
+- [x] Přenosové vlastnosti optických vláken, vlákna mnohovidová a jednovidová, polymerová optická vlákna (POF).
+- [x] Výroba optických vláken, druhy vláken a kabelů (standardy UIT – T, G xxx), spojování optických vláken a kabelů, optické konektory.
+- [x] Zdroje a detektory záření - jejich charakteristiky.
+- [x] Teoretické problémy přenosu optickou sítí - vlnová optika a geometrická optika. Nelineární vlivy u optických vláken.
+- [x] Vlnové délky a pásma využívaná pro přenos, útlum a disperze vláken, disperze chromatická - CD a polarizační – PMD, doporučení UIT. Metody potlačování dispersních vlivů.
+- [x] Optické opakovače a zesilovače.
+- [x] Optické přístupové sítě - FTTx, optické transportní sítě, globální sítě. Výhledy sítí FTTH.
+- [x] Optické linkové zakončení, optické linkové kódy, dosah optického spoje. Optoelektronické linkové trakty. Příklady sítí různých provozovatelů.
+- [x] Multiplexování u optických přenosů - WDM, DWDM, CWDM.
+- [x] Transmisní a reflektometrická (OTDR) metoda měření optických vláken. Metody měření CD a PMD. Dohled (monitoring) optických telekomunikačních sítí.
 
 ### MPC-PLD
 
