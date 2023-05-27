@@ -37,7 +37,7 @@ Pokud tyto vrstvy aplikace nepotřebuje tak je nemusí implementovat a tím sní
 
 Model TCP/IP se snaží o co nejuniverzálnější propojení sítí různých typů (lokální až celosvětové sítě).
 Má při tom za cíl umožnit každému počítači komunikovat s každým počítačem bez ohledu na existenci přímého spojení nebo různých sítí.
-Aplikace/uživatelé se na celou strukturu dívají pouze jako jednu velkou síť.
+Aplikace/uživatelé se na celou strukturu dívají pouze jako jednu velkou síť - vnitřní struktura je pro ně irelevantní.
 Na obrázku je komunikace mezi dvěma zařízeními přes síť.
 Plná čára značí reálný průchod dat a přerušovaná čára značí virtuální spoje.
 
@@ -74,20 +74,35 @@ V modelu TCP/IP je IPv4 protokol využit na úrovni internetové vrstvy.
 Zajišťuje potřebné směrování mezi dílčími sítěmi.
 Musí pracovat s odlišnými adresami, různou maximální velikostí přenášených paketů atd.
 
-\subsection{IPv4}
+\subsection{IPv4 adresy}
 
 IPv4 adresa má délku 32 bitů.
 Počet všech adres je označován jako \textbf{adresní prostor} s~velikostí $2^{32}$, tj. zhruba čtyři miliardy adres.
 IPv4 adresy se zapisují jako čtyři čísla v~rozsahu $[0, 255]$ oddělena tečkou, např. \texttt{147.229.71.29}.
 
 \textbf{Maska sítě} rozděluje IP adresu na~adresu sítě a~stanice.
-Jde o~nepřerušenou řadu bitů zleva, která je reprezentována číslem $[1, 32]$ reprezentujícím počet bitů masky.
+Jde o~nepřerušenou řadu jedničkových bitů zleva, která je reprezentována číslem $[1, 32]$ reprezentujícím počet bitů masky.
 Adresa \texttt{147.229.71.29/24} znamená síť \texttt{147.229.71.0}, stanici \texttt{0.0.0.29} a~masku \texttt{255.255.255.0}: \texttt{11111111 11111111 11111111 00000000}.
 Číslo za~lomítkem se označuje jako délka prefixu: prefix \texttt{/18} odpovídá masce \texttt{255.255.192.0}.
 
 V~síti je první adresa rezervovaná pro~síť samotnou a~poslední adresa pro~všesměrové vysílání (pakety jsou doručovány všem v~síti); ostatní adresy mohou být přiřazeny stanicím.
 
 Historicky se adresní prostor IPv4 rozděloval pomocí tříd. V~devadesátých letech se přešlo k~beztřídnímu adresování, což umožnilo prostor rozdělit efektivněji.
+
+\subsection{Speciální IPv4 adresy}
+\subsubsection{Lokální smyčka}
+Softwarová smyčka uvnitř počítače, adresy 127.0.0.0/8. Pakety s touto adresou nikdy neopustí počítač, lze využít pro meziprocesovou komunikaci
+
+\subsubsection{Privátní (neveřejné) adresy}
+Vyčleněné rozsahy IP adres pro sítě nepřipojené k Internetu, pro lokální sítě s vlastním mechanizmem adresace. Pakety s těmito adresami se nikdy nesmí (a nemohou) dostat do Internetu
+\begin{itemize}
+    \item Třída A 10.0.0.0 – 10.255.255.255
+    \item Třída B 172.16.0.0 – 172.31.255.255
+    \item Třída C 192.168.0.0 – 192.168.255.255
+\end{itemize}
+
+\subsubsection{Lokální linkové adresy}
+Rozsah 169.254.0.0 až 169.254.255.255, tyto adresy jsou nastaveny operačním systémem v případě selhání automatických mechanizmů konfigurace IP adresy
 
 \subsection{IPv4 datagram}
 
@@ -156,7 +171,7 @@ Zdrojový port určuje port na~straně odesílatele, cílový port na~straně p�
 Služby UDP:
 \begin{itemize}[noitemsep]
     \item Komunikace proces--proces (komunikace socketových adres).
-    \item Přenos dat bez spojení, každý datagram je přenášen samostatně (před komunikací není navozováno spojení).
+    \item Přenos dat bez spojení, každý datagram je přenášen samostatně (před komunikací není navazováno spojení).
     \item Žádné řízení toku dat, řízení proti zahlcení či řízení chybových stavů.
     \item Zapouzdřování a~odpouzdřování dat (pokud není detekována chyba).
     \item Frontování, multiplxování a~demultiplexování (fronty jsou vytvářeny dle portů) a~na těchto frontách lze provádět multiplexování a~demultiplexování.
@@ -280,6 +295,12 @@ Nakonec velikost datové části paketu je menší jak u TCP, jelikož využív�
     \includegraphics[width=0.55\textwidth]{obrazky/036.png}
 \end{figure}
 
+\subsection{Srovnání protokolů transportní vrstvy}
+\begin{figure}[!ht]
+\begin{center}
+    \includegraphics[scale=0.7]{obrazky/porovnani_proto.png}
+  \end{center}
+\end{figure}
 
 \clearpage
 \section{Jmenný systém DNS (Domain Name System): důvody existence, popis fungování protokolu, úloha resolveru, kořenové servery DNS, DNSsec. Protokoly MDNS (Multicast DNS) a LLMNR (Link-Local Multicast Name Resolution).}
@@ -295,8 +316,8 @@ Funguje na~principu klient-server, kdy jedinou IP adresou, kterou musíme znát 
 Ke komunikaci využívá porty UDP 53 a~TCP 53.
 Vazba mezi je IP adresou a~doménovým jménem je uložena v~celosvětově distribuované DNS databázi.
 Základní jednotkou systému je DNS server (name server, jmenný server, rekurzivní resolver).
-DNS servery jsou primární (poskytuje autoritativní odpovědi) a~sekundární (záloha primárního) a~pomocný (pracuje jako vyrovnávací paměť).
-Server nejdřív hledá v~pomocném serveru jestli záznam není uložen v~paměti (cache) a~musí mít vlastní DNS server, kterého se může zeptat.
+DNS servery jsou primární (poskytuje autoritativní odpovědi), sekundární (záloha primárního) a pomocné (pracují jako vyrovnávací paměť).
+Každý DNS server by měl být schopen kontaktovat jiný DNS server, pokud nenajde ve svých záznamech požadovanou položku.
 
 Je vytvářena hierarchie domén, která začíná od kořene a~jde postupně níže.
 Prvně se jde od domény nejvyššího řádu k~nižším řádům domény.
@@ -313,7 +334,7 @@ Tuto IP adresu poté lokální DNS server zašle klientovy\footnote{\url{https:/
 \subsection{Úloha resolveru}
 
 Primární úlohou je překlad doménového jména na IP adresu.
-V rámci OS existuje tzv. stup resolver, který zprostředkovává stanicím dotazy na rekurzivní DNS servery.
+V rámci OS existuje tzv. stub resolver, který zprostředkovává stanicím dotazy na rekurzivní DNS servery.
 Než odešle požadavek tak prověří zda překlad není definován staticky nebo není uložen v mezipaměti.
 Dotazování na DNS server je často vícenásobné i při jediném překladu.
 
@@ -329,7 +350,9 @@ Jelikož byly dotazy neúspěšné resolver požádá DNS server o překlad dom�
 
 Kořenové DNS servery obsluhují root doménu.
 Tyto servery jsou využívány běžnými rekurzivními DNS servery k přesměrování na jiné doménové servery.
-Jejich hlavním úkolem je přesměrování DNs dotazů na jednotlivé DNS servery nejvyšších řádů.
+Jejich hlavním úkolem je přesměrování DNS dotazů na jednotlivé DNS servery nejvyšších řádů.
+Celkem existuje 13 kořenových serverů, které spravuje 12 organizací.
+Dotaz na kořenový server probíhá formou anycast - odpoví pouze nejbližší server.
 
 \begin{figure}[!h]
     \centering
@@ -356,7 +379,7 @@ Byl vytvořen aby bylo možné posílat dotazy podobné DNS dotazům pomocí mul
 Umožňuje stanicím si zvolit DNS název (nazev.local), který bude využíván pro lokální označování a adresování a umožní tak i bez veřejně platných názvů usnadnění komunikace s využitím lokálních jmenných názvů.
 Předpokládá se že doménové jméno končící na .local je platné pouze v lokální síti.
 
-Rozdíly oproti DNS"
+Rozdíly oproti DNS:
 \begin{itemize}[noitemsep]
     \item využívá multicast ne unicast
     \item využívá UDP port 5353 ne 53
@@ -394,7 +417,7 @@ Sama stanice nedokáže poznat, že výchozí brána vypadla a mělo by se přep
 Od tohoto existují protokoly pro automatickou konfiguraci výchozí brány.
 Základní myšlenou je, že toto provádí sami směrovače, aniž by do toho byly zapojeny stanice.
 Protokoly se dělí na dvě skupiny.
-První skupinou jsou protokoly které umožňují pouze zálohování dostupnosti výchozí brány (HSRP a VRRRP).
+První skupinou jsou protokoly které umožňují pouze zálohování dostupnosti výchozí brány (HSRP a VRRP).
 Druhou skupinou jsou protokoly, které umožňují nejen zálohování ale i rozkládání zátěže mezi dostupné výchozí brány (GLBP).
 
 \subsection{HSRP Hot Standby Router Protocol}
@@ -587,6 +610,8 @@ Existují 3 druhy adresování:
     \item Anycast (výběrové) také skupina ale paket je do doručen pouze jedinému členovy (nejčastěji nejbližší).
 \end{itemize}
 
+Jedno rozhraní využívá často více než jednu IPv6 adresu.
+
 \begin{center}
 	\includegraphics[width=0.9\textwidth]{obrazky/071.png}
 \end{center}
@@ -618,7 +643,7 @@ Vybrané skupiny s čísly typu zprávu:
 
 Neighbor Discovery (ND) se využívá pouze v rámci jedné sítě.
 Hlavním cílem ND je překlad IP adres na fyzické, k čemu je v IPv4 využíván protokol ARP.
-Dále muže sloužit k:
+Dále může sloužit k:
 \begin{itemize}[noitemsep]
     \item Aktualizace neplatných položek a zjišťování změn ve fyzických adresách
     \item Hledání směrovačů
@@ -681,6 +706,7 @@ Jsou zde tři odlišnosti.
 Prvním je že u IPv4 je DHCPv4 paket zpravidla prvním paketem stanice odeslaným do sítě, ale i IPv6 je toto volitelný krok v závislosti co se stanice dozví od směrovače.
 Druhým je že jednotlivé zprávy se jmenují jinak.
 Třetím je že se pro přenos nepoužívá broadcast ale multicast.
+DHCPv6 také podporuje přidělení celého IPv6 prefixu místo konkrétní IPv6 adresy.
 
 \subsubsection{Bezstavové DHCPv6}
 
@@ -694,7 +720,7 @@ MLD není samostatný protokol ale podmnožina ICMPv6.
 Pakety MLD mají počet skoků nastaven maximálně na 1.
 V případě že je odeílatel směrovač, jako IPv6 adresa odesílatele je využita lokální linková adresa daného rozhraní (local-link).
 Adresátem je pak IPv6 adresa multicastové skupiny.
-MLD paket musí obsahovat rozšiřující IP záhlaví označované jako volby pro všechny (hop-by ho option).
+MLD paket musí obsahovat rozšiřující IP záhlaví označované jako volby pro všechny (hop-by-hop option).
 
 Existují 3 ICMPv6 typy zpráv (130 -- dotaz na členstvý ve skupině, 131 -- ohlášení členství ve skupině, 132 -- ukončení člensví ve skupině).
 
@@ -738,7 +764,7 @@ Toto číslo se přiděluje centrálně v rámci celé světové sítě.
 IGP slouží jako označení pro směrovací protokoly uvnitř autonomního systému.
 Takže sem spadá RIPv2, EIGRP, OSPF, IS-IS
 
-\subsection{EGP (Exterior Gateway Protocol}
+\subsection{EGP (Exterior Gateway Protocol)}
 
 Protokol EGP slouží pro vzájemnou komunikaci mezi AS.
 Vychází z představy že v rámci každého AS je alespoň jedna brána pověřena předáváním směrovacích informací mimo AS (ven).
@@ -813,18 +839,6 @@ Host má k dispozici více IP adres, od různých poskytovatelů ale je připoje
 Při výpadku poskytovatele se přejde na druhého.
 Při výpadku linky nebude konektivita.
 
-\subsubsection{}
-\begin{itemize}[noitemsep]
-        \item Každý ISP předává do našeho AS pouze informaci o default route do svého AS a tato informace je předávána směrovačům našeho AS.
-        Ven se předávají kompletní informace o kompletních existujících sítích.
-        \item Každý ISP předává do našeho AS default route a specifické směrovací informace (nekompletní), nejčastěji o dostupnosti sítí ve svém AS.
-        V tomto případě lze všechny informace předat interním směrovačům v našem AS pomocí transformace informací do některého z IGP protokolu.
-        Nebo muže být využito BGP/iBGP.
-        \item Každý ISP předává všechny směrovací informace, které má k dispozici.
-        Všechny směrovače pracují s BGP.
-        V této situaci je vhodné použití filtrování rout aby zákazník nebyl tranzitivním mezi svými poskytovateli.
-\end{itemize}
-
 \subsubsection{Více fyzických linek, jedna IP adresa na každou z nich}
 
 Při výpadku jednoho poskytovatele nebo fyzické linky zůstává další linka a konektivita je ztracena pouze na krátké období přepnutí na jinou linku.
@@ -840,6 +854,18 @@ Pokud tato linka přestane fungovat přepne se na jinou linku.
 Dochází k současnému využití služeb několika poskytovatelů.
 Díky tomuto dojde ke zvýšení spolehlivosti a kapacity celé konektivity.
 Může se zde využívat load balancing, kdy se zátěž rozděluje rovnoměrně mezi jednotlivé linky.
+
+\subsubsection{Možnosti konfigurace BGP při nasazení multihomingu do AS}
+\begin{itemize}[noitemsep]
+        \item Každý ISP předává do našeho AS pouze informaci o default route do svého AS a tato informace je předávána směrovačům našeho AS.
+        Ven se předávají kompletní informace o kompletních existujících sítích.
+        \item Každý ISP předává do našeho AS default route a specifické směrovací informace (nekompletní), nejčastěji o dostupnosti sítí ve svém AS.
+        V tomto případě lze všechny informace předat interním směrovačům v našem AS pomocí transformace informací do některého z IGP protokolu.
+        Nebo muže být využito BGP/iBGP.
+        \item Každý ISP předává všechny směrovací informace, které má k dispozici.
+        Všechny směrovače pracují s BGP.
+        V této situaci je vhodné použití filtrování rout aby zákazník nebyl tranzitivním mezi svými poskytovateli.
+\end{itemize}
 
 \subsection{Peering}
 
