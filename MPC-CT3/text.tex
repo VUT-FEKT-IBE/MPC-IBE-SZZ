@@ -24,10 +24,10 @@ Kvantová kryptografie (distribuce klíčů protokolem BB84).
 
 \subsection{Dohled nad~L1 sítí}
 
-AIM (\emph{Automatized Infrastrucutre Management}) zajišťuje, dokumentuje a~monituruje síťovou kabeláž.
-Umožňuje detekovat vložení a odstranění propojovacích kabelů (pomocí mikrospínač nebo například měřením impedančních vlastností).
+AIM (\emph{Automatized Infrastrucutre Management}) zajišťuje, dokumentuje a~monitoruje síťovou kabeláž.
+Umožňuje detekovat vložení a odstranění propojovacích kabelů (pomocí mikrospínače nebo například měřením impedančních vlastností).
 
-IPLMS (\emph{Intelligent Physical-Layer Management Solution}) kombinuje inteligentní propojovací panely se softwarovými funkcemi a poskytuje informaceo~stavu připojení na~portech.
+IPLMS (\emph{Intelligent Physical-Layer Management Solution}) kombinuje inteligentní propojovací panely se softwarovými funkcemi a poskytuje informace o~stavu připojení na~portech.
 
 
 \subsection{Rizika a~hrozby na~L1}
@@ -38,14 +38,32 @@ Interní útoky: poškození kabelů nebo zařízení, neoprávněné připojen�
 
 
 \subsection{Bezpečnostní opatření na~L2}
+Základní bezpečnostní opatření linkové vrstvy:
+\begin{itemize}
+    \item Bezpečnost komunikace bod – bod nebo bod – více bodů v
+jedné doméně – sousedů (autentizace, klíčový management,
+šifrování, kontrola integrity a autentičnosti dat).
+    \item Šifrování obsahu po fyzickou adresu (MAC).
+    \item Bezpečnost přepojování rámců.
+\end{itemize}
 
 Ethernet packet obsahuje pouze CRC32, nelze ho považovat za~bezpečnostní prvek.
 
-802.1x: kontrola přístupu zařízení do~sígě na~portech nebo na~bezdrátových přístupových bodech.
+802.1x: kontrola přístupu zařízení do~sítě na~portech nebo na~bezdrátových přístupových bodech.
 Doporučuje se EAP a integrace s~AAA (Radius, Diameter).
 
 802.11: WEP i WPA obsahují mnoho chyb, WPA2 (802.11i): KRACK (2017), WPA3: zranitelnost v~Dragonfly handshake.
 
+Konkrétní opatření:
+\begin{itemize}
+    \item Autentizace 802.1x (filtrace MAC lze obejít spoofingem)
+    \item Hardening síťových zařízení
+    \item Ochrana přístupu na porty - Autentizace EAP
+    \item Vypnutí nepoužívaných portů
+    \item Stanovení portů vedoucích k DHCP serverům
+    \item Sticky MAC funkce
+    \item Dynamic ARP inspection (DAI) – prevence proti ARP spoofingu.  
+\end{itemize}
 
 \subsection{Rizika a~hrozby na~L2}
 
@@ -69,7 +87,7 @@ Protože jde o~ochranu na~L2, chrání data jen uvnitř jednoho LAN segmentu a p
 Podporuje VLAN.
 
 Rámce jsou podobné Ethernet rámcům, ale obsahují navíc \emph{Security Tag} a MAC.
-Používá se AES-GCM-128 (nebo -256).
+Používá se AES-GCM-128 (nebo 256).
 
 
 \clearpage
@@ -153,7 +171,13 @@ Skenováním lze zjistit jaké služby na~stanici běží, a~fingerprinting tech
 Přímá ochrana neexistuje, je možné skenování ztížit nasazením edge proxy která serverům a jejich službám posílá jen žádaný provoz a zbytek je terminován u~ní.
 
 \textbf{Únos TCP relace.}
-Varianta spoofingu, jde o~zastavení klienta (DoS) a odhad sekvenčních čísel jeho komunikace se~serverem.
+Varianta spoofingu, jde o~zastavení klienta (DoS) a odhad sekvenčních čísel jeho komunikace se~serverem. Při úspěšném únosu TCP relace je komunikace pouze jednosměrná - od útočníka na server. Úspěšný útok není jednoduché provést - inicializační sekvenční číslo je těžké predikovat. 
+
+Ochranu představuje:
+\begin{itemize}
+    \item Ochrana proti slepému ukončení spojení - RFC 5961.
+    \item Používání Challenge ACK paketů a omezení ACK paketů
+za sekundu.
 
 \textbf{SYN DoS.}
 Zaslání mnoha SYN paketů bez následného potvrzení navázání spojení ACK zprávou.
@@ -251,7 +275,9 @@ Ani v~současné době není ve~výchozím stavu šifrovaný kvůli důrazu na~r
 Jde o~prostor pro~tunelování provozu (SSH over DNS) i útoků.
 
 Dosáhnout lepšího soukromí lze dosáhnout různými způsoby.
-Omezení rekurze (tzv. \emph{bailiwick}) záleží na~rekurzivním resolveru a ne klientech: DNS dotaz obsahuje pouze data nutná k~vyřešení dotazu (root DNS $\rightarrow$ \texttt{cz.}, DNS pro~\texttt{.cz} $\rightarrow$ \texttt{vut.cz.}, DNS pro~\texttt{vut.cz} $\rightarrow$ \texttt{fekt.vut.cz.}, \dots).
+Omezení rekurze záleží na~rekurzivním resolveru a ne klientech: DNS dotaz obsahuje pouze data nutná k~vyřešení dotazu (root DNS $\rightarrow$ \texttt{cz.}, DNS pro~\texttt{.cz} $\rightarrow$ \texttt{vut.cz.}, DNS pro~\texttt{vut.cz} $\rightarrow$ \texttt{fekt.vut.cz.}, \dots).
+
+Ochrana bailiwick – jednoduchá kontrola DNS záznamů podle správnosti domén a odmítnutí dalších informací DNS, pokud server není autorizován k odpovědi pro dotazovanou doménu. 
 
 DNS dotazy lze balit do~TLS nebo HTTPS paketů  (DoT, DoH), což prvkům infrastruktury znemožní sledovat DNS provoz a chování koncových stanic.
 Dochází tím ale k~nárůstu objemu dat a~času nutnému k~vyřízení požadavku.
@@ -275,7 +301,7 @@ RRSIG je podpis odpovědi, DNSKEY je veřejný klíč použitý k~podpisu, DS sl
 
 
 \clearpage
-\section{Zabezpečení v~sítích typu Low-Power Wide Area Network (kryptografické ochrany, problémy a~omezení), zabezpečení v mobilních sítích 2G -- 5G (základní principy bezpečnosti pro~2G, 3G a 4G).}
+\section{Zabezpečení v~sítích typu Low-Power Wide Area Network (kryptografické ochrany, problémy a~omezení), zabezpečení v mobilních sítích 2G -- 5G (základní principy bezpečnosti pro~2G, 3G a 4G), bezpečnost a slabiny optických sítí.}
 
 LP WAN je reakce na~narůstající počet IoT technologií.
 Jsou vhodné pro~omezené uzly (nízká spotřeba, malá cena, dlouhý dosah).
@@ -358,16 +384,37 @@ Používá se algoritmická sada Milenage: autentizace (f1, f2), generování kl
 Využívá podobný AKA protokol jako 3G (ale s~256b klíčem), proudovou šifru Snow 3G, blokovou šifru AES.
 
 
-\subsubsection{4G}
+\subsubsection{5G}
 
 V~síti existují nejen plošné, ale i~vertikální buňky (drony, letový provoz, IoV).
 
 Bezpečnost založena na~ozkoušených protokolech z~4G, oboustranná autentizace, kontrola integrity i autentičnosti, mitigace a prevence známých útoků.
 Byly odděleny a segmentovány části (snížení mitigace útoků).
 
+\subsection{Bezpečnost a slabiny optických sítí}
 
+Optické sítě tvoří fyzickou vrstvu – bezpečnost na této vrstvě není prioritou, počítá se s bezpečnostní ve vyšších vrstvách ISO/OSI modelu či TCP/IP modelu. 
 
+\subsubsection{Typické hrozby a zranitelnosti}
+\begin{itemize}
+    \item Odposlech dat – neoprávněný přístup k datům a k hlavičkám rámců (pasivní útok - např. pomocí splitteru nebo využití ohybu vlákna).
+    \item Narušení služeb v optické síti – narušení datového přenosu nebo záměrná degradace fyzických parametrů v optických sítí (aktivní útok - útočník musí disponovat speciálním zařízením pro generování signálu).
+    \item (Distributed) Denial of Service (DoS) Attack – narušení služeb pomocí DDoS útoků může nastat u optických sítí využívající SDN (Software Defined Network).
+    \item Narušení sítě – útok zneužívající např. slabou autentizaci a autorizaci uživatelů. 
+\end{itemize}
 
+Odposlechy snižují úroveň signálu - díky tomu lze detekovat útok.
+Narušení lze poznat podle zvýšeného BER (množství chyb).
+
+\subsubsection{Slabiny}
+Inicializace v GPON - výměna klíče mezi OLT a ONU v plaintextu (rok 2015)
+
+Další útoky v GPON:
+\begin{itemize}
+    \item Možnost modifikace zpráv PLOAM - chybí autentizace a integrita zpráv.
+    \item Impersonalizace OLT – falešné OLT – odposlech upstream, MitM útoky.
+    \item Krádež služby – impersonalizace ONU – útočník s přeprogramovaným ONU se vydává za jiné ONU. 
+\end{itemize}
 
 \clearpage
 \section{Ochrana~soukromí v~ICT (pojmy), kryptografické metody zajištující ochranu soukromí, síťové metody poskytující ochranu soukromí a anonymizační nástroje a systémy.}
@@ -404,13 +451,34 @@ Tor.
 Anonymní profily prohlížečů.
 Rozšíření prohlížečů limitující sledování (blokování cookies, reklam, rozšíření sociálních sítí).
 
-
 \subsection{Anonymizační nástroje a systémy}
+Nástroje L3 + L4:
+\begin{itemize}
+    \item VPN aplikace (nahrazení IP adres, šifrování obsahu dat).
+    \item Onion routing implementace (např. nástroj ToR)
+    \item MixNets nástroje.
+    \item Proxy servery.
+    \item Zabezpečené přenosy souborů.
+\end{itemize}
 
-VPN, Proxy.
-Tor.
-TAILS, Whonix, QubesOS.
+Nástroje L7:
+\begin{itemize}
+    \item Anonymní prohlížeče webu (anonymous browsers).
+    \item Anti-trakovací nástroje a rozšíření prohlížečů (blokování cookies,
+tlačítek soc. sítí, reklamy).
+    \item Anonymní instant messaging a chatovací nástroje.
+    \item Anonymní emailové nástroje.
+    \item Anonymní vyhledávače.
+    \item Anonymní autentizace (Uprove, Idemix).
+\end{itemize}
 
+Systémy:
+\begin{itemize}
+    \item TOR - cibulové směrování
+    \item LOOPIX - Vkládá do zpráv drobná, nezávislá zpoždění a generuje krycí provoz
+    \item JAVA ANON PROXY - Založena na metodě kaskády MixNetů
+    \item IDEMIX - minimalizace sběru osobních údajů - pouze potřebné atributy
+\end{itemize}
 
 \clearpage
 \section{Forenzní analýza (hlavní cíle, základní principy, vysvětlete časové značky a časovou osu událostí).}
@@ -418,6 +486,12 @@ TAILS, Whonix, QubesOS.
 
 Forenzní analýza se zabývá zajištěním podkladů pro~analýzu a interpretaci nalezených informací a prezentací vysledků incidentu.
 
+Cíle:
+    \begin{itemize}
+        \item poskytnout spolehlivé info
+        \item podporovat řešení bezp. incidentů
+        \item podporovat možné eskalace případů (soudy)
+    \end{itemize}
 
 \subsection{Základní principy}
 
@@ -468,7 +542,7 @@ Každý souborový systém obsahuje vedle dat i~metadata o~nich (název, velikos
 Časová osa agreguje všechny zajímavé události (nebo jejich vybranou podmnožinu) na~jednom místě pro~účely zjištění korelací.
 
 Protože může jít o~data z~více zdrojů (stanice, servery, síť), je nutné všechna zařízení udržovat co nejblíže časově, aby byla korelace možná.
-Velmi často je také nutné vše převést na~UTC, protože zařízení moho být v~různých časových pásmech.
+Velmi často je také nutné vše převést na~UTC, protože zařízení mohlo být v~různých časových pásmech.
 
 
 \clearpage
@@ -569,7 +643,7 @@ Není přesně definován průběh a rozsah testu, zadavatel testu neví, co vš
 Zadavatel takzvaně kupuje zajíce v pytli (řídit se může pouze referencemi a kvalifikací testera).
 
 
-\subsubsection{ASVS metodologie}
+\subsection{ASVS metodologie}
 
 \textit{Application Security Verification Standard} OWASP definuje úrovně testování (level 0 -- 3), které jasně formulují oblasti, které musí být během testu prověřeny.
 Zadavatel i~tester tak ví co bude obsahem testování.
@@ -641,7 +715,7 @@ Definuje požadavky na~systém managementu bezpečnosti informací, především
 Norma rozlišuje pět skupin informačních aktiv: informace, hardware, software, prostory, lidé.
 
 
-\subsection{PSI DSS}
+\subsection{PCI DSS}
 
 Bezpečnostní standard PCI DSS (\emph{Payment Card Industry Data Security Standard}) představuje mezinárodní pravidla definující podmínky nakládání s~údaji držitelů platebních karet.
 Cílem je omezit rizika úniků dat a~snížit jejich zneužití.
