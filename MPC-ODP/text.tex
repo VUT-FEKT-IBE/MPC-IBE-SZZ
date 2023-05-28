@@ -85,6 +85,9 @@ Není tedy možné nakázat jakýkoliv dohled, včetně zvláštního; ISP sám 
 
 Protože se odpovědnost řídí principem \emph{notice--takedown}, pokud je ISP upozorněn na~protiprávní obsah, musí ho řešit.
 
+Existuje ale obecná povinnost ISP k neopakování zásahu do autorských práv dovozená SDEU ve věci LOREAL vs EBAY (padělky LOREAL prodávány na EBAY - porušení ochranné známky).
+
+EBAY musel uskutečnit opatření k prevenci dalšího porušování - tuto povinnost lze uložit pouze zpětně.
 
 \clearpage
 \section{Pojem osobního údaje, titul ke zpracování osobních údajů, zvláštní kategorie osobních údajů}
@@ -285,6 +288,15 @@ Orgány a osoby, kterým se ukládají povinnosti v~oblasti kybernetické bezpe�
 
 a orgán veřejné moci využívající služeb poskytovatelů cloud computingu
 
+\subsection{Základní povinnosti subjektů}
+\begin{itemize}
+    \item Elektronické komunikace - kontaktní údaje, protiopatření
+    \item Významné sítě - kontaktní údaje, incidenty (národní CERT), protiopatření
+    \item Významné systémy - bezpečnostní opatření, incidenty (vládní CERT), protiopatření
+    \item Kritická infrastruktura - bezpečnostní opatření, incidenty (vládní CERT), protiopatření
+    \item Základní služby - bezpečnostní opatření, incidenty (vládní CERT), protiopatření
+    \item Digitální služby - nespecifikovaná bezpečnostní opatření, incidenty s významným dopadem (národní CERT + významný dopad na základní službu - vládní CERT)
+\end{itemize}
 
 \clearpage
 \section{Bezpečnostní opatření, varování, reaktivní opatření a ochranná opatření dle zákona o~kybernetické bezpečnosti}
@@ -307,6 +319,8 @@ Jde například o~vnitřní normy, proškolení zaměstnanců nebo řízení vzt
 Nezakládá žádnou povinnost, jenom upozorňuje na bezpečnostní riziko.
 Když je ale vydané varovaní pro~povinné subjekty, subjekt ho ignoruju a vznikne mu škoda s~tím související, je za to odpovědný, protože porušil prevenční povinnost.
 
+NÚKIB varování zveřejní na svých internetových stránkách a oznámí je povinným subjektům.
+
 \paragraph{Ochranné opatření}
 
 Je vydané na~základě zhodnocení bezpečnostního incidentu do~budoucnosti.
@@ -315,6 +329,7 @@ Je vydané na~základě zhodnocení bezpečnostního incidentu do~budoucnosti.
 
 Bezprostřední reakce na incident, má svého konkrétního adresáta a musí se vykonat ihned.
 Opatření obecné povahy je naopak vládní předpis směřující k~nekonkrétnímu počtu subjektů.
+U reaktivního opatření je povinnost subjektů oznámit provedení.
 
 \paragraph{Opatření k~nápravě}
 
@@ -348,7 +363,7 @@ Neexistuje specifická úprava pro~práci s~elektronickými důkazy, používaj�
 Také se špatně přenáší do~vnímatelného zachycení a je nutná interpretace (soudci neumí interpretovat zdrojový kód nebo metadata).
 Může také dojít k~tomu, že je důkaz nevyužitelný.
 
-K~počítačovým datům se lze dostam třemi základními způsoby:
+K~počítačovým datům se lze dostat třemi základními způsoby:
 \begin{enumerate}[label=\alph*)]
     \item zajištění zařízení, nebo datových nosičů, na kterých jsou počítačová data uchovávána,
     \item získání přímého přístupu k počítačovým datům uchovaným v počítačových systémech,
@@ -483,22 +498,25 @@ Při~spáchání trestného činu je nutné dokázat všechny znaky skutkové po
 \emph{kvalifikovaná podstata} jsou okolnosti jejichž přítomnost může zvýšit trest proti~základu (pomluva slovně vs. na~internetu),
 \emph{privilegovaná podstata} jsou okolnosti jejichž přítomnost může snížit trest proti~základu (pouze jediný případ: vražda novorozeného dítěte matkou).
 
+\subsection{Znaky}
 
-\subsection{Subjekt}
+Skutkovou podstatu trestného činu tvoří pět znaků a to subjekt, objekt, objektivní stránka, subjektivní stránka.
+
+\subsubsection{Subjekt}
 
 Subjekt je pachatel definovaný věkem a příčetností.
 
 Nezletilé dítě právně způsobilé není: může tedy jít o~provinění, ale ne trestný čin.
 
 
-\subsection{Objekt}
+\subsubsection{Objekt}
 
 Objekt je společenský vztah, zájem nebo hodnota (právo, právem chráněný zájem) které jsou chráněny.
 
 Meč ve~hře je také uznán za chráněný, ne~podle vlastnického práva, ale tím že je jeho \enquote{majitelem} považován za~cenný.
 
 
-\subsection{Objektivní stránka}
+\subsubsection{Objektivní stránka}
 
 Škodlivý následek existuje v~případě kdy se dá vyčíslit a po~prokázání vzniká nárok \emph{na~úhradu} (ušlý zisk).
 Nemateriální újma (psychická, na~dobré pověsti) se vyčíslit nedá a nahrazuje se \emph{odškodněním}.
@@ -508,7 +526,7 @@ Protiprávní jednání je projev vůle, kterým subjekt porušuje příkazy neb
 \emph{Kauzální nexus} je příčinná souvislost mezi protiprávním jednáním a škodlivým následkem.
 
 
-\subsection{Subjektivní stránka}
+\subsubsection{Subjektivní stránka}
 
 Subjektivní stránka je mentální vztah pachatele k~činu a týká se otázky zda je možné zavinění prokázat.
 
@@ -518,6 +536,23 @@ Rozlišuje se na přímý úmysl (plánovaná vražda) vs. nepřímý úmysl (po
 \emph{Nedbalost} je neprovedení něčeho přikázaného.
 Vědomá nedbalost (\emph{\enquote{vím, ale nekonal jsem}}) vs. nevědomá nedbalost (\emph{\enquote{nevěděl jsem, ale měl jsem}}) vs. hrubá nedbalost (\emph{\enquote{nevěděl jsem, ale musel jsem}}).
 
+\subsection{Typy}
+\begin{itemize}
+    \item Cyber dependent - pouze prostřednictvým počítače
+    \item Cyber enabled - lze jak IRL, tak pomocí počítače
+    \item Cyber supported - počítač použit jako nástroj další nelegální činnosti
+\end{itemize}
+
+\subsubsection{Hlavní skutkové podstaty:}
+\begin{itemize}
+    \item porušení tajemství dopravovaných zpráv (§182 TZ)
+    \item porušení tajemství listin a jiných dokumentů uchovávaných v soukromí (§183 TZ)
+    \item neoprávněný přístup k počítačovému systému a nosiči informací (§230 TZ)
+    \item opatření a přechovávání přístupového zařízení a hesla k počítačovému systému a jiných takových dat (§231 TZ)
+    \item poškození záznamu v počítačovém systému a na nosiči informací a zásah do vybavení počítače z nedpalosti (§232 TZ)
+    \item neoprávněné opatření, padělání a pozměnění platebního prostředku (§234 TZ)
+    \item výroba a držení padělatelského náčiní (§236 TZ)
+\end{itemize}
 
 \clearpage
 \section{Subjektivní a objektivní odpovědnost}
@@ -562,9 +597,9 @@ Konsenzuální teorie: společnost se chová podle jistých nepsaných pravidel.
 
 \subsubsection{Prokazatelné právní skutečnosti}
 
-Korespondenční teorie pravdivosti: každou ze~skutečností je prokázat (i když to může být snadné: uzavření smlovy--dodání zboží--\emph{nezaplacení}).
+Korespondenční teorie pravdivosti: každou ze~skutečností lze prokázat (i když to může být snadné: uzavření smlouvy--dodání zboží--\emph{nezaplacení}).
 
-\emph{Verifikace} je prokázní důkazem; \emph{falzifikace} je prokázání antiteze.
+\emph{Verifikace} je prokázání důkazem; \emph{falzifikace} je prokázání antiteze.
 
 
 \subsubsection{Předpokládané právní skutečnosti}
