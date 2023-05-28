@@ -18,7 +18,7 @@ Ty parametrizují transformace šifrování a dešifrování.
 
 \subsubsection{Problém diskrétního logaritmu}
 
-Rovnice $c \equiv g^x \mod p$ je výpočetně jednoduchá a rychlá, získání $x$ z~$c$ je naopak složité.
+Rovnice $c \equiv g^m \mod p$ je výpočetně jednoduchá a rychlá, získání $m$ z~$c$ je naopak složité.
 
 DLP využívají protokoly Diffie-Hellman, ElGamal, DSA, ECDL, ECDSA, \dots
 
@@ -194,7 +194,10 @@ Jde o~princip dnes nejčastěji používaný (MD, SHA).
 
 Je založený na~opakovaném použití kompresní funkce $h_i = f(h_{i-1}, M_i)$, kde
 $M_i$ je aktuální zpracovávaný blok zprávy $M$,
-$h_{i-1}$ je výstup předchozího bloku (případně iniciační vektor\footnote{Inicializační vektor není v tomto případě náhodná hodnota. Může se buď spočítat z hashované zprávy, nebo se nastaví jako konstantní hodnota.});
+$h_{i-1}$ je výstup předchozího bloku (případně iniciační vektor\footnote{
+    Inicializační vektor není v~tomto případě náhodná hodnota.
+    Může se buď spočítat z~hashované zprávy, nebo se použije nějaká konstanta.
+});
 výstupem je nový částečný \emph{digest}.
 Hash vzniká z~konečné hodnoty $h_i$ po~zpracování celé zprávy $M$ (viz obr.~\ref{sha}).
 
@@ -369,7 +372,7 @@ Bob   & \verb@ +x+xx+ +x++x +xx+x+ + +x@ & poslání bází Alici \\
 Alice & \verb@ .. ..   ...   . ...   . @ & potvrzení správně vybraných bází \\
       & \verb@ 11 10   100   0 001   0 @ & \dots je materiál klíče \\
 \hline
-      & \verb@    10   10    0 00    0 @ & \dots je klíč po~obětování bitů (obětování = zveřejnění) \\
+      & \verb@    10   10    0 00    0 @ & \dots je klíč po~obětování (zveřejnění) části bitů \\
 \end{tabular}
 \caption{
 Bity 0, 1 jsou kódovány do~kvantových stavů polarizovaných fotonů.
@@ -467,7 +470,7 @@ Mezi praktické příklady patří kryptosystémy GGH (Enc, Sig), Dilithium (Sig
 
 \subsection{McEliece}
 
-Jde o~asymetrický systém $[n;k;t]$ postavený nad~protichybovým kódováním (\emph{binary Goppa code}) s~NP-těžkou obtížností\footnote{Použitým problémem je nalezení kódového slova obecného lineárního kódu s minimální vzdáleností k danému vektoru – problém obecného dekódování.}.
+Jde o~asymetrický systém $[n;k;t]$ postavený nad~protichybovým kódováním (\emph{binary Goppa code}) s~NP-těžkou obtížností\footnote{Použitým problémem je nalezení kódového slova obecného lineárního kódu s~minimální vzdáleností k~danému vektoru: problém obecného dekódování.}.
 Tvoří se náhodnou binární regulární maticí $\textbf{S}_{k \times k}$, generující maticí $\textbf{G}_{k \times n}$, náhodnou permutační maticí $\textbf{P}_{n \times n}$ a výslednou maticí $\textbf{G'}_{k \times n} = \textbf{SGP}$.
 Veřejným klíčem je $[\textbf{G'}, t]$, soukromým $[S, G, P]$.
 
@@ -521,13 +524,14 @@ Musí být vytvořen pomocí vydaného certifikátu (vydaného jakkoliv: ať kva
 Kvalifikovaný elektronický podpis je vytvořený kvalifikovaným prostředkem pro~vytváření elektronických podpisů a je založen na~kvalifikovaném certifikátu pro~elektronické podpisy.
 Kvalifikovaný certifikát je vydaný kvalifikovaným poskytovatelem služeb vytvářejících důvěru (tj. mu byl státním orgánem udělen takový status; v~ČR jsou v~současnosti čtyři).
 
-V ČR mohou kvalifikovaný elektronický podpis vydávat:
-\begin{itemize}
+V~ČR mohou kvalifikované elektronické podpisy vydávat:
+\vspace*{-0.5em}\begin{itemize}
 \item První certifikační autorita, a. s.
-\item Česká pošta, s. p. – služba Postsignum
+\item Česká pošta, s. p. (služba Postsignum)
 \item eIdentity a. s.
 \item Národní certifikační autorita (poskytovatel: Správa základních registrů)
 \end{itemize}
+
 
 \subsection{Elektronická pečeť}
 

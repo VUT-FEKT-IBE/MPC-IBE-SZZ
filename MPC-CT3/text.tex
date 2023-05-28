@@ -38,11 +38,10 @@ Interní útoky: poškození kabelů nebo zařízení, neoprávněné připojen�
 
 
 \subsection{Bezpečnostní opatření na~L2}
+
 Základní bezpečnostní opatření linkové vrstvy:
-\begin{itemize}
-    \item Bezpečnost komunikace bod – bod nebo bod – více bodů v
-jedné doméně – sousedů (autentizace, klíčový management,
-šifrování, kontrola integrity a autentičnosti dat).
+\vspace*{-0.5em}\begin{itemize}
+    \item Bezpečnost komunikace bod--bod nebo bod--více bodů v~jedné doméně (autentizace, klíčový management, šifrování, kontrola integrity a autentičnosti dat).
     \item Šifrování obsahu po fyzickou adresu (MAC).
     \item Bezpečnost přepojování rámců.
 \end{itemize}
@@ -55,14 +54,14 @@ Doporučuje se EAP a integrace s~AAA (Radius, Diameter).
 802.11: WEP i WPA obsahují mnoho chyb, WPA2 (802.11i): KRACK (2017), WPA3: zranitelnost v~Dragonfly handshake.
 
 Konkrétní opatření:
-\begin{itemize}
-    \item Autentizace 802.1x (filtrace MAC lze obejít spoofingem)
-    \item Hardening síťových zařízení
-    \item Ochrana přístupu na porty - Autentizace EAP
-    \item Vypnutí nepoužívaných portů
-    \item Stanovení portů vedoucích k DHCP serverům
-    \item Sticky MAC funkce
-    \item Dynamic ARP inspection (DAI) – prevence proti ARP spoofingu.  
+\vspace*{-0.5em}\begin{itemize}
+    \item autentizace 802.1x (filtrace MAC lze obejít spoofingem),
+    \item hardening síťových zařízení,
+    \item ochrana přístupu na~porty (Autentizace EAP),
+    \item vypnutí nepoužívaných portů,
+    \item stanovení portů vedoucích k~DHCP serverům,
+    \item funkce \emph{sticky MAC},
+    \item \emph{dynamic ARP inspection} (DAI; prevence proti ARP spoofingu).
 \end{itemize}
 
 \subsection{Rizika a~hrozby na~L2}
@@ -87,7 +86,7 @@ Protože jde o~ochranu na~L2, chrání data jen uvnitř jednoho LAN segmentu a p
 Podporuje VLAN.
 
 Rámce jsou podobné Ethernet rámcům, ale obsahují navíc \emph{Security Tag} a MAC.
-Používá se AES-GCM-128 (nebo 256).
+Používá se AES-GCM-128 (nebo -256).
 
 
 \clearpage
@@ -171,13 +170,14 @@ Skenováním lze zjistit jaké služby na~stanici běží, a~fingerprinting tech
 Přímá ochrana neexistuje, je možné skenování ztížit nasazením edge proxy která serverům a jejich službám posílá jen žádaný provoz a zbytek je terminován u~ní.
 
 \textbf{Únos TCP relace.}
-Varianta spoofingu, jde o~zastavení klienta (DoS) a odhad sekvenčních čísel jeho komunikace se~serverem. Při úspěšném únosu TCP relace je komunikace pouze jednosměrná - od útočníka na server. Úspěšný útok není jednoduché provést - inicializační sekvenční číslo je těžké predikovat. 
+Varianta spoofingu, jde o~zastavení klienta (DoS) a odhad sekvenčních čísel jeho komunikace se~serverem.
+Při úspěšném únosu TCP relace je komunikace pouze jednosměrná: od~útočníka na~server.
+Úspěšný útok není jednoduché provést, protože inicializační sekvenční číslo je těžké predikovat. 
 
 Ochranu představuje:
-\begin{itemize}
-    \item Ochrana proti slepému ukončení spojení - RFC 5961.
-    \item Používání Challenge ACK paketů a omezení ACK paketů
-za sekundu.
+\vspace*{-0.5em}\begin{itemize}
+    \item ochrana proti slepému ukončení spojení (RFC 5961),
+    \item používání Challenge ACK paketů a omezení ACK paketů za~sekundu.
 \end{itemize}
 
 \textbf{SYN DoS.}
@@ -278,7 +278,7 @@ Jde o~prostor pro~tunelování provozu (SSH over DNS) i útoků.
 Dosáhnout lepšího soukromí lze dosáhnout různými způsoby.
 Omezení rekurze záleží na~rekurzivním resolveru a ne klientech: DNS dotaz obsahuje pouze data nutná k~vyřešení dotazu (root DNS $\rightarrow$ \texttt{cz.}, DNS pro~\texttt{.cz} $\rightarrow$ \texttt{vut.cz.}, DNS pro~\texttt{vut.cz} $\rightarrow$ \texttt{fekt.vut.cz.}, \dots).
 
-Ochrana bailiwick – jednoduchá kontrola DNS záznamů podle správnosti domén a odmítnutí dalších informací DNS, pokud server není autorizován k odpovědi pro dotazovanou doménu. 
+\emph{Bailiwick} je jednoduchá kontrola DNS záznamů podle správnosti domén a odmítnutí dalších informací DNS, pokud server není autorizován k~odpovědi pro~dotazovanou doménu.
 
 DNS dotazy lze balit do~TLS nebo HTTPS paketů  (DoT, DoH), což prvkům infrastruktury znemožní sledovat DNS provoz a chování koncových stanic.
 Dochází tím ale k~nárůstu objemu dat a~času nutnému k~vyřízení požadavku.
@@ -392,29 +392,33 @@ V~síti existují nejen plošné, ale i~vertikální buňky (drony, letový prov
 Bezpečnost založena na~ozkoušených protokolech z~4G, oboustranná autentizace, kontrola integrity i autentičnosti, mitigace a prevence známých útoků.
 Byly odděleny a segmentovány části (snížení mitigace útoků).
 
+
 \subsection{Bezpečnost a slabiny optických sítí}
 
 Optické sítě tvoří fyzickou vrstvu – bezpečnost na této vrstvě není prioritou, počítá se s bezpečnostní ve vyšších vrstvách ISO/OSI modelu či TCP/IP modelu. 
 
+
 \subsubsection{Typické hrozby a zranitelnosti}
+
 \begin{itemize}
-    \item Odposlech dat – neoprávněný přístup k datům a k hlavičkám rámců (pasivní útok - např. pomocí splitteru nebo využití ohybu vlákna).
-    \item Narušení služeb v optické síti – narušení datového přenosu nebo záměrná degradace fyzických parametrů v optických sítí (aktivní útok - útočník musí disponovat speciálním zařízením pro generování signálu).
-    \item (Distributed) Denial of Service (DoS) Attack – narušení služeb pomocí DDoS útoků může nastat u optických sítí využívající SDN (Software Defined Network).
-    \item Narušení sítě – útok zneužívající např. slabou autentizaci a autorizaci uživatelů. 
+    \item Odposlech dat: neoprávněný přístup k~datům a k~hlavičkám rámců (pasivní útok; např. pomocí splitteru nebo využití ohybu vlákna).
+    \item Narušení služeb v~optické síti: narušení datového přenosu nebo záměrná degradace fyzických parametrů v~optických sítí (aktivní útok; útočník musí disponovat speciálním zařízením pro~generování signálu).
+    \item (D)DoS \emph{((Distributed) Denial of Service)}: narušení služeb pomocí DDoS útoků může nastat u~optických sítí využívající SDN \emph{(Software Defined Network)}.
+    \item Narušení sítě: útok zneužívající např. slabou autentizaci a~autorizaci uživatelů. 
 \end{itemize}
 
-Odposlechy snižují úroveň signálu - díky tomu lze detekovat útok.
+Odposlechy snižují úroveň signálu a~tak lze detekovat útok.
 Narušení lze poznat podle zvýšeného BER (množství chyb).
 
 \subsubsection{Slabiny}
-Inicializace v GPON - výměna klíče mezi OLT a ONU v plaintextu (rok 2015)
 
-Další útoky v GPON:
-\begin{itemize}
-    \item Možnost modifikace zpráv PLOAM - chybí autentizace a integrita zpráv.
-    \item Impersonalizace OLT – falešné OLT – odposlech upstream, MitM útoky.
-    \item Krádež služby – impersonalizace ONU – útočník s přeprogramovaným ONU se vydává za jiné ONU. 
+Inicializace v~GPON: výměna klíče mezi OLT a ONU v~plaintextu (rok 2015).
+
+Další útoky v~GPON:
+\vspace*{-0.5em}\begin{itemize}
+    \item Možnost modifikace zpráv PLOAM (chybí autentizace a integrita zpráv).
+    \item Falešné OLT: odposlech upstream, MitM útoky.
+    \item Krádež služby (falešné ONU): útočník s~přeprogramovaným ONU se vydává za jiné ONU.
 \end{itemize}
 
 \clearpage
@@ -453,20 +457,20 @@ Anonymní profily prohlížečů.
 Rozšíření prohlížečů limitující sledování (blokování cookies, reklam, rozšíření sociálních sítí).
 
 \subsection{Anonymizační nástroje a systémy}
+
 Nástroje L3 + L4:
-\begin{itemize}
+\vspace*{-0.5em}\begin{itemize}
     \item VPN aplikace (nahrazení IP adres, šifrování obsahu dat).
-    \item Onion routing implementace (např. nástroj ToR)
+    \item Onion routing implementace (např. nástroj Tor)
     \item MixNets nástroje.
     \item Proxy servery.
     \item Zabezpečené přenosy souborů.
 \end{itemize}
 
 Nástroje L7:
-\begin{itemize}
+\vspace*{-0.5em}\begin{itemize}
     \item Anonymní prohlížeče webu (anonymous browsers).
-    \item Anti-trakovací nástroje a rozšíření prohlížečů (blokování cookies,
-tlačítek soc. sítí, reklamy).
+    \item Antitrakovací nástroje a rozšíření prohlížečů (blokování cookies, tlačítek sociálních sítí, reklamy).
     \item Anonymní instant messaging a chatovací nástroje.
     \item Anonymní emailové nástroje.
     \item Anonymní vyhledávače.
@@ -474,11 +478,11 @@ tlačítek soc. sítí, reklamy).
 \end{itemize}
 
 Systémy:
-\begin{itemize}
-    \item TOR - cibulové směrování
-    \item LOOPIX - Vkládá do zpráv drobná, nezávislá zpoždění a generuje krycí provoz
-    \item JAVA ANON PROXY - Založena na metodě kaskády MixNetů
-    \item IDEMIX - minimalizace sběru osobních údajů - pouze potřebné atributy
+\vspace*{-0.5em}\begin{itemize}
+    \item Tor \emph{(The Onion Router)}
+    \item Loopix: vkládá do~zpráv drobná, nezávislá zpoždění a generuje krycí provoz
+    \item Java Anon Proxy: založena na~metodě kaskády MixNetů
+    \item Idemix: limituje předávané informace (atributy) na~ty které služba opravdu potřebuje k~provozu.
 \end{itemize}
 
 \clearpage
@@ -486,13 +490,12 @@ Systémy:
 \subsection{Hlavní cíle}
 
 Forenzní analýza se zabývá zajištěním podkladů pro~analýzu a interpretaci nalezených informací a prezentací vysledků incidentu.
-
-Shrnutí cílů:
-    \begin{itemize}
-        \item poskytnout spolehlivé informace
-        \item podporovat řešení bezp. incidentů
-        \item podporovat možné eskalace případů (soudy)
-    \end{itemize}
+Hlavními cíly jsou:
+\vspace*{-0.5em}\begin{itemize}
+    \item poskytnout spolehlivé informace,
+    \item podporovat řešení bezpečnostních incidentů,
+    \item podporovat možné eskalace případů (soudy).
+\end{itemize}
 
 \subsection{Základní principy}
 
