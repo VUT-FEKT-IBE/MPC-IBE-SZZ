@@ -1,82 +1,106 @@
 \section{Služby komunikačních systémů -- obecný rozbor, signalizační systém SS7, Telecommunication Management Network -- TMN, telekomunikační služby z pohledu ekonomiky.}
 
 \subsection{Služby komunikačních systémů}
+Služby komunikačních systémů jsou funkce poskytované přes komunikační sítě a zařízení, které umožňují uživatelům komunikovat a vyměňovat informace. Patří sem hlasové a datové služby, SMS a MMS, videohovory, VoIP, mobilní služby a další. Jejich cílem je usnadnit komunikaci a výměnu informací mezi uživateli.
+
+\subsection{Telekomunikační služby}
+Telekomunikační služby přenášejí informace pomocí signálů a mohou obsahovat text, zvuk nebo obraz. Telekomunikační síť je systém, který umožňuje výměnu dat a spojení mezi koncovými zařízeními. Vývoj telekomunikačních služeb začal v 60. letech a dnes existují globální sítě, jako je internet. Síťová architektura a vrstevnatá struktura definují způsob komunikace a řízení v telekomunikačních systémech. Protokoly slouží k výměně údajů mezi komunikujícími prvky a dodržování pravidel a procedur. Přenosové systémy sítí jsou standardizovány pro zajištění vyšší propustnosti a spolehlivosti sítí.
+
+Přístupové sítě -- metalické (telefonní), datové (xDSL, ISDN), optické (PON), bezdrátové (mobilní GSM)
 
 \subsubsection{Základní prvky}
-\begin{itemize}
-    \item \textbf{vysílač} -- příprava, zpracování a vložení informace do komunikačního kanálu pomocí signálu.
-    \item \textbf{přenosové médium} -- prvky vytvářející přenosové prostředí pro přenos informace v požadované podobě signálu -- elektromagnetické, rádiové, kabelové, optické.
-    \item \textbf{přijímač} -- příjem informace, signálu z přenosového prostředí a jeho zpracování pro předání cílovému subjektu.
-\end{itemize}
+\begin{description}
+    \item[vysílač] Příprava, zpracování a vložení informace do komunikačního kanálu pomocí signálu.
+    \item[přenosové médium] Prvky vytvářející přenosové prostředí pro přenos informace v požadované podobě signálu -- elektromagnetické, rádiové, kabelové, optické.
+    \item[přijímač] Příjem informace, signálu z přenosového prostředí a jeho zpracování pro předání cílovému subjektu.
+\end{description}
 
 \subsubsection{Kategorizace}
-\begin{enumerate}
+\begin{itemize}
     \item Podle typu zpracování informace:
-          \begin{itemize}
-              \item \textbf{analogové} -- telefonní síť, terestiální analogové vysílání atp. (v dnešní době postupně zanikající služby, nahrazované digitálními technologiemi).
-              \item \textbf{digitální} -- datová síť -- většina dnes nabízených služeb.
-          \end{itemize}
+          \begin{description}
+              \item[Analogové] Telefonní síť, terestiální analogové vysílání atp. (v dnešní době postupně zanikající služby, nahrazované digitálními technologiemi).
+              \item[Digitální] Datová síť -- většina dnes nabízených služeb.
+          \end{description}
     \item Podle regulace:
-          \begin{itemize}
-              \item \textbf{rezervované služby} -- jedná se o služby telefonního charakteru,
-              \item \textbf{oblasti regulované licenčními podmínkami} -- televizní a rádiové vysílání, mobilní komunikace,
-              \item \textbf{oblasti volného působení za dodržení norem a předpisů} -- služby uživatelského charakteru.
-          \end{itemize}
+          \begin{description}
+              \item[Rezervované služby] Jedná se o služby telefonního charakteru.
+              \item[Oblasti regulované licenčními podmínkami] Televizní a rádiové vysílání, mobilní komunikace.
+              \item[Oblasti volného působení za dodržení norem a předpisů] Služby uživatelského charakteru.
+          \end{description}
     \item Podle potřeb uživatelů:
-          \begin{itemize}
-              \item \textbf{základní a rozšířené telefonní služby} -- telefonní hovory, datové služby ISDN, doplňkové služby ke zdokonalení základní služby, jako je například přenos telefonního čísla, volání na účet volaného, roamingové služby, textové a hlasové zprávy apod,
-              \item \textbf{telematické datové služby} -- využívající stávající telekomunikační sítě v infrastruktuře dopravy v ČR,
-              \item \textbf{multimediální datové služby} -- IPTV internetové televizní vysílání, VoIP -- internetová telefonie, ISP -- poskytování služeb internetu a podobně, jsou kladeny vyšší nároky na přenosová média z hlediska zpracování a rychlosti doručení informace.
-          \end{itemize}
+          \begin{description}
+              \item[Základní a rozšířené telefonní služby] Telefonní hovory, datové služby ISDN, doplňkové služby ke zdokonalení základní služby, jako je například přenos telefonního čísla, volání na účet volaného, roamingové služby, textové a hlasové zprávy apod.
+              \item[Telematické datové služby] Využívající stávající telekomunikační sítě v infrastruktuře dopravy v ČR.
+              \item[Multimediální datové služby] IPTV internetové televizní vysílání, VoIP -- internetová telefonie, ISP -- poskytování služeb internetu a podobně, jsou kladeny vyšší nároky na přenosová média z hlediska zpracování a rychlosti doručení informace.
+          \end{description}
     \item Podle počtu současně komunikujících účastníků:
-          \begin{itemize}
-              \item \textbf{bod-bod: point to point} -- komunikace pouze dvou uživatelů, bodů, na přenosovém médiu,
-              \item \textbf{bod-více bodů: point to multipoint} -- (centralizované) komunikace jednoho uživatele s více, TV, IPTV, rozšířené telefonní služby a rádiové vysílání, některé služby ISP,
-              \item \textbf{více bodů-více bodů: multipoint to multipoint} -- (decentralizované) -- videokonference, sdílení sítí a výpočetních prostředků na síti, P2P, PC hry a podobně.
-          \end{itemize}
+          \begin{description}
+              \item[Bod-bod: point to point] Komunikace pouze dvou uživatelů, bodů, na přenosovém médiu.
+              \item[Bod-více bodů: point to multipoint] (Centralizované) komunikace jednoho uživatele s více, TV, IPTV, rozšířené telefonní služby a rádiové vysílání, některé služby ISP.
+              \item[Více bodů-více bodů: multipoint to multipoint] (Decentralizované) -- videokonference, sdílení sítí a výpočetních prostředků na síti, P2P, PC hry a podobně.
+          \end{description}
     \item Podle dosažitelnosti služeb:
-          \begin{itemize}
-              \item \textbf{pevné} -- digitální integrované služby ISDN, služby asynchronních sítí ATM, služby sítí LAN, služby internetového charakteru,
-              \item \textbf{mobilní} -- služby bezdrátových paketových sítí, služby GSM standardů.
-          \end{itemize}
-\end{enumerate}
-
-\subsection{SS7 -- Signalling System Number}
-Signalizační systém č.7. -- sada signalizačních protokolů, které jsou použity v mobilních telefonních sítích, v pozemních digitálních telefonních
-sítích a pro mezi ústřednovou signalizaci. Signalizační informace (informace k uskutečnění a ukončení telefonních hovorů -- překlad telefonních čísel, účtování, zasílání zpráv) jsou předávány odděleně od ostatních informací. Slouží také zasílání krátkých textových zpráv SMS, účtování, překlady telefonních čísel.
-
-Signalizační zprávy:
-\begin{itemize}
-    \item MSU
-    \item Stavová signalizační zpráva LSSU (Link Status Signal Unit)
-    \item Výplňová signalizační zpráva FISU (Fill-in Signal Unit)
+          \begin{description}
+              \item[Pevné] Digitální integrované služby ISDN, služby asynchronních sítí ATM, služby sítí LAN, služby internetového charakteru.
+              \item[Mobilní] Služby bezdrátových paketových sítí, služby GSM standardů.
+          \end{description}
 \end{itemize}
 
-Jednotlivé uzly SS7 signalizační sítě SP (Signalling Points) jsou rozdělovány do skupin:
-\begin{itemize}
-    \item SSP (Service Switching Point) - funkce telefonní ústředny, zajišťuje jednotlivé propojování hlasových spojení
-    \item STP (Signal Transfer Point) - signalizační přenosový bod, tvoří jej směrovače SS7
-    \item SCP (Service Control Point) - poskytování přídavných služeb v síti
-\end{itemize}
+\subsection{Signaling System Number 7 (SS7)}
+Signalizační systém SS7 (Signaling System Number 7) je sada signalizačních protokolů používaných v mobilních telefonních sítích, pozemních digitálních telefonních sítích a pro mezi-ústřednovou signalizaci. Úkolem signalizačního systému SS7 je poskytovat informace k navázání, uskutečnění a ukončení telefonních hovorů, a také k dalším službám jako je zasílání SMS, účtování a překlady telefonních čísel.
 
-\subsection{TMN}
-TMN má podporovat požadavky na řízení, správu, plánování, zabezpečování, instalaci, údržbu a provoz telekomunikačních sítí a služeb. Koncepčně je TMN zvláštní sítí, která je s telekomunikační sítí propojena pouze na speciálních rozhraních, přes která telekomunikační síť řídí. TMN však může využívat částí telekomunikačních sítě pro vlastní komunikaci.
-\begin{itemize}
-    \item sledování kvality služeb (Performance)
-    \item sledování a odstraňování poruch (Fault Management-FM)
-    \item řízení konfigurace telekomunikačních zařízení a sítí (Configuration Management-CM)
-    \item vedení účtování služeb (Acounting Management-AM)
-    \item zajištění bezpečnosti TMN (Security Management-SM)
-\end{itemize}
+SS7 síť se skládá z různých uzlů:
+\begin{description}
+    \item[SSP (Service Switching Point)] funkce telefonní ústředny, která zajišťuje propojování hlasových spojení. U mobilních stanic se používá název MSC (Mobile Switching Centre).
+    \item[STP (Signal Transfer Point)] signalizační přenosový bod, který sestává ze směrovačů SS7 a zajišťuje komunikaci mezi SSP a SCP.
+    \item[SCP (Service Control Point)] poskytuje přídavné služby v síti, například VLR (Visitor Location Register), HLR (Home Location Register) nebo EIR (Equipment Identity Register).
+\end{description}
+
+Komunikace v SS7 probíhá na společném signalizačním kanálu v rámci jednoho časového slotu E1. Jednotlivé signalizační okruhy SS7 jsou vzájemně odděleny. SS7 síť se dále dělí na přenos hlasu a síť pro signalizaci, přičemž síť pro signalizaci používá techniku přepojování paketů a ovládá přenos hlasu pomocí protokolů SS7.
+
+Protokolová sada SS7 zahrnuje několik protokolů, které odpovídají různým vrstvám referenčního modelu OSI. Patří sem:
+\begin{description}
+    \item[MTP (Message Transfer Part)] přenos signalizace uvnitř jednotky v rámci národní sítě jednoho operátora.
+    \item[SCCP (Signaling Connection Control Part)] směrování signalizačních zpráv dle telefonních čísel.
+    \item[TCAP (Transaction Capabilities Application Part)] provádí spolehlivou výměnu informací mezi částmi mobilních telefonních sítí a telefonními ústřednami.
+    \item[ISUP (ISDN User Part)] vytváří a ruší spojení mezi ISDN jednotkami.
+    \item[MAP (Mobile Application Part)] výměna signalizačních zpráv v mobilních sítích.
+\end{description}
+
+MTP (Message Transfer Part) se skládá ze tří úrovní, které odpovídají vrstvám fyzické, linkové a síťové. MTP 1 slouží pro přenos signálů, MTP 2 pro řízení a detekci chyb a MTP 3 pro směrování signalizačních zpráv a spolehlivý přenos.
+
+
+V rámci SS7 se využívají různé typy signalizačních zpráv pro přenos informací mezi síťovými prvky:
+\begin{description}
+    \item[MSU (Message Signal Unit)] Jedná se o základní jednotku signalizačních zpráv v systému SS7. MSU nese informace potřebné pro signalizaci mezi jednotlivými uzly sítě.
+    \item[LSSU (Link Status Signal Unit)] Stavová signalizační zpráva, která slouží k signalizaci stavu přenosového spoje (link) mezi dvěma uzly.
+    \item[FISU (Fill-in Signal Unit)] Výplňová signalizační zpráva, která se používá pro doplnění prázdných míst v přenosovém toku signalizačních zpráv. FISU je využívána pro zachování konstantního přenosového toku na linkách.
+\end{description}
+
+\subsection{Telecommunication Management Network (TMN)}
+Telecommunication Management Network (TMN) je síťový koncept používaný v telekomunikacích pro správu a monitorování telekomunikačních sítí. TMN poskytuje rámec pro správu a kontrolu telekomunikační infrastruktury, včetně správy sítě, správy služeb a správy systémů. Koncepčně je TMN zvláštní sítí, která je s telekomunikační sítí propojena pouze na speciálních rozhraních, přes která telekomunikační síť řídí. TMN však může využívat částí telekomunikačních sítě pro vlastní komunikaci.
+TMN se skládá z několika vrstev, zahrnujících:
+\begin{description}
+    \item[Business Management Layer:] Tato vrstva se zaměřuje na strategické aspekty a řízení telekomunikačních služeb, včetně plánování, strategie, marketingu a ekonomiky.
+    \item[Service Management Layer:] Tato vrstva se zabývá správou a řízením telekomunikačních služeb poskytovaných koncovým uživatelům. Zahrnuje procesy jako správu zákaznických služeb, řízení kvality služeb (QoS), fakturaci a řešení reklamací.
+    \item[Network Management Layer:] Tato vrstva je odpovědná za správu a řízení telekomunikační infrastruktury a sítí. Zahrnuje správu sítě, konfiguraci, monitorování výkonu, řízení chyb a bezpečnostní aspekty.
+    \item[Element Management Layer:] Tato vrstva se soustředí na správu jednotlivých prvků v telekomunikační síti, jako jsou přepínače, směrovače, báze stanic a další zařízení. Zajišťuje jejich konfiguraci, monitorování, diagnostiku a řízení.
+\end{description}
+
+Jednotlivé aspekty správy telekomunikačních sítí a zařízení dělí na následující:
+\begin{description}
+    \item[Sledování kvality služeb (Performance Management -- PM)] Tento aspekt se zaměřuje na monitorování a řízení výkonnosti telekomunikačních služeb. Zahrnuje sběr dat o výkonu sítě, analýzu těchto dat a přijímání opatření pro zlepšení kvality poskytovaných služeb.
+    \item[Sledování a odstraňování poruch (Fault Management -- FM)] Tento aspekt se zabývá detekcí, signalizací a řešením poruch v telekomunikačních sítích. Zahrnuje monitorování stavu sítě, detekci poruch, jejich lokalizaci a následnou obnovu služeb.
+    \item[Řízení konfigurace telekomunikačních zařízení a sítí (Configuration Management -- CM)] Tento aspekt se týká správy konfigurace telekomunikačních zařízení a sítí. Zahrnuje sledování, správu a změnu konfigurace zařízení a sítí včetně verzování, dokumentace a zajištění konzistence konfigurace.
+    \item[Vedení účtování služeb (Accounting Management -- AM)] Tento aspekt zahrnuje sběr, zpracování a správu dat o využívání telekomunikačních služeb pro účely fakturace a účtování. Zahrnuje sledování spotřeby služeb, identifikaci a klasifikaci provozu a generování výkazů o účtování.
+    \item[Zajištění bezpečnosti TMN (Security Management -- SM)] Tento aspekt se zaměřuje na ochranu TMN před hrozbami a zajištění bezpečnosti telekomunikačních sítí a zařízení. Zahrnuje monitorování bezpečnostních událostí, identifikaci a odstraňování bezpečnostních hrozeb, implementaci bezpečnostních opatření a řízení přístupu k síti a datům.
+\end{description}
 
 \subsection{Pohled ekonomiky}
 Telekomunikace jsou páteří prakticky všech odvětví hospodářství a samozřejmě i dopravních systémů. Telekomunikační řešení je nutno vždy chápat jako aplikaci jedné nebo vice telekomunikačních služeb, které vytvářejí přiměřené podmínky pro řešeni zadané telekomunikační úlohy.
 
 Náklady za provozovaná nebo poskytovaná komunikační řešení patří mezi významné omezující faktory, které limitují rychlejší rozvoj řady oborů. To je ostatně i jedním z hlavních motivů budování telekomunikačních sítí, které zaručují možnost sdílení její kapacity nejen více aplikacemi, ale i více právními subjekty. Možnost sdílení je podmíněno zaručením bezpečnostní integrity jednotlivých aplikaci.
-
-\subsection{Telekomunikační služby}
-Přenos informací v podobě signálů. Signály nesou textovou, zvukovou nebo obrazovou informaci pomocí telekomunikačního systému. Schopnost uspokojit dohodnuté požadavky a potřeby.
-Přístupové sítě -- metalické (telefonní), datové (xDSL, ISDN), optické (PON), bezdrátové (mobilní GSM)
 
 
 \clearpage
