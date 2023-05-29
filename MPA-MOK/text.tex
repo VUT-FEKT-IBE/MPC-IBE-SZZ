@@ -8,11 +8,11 @@ V~rovině ji lze popsat kartézskými souřadnicemi $(x, y)$.
 Mřížky se definují jejich bázovými vektory:
 $$\lat = \lat(b_1, b_2) = \{x_1b_1 + x_2b_2 : x_i \in \mathbb{Z}\}$$
 
-N-dimenzionální mřížka $\lat$ je množina všech celočíselných kombinaí n-lineárně nezávislých vektorů (generátorů)
+N-dimenzionální mřížka $\lat$ je množina všech celočíselných kombinací $n$-lineárně nezávislých vektorů (generátorů)
 $$b_1, \dots, b_n \in \mathbb{R}^n : \lat = \left\{\sum_{i=1}^n x_ib_i : x_i \in \mathbb{Z}\right\}$$
 
 $\mathcal{B} = \{b_1, \dots, b_n\}$ se nazývá bází mřížky.
-Platí že každý vektor $v \in \lat$ může být unikátně vyjářden jako lineární kombinace bázových vektorů: $v = a_1b_1 + \cdots + a_nb_n$.
+Platí že každý vektor $v \in \lat$ může být unikátně vyjádřen jako lineární kombinace bázových vektorů: $v = a_1b_1 + \cdots + a_nb_n$.
 
 V~kryptografii se využívají mřížky splňující podmínku $q \mathbb{Z}^n \subset \lat \subset \mathbb{Z}^n$ pro~některé (prvočíselné)~$q$.
 Jako matice se využívá
@@ -71,10 +71,6 @@ Existuje deterministický algoritmus ($n^{O(n)}$)\footnotemark{}.
 \footnotetext{Micciancio, Daniele; Voulgaris, Panagiotis (2010): Faster Exponential Time Algorithms for the Shortest Vector Problem \\ \url{https://doi.org/10.1137/1.9781611973075.119}}
 
 Jinými slovy jde o~prohledávání okolí vektoru a~nalezení bázového vektoru který je k~hledanému nejbližší.
-Jde o~generalizaci SVP.
-CVP$_\gamma$: vzdálenost může být nejvýše $\gamma$ (tzv. aproximační faktor).
-Platí že $\gamma$-GapCVP' je NP-hard pro~$\gamma \ge 1$\footnotemark{}.
-\footnotetext{Arora, S., L. Babai, J. Stern, and E.Z. Sweedyk (1997). The hardness of approximate optima in lattices, codes, and systems of linear equations}
 
 
 \subsection{Babaiův algoritmus}
@@ -82,10 +78,10 @@ Platí že $\gamma$-GapCVP' je NP-hard pro~$\gamma \ge 1$\footnotemark{}.
 Pokud je $\base$ ortogonální báze v~$\lat$, approx-CVP může být vyřešen v~polynomiálním čase.
 Algoritmus funguje i při~dostatečně ortogonálních bázích.
 
-\begin{enumerate}
-\item $t = t_1 b_1 + t_2 b_2 + \cdots + t_n b_n$ kde $t_1, t_2, \dots, t_n \in \mathbb{R}$.
-\item $v = a_1 b_1 + a_2 b_2 + \cdots + a_n b_n$ kde $a_i = \lceil t_i \rfloor$ pro $i = 1, 2, \dots, n$.
-\end{enumerate}
+\begin{itemize}
+\item $\mathcal{E}$: $t = t_1 b_1 + t_2 b_2 + \cdots + t_n b_n$ kde $t_1, t_2, \dots, t_n \in \mathbb{R}$.
+\item $\mathcal{D}$: $v = a_1 b_1 + a_2 b_2 + \cdots + a_n b_n$ kde $a_i = \lceil t_i \rfloor$ pro $i = 1, 2, \dots, n$.
+\end{itemize}
 
 % FIXME Vysvětlení?
 
@@ -117,23 +113,29 @@ Algoritmus funguje i při~dostatečně ortogonálních bázích.
 \subsection{Asymetrický kryptosystém GGH}
 
 Alice vybírá lineárně nezávislé vektory $v_1, v_2, \dots, v_n \in \mathbb{Z}^n$ které jsou k~sobě celkem kolmé (což lze zjistit Hadamardovým poměrem).
-Vektory $v_i$ jsou Alicin privátní klíč (uspořádán do~řádků v~$n \times n$ matici $V$).
+Vektory $v_i$ (resp. jimi tvořená matice $\textbf{V}_{n \times n}$) jsou Alicin privátní klíč.
 
 Alice vytvoří $n \times n$ matici $\textbf{U}$ tak aby $\text{det}(\textbf{U}) = \pm 1$.
 Poté spočítá $\textbf{W} = \textbf{UV}$.
-Řádky matice $\textbf{W}$ ($w_1, \dots, w_n$) je nová báze $\lat$ a Alicin veřejný klíč.
+Matice $\textbf{W}_{n \times n}$ je špatná báze a~tedy Alicin veřejný klíč.
 
-Pro~poslání zprávy vybere Bob malý vektor $m$ s~celočíselnými souřadnicemi.
-Vybere také náhodný rušivý vektor $r$ (např. z~předem definovaného rozsahu $-\delta$ až $\delta$) a vypočítá
-$e = m\textbf{W} + r = \sum_{i=1}^n m_i w_i + r_i$.
+Pro~poslání zprávy vybere Bob malý vektor (zprávu) $m$ s~celočíselnými souřadnicemi.
+Vybere také náhodný rušivý vektor $r$ (s~maximální velikostí $\delta$) a vypočítá
+$c = m\textbf{W} + r$.
 
-Alice použije Babaiův algoritmus se~svou dobrou bází $v_1, \dots, v_n$ k~nalezení vektoru v~$\lat$ blízkému $e$.
-Protože používá dobrou bázi a~$r$ je malé, vypočítá $m\textbf{W}$.
+Alice použije Babaiův algoritmus se~svou dobrou bází $\textbf{V}$ k~nalezení vektoru ve~$\textbf{W}$ blízkému $c$.
+Protože používá dobrou bázi a~$r$ je malé, získá $m\textbf{W}$.
 Tuto hodnotu vynásobí $\textbf{W}^{-1}$ a tím získá $m$.
+Útočník Eva musí vektor mřížky nejbližší k~$c$ hledat ve~špatné mřížce, což je těžké.
 
-Jde o~schéma bezpečné, ale kvůli velikosti bezpečnostních parametrů nepraktické.
-(Převzato z~\emph{An Introduction to Mathematical Cryptography}\footnotemark{}).
-\footnotetext{\url{https://staff.emu.edu.tr/alexanderchefranov/Documents/CMSE491/CMSE491 Fall2020/Hoffstein2015 Introduction to Mathematical Cryptography 409-412 GGH.pdf}. \\ Plně dostupné na \url{https://doi.org/10.1007/978-1-4939-1711-2}}
+Jde o~schéma obecně bezpečné, ale kvůli velikosti bezpečnostních parametrů nepraktické\footnotemark{}.
+\footnotetext{
+    Hoffstein, Pipher, Silverman (2014): An Introduction to Mathematical Cryptography.
+    \\
+    \url{https://doi.org/10.1007/978-1-4939-1711-2}
+    % Paywall, extrakt na
+    % https://staff.emu.edu.tr/alexanderchefranov/Documents/CMSE491/CMSE491 Fall2020/Hoffstein2015 Introduction to Mathematical Cryptography 409-412 GGH.pdf
+}
 
 
 \clearpage
@@ -143,58 +145,55 @@ Všechny LWE problémy jsou do~určité míry ekvivalentní (pro~rovnou bezpečn
 V~praxi proti nim neexistuje útok.
 
 Obecně jde o~řešení problému soustavy rovnic.
-Samotná matice lze řešit Gaussovskou eliminací, ale po~přidání chyby $e \in \{-1, 0, 1\}$ k~výsledkům již správný výsledek vycházet nebude.
+Samotná matice lze řešit Gaussovskou eliminací, ale po~přidání chyby k~výsledkům již správný výsledek vycházet nebude.
 
+
+\subsection{Learning with Errors}
+
+LWE lze zapsat jako $\textbf{A}s + e = b$. Obsahuje $n$ polynomů (řádu $m$), tajemství $s$ a chybu $e$.
 $$
-\left[
+\left(
 \begin{matrix}
 1 & 5 & 3 & 2 \\
 1 & 4 & 2 & 6 \\
 2 & 1 & 3 & 1 \\
 3 & 4 & 4 & 6 \\
 \end{matrix}
-\right] \equiv \left[
+\right)_{m \times n}
+\left(
+\begin{matrix}
+s_1 \\ s_2 \\ s_3 \\ s_4
+\end{matrix}
+\right)_{1 \times n} + e
+\equiv \left(
 \begin{matrix}
 1 \\ 2 \\ 4 \\ 0
 \end{matrix}
-\right] + e
-\equiv \left[
+\right) + \left(
 \begin{matrix}
-{\color{gray}1+1=}\, 2 \\
-{\color{gray}2+0=}\, 2 \\
-{\color{gray}4-1=}\, 3 \\
-{\color{gray}0-1=}\, 6 \\
+1 \\ 0 \\ -1 \\ -1
 \end{matrix}
-\right] \pmod 7
+\right)
+\equiv \left(
+\begin{matrix}
+2 \\ 2 \\ 3 \\ 6
+\end{matrix}
+\right) \pmod 7
 $$
 
-
-\subsection{Learning with Errors}
-
-LWE lze zapsat jako $\textbf{A}s + e = b$. Obsahuje $n$ polynomů (řádu $m$), tajemství $s$ a chybu $e$.
-
-$s$ je nalezitelné linearizací pokud je $\chi$ náhodně rozložené v~$\mathbb{Z}_2$ (tj. $n=1$ a $e \in \{-1, 0, 1\}$).
+Bez přidání chyby $e$ je~$s$ nalezitelné jednoduchou Gaussovskou eliminací.
+S~přidanou chybou $e$ je nalezení $s$ velmi obtížné (např. pokud $n=1$ a $e \in \{-1, 0, 1\}$, tj. $\chi$ je rovnoměrně rozložená chyba v~$\mathbb{Z}_2$, je vypočítatelné linearizací) nebo nemožné.
 Bezpečnost tedy závisí na~volbě distribuce $\chi$.
 
 Je možné ho uplatit na~symetrické i asymetrické šifrování, výměnu klíčů, digitální podpisy, (plně) homomorfní šifrování, ZK protokoly a další.
 
-\subsection{Ring Learninig with Errors}
-
-LWE trpí velikostmi klíčů ($n^2$).
-R-LWE redukuje matici \textbf{A} na~jediný řádek, který je pokaždé horizontálně posunutý o~jednu pozici vpravo.
-Stačí tak přenášet pouze tento jeden řádek a ne~celou matici.
-Vytvořená struktura je ideální mřížka, ve~které může být grupa $\mathbb{Z}_q^n$ nahrazena polynomiálním okruhem $\mathbb{Z}_q[x]/\left<x^n+1\right>$.
-
-R-LWE lze zapsat jako $\textbf{A} + s \equiv b$. Obsahuje $n$ polynomů (řádu $m$) a tajemství $s$.
-
-Redukce na~polynomy výrazně zmenšuje velikost přenášených klíčů $\textbf{A}, s$.
 
 \subsection{Regev one-bit kryptosystém}
 
-\begin{wrapfigure}{r}{16em}
+\begin{figure}[ht]
     \centering
     \includegraphics[width=13em]{regev}
-\end{wrapfigure}
+\end{figure}
 
 Schéma stavící na~LWE.
 Privátním klíčem je $s$, $e$, veřejným $A$, $b$.
@@ -208,11 +207,79 @@ Dešifrováno bude $\begin{cases}
 0: & p \in \left<-4, 3\right> \\
 \end{cases}$.
 
-% NOTE Zde je možné přidat schéma/obrázek z prezentace (Post-Quantum Cycles, slide 28)
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lr}
+    \textbf{Alice} & \textbf{Bob} \\
+    $n = 3$, $q = 17$ \\
+
+    \multicolumn{2}{c}{Generování klíčů} \\
+    \multicolumn{2}{l}{
+    $s = \left(\begin{matrix}
+    2 \\ 3 \\ -2
+    \end{matrix}\right) \in_{UR} \mathbb{Z}_{17}^3$,
+
+    $\textbf{A} = \left(\begin{matrix}
+    5 & 3 & -1 \\ 6 & 1 & -13 \\ 1 & -11 & 1 \\ -7 & 4 & 0
+    \end{matrix}\right) \in_{UR} \mathbb{Z}_{17}^{4 \times 3}$,
+    $e = \left(\begin{matrix}
+    1 \\ -1 \\ 0 \\ 1
+    \end{matrix}\right) \in_{\psi_\alpha} \mathbb{Z}_{17}^4$
+    \hspace*{5em}
+    } \\
+    $p = \textbf{A}s + e \mod {17} = \left(\begin{matrix}
+    5 \\ 5 \\ 1 \\ -1
+    \end{matrix}\right)$ \\
+    veřejný klíč je $(\textbf{A}, p)$, privátní klíč $s, e$ \\
+
+    \multicolumn{2}{c}{Šifrování} \\
+    & výběr zprávy $b = 1$ \\
+    & $\mathcal{E}_{\textbf{A},p}(b) = (a', p') = \left( \sum a_i, \sum p_i + b \lfloor \frac{q}{2} \rfloor \right)$ \\
+
+    \multicolumn{2}{c}{Dešifrování} \\
+    $e' = p' - a' s^T = 12 - 2 = 10$ \\
+    $\mathcal{D}_{s}(a',p') = \begin{cases}
+    0 & e' \sim 0 \\
+    1 & e' \sim \frac{17}{2} \\
+    \end{cases}$
+    \end{tabular}
+
+    \caption{(Regev) one-bit kryptosystém}
+\end{table}
+\FloatBarrier
+
+
+\subsection{Ring Learning with Errors}
+
+LWE trpí velikostmi klíčů ($n^2$).
+R-LWE redukuje 2D matici \textbf{A} na~jediný řádek, který je pokaždé horizontálně posunutý o~jednu pozici vpravo.
+Stačí tak přenášet pouze tento jeden řádek a ne~celou matici.
+Vytvořená struktura je ideální mřížka, ve~které může být grupa $\mathbb{Z}_q^n$ nahrazena polynomiálním okruhem $\mathbb{Z}_q[x]/\left<x^n+1\right>$.
+
+R-LWE lze zapsat jako $\textbf{A} s \equiv b$. Obsahuje $n$ polynomů (řádu $m$) a tajemství $s$.
+
+Redukce na~polynomy výrazně zmenšuje velikost přenášených klíčů $\textbf{A}, s$.
+
+$$
+\textbf{A} \cdot s + e \equiv
+\left|\begin{matrix}
+- x^3 +2x^2 -x +2 \\
+      - x^2 -x -1 \\
+-3x^3 + x^2 -x
+\end{matrix}\right|
+\cdot
+x^3 -x +1
+\equiv
+\left|\begin{matrix}
+-3x^3 +2x^2 -4x +3 \\
+      - x^2 + x +1 \\
+\dots
+\end{matrix}\right|
+$$
 
 
 \clearpage
-\section{Lattice-based protocols: Module-LWE problem, LWR problem, NTT, KYBER scheme, SABER scheme.}
+\section{Lattice-based protocols: M-LWE, LWR, NTT, KYBER scheme, SABER scheme.}
 
 \subsection{M-LWE}
 
@@ -227,8 +294,8 @@ b =
 \textbf{A}s + e =
 \left(\begin{matrix}
 a_{11}(x) & a_{12}(x) & a_{13}(x) \\
-a_{11}(x) & a_{12}(x) & a_{13}(x) \\
-a_{11}(x) & a_{12}(x) & a_{13}(x) \\
+a_{21}(x) & a_{22}(x) & a_{23}(x) \\
+a_{31}(x) & a_{32}(x) & a_{33}(x) \\
 \end{matrix}\right) \left(\begin{matrix}
 s_{11}(x) \\ s_{21}(x) \\ s_{31}(x) \\
 \end{matrix}\right) + \left(\begin{matrix}
@@ -236,30 +303,27 @@ e_{11}(x) \\ e_{21}(x) \\ e_{31}(x) \\
 \end{matrix}\right)
 $$
 
-Chyba $e$ je vytvořena násobením nebo zaokrouhlováním.
+Chyba je vytvořena přičtením čísel, násobením nebo zaokrouhlováním.
 % TODO Vysvětlit do větších detailů
 
-% TODO Vysvětlit co se zde děje, je to šifrování?
-% TODO V čem je důležité to že je to polynomiální modulus?
-Nechť $q$ je polynomiální modulus a $p < q$.
-Poté $b = \lfloor \frac{p}{q} \textbf{A}s \rfloor$.
-Zaokrouhlováním dolů se chyba stává deterministická.
-Pokud jsou $p$ a $q$ mocniny dvou, operace násobení a zaokrouhlování jsou velmi rychlé.
-
-% TODO Jak dešifrovat?
 
 \subsection{LWR}
 % Learning with Rounding, Revisited. New Reduction, Properties and Applications
 %  https://www.iacr.org/archive/crypto2013/80420212/80420212.pdf
+% TODO Nalinkovaný paper obsahuje spoustu informací o bezpečnosti parametrů, hodilo by se tu něco z toho mít?
 
 \emph{Learning with Rounding} je varianta LWE, kde je náhodná chyba nahrazena deterministickým zaokrouhlováním.
 Jde o~problém postavený na~Regev a je stejně těžký jako LWE.
 
-Pro~$p < q$ rozdělíme prvky $\mathbb{Z}_q$ do~$p$ sousedících intervalů (každých velkých zhruba $q/p$), a definujeme funkci zaokrouhlení $\lfloor \cdot \rfloor_p$: $\mathbb{Z}_q \rightarrow \mathbb{Z}_p$ která mapuje $x \in \mathbb{Z}_q$ na~index intervalu do~kterého $x$ patří.
+% TODO Vysvětlit co se zde děje, je to šifrování?
+% TODO V čem je důležité to že je to polynomiální modulus?
+Nechť $q$ je polynomiální modulus a $p < q$.
+Poté $b = \lfloor \frac{p}{q} \textbf{A}s \rceil$.
 
-LWR tvrdí že $(\textbf{A}, \lfloor \textbf{A} \cdot s \rfloor_p)$ je výpočetně nerozlišitelné od~$(\textbf{A}, \lfloor b \rfloor_p)$, kde $b$ je veřejný vektor.
+Pro~$p < q$ rozdělíme prvky $\mathbb{Z}_q$ do~$p$ sousedících intervalů (každých velkých zhruba $q/p$), a definujeme funkci zaokrouhlení $\lfloor \cdot \rceil_p$: $\mathbb{Z}_q \rightarrow \mathbb{Z}_p$ která mapuje $x \in \mathbb{Z}_q$ na~index intervalu do~kterého $x$ patří.
 
-% TODO Nalinkovaný paper obsahuje spoustu informací o bezpečnosti parametrů, hodilo by se tu něco z toho mít?
+LWR tvrdí že $(\textbf{A}, \lfloor \textbf{A}s \rfloor_p)$ je výpočetně nerozlišitelné od~$(\textbf{A}, \lfloor b \rceil_p)$, kde $b$ je veřejný vektor.
+
 
 \subsection{NTT}
 \label{sec:ntt}
@@ -269,16 +333,15 @@ Inverzní NTT odpovídá rekonstrukci původního polynomu při~znalosti několi
 
 $$
 b(x):
-\left[\begin{matrix}
-3 \\ 0 \\ 0
-\end{matrix}\right] = \left[\begin{matrix}
-1 & 1 & 1 \\ 4 & 2 & 1 \\ 1 & 4 & 1 \\
-\end{matrix}\right]
+\left[\begin{array}{ccc|c}
+1 & 1 & 1 & 3 \\ 4 & 2 & 1 & 0 \\ 1 & 4 & 1 & 0 \\
+\end{array}\right]
 \hspace*{1em}
 \mathrel{\mathop{\longrightarrow}^{\text{deg}(b)=5}_{\in \, \mathbb{Z}_5[x]}}
 \hspace*{1em}
 b(x) = x^2 - x + 3
 $$
+
 
 \subsection{Dohoda na~sdíleném klíči v~LWE schématu}
 
@@ -290,25 +353,23 @@ $$
     vytvoření $s_a$, $e_a$ & & vytvoření $s_b$, $e_b$ \\
     $b_a = As_a + e_a$ & & $b_b = A^Ts_b + e_b$ \\
     & $\stackrel{b_a}{\longrightarrow} \ \ \stackrel{b_b}{\longleftarrow}$ & \\
-    $v_a = s_a^T b_b$ & & $v_b = s_b^T b_a$ \\
-    & $v_a \approx v_b^T$ & \\
+    $k_a = s_a^T b_b$ & & $k_b = s_b^T b_a$ \\
+    & $k_a \approx k_b^T$ & \\
     \end{tabular}
 \end{table}
 \FloatBarrier
 
 \subsection{KYBER}
 
-CRYSTALS-Kyber je KEM schéma založené na~mřížkách.
-Je založené na M-LWE a je post-kvantově bezpečné.
-Je to (jediný) výherce třetího kola soutěže PQC NIST.
+CRYSTALS-Kyber je KEM schéma založené na~M-LWE.
+Je to (jediný) výherce třetího PKE \& KEM kola soutěže PQC NIST.
 
 Náročnost (\emph{security levels}) lze upravovat změnou velikosti \textbf{A} (počtu polynomů) a náhodného rozložení.
 Pokud je chyba moc velká, dešifrování se nemusí podařit, ale pravděpodobnost takového stavu je pouze malá ($< 2^{100}$).
 
 \subsection{SABER}
 
-Saber je KEM schéma založené na~mřížkách.
-Je založené na~M-LWE a je post-kvantově bezpečné.
+Saber je KEM schéma založené na~M-LWE.
 Byl to kandidát třetího kola PQC NIST.
 
 \begin{figure}[ht]
@@ -319,7 +380,7 @@ Byl to kandidát třetího kola PQC NIST.
 
         \begin{tabular}{lcr}
         \textbf{Vytvoření klíčů} && \\
-        $s_a \leftarrow \text{random()}$ && \\
+        seed $s_a \leftarrow \text{random()}$ && \\
         $\textbf{A} = \text{gen}(s_a)$ && \\
         $s = \text{gen()}$ && \\
         $e = \text{gen()}$ && \\
@@ -343,21 +404,21 @@ Byl to kandidát třetího kola PQC NIST.
 
         \begin{tabular}{lcl}
         \textbf{Vytvoření klíčů} && \\
-        $s_a \leftarrow \text{random()}$ && \\
+        seed $s_a \leftarrow \text{random()}$ && \\
         $\textbf{A} = \text{gen}(s_a)$ && \\
         $s = \text{gen()}$ && \\
-        $b = \lfloor \frac{p}{q} \textbf{A}^T s \rceil$ && \\
+        $b = \left\lfloor \frac{p}{q} \textbf{A}^T s \right\rceil$ && \\
         & $\stackrel{s_a, b}{\longrightarrow}$ & \\
         && \textbf{Šifrování} \\
         && $\text{zpráva}\ m$ \\
         && $\textbf{A} = \text{gen}(s_a)$ \\
         && $s' = \text{gen()}$ \\
-        && $b' =\lfloor \frac{p}{q} \textbf{A} s' \rceil$ \\
-        && $c = \lfloor \frac{T}{q} b^T s' + \frac{T}{2} m \rceil$ \\
+        && $b' = \left\lfloor \frac{p}{q} \textbf{A} s' \right\rceil$ \\
+        && $c = \left\lfloor \frac{T}{q} b^T s' + \frac{T}{2} m \right\rceil$ \\
         & $\stackrel{b', c}{\longleftarrow}$ & \\
         \textbf{Dešifrování} && \\
         $v = b'^T s$ && \\
-        $m = \lfloor \frac{2}{q} (v - \frac{p}{T} c) \rceil$ && \\
+        $m = \left\lfloor \frac{2}{q} (v - \frac{p}{T} c) \right\rceil$ && \\
         \end{tabular}
     \end{minipage}
 
