@@ -104,14 +104,16 @@ Náklady za provozovaná nebo poskytovaná komunikační řešení patří mezi 
 
 
 \clearpage
+
 \section{Integrované služby digitální sítě -- ISDN, základní a primární přístup, referenční model účastnické přípojky ISDN, strukturu rámce na rozhraní S a U, napájení terminálů.}
 Umožňuje přenos digitalizovaného hovorového signálu spolu s daty Internetu. Je založena na digitální spojovací technice telefonní sítě.
 Pro přenos využity tzv. B. kanály jako bearer, nosič) s přenosovou rychlostí 64 kbit/s.
-Dva základní typy ISDN přípojek:
-\begin{itemize}
-    \item BRI (Basic Rate Interface) -- Účastnická přípojka pro 8 koncových zařízení (telefon, fax, modem). Označována jako 2B + D (dva kanály pro vlastní datovou zátěž s rychlostí 64 kb/s).
-    \item PRI (Primary Rate Interface) -- Přípojka je určena k připojení pobočkových ústředen. Označována jako 30B + D E1-PRI (třicet kanálů s rychlostí 64 kb/s) v Austrálii a Evropě.
-\end{itemize}
+
+ISDN poskytuje dva základní typy přístupu - základní a primární.
+\begin{description}
+    \item[BRI - Basic Rate Interface] Určen pro individuální uživatele, skládá se z~dvou kanálů pro hlas nebo datový přenos (B-kanály) a~jednoho kanálu pro signalizaci (D-kanál). Celková přenosová rychlost základního přístupu je obvykle 128 kilobitů za sekundu (64 kbit/s pro každý B-kanál).
+    \item[PRI - Primary Rate Interface] Určen pro podnikové uživatele, poskytuje vyšší kapacitu než základní přístup. Skládá se z~30 kanálů pro hlas nebo datový přenos (B-kanály) a~jednoho kanálu pro signalizaci (D-kanál). Celková přenosová rychlost primárního přístupu je obvykle 2 megabity za sekundu (64 kbit/s pro každý B-kanál).
+\end{description}
 
 ISDN H-kanály jsou určeny pro rychlou datovou komunikaci, rychlé faxové služby, telekonference a vysoce kvalitní přenos zvuku. Komunikace v kanále oddělena od signalizace. H-kanály se využívají v rámci primárního přístupu.
 \begin{itemize}
@@ -121,12 +123,12 @@ ISDN H-kanály jsou určeny pro rychlou datovou komunikaci, rychlé faxové slu�
 \end{itemize}
 
 \subsection{Referenční model}
-Využívá z referenčního modelu OSI první tři vrstvy:
-\begin{itemize}
-    \item síťovou vrstvu : kanál D: signalizační protokol Q.931 (DSS1), kanál B: IP/IPX,
-    \item spojovací vrstvu: kanál D: signalizační protokol Q.921 (LAPD), kanál B: HDLC, FR, PPP, LAPB,
-    \item fyzickou vrstvu: protokol I.431 -- PRI a I.430 -- BRI/ANSI T1.601 pro oba kanály D i B.
-\end{itemize}
+Referenční model účastnické přípojky ISDN popisuje vrstvovou strukturu ISDN terminálu nebo účastnického zařízení.
+\begin{description}
+    \item[Fyzická vrstva] Zajišťuje přenos fyzických signálů mezi terminálem a ISDN sítí. Tato vrstva definuje elektrické, optické nebo bezdrátové rozhraní pro připojení terminálu. Protokoly I.431 (pro PRI) a I.430/ANSI T1.601 (pro BRI) se využívají pro oba kanály D i B.
+    \item[Spojovací vrstva] Řídí přenos dat mezi terminálem a ISDN sítí. Zajišťuje multiplexování/de-multiplexování kanálů, řízení toku dat a detekci chyb. Na kanálu D se používá signalizační protokol Q.921 (LAPD), zatímco na kanálu B se mohou využívat protokoly HDLC, FR, PPP a LAPB.
+    \item[Síťová vrstva] Zajišťuje směrování hovorů a přenosového provozu mezi terminálem a ISDN sítí. Tato vrstva řídí spojování a rozpojování hovorů, signalizaci a identifikaci účastnického terminálu. Na kanálu D se využívá signalizační protokol Q.931 (DSS1), zatímco kanál B může sloužit pro přenos protokolů IP/IPX.
+\end{description}
 
 \begin{figure}[!ht]
     \begin{center}
@@ -135,8 +137,7 @@ Využívá z referenčního modelu OSI první tři vrstvy:
 \end{figure}
 
 \subsection{Rozhraní}
-Mezi ISDN sítí a zařízením NT (jednotka ukončení sítě na straně ISDN, na kterou se při základním přístupu připojuje až 8 koncových
-zařízení) je použito rozhraní U. Mezi TE (koncové digitální zařízeníbez rozlišení zda slouží pro hlasovou nebo datovou komunikaci) a NT2 (umožňuje připojit několik koncových zařízení současně, což je realizováno sběrnicí, statickým slupovačem nebo i pobočkovou ústřednou.) jsou spojena rozhraním S.
+ISDN využívá strukturované rámcování na rozhraní S (subscriber) a U (user). Rozhraní S je určeno pro připojení terminálu (např. telefonní přístroj) k ISDN síti. Rámce na rozhraní S obsahují informace pro signalizaci a přenosový provoz. Rozhraní U je určeno pro připojení datových zařízení (např. počítač) k ISDN síti. Rámce na rozhraní U obsahují pouze informace pro přenosový provoz. Mezi ISDN sítí a zařízením NT (Network Termination) je použito rozhraní U. Mezi TE (Terminal Equipment) a NT2 (Network Termination 2) jsou spojena rozhraním S.
 
 \subsubsection{Struktura rámce S}
 Každý rámec obsahuje signalizační informace, pomocné bity, uživatelská data a synchronizaci.
@@ -147,22 +148,29 @@ Každý rámec obsahuje signalizační informace, pomocné bity, uživatelská d
     \item E (Echo Channel Bit) -- bit echo kanálu.
     \item S -- rezervováno pro budoucí využití a je nastaveno na hodnotu 0.
     \item A -- bit použitý pro protokoly aktivace.
-    \item B1,B2 -- bity kanálů B1 a B2
+    \item B1, B2 -- bity kanálů B1 a B2
 \end{itemize}
-V kanálu E Slouží k řízení přístupu k D a B kanálům jednotlivým koncovýmzařízením.V případě B kanálu přístup k médiu řídí ústředna.
+V kanálu E slouží k řízení přístupu k D a B kanálům jednotlivým koncovým zařízením. V případě B kanálu přístup k médiu řídí ústředna.
 
 \subsubsection{Struktura rámce U}
-
-Tvořené dvoudrátovým vedením s plně duplexním provozem. Vedení má maximálně 8km a obsahuje zdroj a opakovač s rozhraním U. Dva druhy kódování:
+Tvořené dvoudrátovým vedením s plně duplexním provozem. Vedení má maximálně 8 km a obsahuje zdroj a opakovač s rozhraním U. Dva druhy kódování:
 \begin{itemize}
-    \item 4B/3T -- 4 bity do se kódují do 3 ternálních signálů
-    \item 2B/1Q -- 2 bity se kódují do jedné značky
+    \item 4B/3T -- 4 bity se kódují do 3 ternálních signálů.
+    \item 2B/1Q -- 2 bity se kódují do jedné značky.
 \end{itemize}
 
 \subsection{Napájení terminálů}
-Napájení terminálu ISDN lze získat v interním napáječi terminálu (charakteristické pro PC), ze síťového napáječe NT fantomním\footnote{Termín \enquote{fantomové napájení} vznikl v 60. letech 20. století po úspěšném pokusu spojit datové a napájecí vedení do jednoho kabelu.} způsobem, ze zdroje jiného terminálu přes přídavný pár vodičů a jednotku NT, z ústředny přes NT a rozhraní S0 fantomním způsobem (použije se při výpadku proudu v místě terminálu).
+Napájení terminálů v ISDN lze realizovat různými způsoby:
+
+\begin{enumerate}
+    \item \emph{Interní napáječ terminálu}: Tento způsob napájení je charakteristický pro PC a umožňuje získat napájení přímo z interního zdroje terminálu.
+    \item \emph{Síťový napáječ NT}: Používá se fantomní\footnote{Termín \enquote{fantomové napájení} vznikl v 60. letech 20. století po úspěšném pokusu spojit datové a napájecí vedení do jednoho kabelu.} způsob napájení, který kombinuje datové a napájecí vedení do jednoho kabelu. Termín \textit{fantomové napájení} vznikl v 60. letech 20. století.
+    \item \emph{Napájení ze zdroje jiného terminálu}: Tento způsob vyžaduje připojení pomocí přídavného páru vodičů a jednotky NT, která umožňuje přenos napájení mezi terminály.
+    \item \emph{Napájení z ústředny přes NT a rozhraní S0}: Tento způsob se používá fantomním způsobem v případě výpadku proudu v místě terminálu, kdy se napájení poskytuje přes ústřednu a rozhraní S0.
+\end{enumerate}
 
 \clearpage
+
 \section{Asynchronní přepravní způsob -- ATM, buňka ATM, synchronizace, virtuální cesta a virtuální kanál, třídy služeb, ATM vrstvový model, síťové prvky ATM.}
 
 Standard pro síťovou vysokorychlostní architekturu v 80. a 90. letech. Zajišťuje kvalitu služby QoS především pro přenos hlasu a videa. Pracuje s buňkami konstantní délky. ATM je kvalitní technologie, ale pro svou složitost je to technologie drahá, proto je většinou nahrazeno mnohem levnějším Ethernetem. Používá statické multiplexování a směrování po virtuálních kanálech. Umožňuje přenosy dat v řádech Gb/s. Asynchronní není však přenos, ale nepravidelný výskyt buňěk během spojení. ATM tedy definuje rozhraní mezi uživatelem a sítí tzv. UNI a mezi přepínači v síti tzv. NNI.
