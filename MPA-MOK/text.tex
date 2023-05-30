@@ -8,7 +8,7 @@ V~rovině ji lze popsat kartézskými souřadnicemi $(x, y)$.
 Mřížky se definují jejich bázovými vektory:
 $$\lat = \lat(b_1, b_2) = \{x_1b_1 + x_2b_2 : x_i \in \mathbb{Z}\}$$
 
-N-dimenzionální mřížka $\lat$ je množina všech celočíselných kombinací $n$-lineárně nezávislých vektorů (generátorů)
+$n$-dimenzionální mřížka $\lat$ je množina všech celočíselných kombinací $n$-lineárně nezávislých vektorů (generátorů)
 $$b_1, \dots, b_n \in \mathbb{R}^n : \lat = \left\{\sum_{i=1}^n x_ib_i : x_i \in \mathbb{Z}\right\}$$
 
 $\mathcal{B} = \{b_1, \dots, b_n\}$ se nazývá bází mřížky.
@@ -56,19 +56,24 @@ Dobrá báze má $\mathcal{H}$ blízko jedné.
 
 \subsection{CVP, SVP}
 
-\textbf{\emph{Shortest Vector Problem}}: pro~zadanou mřížku $\lat$ najděte nejkratší nenulový vektor $v$ z~$\lat$ s~minimální velikostí $||v||_2$.
+\subsubsection{Shortest Vector Problem}
+
+Pro~zadanou mřížku $\lat$ najděte nejkratší nenulový vektor $v$ z~$\lat$ s~minimální velikostí $||v||_2$.
 V~současnosti neexistuje žádný algoritmus s~polynomiální složitostí.
-Existují deterministické ($n^{O(n)}$)\footnotemark{} či randomizované ($2^{O(n)}$)\footnotemark{}; rychlejší nejsou pravděpodobné, protože jde o~NP-hard problém.
-\footnotetext{Kannan, Ravi (1983): Improved Algorithms for Integer Programming and Related Lattice Problems \\ \url{https://doi.org/10.1145/800061.808749}}
-\footnotetext{Ajtai, Miklós; Kumar, Ravi; Sivakumar, D. (2001): A sieve algorithm for the shortest lattice vector problem \\ \url{https://doi.org/10.1145/380752.380857}}
+Existují deterministické ($n^{O(n)}$) či randomizované ($2^{O(n)}$); rychlejší nejsou pravděpodobné, protože jde o~NP-hard problém.
+% Kannan, Ravi (1983): Improved Algorithms for Integer Programming and Related Lattice Problems; https://doi.org/10.1145/800061.808749
+% Ajtai, Miklós; Kumar, Ravi; Sivakumar, D. (2001): A sieve algorithm for the shortest lattice vector problem; https://doi.org/10.1145/380752.380857
 
-\emph{Worst-case} SVP je možné redukovat na~\emph{average-case}\footnotemark{}.
-\footnotetext{Ajtai, Miklós (1998): The shortest vector problem in L2 is NP-hard for randomized reductions. \\ \url{https://doi.org/10.1145/276698.276705}}
+\emph{Worst-case} SVP je možné redukovat na~\emph{average-case}.
+% Ajtai, Miklós (1998): The shortest vector problem in L2 is NP-hard for randomized reductions. https://doi.org/10.1145/276698.276705
 Nejde o~problém dostatečně složitý pro~praktickou kryptografii.
+V~praxi se často používá varianta $\alpha$-SVP, ve~které stačí nalézt vektor kratší než $\alpha$-násobek nejkratšího vektoru.
 
-\textbf{\emph{Closest Vector Problem}}: pro~zadanou mřížku $\lat$ a vektor $t \in \mathbb{R}^n$ najděte nenulový vektor $v \in \lat$ takový abyste minimalizovali $||t - v||_2$.
-Existuje deterministický algoritmus ($n^{O(n)}$)\footnotemark{}.
-\footnotetext{Micciancio, Daniele; Voulgaris, Panagiotis (2010): Faster Exponential Time Algorithms for the Shortest Vector Problem \\ \url{https://doi.org/10.1137/1.9781611973075.119}}
+\subsubsection{Closest Vector Problem}
+
+Pro~zadanou mřížku $\lat$ a vektor $t \in \mathbb{R}^n$ najděte nenulový vektor $v \in \lat$ takový abyste minimalizovali $||t - v||_2$.
+Existuje deterministický algoritmus ($n^{O(n)}$).
+% Micciancio, Daniele; Voulgaris, Panagiotis (2010): Faster Exponential Time Algorithms for the Shortest Vector Problem; https://doi.org/10.1137/1.9781611973075.119
 
 Jinými slovy jde o~prohledávání okolí vektoru a~nalezení bázového vektoru který je k~hledanému nejbližší.
 
@@ -115,9 +120,10 @@ Algoritmus funguje i při~dostatečně ortogonálních bázích.
 Alice vybírá lineárně nezávislé vektory $v_1, v_2, \dots, v_n \in \mathbb{Z}^n$ které jsou k~sobě celkem kolmé (což lze zjistit Hadamardovým poměrem).
 Vektory $v_i$ (resp. jimi tvořená matice $\textbf{V}_{n \times n}$) jsou Alicin privátní klíč.
 
-Alice vytvoří $n \times n$ matici $\textbf{U}$ tak aby $\text{det}(\textbf{U}) = \pm 1$.
-Poté spočítá $\textbf{W} = \textbf{UV}$.
-Matice $\textbf{W}_{n \times n}$ je špatná báze a~tedy Alicin veřejný klíč.
+Alice vytvoří matici $\textbf{U}_{n \times n}$ tak aby $\text{det}(\textbf{U}) = \pm 1$.
+Poté spočítá $\textbf{W}_{n \times n} = \textbf{UV}$.
+Matice $\textbf{W}$ je špatná báze a~tedy Alicin veřejný klíč.
+Tato matice má stejné body jako \textbf{U}, ale její vektory jsou zbytečně velké nebo pod~vzájemným ostrým nebo tupým úhlem.
 
 Pro~poslání zprávy vybere Bob malý vektor (zprávu) $m$ s~celočíselnými souřadnicemi.
 Vybere také náhodný rušivý vektor $r$ (s~maximální velikostí $\delta$) a vypočítá
@@ -128,14 +134,9 @@ Protože používá dobrou bázi a~$r$ je malé, získá $m\textbf{W}$.
 Tuto hodnotu vynásobí $\textbf{W}^{-1}$ a tím získá $m$.
 Útočník Eva musí vektor mřížky nejbližší k~$c$ hledat ve~špatné mřížce, což je těžké.
 
-Jde o~schéma obecně bezpečné, ale kvůli velikosti bezpečnostních parametrů nepraktické\footnotemark{}.
-\footnotetext{
-    Hoffstein, Pipher, Silverman (2014): An Introduction to Mathematical Cryptography.
-    \\
-    \url{https://doi.org/10.1007/978-1-4939-1711-2}
-    % Paywall, extrakt na
-    % https://staff.emu.edu.tr/alexanderchefranov/Documents/CMSE491/CMSE491 Fall2020/Hoffstein2015 Introduction to Mathematical Cryptography 409-412 GGH.pdf
-}
+Jde o~schéma obecně bezpečné, ale kvůli velikosti bezpečnostních parametrů nepraktické.
+% Hoffstein, Pipher, Silverman (2014): An Introduction to Mathematical Cryptography. https://doi.org/10.1007/978-1-4939-1711-2
+% https://staff.emu.edu.tr/alexanderchefranov/Documents/CMSE491/CMSE491 Fall2020/Hoffstein2015 Introduction to Mathematical Cryptography 409-412 GGH.pdf
 
 
 \clearpage
@@ -196,7 +197,7 @@ Je možné ho uplatit na~symetrické i asymetrické šifrování, výměnu klí�
 \end{figure}
 
 Schéma stavící na~LWE.
-Privátním klíčem je $s$, $e$, veřejným $A$, $b$.
+Privátním klíčem je $(s, e)$, veřejným $(\textbf{A}, b)$.
 
 Chceme zašifrovat jednobitovou zprávu $m$.
 V~určité grupě ($\mathbb{Z}_{17}$) můžeme zvolit $p$ takové aby $c = p+m$ šumem nepřerušilo zprávu.
@@ -230,7 +231,7 @@ Dešifrováno bude $\begin{cases}
     $p = \textbf{A}s + e \mod {17} = \left(\begin{matrix}
     5 \\ 5 \\ 1 \\ -1
     \end{matrix}\right)$ \\
-    veřejný klíč je $(\textbf{A}, p)$, privátní klíč $s, e$ \\
+    veřejný klíč je $(\textbf{A}, p)$, privátní klíč $(s, e)$ \\
 
     \multicolumn{2}{c}{Šifrování} \\
     & výběr zprávy $b = 1$ \\
@@ -256,7 +257,7 @@ R-LWE redukuje 2D matici \textbf{A} na~jediný řádek, který je pokaždé hori
 Stačí tak přenášet pouze tento jeden řádek a ne~celou matici.
 Vytvořená struktura je ideální mřížka, ve~které může být grupa $\mathbb{Z}_q^n$ nahrazena polynomiálním okruhem $\mathbb{Z}_q[x]/\left<x^n+1\right>$.
 
-R-LWE lze zapsat jako $\textbf{A} s \equiv b$. Obsahuje $n$ polynomů (řádu $m$) a tajemství $s$.
+R-LWE lze zapsat jako $\textbf{A}s + e \equiv b$. Obsahuje $n$ polynomů (řádu $m$) a tajemství $s$.
 
 Redukce na~polynomy výrazně zmenšuje velikost přenášených klíčů $\textbf{A}, s$.
 
@@ -281,7 +282,7 @@ $$
 \clearpage
 \section{Lattice-based protocols: M-LWE, LWR, NTT, KYBER scheme, SABER scheme.}
 
-\subsection{M-LWE}
+\subsection{Module LWE}
 
 Modul je generalizace tělesa, ve~kterém je těleso\footnotemark{} nahrazeno okruhem\footnotemark{}.
 \footnotetext{Těleso je okruh který obsahuje inverzní prvky vzhledem k~násobení.}
@@ -304,7 +305,6 @@ e_{11}(x) \\ e_{21}(x) \\ e_{31}(x) \\
 $$
 
 Chyba je vytvořena přičtením čísel, násobením nebo zaokrouhlováním.
-% TODO Vysvětlit do větších detailů
 
 
 \subsection{LWR}
@@ -318,9 +318,9 @@ Jde o~problém postavený na~Regev a je stejně těžký jako LWE.
 % TODO Vysvětlit co se zde děje, je to šifrování?
 % TODO V čem je důležité to že je to polynomiální modulus?
 Nechť $q$ je polynomiální modulus a $p < q$.
-Poté $b = \lfloor \frac{p}{q} \textbf{A}s \rceil$.
+Poté $b = \left\lfloor \frac{p}{q} \textbf{A}s \right\rceil$.
 
-Pro~$p < q$ rozdělíme prvky $\mathbb{Z}_q$ do~$p$ sousedících intervalů (každých velkých zhruba $q/p$), a definujeme funkci zaokrouhlení $\lfloor \cdot \rceil_p$: $\mathbb{Z}_q \rightarrow \mathbb{Z}_p$ která mapuje $x \in \mathbb{Z}_q$ na~index intervalu do~kterého $x$ patří.
+Pro~$p < q$ rozdělíme prvky $\mathbb{Z}_q$ do~$p$ sousedících intervalů (každých velkých zhruba $\frac{q}{p}$), a definujeme funkci zaokrouhlení $\lfloor \cdot \rceil_p$: $\mathbb{Z}_q \rightarrow \mathbb{Z}_p$ která mapuje $x \in \mathbb{Z}_q$ na~index intervalu do~kterého $x$ patří.
 
 LWR tvrdí že $(\textbf{A}, \lfloor \textbf{A}s \rfloor_p)$ je výpočetně nerozlišitelné od~$(\textbf{A}, \lfloor b \rceil_p)$, kde $b$ je veřejný vektor.
 
@@ -364,12 +364,12 @@ $$
 CRYSTALS-Kyber je KEM schéma založené na~M-LWE.
 Je to (jediný) výherce třetího PKE \& KEM kola soutěže PQC NIST.
 
-Náročnost (\emph{security levels}) lze upravovat změnou velikosti \textbf{A} (počtu polynomů) a náhodného rozložení.
+Náročnost \emph{(security levels)} lze upravovat změnou velikosti \textbf{A} (počtu polynomů) a náhodného rozložení.
 Pokud je chyba moc velká, dešifrování se nemusí podařit, ale pravděpodobnost takového stavu je pouze malá ($< 2^{100}$).
 
 \subsection{SABER}
 
-Saber je KEM schéma založené na~M-LWE.
+Saber je KEM schéma založené na~M-LWR.
 Byl to kandidát třetího kola PQC NIST.
 
 \begin{figure}[ht]
@@ -442,7 +442,7 @@ Byl to kandidát třetího kola PQC NIST.
 \section{Homomorphic Encryption (HE): homomorphism, HE definition, kind of HE (partially, somewhat, fully), Bootstrapping, Paillier Cryptosystem}
 
 Homomorfismus je zobrazení z~jedné algebraické struktury do~jiné stejného typu, které zachovává důležitou strukturu.
-y
+
 Šifrovací schéma $E$ je homomorfní pokud platí $f(E(x)) = E(f(x))$:
 \begin{align*}
     E_k(a) \oplus_c E_k(b) &= E_k (a \oplus_p b)
@@ -458,14 +458,15 @@ Umožňuje provádět operace s~daty bez~toho aby bylo nutné je dešifrovat (tj
 
 % https://dspace.cvut.cz/handle/10467/101730, str 6
 
-\textbf{Částečně homomorfní šifrování} (\emph{Partially Homomorphic Encryption}) podporuje pouze jednu z~operací (sčítání nebo násobení).
+\textbf{Částečně homomorfní šifrování} \emph{(Partially Homomorphic Encryption)} podporuje pouze jednu z~operací (sčítání nebo násobení).
 Cesarova šifra umožňuje homomorfické sčítání, RSA a ElGamal (v~surové matematické formě) umožňují homomorfické násobení.
 
-\textbf{Celkem homomorfní šifrování} (\emph{Somewhat Homomorphic Encryption}) podporuje obě operace, ale pouze pro~omezený počet operací.
+\textbf{Celkem homomorfní šifrování} \emph{(Somewhat Homomorphic Encryption)} podporuje obě operace, ale pouze pro~omezený počet operací.
 
-\textbf{Vyrovnané plně homomorfní šifrování} (\emph{Leveled Fully Homomorphic Encryption}) podporuje více operací do~předem daného počtu operací.
+\textbf{Vyrovnané plně homomorfní šifrování} \emph{(Leveled Fully Homomorphic Encryption)} podporuje více operací do~předem daného počtu operací.
 
-\textbf{Plně homomorfní šifrování} (\emph{Fully Homomorphic Encryption}) podporuje více operací při~libovolném počtu operací.
+\textbf{Plně homomorfní šifrování} \emph{(Fully Homomorphic Encryption)} podporuje více operací při~libovolném počtu operací.
+
 
 \subsection{Bootstraping}
 
@@ -501,11 +502,11 @@ Provádí se opětovným zašifrováním: $c_\text{new} = E(c, E(s_k))$.
 
 \subsection{Paillier}
 
-PES (\emph{Paillier Encryption Scheme}) je probabilistický šifrovací algoritmus s~veřejnými klíči.
+PES \emph{(Paillier Encryption Scheme)} je probabilistický šifrovací algoritmus s~veřejnými klíči.
 
-Je založený na~předpokladu $n$-té zbytkové třídy (\emph{Decisional Composite Residuosity Assumption}): při~složeném čísle $n$ a čísle $z$ je obtížné rozhodnout zda existuje $y$ takové aby $z = y^n \mod n^2$.
+Je založený na~předpokladu $n$-té zbytkové třídy \emph{(Decisional Composite Residuosity Assumption)}: při~složeném čísle $n$ a čísle $z$ je obtížné rozhodnout zda existuje $y$ takové aby $z = y^n \mod n^2$.
 
-DJN (\emph{Damgård--Jurik}) krytposystém je zjednodušením/zobecněním (používá modulo $n^{s+1}$).
+DJN \emph{(Damgård--Jurik)} kryptosystém je zjednodušením/zobecněním (používá modulo $n^{s+1}$).
 
 \begin{figure}[ht]
     \centering
@@ -563,7 +564,8 @@ Ale je také možné data rozdělit na~menší části tak, aby k~rekonstrukci s
 Naopak útočník musí ukrást nebo zničit určité množství této informace.
 
 % TODO Existují lepší, zavedené české ekvivalenty?
-\emph{Secret Sharing} je kryptografický nástroj, který je používán jako stavební kámen mnoha rodin primitiv, jako jsou sdílené výpočty (\emph{multiparty computation}), utajený přenos (\emph{generalized oblivious transfer}) nebo atributové šifrování (\emph{attribute-based encryption}).
+\emph{Secret Sharing} je kryptografický nástroj, který je používán jako stavební kámen mnoha rodin primitiv, jako jsou sdílené výpočty \emph{(multiparty computation)}, utajený přenos \emph{(generalized oblivious transfer)} nebo atributové šifrování \emph{(attribute-based encryption)}.
+
 
 \subsection{Treshold Secret Sharing}
 
@@ -572,14 +574,15 @@ Vlastník rozdělí tajemství $s$ na~díly, a pouze kvalifikovaná podmnožina 
 
 Toto schéma je korektní (\emph{Correctness}: tajemství $s$ může být dekódováno libovolnou autorizovanou podmnožinou Účastníků) a zahovává dokonalé soukromí (\emph{Perfect Privacy}: neautorizovaná množina účastníků se o~sdíleném tajemství nemůže nic dozvědět).
 
-Minimální počet dílů nutný k~rekonstrukci se nazývá práh (\emph{treshold}).
+Minimální počet dílů nutný k~rekonstrukci se nazývá práh \emph{(treshold)}.
 Ve~schématu $(t,n)$ rozděluje Vlastník tajemství $s$ na~$n$ dílů tak, aby ho bylo možné rekonstruovat s~použitím $t$ dílů.
+
 
 \subsection{Shamir Secret Sharing}
 \label{sec:sharmir-secret-sharing}
 
 Mějme funkci $f(x) = x^3 + 2x^2 + 10x + 9 \mod 11$.
-Vyberme pět hodnot $x$ ve~kterých se funkce vyhodnotí; získáme pět bodů (\emph{shares}): $\{(1,0),(2,1),(3,7),(4,2),(5,3)\}$.
+Vyberme pět hodnot $x$ ve~kterých se funkce vyhodnotí; získáme pět bodů \emph{(shares)}: $\{(1,0),(2,1),(3,7),(4,2),(5,3)\}$.
 Stupeň polynomu určuje minimální počet Účastníků: polynom o~stupni $n$ vyžaduje alespoň $n+1$ dílů.
 V~případě této funkce $f$ jsou nutné alespoň čtyři díly.
 
@@ -597,7 +600,7 @@ $$\left[\begin{matrix}
    &    &    & d & | & 9
 \end{matrix}\right] \pmod {11}$$
 
-Aby Účastníci nemuseli sdělovat svá tajemství, lze provést tzv. Zaslepení (\emph{Blinding}).
+Aby Účastníci nemuseli sdělovat svá tajemství, lze provést tzv. Zaslepení \emph{(Blinding)}.
 To vyžaduje distribuci veřejných klíčů ke~všem Účastníkům podílejícím se na~rekonstrukci.
 Následující rovnice popisují zaslepení $b$ v~bodě $x$ a následnou rekonstrukci pomocí zaslepených bodů.
 
@@ -648,37 +651,39 @@ Ukázka řešení je v~kapitole~\ref{sec:sharmir-secret-sharing}.
 Nechť $P_1, \dots, P_n$ je množina $n$ účastníků držících tajné hodnoty $x_1, \dots, x_n$, které chtějí vyhodnotit funkcí $f(x_1, \dots, x_n)$.
 Problém bezpečného počítání s~více stranami je nalezení protokolu který umožní $P_1, \dots, P_n$ dohromady vypočítat hodnotu $f$ aniž by odhalili $x_1, \dots, x_n$.
 
+
 \subsection{Bezpečnostní podmínky}
 
 \begin{itemize}
-\item Bezpečnost (\emph{privacy}): je znám pouze výsledek, nic víc.
-\item Správnost (\emph{correctness}): účastníci dojdou ke~správnému výsledku i když někteří podvádí.
-\item Nezávislost vstupů (\emph{input independence}): účastníci si nemohou zvolit své vstupy tak aby byly závislé na~vstupech jiných účastníků.
-\item Spravedlnost (\emph{fairness}): pokud se jeden účastník dozví výsledek, dozví se ho všichni.
-\item Garance doručení (\emph{guaranteed output delivery}): všichni poctiví účastníci se dozví výsledek.
+\item Bezpečnost \emph{(privacy)}: je znám pouze výsledek, nic víc.
+\item Správnost \emph{(correctness)}: účastníci dojdou ke~správnému výsledku i když někteří podvádí.
+\item Nezávislost vstupů \emph{(input independence)}: účastníci si nemohou zvolit své vstupy tak aby byly závislé na~vstupech jiných účastníků.
+\item Spravedlnost \emph{(fairness)}: pokud se jeden účastník dozví výsledek, dozví se ho všichni.
+\item Garance doručení \emph{(guaranteed output delivery)}: všichni poctiví účastníci se dozví výsledek.
 \end{itemize}
 
 V~\textbf{reálném modelu} účastníci provádí opravdový protokol bez~nutnosti třetí strany.
 V~\textbf{ideálním modelu} účastníci odešlou své vstupy důvěryhodné třetí straně, která provede funkci a distribuuje výsledky.
 
 $\mathcal{A}$ je útočník v~reálném modelu, $\mathcal{S}$ je útočník v~ideálním modelu.
-Rozlišovač $\mathcal{D}$ (\emph{distinguisher}) určuje vstupy účastníků, získává jejich výsledky a hádá který model je reálný a který ideální.
+Rozlišovač $\mathcal{D}$ \emph{(distinguisher)} určuje vstupy účastníků, získává jejich výsledky a hádá který model je reálný a který ideální.
 Protokol $\pi$ bezpečně počítá $f$ pokud $\forall \ \mathcal{A} \ \exists \ \mathcal{S}$ kde $\forall \ \mathcal{D}$ je pravděpodobnost rozlišení reálného a ideálního modelu zanedbatelná.
-Reálný a ideální model jsou poté výpočetně nerozlišitelné (\emph{computationally indistinguishable}).
+Reálný a ideální model jsou poté výpočetně nerozlišitelné \emph{(computationally indistinguishable)}.
+
 
 \subsection{Komponenty SMPC}
 
 \textbf{Funkcionalita}: Co chceme počítat?
 
-\textbf{Bezpečnostní kategorie} (\emph{security type}):
+\textbf{Bezpečnostní kategorie} \emph{(security type)}:
 
 \begin{itemize}
-\item Výpočetní (\emph{computational}): Probabilistický polynomiální rozlišovač; reálný a ideální svět jsou výpočetně nerozlišitelné.
-\item Statistická (\emph{statistical}): Všemocný rozlišovač s~malou šancí omylu; reálný a ideální svět jsou si statisticky podobné.
-\item Perfektní (\emph{perfect}): Všemocný rozlišovač s~nulovou šancí omylu; reálný a ideální svět jsou identické.
+\item Výpočetní \emph{(computational)}: Probabilistický polynomiální rozlišovač; reálný a ideální svět jsou výpočetně nerozlišitelné.
+\item Statistická \emph{(statistical)}: Všemocný rozlišovač s~malou šancí omylu; reálný a ideální svět jsou si statisticky podobné.
+\item Perfektní \emph{(perfect)}: Všemocný rozlišovač s~nulovou šancí omylu; reálný a ideální svět jsou identické.
 \end{itemize}
 
-\textbf{Síťový model} (\emph{network model}):
+\textbf{Síťový model} \emph{(network model)}:
 
 \begin{itemize}
 \item \emph{point-to-point}: plně propojená síť;
@@ -692,15 +697,16 @@ Doručování zpráv může být:
 \item plně asynchronní: útočník má plnou kontrolu nad~sítí a může zprávy zahazovat.
 \end{itemize}
 
-\textbf{Model útočníka} (\emph{adversarial model}): viz níže.
+\textbf{Model útočníka} \emph{(adversarial model)}: viz níže.
+
 
 \subsection{Model útočníka}
 
 Chování útočníka lze rozlišit na:
 \begin{itemize}
-\item zvídavý (\emph{semi-honest}, \emph{honest-but-curious}): účastníci postupují dle protokolu, ale mohou se zkoušet dozvědět více informací;
-\item nedokončující (\emph{fail stop}): jako zvídavý, ale nepoctivé strany mohou předčasně skončit;
-\item škodlivý (\emph{malicious}): nepoctivé strany se mohou libovolně od~protokolu odklonit.
+\item zvídavý \emph{(semi-honest, honest-but-curious)}: účastníci postupují dle protokolu, ale mohou se zkoušet dozvědět více informací;
+\item nedokončující \emph{(fail stop)}: jako zvídavý, ale nepoctivé strany mohou předčasně skončit;
+\item škodlivý \emph{(malicious)}: nepoctivé strany se mohou libovolně od~protokolu odklonit.
 \end{itemize}
 
 Počet útočníků lze rozlišit na:
@@ -713,6 +719,7 @@ Počet útočníků lze rozlišit na:
     \end{itemize}
 \item obecný: může se vyskytnout libovolný počet nepoctivých stran.
 \end{itemize}
+
 
 \subsection{Elektronické volby}
 
@@ -816,8 +823,8 @@ Data mohou být \emph{číselná} nebo \emph{kategorická} (tj. výběr z~koneč
 \emph{Kvazi-identifikátory} jsou taková data která mohou pomocí re-identifikovat jedince nebo jejich část za~pomoci dalších dat, nebo mohou jedince identifikovat částečně.
 \emph{Citlivé údaje} jsou taková data která mají zůstat skryta.
 
-Při~\emph{odhalení totožnosti} (\emph{Identity disclosure}) dochází k~plné identifikaci jedince.
-Při~\emph{odhalení atributu} (\emph{Attribute disclosure}) dochází k~odhalení nových informací o~jedinci.
+Při~\emph{odhalení totožnosti} \emph{(Identity disclosure)} dochází k~plné identifikaci jedince.
+Při~\emph{odhalení atributu} \emph{(Attribute disclosure)} dochází k~odhalení nových informací o~jedinci.
 
 
 \subsection{Rizika zveřejňování informací, ztráta informací}
@@ -834,7 +841,7 @@ Metody zveřejňování zajišťují statistickou pravdivost při~zachování so
 Např. \emph{$k$-anonymity}, \emph{differential privacy}.
 
 \emph{Utility-first} metodami zajišťujeme že zveřejněná data mohou být použita pro~další výzkum, rizika jsou zvažována na~druhém místě.
-Neporuchové (\emph{non-perturbative}) metody vybírají data k~publikování, poruchové (\emph{perturbative}) metody data přes publikací upravují.
+Neporuchové \emph{(non-perturbative)} metody vybírají data k~publikování, poruchové \emph{(perturbative)} metody data přes publikací upravují.
 Syntetická data jsou generována tak aby statisticky odpovídala nasbíraným datům a jsou zveřejněna namísto dat opravdových.
 
 
@@ -854,7 +861,7 @@ Pouze je lokálně utlumují nebo redukují jejich detaily.
 \subsubsection*{Vzorkování}
 
 \emph{Sampling}.
-Záznamy jsou vybírány náhodně, buď se stejnou nebo s~jinou pravděpodobností (\emph{probability $\times$ non-probability sampling}).
+Záznamy jsou vybírány náhodně, buď se stejnou nebo s~jinou pravděpodobností \emph{(probability $\times$ non-probability sampling)}.
 
 % TODO Jaké jsou rozdíly mezi clusterováním a stratified samplingem?
 \emph{Simple random sampling}: každý záznam má stejnou pravděpodobnost.
