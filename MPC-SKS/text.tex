@@ -262,30 +262,32 @@ Vrstvy:
           \end{itemize}
 \end{itemize}
 
+\subsection{Síťové prvky ATM}
+V síti ATM se vyskytují různé síťové prvky. Patří sem ATM přepínače (ATM Switches), které přepínají buňky ATM mezi různými virtuálními cestami a kanály. Dále se zde mohou objevit ATM směrovače (ATM Routers), které směrují datový provoz mezi různými sítěmi a ATM terminály (ATM Terminals), které slouží jako koncové body přenosu dat v síti ATM.
 
 \clearpage
 \section{Digitální účastnická přípojka xDSL, HDSL, ADSL, spojení, referenční model, modulace, rušivé vlivy, přeslechy.}
-\subsection{xDSL -- Digital Subscriber Line}
 
-Využívá stávajícího vedení telefonní sítě k uživateli. Jednotlivé typy DSL se liší použitým frekvenčním pásmem, přenosovou
-rychlostí a možným dosahem. Obecně platí, že čím horším je vedení od ústředny k uživateli (kvalita
-rozvodu a délka), tím menší je přenosová rychlost. Nejčastějším typem DSL je stále ještě ADSL, postupně je však nahrazováno
-sofistikovanějšími a rychlejšími technologiemi. ADSL, VDSL, HDSL a další jsou označované pod souhrnným názvem xDSL. Jsou rozlišovány dvě základní verze xDSL technologie:
+\subsection{xDSL -- Digital Subscriber Line}
+Digitální účastnické přípojky jsou technologie pro rychlé připojení konečných uživatelů k poskytovatelům služeb využívající existující infrastrukturu, jako je telefonní síť.
+
+Nejznámějšími typy xDSL (Digital Subscriber Line) jsou HDSL (High-bit-rate Digital Subscriber Line), ADSL(Asymmetric Digital Subscriber Line), VDSL (Very-high-bit-rate Digital Subscriber Line), atd. Každý typ xDSL má specifické frekvenční pásmo, přenosovou rychlost a dosah.
+
+Obecně platí, že čím horším je vedení od ústředny k uživateli (kvalita rozvodu a délka), tím menší je přenosová rychlost. Nejčastějším typem DSL je stále ještě ADSL, postupně je však nahrazováno sofistikovanějšími a rychlejšími technologiemi \textbf{Is it really??}.
+
+Jsou rozlišovány dvě základní verze xDSL technologie:
 \begin{itemize}
     \item Symetrická -- symetrická řešení poskytují jak v dopředném, tak i v opačném směru synchronní přenos dat.
-    \item Asymetrická -- ADSL
+    \item Asymetrická -- ADSL, VDSL
 \end{itemize}
 
-\subsubsection{Metody zabezpečení proti chybám v DSL}
-\begin{itemize}
-    \item Detekce chyb pomocí cyklického kódu CRC
-    \item Dopředná chybová korekce FEC -- Spolu s prokládáním poskytuje FEC ochranu hlavně proti shlukům chyb. Skramblování neslouží k opravě chyb, ale rozrušuje dlouhé posloupnosti jedniček a nul a tak zabezpečí lepší synchronizaci na přijímací straně.
-    \item Interleaving -- ochrana zabezpečení dat při přenosu v prostředí, zarušené především impulsním šumem. Zvyšuje odolnost přenosu, ale vnáší do přenosu větší zpoždění.
-\end{itemize}
+\subsection{HDSL}
+HDSL je jednou z technologií xDSL, která se používá pro přenos dat vysokou rychlostí po telefonních linkách. HDSL je symetrická technologie, což znamená, že nabízí stejnou rychlost pro stahování i nahrávání. Byla představena na trhu v 90. letech jako součást digitálního vývoje telefonních připojení. HDSL je navrženo pro podnikové prostředí a umožňuje dosáhnout rychlostí až 1,544 Mbps nebo 2,048 Mbps na jedné telefonní lince.
 
 \subsection{ADSL}
-Zajišťuje datový přenos vyššími rychlostmi po symetrickém vedení. Na obou koncích vedení instalovány transceivery, a to s modulacemi DMT, QAM či CAP. Používá existující dvoudrátové vedení pro vysokorychlostní přenos dat se zachováním služby POTS, přenos je full duplex.
-\subsubsection{Referenční model}
+ADSL je asymetrická xDSL technologie, která umožňuje rychlé připojení k internetu a přenos dat po telefonních linkách. Byla představena na trhu v 90. letech jako způsob využití stávající telefonní infrastruktury pro poskytování širokopásmového připojení. ADSL je asymetrické, což znamená, že nabízí vyšší rychlost stahování dat než rychlost nahrávání. Typické rychlosti ADSL se pohybují od 8 Mbps do 24 Mbps pro stahování a od 1 Mbps do 3 Mbps pro nahrávání. Tato technologie je vhodná pro domácnosti a malé firmy, které potřebují přístup k internetu a online službám.
+
+\subsection{Spojení a referenční model}
 \begin{figure} [h]
     \centering
     \includegraphics[scale=0.85]{snimky/ADSL model.png}
@@ -306,8 +308,8 @@ Hlavní komponenty sítě:
 \subsubsection{Modulace}
 Využíva se kvadraturní amplitudová modulace QAM, amplitudová fázová modulace bez nosné CAP, diskrétní vícetónová modulace DMT.
 \begin{itemize}
-    \item QAM -- používaná ve velké řadě aplikací (např. modemy v základním pásmu, mikrovlnné radiové systémy aj.). Modulace se provádí pomocí digitálního kvadraturního (ortogonálního) modulátoru se sinusovou a kosinusovou směšovací funkcí. Díky této ortogonalitaě (nosných signálů) se umožní následná detekce dat v přijímači.
-    \item CAP -- podobná QAM. Používá stejné dvourozměrné přenosové schéma a má stejný typ výkonového spektra. Modulace se provádí pomocí digitálních transverzálních pásmových filtrů. Impulsní odezva těchto filtrů má stejnou amplitudovou charakteristiku, ale fázová charakteristika se navzájem liší o 90°.
+    \item \textbf{QAM} -- používaná ve velké řadě aplikací (např. modemy v základním pásmu, mikrovlnné radiové systémy aj.). Modulace se provádí pomocí digitálního kvadraturního (ortogonálního) modulátoru se sinusovou a kosinusovou směšovací funkcí. Díky této ortogonalitaě (nosných signálů) se umožní následná detekce dat v přijímači.
+    \item \textbf{CAP} -- podobná QAM. Používá stejné dvourozměrné přenosové schéma a má stejný typ výkonového spektra. Modulace se provádí pomocí digitálních transverzálních pásmových filtrů. Impulsní odezva těchto filtrů má stejnou amplitudovou charakteristiku, ale fázová charakteristika se navzájem liší o 90°.
     \item \textbf{DMT} -- jeví se v systémech ADSL jako velmi perspektivní a výrobci podporovaná. Modulace s více nosnými MCM. Je založena na diskrétní Fourierově transformaci, resp. na rychlé Fourierově transformaci FFT (Fast Fourier Transform). Velkou výhodou této metody modulace je plně digitální realizace a poměrně nízká složitost. Pomocí DMT lze efektivněji řešit negativní vlivy nedokonalé přenosové cesty a také rušící vliv okolí na užitečný signál při přenosu symetrickým párem v metalické přístupové síti
 \end{itemize}
 \newpage
@@ -323,7 +325,7 @@ Využíva se kvadraturní amplitudová modulace QAM, amplitudová fázová modul
     \item Impulsní rušení -- impulsive noise
     \item Vf rušení -- RFI (Radio Frequency Interference)
     \item Vnitřní rušivé vlivy
-    \item NEXT (Near And cross talk)
+    \item NEXT (Near End cross talk)
     \item FEXT (Far End cross Talk)
     \item AWGN (Additive White Gausian Noise)
 \end{itemize}
@@ -332,8 +334,13 @@ Využíva se kvadraturní amplitudová modulace QAM, amplitudová fázová modul
 NEXT, FEXT
 Aditivní bílý šum (Tepelný šum, Výstřelový šum, Kvantizační šum, Zbytkový odrazový šum)
 
-\subsection{HDSL}
-V případě varianty T1 používá 2 páry telefonního vedení, každý o rychlosti 784 kb/s. V případě E1 varianty 1168 kb/s na každý pár. Používají se modulace 2B1Q a CAP. Jednotlivá maximální délka vedení mezi HDLS je 3,7 km v případě modulace 2B1Q nebo 4,2 km
+
+\subsubsection{Metody zabezpečení proti chybám v DSL}
+\begin{itemize}
+    \item Detekce chyb pomocí cyklického kódu CRC
+    \item Dopředná chybová korekce FEC -- Spolu s prokládáním poskytuje FEC ochranu hlavně proti shlukům chyb. Skramblování neslouží k opravě chyb, ale rozrušuje dlouhé posloupnosti jedniček a nul a tak zabezpečí lepší synchronizaci na přijímací straně.
+    \item Interleaving -- ochrana zabezpečení dat při přenosu v prostředí, zarušené především impulsním šumem. Zvyšuje odolnost přenosu, ale vnáší do přenosu větší zpoždění.
+\end{itemize}
 
 
 \clearpage
