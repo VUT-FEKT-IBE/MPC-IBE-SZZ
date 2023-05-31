@@ -181,89 +181,83 @@ Napájení terminálů v~ISDN bylo možné realizovat:
 \clearpage
 \section{Asynchronní přepravní způsob -- ATM, buňka ATM, synchronizace, virtuální cesta a virtuální kanál, třídy služeb, ATM vrstvový model, síťové prvky ATM.}
 
-Standard pro síťovou vysokorychlostní architekturu v 80. a 90. letech. Zajišťuje kvalitu služby QoS především pro přenos hlasu a videa. Pracuje s buňkami konstantní délky. ATM je kvalitní technologie, ale pro svou složitost je to technologie drahá, proto je většinou nahrazeno mnohem levnějším Ethernetem. Používá statické multiplexování a směrování po virtuálních kanálech. Umožňuje přenosy dat v řádech Gb/s. Asynchronní není však přenos, ale nepravidelný výskyt buňěk během spojení. ATM tedy definuje rozhraní mezi uživatelem a sítí tzv. UNI a mezi přepínači v síti tzv. NNI.
+ATM je standard vytvořený pro~\enquote{vysokorychlostní} síťě 80. a~90.~let.
+Má buňky o~konstantní velikosti (5+48~B) a podporuje QoS pro~přenos hlasu a videa.
+Přenášeny jsou samostatné pakety směrovány dle jejich identifikátoru ve~virtuálním okruhu (sestaveném pro~celý přenos).
 
-ATM je vlastně paketovým přenosem dat s určitými odlišnostmi:
-\begin{itemize}
-    \item Provoz se sestavováním spojení
-    \item Přenosová cesta buněk se při sestavování spojení určí přiřazením virtuálního spoje mezi koncovými zařízeními (v koncovém provozu). Tím se připraví potřebné provozní prostředky pro virtuální spojení a přidělí se logické kanály. Při datovém přenosu používají všechny pakety (buňky) stejnou spojovací cestu. Pro vybavení spojení se uvolní obsazené provozní prostředky a logické kanály
-\end{itemize}
+Mělo jít o~technologii nahrazující ISDN, ale místoho toho byl na~sítích nasazen rychlejší a~efektivnější Ethernet.
+
 
 \subsection{Buňka v ATM}
-\begin{figure} [h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{snimky/ATM bunka.png}
-    \label{fig:atm-bunka}
-\end{figure}
 
-\subsubsection{Formát hlavičky buňky}
-\begin{itemize}
-    \item VPI -- Virtual Path Identifier
-    \item VCI -- Virtual Circuit Identifier
-    \item PT -- Payload Type
-    \item CLP -- Cell Loss Priority
-    \item HEC -- Header Error Control
-\end{itemize}
-
-Rozlišují se dva základní druhy rozhraní:
-\begin{itemize}
-    \item UNI (User Network Interface) -- rozhraní \enquote{účastník-síť},
-    \item NNI (Network Node Interface) -- rozhraní mezi ATM ústřednami.
-\end{itemize}
-
-\subsubsection{Synchronizace}
-Ke generování jednotlivých buně dochází podle potřeby, zda zdroj má vysílat informace. V opačném případě se přenášejí prázdné buňky. Takto se dosáhne
-plynulého toku jednotlivých buněk. Jedná se o asynchronní přenos a to proto, že přenosová bitová rychlost, kterou zdroj vyžaduje je nezávislá na celkové přenosové rychlosti.  Vlastní přenos bitů probíhá synchronně.
-
-\subsection{Virtuální cesty a kanály}
-K jedné virtuální cestě VP (Virtual Path) je možno přiřadit několik virtuálních kanálů VC. (Virtual Channel). Takovýmto přiřazením VC jsou propojeny virtuální cesty. V síti ATM je rozlišováno několika prvků, které zajišťují datový přenos:
-
-\begin{itemize}
-    \item digitální rozvaděč ATM (ATM Cross-Connect) -- vyhodnocuje identifikátor VPI a VCI
-    \item koncentrátor ATM -- vyhodnocuje identifikátory VPI a VCI pro koncentraci provozu
-    \item ústředna ATM -- propojuje virtuální spoje v závislosti na VPI a VCI
-\end{itemize}
-
-\begin{figure} [h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{snimky/VC.png}
-    \label{fig:virt-cesty-kanaly}
-\end{figure}
-
-\subsection{Třídy služeb}
-Pro přenos užitných dat v systémech ATM jsou stanoveny celkem 4 třídy služeb (třídy A až D). Od požadovaných tříd služeb jsou odvozeny různé typy služeb pro přizpůsobení užitných dat při přenosu ATM.
+Buňka mezi účastníkem a~sítí (UNI-ATM) a uvnitř sítě (NNI-ATM) se téměř neliší, jediné rozdílné pole nakonec nebylo využíváno.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.6]{snimky/sluzby.png}
+    \onehalfspacing
+    \includegraphics[width=0.5\textwidth]{snimky/atm-bunka}
+    \caption{
+        Schéma ATM buňky; šířka reprezentuje osm bitů. \\
+        GFC \emph{(Generic Control Flow)}: pouze UNI-ATM, nevyužíváno,
+        VPI \emph{(Virtual path identifier)},
+        VCI \emph{(Virtual channel identifier)},
+        PT \emph{(Payload type)}: network management, zahlcení, user--to--user;
+        CLP \emph{(Cell loss priority)},
+        HEC \emph{(Header error control)}: CRC.
+    }
+    \label{fig:atm-bunka}
 \end{figure}
-\newpage
+
+
+\subsection{Synchronizace}
+
+Buňky jsou přenášeny neustále.
+Pokud stanice nemá data k~odeslání, vysílají se prázdné buňky a tím se dosáhne plynulého toku dat.
+Přenos jako takový je asynchronní.
+
+
+\subsection{Virtuální cesty a kanály}
+
+Jedna virtuální cesta (VP) může mít více virtuálních okruhů (VC).
+Během přenosu buňky se hodnoty VPI a~VCI mění (tzv. \emph{label swapping}).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{snimky/VC.png}
+    \caption{Vizualizace ATM spojení.}
+    \label{fig:virt-cesty-kanaly}
+\end{figure}
+\FloatBarrier
+
+
+\subsection{Třídy služeb}
+
+Pro~zajištění QoS slouží čtyři třídy.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{snimky/atm-tridy}
+    \caption{Třídy ATM provozu.}
+\end{figure}
+\FloatBarrier
+
 
 \subsection{Vrstvový model ATM}
-\begin{figure} [h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{snimky/ATM model.png}
-    \label{fig:vrstvovy-model-atm}
-\end{figure}
-Vrstvy:
-\begin{itemize}
-    \item \textbf{Fyzická vrstva} -- rozdělena do dvou částí:
-          \begin{itemize}
-              \item PMD (Physical Medium Dependent) podvrstva -- synchronizuje vysílánía příjem, určuje fyzické médium včetně typů konektorů a kabeláže.
-              \item TC(Transmission Convergence) podvrstva -- má čtyři funkce: vyčleňování buněk, kontrolu záhlaví pomocí (HEC) sekvence, přizpůsobení přenosu rámců.
-          \end{itemize}
-    \item \textbf{ATM vrstva} -- Poskytuje následující funkce -- generic Flow Control (GFC)( řešení vícenásobného přístupu na UNI),přiřazuje hodnoty VPI a VCI každé buňce a poskytuje překlady VCI/VPI, multiplex buněk.
-    \item \textbf{Adaptační vrstva ATM}
-          \begin{itemize}
-              \item AAL1 -- poskytuje spojově orientovanou službu a provádí emulaci okruhů pro aplikace, jako jsou například hlasové nebo videokonference. Požaduje synchronizaci zdroje a vysílače. Tato vrstva je závislá na typu média, které musí podporovat taktování.
-              \item AAL2 -- poskytuje efektivní přidělování šířky pásma, obsahuje krátké a variabilní pakety
-              \item AAL3/4 -- poskytuje jak spojově orientovanou službu, tak i spojově neorientovanou službu.
-              \item AAL5 -- primární vrstvou pro data AAL a definuje jak spojově orientovanou službu, tak i spojově neorientovanou.
-          \end{itemize}
-\end{itemize}
 
-\subsection{Síťové prvky ATM}
-V síti ATM se vyskytují různé síťové prvky. Patří sem ATM přepínače (ATM Switches), které přepínají buňky ATM mezi různými virtuálními cestami a kanály. Dále se zde mohou objevit ATM směrovače (ATM Routers), které směrují datový provoz mezi různými sítěmi a ATM terminály (ATM Terminals), které slouží jako koncové body přenosu dat v síti ATM.
+\textbf{Fyzická vrstva} se dělí na PMD (\emph{Physical Medium Dependent}; synchronizace) a TC (\emph{Transmission Convergence}; kontrola záhlaví buněk, směrování).
+
+\textbf{ATM vrstva} poskytuje \emph{Generic Flow Control}, multiplexování a překlady VCI/VPI hodnot.
+
+\textbf{Adaptační vrstva} přiděluje šířku pásma, poskytuje spojově orientovanou službu a provádí emulaci okruhů pro~aplikace (hlas, videokonference).
+
+
+\subsection{Síťové prvky v~ATM}
+
+V~síti ATM se vyskytují různé síťové prvky:
+přepínače \emph{(switches)} přepínají buňky ATM mezi různými virtuálními cestami a~kanály,
+směrovače \emph{(routers)} směrují datový provoz mezi různými sítěmi,
+terminály \emph{(terminals)} slouží jako koncové body přenosu dat.
+
 
 \clearpage
 \section{Digitální účastnická přípojka xDSL, HDSL, ADSL, spojení, referenční model, modulace, rušivé vlivy, přeslechy.}
