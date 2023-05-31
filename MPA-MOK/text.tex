@@ -134,7 +134,8 @@ Protože používá dobrou bázi a~$r$ je malé, získá $m\textbf{W}$.
 Tuto hodnotu vynásobí $\textbf{W}^{-1}$ a tím získá $m$.
 Útočník Eva musí vektor mřížky nejbližší k~$c$ hledat ve~špatné mřížce, což je těžké.
 
-Jde o~schéma obecně bezpečné, ale kvůli velikosti bezpečnostních parametrů nepraktické.
+Jde o~schéma kvůli velikosti bezpečnostních parametrů nepraktické.
+V~roce '97 bylo prokázáno že každý ciphertext obsahuje informace o~plaintextu.
 % Hoffstein, Pipher, Silverman (2014): An Introduction to Mathematical Cryptography. https://doi.org/10.1007/978-1-4939-1711-2
 % https://staff.emu.edu.tr/alexanderchefranov/Documents/CMSE491/CMSE491 Fall2020/Hoffstein2015 Introduction to Mathematical Cryptography 409-412 GGH.pdf
 
@@ -210,6 +211,7 @@ Dešifrováno bude $\begin{cases}
 
 \begin{table}[ht]
     \centering
+    \onehalfspacing
     \begin{tabular}{lr}
     \textbf{Alice} & \textbf{Bob} \\
     $n = 3$, $q = 17$ \\
@@ -235,7 +237,8 @@ Dešifrováno bude $\begin{cases}
 
     \multicolumn{2}{c}{Šifrování} \\
     & výběr zprávy $b = 1$ \\
-    & $\mathcal{E}_{\textbf{A},p}(b) = (a', p') = \left( \sum a_i, \sum p_i + b \lfloor \frac{q}{2} \rfloor \right)$ \\
+    & výběr některých řádků $S$ z~vektoru $p$ \\
+    & $\mathcal{E}_{\textbf{A},p}(b) = (a', p') = \left( \sum_S a_i, \sum_S p_i + b \lfloor \frac{q}{2} \rfloor \right)$ \\
 
     \multicolumn{2}{c}{Dešifrování} \\
     $e' = p' - a' s^T = 12 - 2 = 10$ \\
@@ -367,6 +370,9 @@ Je to (jediný) výherce třetího PKE \& KEM kola soutěže PQC NIST.
 Náročnost \emph{(security levels)} lze upravovat změnou velikosti \textbf{A} (počtu polynomů) a náhodného rozložení.
 Pokud je chyba moc velká, dešifrování se nemusí podařit, ale pravděpodobnost takového stavu je pouze malá ($< 2^{100}$).
 
+Na~přelomu let 2022/23 byly pomocí strojového učení objeveny nedostatky hardwarové implementace, která umožňovala extrahovat kryptografický materiál.
+
+
 \subsection{SABER}
 
 Saber je KEM schéma založené na~M-LWR.
@@ -459,7 +465,7 @@ Umožňuje provádět operace s~daty bez~toho aby bylo nutné je dešifrovat (tj
 % https://dspace.cvut.cz/handle/10467/101730, str 6
 
 \textbf{Částečně homomorfní šifrování} \emph{(Partially Homomorphic Encryption)} podporuje pouze jednu z~operací (sčítání nebo násobení).
-Cesarova šifra umožňuje homomorfické sčítání, RSA a ElGamal (v~surové matematické formě) umožňují homomorfické násobení.
+Cesarova šifra nebo Paillier umožňují homomorfické sčítání, RSA a ElGamal (v~surové matematické formě) umožňují homomorfické násobení.
 
 \textbf{Celkem homomorfní šifrování} \emph{(Somewhat Homomorphic Encryption)} podporuje obě operace, ale pouze pro~omezený počet operací.
 
