@@ -592,37 +592,32 @@ Jednotka ONU komunikuje s OLT pomocí PLOAM zpráv, kdy typy zpráv a průběh k
 
 \textbf{Realizovatelným/možným řešením} je řešení lineárního programu, které splňuje všechny omezení. Sada všech možných řešení se nazývá prostor pro řešení. Jestli že má lineární program realizovatelné řešení tak říkáme že je proveditelné jinak je neuskutečnitelné.
 
-\subsection{Maximalizace toku}
-Problém maximalizace toku hledá toky provozu, které maximalizují objem přenosu ze zdrojového uzlu do cílového, s omezením že není překročena kapacita spoje.
+\subsection{Maximalizace toku, minimalizace ceny}
 
-\begin{figure} [h]
+Maximalizace hledá tok v~orientovaném grafu tak, aby se maximalizoval objem přenosu ze~zdroje do~cíle při~dodržení kapacity spojů:
+$\text{max}~v$.
+
+Minimalizace hledá tok v~váženém orientovaném grafu tak, aby se maximalizoval objem za~co nejmenší cenu:
+$\text{max}\ 4x_{12} + 8x_{13} + 2x_{23} + 6x_{24} + 7x_{34}$.
+
+\begin{center}\begin{minipage}{0.3\textwidth}
+\begin{align}
+x_{12} + x_{23} &= v \\
+x_{12} - x_{23} - x_{24} &= 0 \\
+x_{13} + x_{23} + x_{34} &= 0 \\
+0 \leq x_{12} &\leq 14 \\
+0 \leq x_{13} &\leq 15 \\
+0 \leq x_{23} &\leq 4 \\
+0 \leq x_{24} &\leq 10 \\
+0 \leq x_{34} &\leq 18
+\end{align}
+\end{minipage}\end{center}
+
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{snimky/ilpModel.png}
+    \includegraphics[width=\textwidth]{snimky/ilp}.
+    \caption{Orientovaný graf (maximalizace toku) a vážený orientovaný graf (minimalizace ceny).}
 \end{figure}
-
-Max v představuje objektivní funkci, která maximalizuje objem provozu od uzlu 1 do uzlu 4. Rovnice 2 -- 9 jsou omezení funkce, kdy rovnice 2 -- 4 ukazují zachování průtoku.
-
-Rovnice 2 ($x_{12} + x_{13} = v$) je omezení udržování toků v uzlu zdroje. Odchozí objem provozu z uzlu 1 je roven $v$.
-
-Rovnice 3 ($x_{12} - x_{23} - x_{24} = 0$) je omezení k udržení toků v uzlu 2. Příchozí objem do uzlu 2 je roven odchozímu provozu z uzlu 2.
-
-Rovnice 4 ($x_{13} + x_{23} - x_{34} = 0$) je omezení k udržení toků v uzlu 3. Příchozí objem do uzlu 3 se rovná odchozímu objemu provozu z uzlu 3.
-
-V případě úlohy na obrázku bude $v = 28$, kdy se bude skládat ze tří cest. První cesta ($1\xrightarrow{}2\xrightarrow{}4$) má maximální tok 10, druhá cesta ($1\xrightarrow{}2\xrightarrow{}3\xrightarrow{}4$) má maximální tok 4 a třetí cesta ($1\xrightarrow{}3\xrightarrow{}4$) má maximální tok 14.
-
-\subsection{Minimální cena toku}
-
-Problematika minimální ceny toku se snaží najít toky, jejich cena je minimalizována tak, aby splňovala že objem provozu nepřekračuje kapacitu spoje (maximalizace toku).
-
-\begin{figure} [h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{snimky/MinCena.png}
-\end{figure}
-
-Na obrázku dvojice čísel u hran představuje cenu, kapacitu. Definice rovnic na obrázku jsou stejné jako v případě maximálního toku. Jen zde se hledá výsledná minimální cena.
-
-V případě úlohy na obrázku bude $v = 12$ a celková cena je 161, kdy se bude skládat ze tří cest. První cesta ($1\xrightarrow{}2\xrightarrow{}4$) má maximální tok 2, druhá cesta ($1\xrightarrow{}2\xrightarrow{}3\xrightarrow{}4$) má maximální tok 3 a třetí cesta ($1\xrightarrow{}3\xrightarrow{}4$) má maximální tok 7.
-
 
 
 \clearpage
