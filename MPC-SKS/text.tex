@@ -475,7 +475,7 @@ Pro realizaci obou směrů na jednom vlákně je využito dělení podle času (
 \section{Vývoj pasivních optických sítí a jejich rozdíly z pohledu fyzické a přenosové vrstvy.}
 
 \subsection{ATM PON (APON) a BPON}
-Rychlost v symetrické variantě 155,52\,MB/s a v asymetrické 622,8/155,52\,MB/s. BPON vylo pouze rozšíření a zvyšovala symetrickou rychlost na 622.8\,MB/s a přidávala nové funkce jako dynamickou distribuci pásma, vlnový multiplex (WDM).
+Rychlost v symetrické variantě 155,52\,MB/s a v asymetrické 622,8/155,52\,MB/s. BPON vylo pouze rozšíření a zvyšovala symetrickou rychlost na 622.8\,MB/s a přidávala nové funkce jako dynamickou distribuci pásma, vlnový multiplex (WDM). Používá ATM buňky.
 
 \subsection{GPON}
 GPON je nejpoužívanější v ČR. Využívá linkový kód NRZ (Non-return-to-zero) a podporuje plně ethernetové rámce se zapouzdřením do rámců GEM (Gigabit Passive Optical Network Encapsulation Mode) viz obrázek. Přenosové rychlosti závisí na použité variantě (symetrická/asymetrická).
@@ -486,7 +486,7 @@ GPON je nejpoužívanější v ČR. Využívá linkový kód NRZ (Non-return-to-
 \end{figure}
 
 \subsection{EPON}
-Odvozen od standardního Ethernet protokolu. Využívá linkový kód 8B/10B, tj. ke každému bloku 8 bitů jsou přidány 2 paritní bity. Pro přenos se využívá Ethernet rámců viz obrázek. Předchází kolizi paketů v síti pomocí MPCP (MultiPoint Control Protocol). Funguje na principu detekce ONU a ustanovení provozních parametrů, kdy na konci je mu přiděleno LLID.
+Odvozen od standardního Ethernet protokolu. Využívá linkový kód 8B/10B, tj. ke každému bloku 8 bitů jsou přidány 2 paritní bity. Pro přenos se využívá Ethernet rámců viz obrázek. Předchází kolizi paketů v síti pomocí MPCP (MultiPoint Control Protocol). Funguje na principu detekce ONU a ustanovení provozních parametrů, kdy na konci je mu přiděleno LLID. Primární rozmach měl na asijském trhu.
 
 \begin{figure} [h]
     \centering
@@ -530,7 +530,7 @@ XGS-PON je pouze rozšíření XG-PON, kdy hlaví změnou je nově navržená TC
 
 \subsection{10G-EPON}
 
-Navazují standard na EPON s cílem možnosti provozovat 10G-EPON v souběhu s EPON na stejné optické distribuční síti.
+Navazují standard na EPON s cílem možnosti provozovat 10G-EPON v souběhu s EPON na stejné optické distribuční síti. Používá Ethernet rámce. Existují ještě varianty 25G-EPON a 50G-EPON. Všechny jsou zpětně kompatibilní až po EPON.
 
 \subsection{NG-PON2}
 Poslední kompletně standardizovaný standard pro PON.
@@ -561,19 +561,26 @@ NG-PON2 umožnuje rychlost 40\,Gb/s s možností škálování až k hranici 80\
 \begin{itemize}
     \item Zvyšuje počet připojených ONU k jediné OLT z 64 na 1024
     \item Dochází ke snížení počtu CO, protože dosah sítě je zvýšen z 20 na 50 km
-    \item Nasazení od 10 Gbit/s po 25 Gbit/s –> využití pro sítě 5G
+    \item Nasazení od 10 Gbit/s po 25 Gbit/s --> využití pro sítě 5G
+    \item Používá Ethernet rámce
 \end{itemize}
 
 \subsection{Higher Speed PON (HSP)}
 Parametry:
 \begin{itemize}
-    \item Přenosová rychlost – sestupný směr: 49,77 Gbit/s
-    \item Přenosová rychlost – vzestupný směr: 49,77/24,88/12,44 Gbit/s
+    \item Přenosová rychlost -- sestupný směr: 49,77 Gbit/s
+    \item Přenosová rychlost -- vzestupný směr: 49,77/24,88/12,44 Gbit/s
     \item Samo opravný kód: LDPC (low-density parity check)
     \item Linkový kód: NRZ
-    \item Maximální vzdálenost přenosu: 20–40km
-    \item Použitá vlnová délka 1340–1344nm
+    \item Maximální vzdálenost přenosu: 20--40km
+    \item Použitá vlnová délka 1340--1344nm
 \end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{snimky/pon-kompatibilita.png}
+    \caption{Kompatibilita PON protokolů}
+\end{figure}
 
 \clearpage
 \section{Aktivační proces koncové jednotky v síti GPON.}
