@@ -13,47 +13,47 @@ Telekomunikační služby přenášejí informace pomocí signálů mezi koncov�
 
 \subsubsection{Základní prvky}
 \begin{itemize}
-\item
-    \textbf{Vysílač}:
-    příprava, zpracování a~vložení informace do~komunikačního kanálu pomocí signálu.
-\item
-    \textbf{Přenosové médium}:
-    prvky vytvářející přenosové prostředí pro~přenos informace v~požadované podobě signálu -- elektromagnetické, rádiové, kabelové, optické.
-\item
-    \textbf{Přijímač}:
-    příjem informace, signálu z~přenosového prostředí a~jeho zpracování pro předání cílovému subjektu.
+    \item
+          \textbf{Vysílač}:
+          příprava, zpracování a~vložení informace do~komunikačního kanálu pomocí signálu.
+    \item
+          \textbf{Přenosové médium}:
+          prvky vytvářející přenosové prostředí pro~přenos informace v~požadované podobě signálu -- elektromagnetické, rádiové, kabelové, optické.
+    \item
+          \textbf{Přijímač}:
+          příjem informace, signálu z~přenosového prostředí a~jeho zpracování pro předání cílovému subjektu.
 \end{itemize}
 
 \subsubsection{Kategorizace}
 \begin{enumerate}
-\item Podle typu zpracování informace:
-    \begin{description}
-    \item[Analogové] Telefonní síť, terestiální analogové vysílání atp. (v~dnešní době postupně zanikající služby, nahrazované digitálními technologiemi).
-    \item[Digitální] Datová síť.
-    \end{description}
-\item Podle regulace:
-    \begin{description}
-    \item[Rezervované služby] Telefonní síť.
-    \item[Oblasti regulované licenčními podmínkami] Televizní a~rádiové vysílání, mobilní komunikace.
-    \item[Oblasti volného působení za~dodržení norem a předpisů] Služby uživatelského charakteru.
-    \end{description}
-\item Podle potřeb uživatelů:
-    \begin{description}
-    \item[Základní a~rozšířené telefonní služby] Telefonní hovory, datové služby ISDN, doplňkové služby ke~zdokonalení základní služby (přenos telefonního čísla, volání na~účet volaného, roaming, SMS).
-    \item[Telematické datové služby] Infrastruktura dopravy (navigační systémy, řízení dopravy).
-    \item[Multimediální datové služby] IPTV, VoIP, internet, \dots; jsou kladeny vyšší nároky na~přenosová média z~hlediska zpracování a~rychlosti doručení informace.
-    \end{description}
-\item Podle počtu současně komunikujících účastníků:
-    \begin{description}
-    \item[point to point] Komunikace pouze dvou uživatelů/bodů na~přenosovém médiu.
-    \item[point to multipoint] Centralizované komunikace jednoho uživatele s~více: TV, IPTV, rozšířené telefonní služby a~rádiové vysílání, některé služby ISP.
-    \item[multipoint to multipoint] Decentralizované komunikace: běžný internetový provoz.
-    \end{description}
-\item Podle dosažitelnosti služeb:
-    \begin{description}
-    \item[Pevné] Digitální integrované služby ISDN, služby asynchronních sítí ATM, služby sítí LAN, služby internetového charakteru.
-    \item[Mobilní] Služby bezdrátových paketových sítí, služby GSM standardů.
-    \end{description}
+    \item Podle typu zpracování informace:
+          \begin{description}
+              \item[Analogové] Telefonní síť, terestiální analogové vysílání atp. (v~dnešní době postupně zanikající služby, nahrazované digitálními technologiemi).
+              \item[Digitální] Datová síť.
+          \end{description}
+    \item Podle regulace:
+          \begin{description}
+              \item[Rezervované služby] Telefonní síť.
+              \item[Oblasti regulované licenčními podmínkami] Televizní a~rádiové vysílání, mobilní komunikace.
+              \item[Oblasti volného působení za~dodržení norem a předpisů] Služby uživatelského charakteru.
+          \end{description}
+    \item Podle potřeb uživatelů:
+          \begin{description}
+              \item[Základní a~rozšířené telefonní služby] Telefonní hovory, datové služby ISDN, doplňkové služby ke~zdokonalení základní služby (přenos telefonního čísla, volání na~účet volaného, roaming, SMS).
+              \item[Telematické datové služby] Infrastruktura dopravy (navigační systémy, řízení dopravy).
+              \item[Multimediální datové služby] IPTV, VoIP, internet, \dots; jsou kladeny vyšší nároky na~přenosová média z~hlediska zpracování a~rychlosti doručení informace.
+          \end{description}
+    \item Podle počtu současně komunikujících účastníků:
+          \begin{description}
+              \item[point to point] Komunikace pouze dvou uživatelů/bodů na~přenosovém médiu.
+              \item[point to multipoint] Centralizované komunikace jednoho uživatele s~více: TV, IPTV, rozšířené telefonní služby a~rádiové vysílání, některé služby ISP.
+              \item[multipoint to multipoint] Decentralizované komunikace: běžný internetový provoz.
+          \end{description}
+    \item Podle dosažitelnosti služeb:
+          \begin{description}
+              \item[Pevné] Digitální integrované služby ISDN, služby asynchronních sítí ATM, služby sítí LAN, služby internetového charakteru.
+              \item[Mobilní] Služby bezdrátových paketových sítí, služby GSM standardů.
+          \end{description}
 \end{enumerate}
 
 \subsection{Signaling System Number 7}
@@ -84,10 +84,10 @@ Protokol \textbf{MTP} \emph{(Message Transfer Part)} se skládá ze~tří úrovn
 Zástupci aplikačních protokolů jsou:
 
 \begin{itemize}
-\item \textbf{MTP} \emph{(Message Transfer Protocol)}: přenos signalizace uvnitř národní sítě operátora.
-\item \textbf{SCCP} \emph{(Signaling Connection Control Part)}: směrování signalizačních zpráv dle~telefonních čísel; propojování operátorů a států.
-\item \textbf{TCAP} \emph{(Transaction Capabilities Application Part)}: výměna informací mezi sítí a ústřednami.
-\item \textbf{MAP} \emph{(Mobile Application Part)}: signalizace o~lokaci účastníků, přenos dat a~SMS, \dots
+    \item \textbf{MTP} \emph{(Message Transfer Protocol)}: přenos signalizace uvnitř národní sítě operátora.
+    \item \textbf{SCCP} \emph{(Signaling Connection Control Part)}: směrování signalizačních zpráv dle~telefonních čísel; propojování operátorů a států.
+    \item \textbf{TCAP} \emph{(Transaction Capabilities Application Part)}: výměna informací mezi sítí a ústřednami.
+    \item \textbf{MAP} \emph{(Mobile Application Part)}: signalizace o~lokaci účastníků, přenos dat a~SMS, \dots
 \end{itemize}
 
 
@@ -96,10 +96,10 @@ Zástupci aplikačních protokolů jsou:
 TMN je koncept používaný pro~správu a monitorování telekomunikačních sítí.
 
 \begin{itemize}
-\item \textbf{Business management}: plánování, strategie, marketing a řízení ekonomických výdajů.
-\item \textbf{Service management}: správa a řízení služeb poskytovaných koncovým uživatelům (správa služeb, řízení QoS, fakturace, reklamace).
-\item \textbf{Network management}: správa infrastruktury a sítí (konfigurace, monitoring, řízení chyb a bezpečnosti).
-\item \textbf{Element management}: správa prvků sítě (konfigurace, monitoring, diagnostika, řízení).
+    \item \textbf{Business management}: plánování, strategie, marketing a řízení ekonomických výdajů.
+    \item \textbf{Service management}: správa a řízení služeb poskytovaných koncovým uživatelům (správa služeb, řízení QoS, fakturace, reklamace).
+    \item \textbf{Network management}: správa infrastruktury a sítí (konfigurace, monitoring, řízení chyb a bezpečnosti).
+    \item \textbf{Element management}: správa prvků sítě (konfigurace, monitoring, diagnostika, řízení).
 \end{itemize}
 
 
@@ -148,16 +148,16 @@ Skládal se z~30 B-kanálů (pro~celkovou rychlost 2~Mbps) a jednoho D-kanálu.
 Každý rámec obsahuje signalizační informace, pomocné bity, uživatelská data a~synchronizaci.
 
 \begin{center}
-\begin{tabular}{cll}
-\textbf{bit} & & \textbf{popis} \\
-F & \emph{framing} & začátek rámce \\
-L & \emph{balancing} & vyvážení stejnosměrné složky \\
-D & \emph{channel} & bit D kanálu \\
-E & \emph{echo} & řízení přístupu stanic ke~kanálům \\
-S & -- & budoucí použití \\
-A & -- & protokoly aktivace \\
-B1,B2 & -- & bity kanálů B1 a B2 \\
-\end{tabular}
+    \begin{tabular}{cll}
+        \textbf{bit} &                  & \textbf{popis}                    \\
+        F            & \emph{framing}   & začátek rámce                     \\
+        L            & \emph{balancing} & vyvážení stejnosměrné složky      \\
+        D            & \emph{channel}   & bit D kanálu                      \\
+        E            & \emph{echo}      & řízení přístupu stanic ke~kanálům \\
+        S            & --               & budoucí použití                   \\
+        A            & --               & protokoly aktivace                \\
+        B1,B2        & --               & bity kanálů B1 a B2               \\
+    \end{tabular}
 \end{center}
 
 
@@ -171,10 +171,10 @@ Kódování 4B/3T nebo 2B/1Q.
 Napájení terminálů v~ISDN bylo možné realizovat:
 
 \begin{enumerate}
-\item \textbf{Interní napáječ terminálu}.
-\item \textbf{Síťový napáječ NT}: fantomní napájení skrz datový kabel.
-\item \textbf{Napájení z~jiného terminálu}: připojení pomocí přídavného páru vodičů a jednotky NT která umožňuje přenos napájení mezi terminály.
-\item \textbf{Napájení z~ústředny přes NT a rozhraní~S0}: fantomní napájení z~ústředny přes rozhraní S0.
+    \item \textbf{Interní napáječ terminálu}.
+    \item \textbf{Síťový napáječ NT}: fantomní napájení skrz datový kabel.
+    \item \textbf{Napájení z~jiného terminálu}: připojení pomocí přídavného páru vodičů a jednotky NT která umožňuje přenos napájení mezi terminály.
+    \item \textbf{Napájení z~ústředny přes NT a rozhraní~S0}: fantomní napájení z~ústředny přes rozhraní S0.
 \end{enumerate}
 
 
@@ -359,11 +359,11 @@ V~IPv4 navíc existují broadcast adresy které reprezentují všechny adresy v~
 Kvalita služeb je metrika propustnosti a~efektivnosti sítí a služeb.
 K~základním měřeným parametrům patří:
 \begin{itemize}
-\item komunikační zpoždění: packetové, rámcové, způsobené kódováním,
-\item jitter: odchylka zpoždění jednotlivých rámců,
-\item šířka pásma: kapacita linky,
-\item ztrátovost: zastoupení nedoručených datagramů způsobené rušením linky nebo zahlcením síťových prvků,
-\item míra pravděpodobnosti blokování: čekání ve~frontách.
+    \item komunikační zpoždění: packetové, rámcové, způsobené kódováním,
+    \item jitter: odchylka zpoždění jednotlivých rámců,
+    \item šířka pásma: kapacita linky,
+    \item ztrátovost: zastoupení nedoručených datagramů způsobené rušením linky nebo zahlcením síťových prvků,
+    \item míra pravděpodobnosti blokování: čekání ve~frontách.
 \end{itemize}
 
 Dále může být provoz měřen objektivními a subjektivními testy, které se měří a vyjadřují v~jednotkách MOS \emph{(Mean of Service)} a které reprezentují vnímání kvality služby uživatelem.
@@ -392,29 +392,29 @@ ISO/OSI je teoretický model struktury počítačových sítí, který předpokl
 Obsahuje sedm vrstev s~pevně stanovenými úkoly.
 
 \begin{enumerate}
-\item
-    Fyzická vrstva:
-    zajišťuje spojení mezi zařízeními na~fyzické úrovni a transformuje digitální signál na~impulsy na~fyzickém médiu.
-    Základní jednotkou je bit.
-\item
-    Linková vrstva:
-    zajišťuje přenos a~zpracování rámců v~rámci segmentu.
-    Zajišťuje bezporuchovou službu a~vytvoření zdálnivě kontinuální spojení mezi dvěma síťovými prvky.
-\item
-    Síťová vrstva:
-    zajišťuje směrování paketů co nejvhodnější cestou v~síti.
-\item
-    Transportní vrstva:
-    zajišťuje řízení komunikace mezi odesílatelem a~příjemcem a poskytuje přenos a~zpracování TCP/UDP segmentů/datagramů.
-\item
-    Relační vrstva:
-    zajišťuje navázání, udržování a ukončení relací mezi účastníky spojení.
-\item
-    Prezentační vrstva:
-    zajišťuje kódování, překlad, konverzi, šifrování a kompresi přenášených dat.
-\item
-    Aplikační vrstva:
-    provádí správu aplikačních systémů a~programů.
+    \item
+          Fyzická vrstva:
+          zajišťuje spojení mezi zařízeními na~fyzické úrovni a transformuje digitální signál na~impulsy na~fyzickém médiu.
+          Základní jednotkou je bit.
+    \item
+          Linková vrstva:
+          zajišťuje přenos a~zpracování rámců v~rámci segmentu.
+          Zajišťuje bezporuchovou službu a~vytvoření zdálnivě kontinuální spojení mezi dvěma síťovými prvky.
+    \item
+          Síťová vrstva:
+          zajišťuje směrování paketů co nejvhodnější cestou v~síti.
+    \item
+          Transportní vrstva:
+          zajišťuje řízení komunikace mezi odesílatelem a~příjemcem a poskytuje přenos a~zpracování TCP/UDP segmentů/datagramů.
+    \item
+          Relační vrstva:
+          zajišťuje navázání, udržování a ukončení relací mezi účastníky spojení.
+    \item
+          Prezentační vrstva:
+          zajišťuje kódování, překlad, konverzi, šifrování a kompresi přenášených dat.
+    \item
+          Aplikační vrstva:
+          provádí správu aplikačních systémů a~programů.
 \end{enumerate}
 \FloatBarrier
 
@@ -424,18 +424,18 @@ Obsahuje sedm vrstev s~pevně stanovenými úkoly.
 \begin{table}[ht]
     \centering
     \begin{tabular}{lll}
-    \textbf{ISO/OSI} & \textbf{TCP/IP} & zástupci \\
-    \hline \hline
-    aplikační vrstva   & aplikační vrstva   & HTTP, DNS \\
-    prezentační vrstva &                    & \\
-    relační vrstva     &                    & \\
-    \hline
-    transportní vrstva & transportní vrstva & TCP, UDP \\
-    \hline
-    síťová vrstva      & internetová vrstva & IP \\
-    \hline
-    spojová vrstva     & vrstva síťového rozhraní & 802.3 (Ethernet), 802.11 (WiFi) \\
-    fyzická vrstva     &                    & \\
+        \textbf{ISO/OSI}   & \textbf{TCP/IP}          & zástupci                        \\
+        \hline \hline
+        aplikační vrstva   & aplikační vrstva         & HTTP, DNS                       \\
+        prezentační vrstva &                          &                                 \\
+        relační vrstva     &                          &                                 \\
+        \hline
+        transportní vrstva & transportní vrstva       & TCP, UDP                        \\
+        \hline
+        síťová vrstva      & internetová vrstva       & IP                              \\
+        \hline
+        spojová vrstva     & vrstva síťového rozhraní & 802.3 (Ethernet), 802.11 (WiFi) \\
+        fyzická vrstva     &                          &                                 \\
     \end{tabular}
     \label{Srovnání modelů ISO/OSI a TCP/IP}
 \end{table}
@@ -601,17 +601,17 @@ Minimalizace hledá tok v~váženém orientovaném grafu tak, aby se maximalizov
 $\text{max}\ 4x_{12} + 8x_{13} + 2x_{23} + 6x_{24} + 7x_{34}$.
 
 \begin{center}\begin{minipage}{0.3\textwidth}
-\begin{align}
-x_{12} + x_{23} &= v \\
-x_{12} - x_{23} - x_{24} &= 0 \\
-x_{13} + x_{23} + x_{34} &= 0 \\
-0 \leq x_{12} &\leq 14 \\
-0 \leq x_{13} &\leq 15 \\
-0 \leq x_{23} &\leq 4 \\
-0 \leq x_{24} &\leq 10 \\
-0 \leq x_{34} &\leq 18
-\end{align}
-\end{minipage}\end{center}
+        \begin{align}
+            x_{12} + x_{23}          & = v     \\
+            x_{12} - x_{23} - x_{24} & = 0     \\
+            x_{13} + x_{23} + x_{34} & = 0     \\
+            0 \leq x_{12}            & \leq 14 \\
+            0 \leq x_{13}            & \leq 15 \\
+            0 \leq x_{23}            & \leq 4  \\
+            0 \leq x_{24}            & \leq 10 \\
+            0 \leq x_{34}            & \leq 18
+        \end{align}
+    \end{minipage}\end{center}
 
 \begin{figure}[ht]
     \centering
