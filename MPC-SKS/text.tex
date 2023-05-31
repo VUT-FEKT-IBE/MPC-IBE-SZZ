@@ -640,7 +640,7 @@ $\text{max}\ 4x_{12} + 8x_{13} + 2x_{23} + 6x_{24} + 7x_{34}$.
 
 \subsection{Vlnový multiplex WDM}
 
-Přenos více signálů jedním optickým vláknem v rozdílných vlnových délkách. Je základem pro všechny rozšiřující vlnové multiplexy.
+Přenos více signálů jedním optickým vláknem v rozdílných vlnových délkách. Je základem pro všechny rozšiřující vlnové multiplexy. Klasické WDM pomocí multiplexoru přidávalo k signálu jednu další nosnou vlnovou délku. Pomocí demultiplexoru je následně signál opět rozdělen.
 
 \subsubsection{IP přes WDM}
 
@@ -655,7 +655,8 @@ Mezi výhody CWDM technologie patří:
     \item nižší energetické a prostorové nároky v porovnání s DWDM,
     \item jednoduchý management,
     \item velká nabídka vysílačů,
-    \item tolerance střední vlnové délky kanálu 6-7 nm.
+    \item tolerance střední vlnové délky kanálu 6-7 nm -- spacing mezi kanály 20~nm,
+    \item používá se v rozsahu 1270-1610~nm,
 \end{itemize}
 
 \subsection{Vlnový multiplex DWDM}
@@ -667,15 +668,20 @@ Mezi výhody DWDM patří:
     \item na jednom optickém vlákně dokáže přenést více než 96 datových kanálů,
     \item velký dosah do 100 km bez nutnosti zesílení signálu,
     \item snadná rozšiřitelnost o další datové kanály.
+    \item spacing mezi kanály se pohybuje běžně na 0,8~nm (100~GHz), do budoucna 0,4-0,2~nm (50-25~GHz),
+    \item používá se v okolí vlnové délky 1550~nm z důvodu nejlepších přenosových vlastností.
 \end{itemize}
 
 \subsection{TDM vs. WDM}
 Díky neustálému požadavku na šířku pásma při výstavbě infrastruktury a provozování služeb je relativně drahé položit nová vlákna a dále je
 spravovat. Proto jsou nezbytné techniky vícenásobného využití vlákna.
-\begin{figure} [h]
+
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{snimky/TDMvsWDM.png}
-    \label{fig:tdm-wdm}
+    \subfloat[Time division multiplexing (TDM)]{\includegraphics[width=\textwidth]{snimky/TDM.png}}
+    \hfill
+    \subfloat[Wavelength-division multiplexing (WDM)]{\includegraphics[width=\textwidth]{snimky/WDM.png}}
+    \caption{TDM vs. WDM}
 \end{figure}
 
 \subsection{Problematika přiřazení vlnových délek (RWA)}
