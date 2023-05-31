@@ -327,62 +327,111 @@ Aditivní bílý šum (Tepelný šum, Výstřelový šum, Kvantizační šum, Zb
 \subsection{HDSL}
 V případě varianty T1 používá 2 páry telefonního vedení, každý o rychlosti 784 kb/s. V případě E1 varianty 1168 kb/s na každý pár. Používají se modulace 2B1Q a CAP. Jednotlivá maximální délka vedení mezi HDLS je 3,7 km v případě modulace 2B1Q nebo 4,2 km
 
+
 \clearpage
 \section{IPv6, návaznost na IPv4, kvalita služeb QoS, referenční model OSI versus síťová architektura TCP/IP.}
 
+
 \subsection{IPv6}
-Nahrazuje dosluhující protokol verze 4. Masivní rozšíření adresního prostoru. Zdokonalení vysokorychlostního přenášení dat. Pro uživatele není nutná žádná specifická příprava. Nutná podpora ze strany sítě. IPv6 nahrazuje formát IP datagramů. Velikost hlavičky je 40 bajtů a Payload 64 KB. Pro adresaci v IPv6 se používá adresování založené na CIDR (Classless Inter-Domain Routing).
 
-Typy adres:
-\begin{itemize}
-    \item Unicast -- unikátní -- adresace rozhraní
-    \item Anycast -- speciální typ adresy, kterým je definováno více rozhraní, ale provoz je směrován pouze jednomu, většinou nejbližšímu rozhraní z logického pohledu
-    \item Multicast -- vícesměrová adresa
-\end{itemize}
+IPv6 je protokol síťové vrstvy modelu TCP/IP.
+Adresy mají délku 128 bitů (proti 32 bitům ve~IPv4) a nabízí tak nevyčerpatelný prostor adres (matematicky $10^{39}$ použitelných adres, zhruba $6 \cdot 10^{19}$ na~každý~cm$^2$ povrchu Země).
+Obě verze v~současném internetu koexistují (tzv. \emph{dual stack}) a je nutné provádět duální konfigurace (směrování, firewally, DNS).
 
-\subsubsection{Návaznost IPv6 na IPv4 protokol}
-Základním rozdílem protokolu IPv4 a IPv6 je v rozsahu použitelných adres v síti pro jednotlivá rozhraní, zařízení. Technické funkce fungování sítí zůstávají stejné a obě verze jsou provozovány současně. IPv4 -- adresní rozsah 32 bitový, IPv6 128 bitový.
+IPv6 hlavička má pouze 40~bajtů, protože byla odstraněna nepoužívaná pole z~hlavičky IPv4.
+Poli v~IPv6 jsou: verze IP, třída provozu, identifikace toku dat, délka datagramu, další záhlaví/identifikátor vyšší vrstvy, limit počtu skoků, zdrojová a~cílová adresa a přenášená data.
+
+Směrování je v~IPv6 beztřídní, stejně jako v~současných verzích IPv4.
+Podporuje tři typy adres: \underline{unicast} jsou adresy konkrétních rozhraní zařízení, \underline{anycast} jsou speciální adresy které jsou sdílený více zařízeními, ale provoz je směrován pouze jednomu z~nich (nejčastěji geograficky nejbližšímu) a \underline{multicast} jsou vícesměrové adresy na~kterých naslouchá více zařízení.
+V~IPv4 navíc existují broadcast adresy které reprezentují všechny adresy v~dané síti.
+
 
 \subsection{Quality of Services}
-K základním metrikám (požadavkům) patří \textbf{komunikační zpoždění} (paketové, rámcove, zpoždění kódováním), \textbf{jitter} (nežádoucí odchylku periodického signálu a vyjadřuje nestabilitu zdroje), \textbf{šířka pásma, ztráta rámců a paketů} (důvodu rušení přenosové linky, nebo zahlcením jednotlivých kapacit prvků sítě, které mají omezenou schopnost odbavovat provoz a po naplnění jednotlivých vstupních front začnou provoz zahazovat), míra pravděpodobnosti blokování (vyjádřeno modely Erlang), \textbf{kvantovací šum} (vázán na zdrojové kódování a jeho vzorkovací
-a kvantovací procesy), \textbf{objektivní a subjektivní testování} (měří a vyjadřuje se v jednotkách MOS (Mean of Services) vnímání kvality služby uživatelem takovéto služby).
 
-\subsubsection{Služby}
+Kvalita služeb je metrika propustnosti a~efektivnosti sítí a služeb.
+K~základním měřeným parametrům patří:
 \begin{itemize}
-    \item Služby \enquote{Best Effort} -- jedná se o typ služby s maximálním úsilím o přenos v síti, bez specielního nastavení QoS v takovéto síti. Nejlépe je charakterizováno pomocí plánování front metodou FIFO (First In First Out).
-    \item Služby integrované \enquote{IntServ} -- takovýto model QoS rezervuje požadavky síťového provozu po celou dobu trvání přenosu. Aplikace si sami určují nároky na přenos (oznamují je síťovým prostředkům, jako jsou směrovače). Je zde využito například protokolu RSVP (Resource Reservation Protocol).
-    \item Služby diferencované \enquote{DiffServ} -- v tomto modelu poskytování QoS dochází již ke klasifikaci jednotlivých přenosů. Je zde použito metod QoS jako je například metoda WFQ (Weighted Fair Queueing), WRED (Weighted Random Early Detection). Požadavky na QoS neurčují aplikace, ale zařízení v síti.
+\item komunikační zpoždění: packetové, rámcové, způsobené kódováním,
+\item jitter: odchylka zpoždění jednotlivých rámců,
+\item šířka pásma: kapacita linky,
+\item ztrátovost: zastoupení nedoručených datagramů způsobené rušením linky nebo zahlcením síťových prvků,
+\item míra pravděpodobnosti blokování: čekání ve~frontách.
 \end{itemize}
 
-\subsubsection{QoS IPv6}
-V IPv4 je obvykle provozována služba \enquote{Best Effort} tedy nejlepší snaha o přenos informační jednotky. Fragmentace paketů je v IPv4 hlavním zdrojem zpoždění paketů nebo jejich vysoké latence. IPv6 používá sofistikovanější přístup k zpracování dat. IPv6 má dvě pole týkající se QoS, a to 20 bitové pole \enquote{Flow Label} a 8 bitové pole \enquote{Traffic Class}.
+Dále může být provoz měřen objektivními a subjektivními testy, které se měří a vyjadřují v~jednotkách MOS \emph{(Mean of Service)} a které reprezentují vnímání kvality služby uživatelem.
+
+V~IPv4 bývá častým zdrojem latence fragmentace paketů.
+IPv6 tento problém limituje zákazem fragmentace na~úrovni směrovačů (pakety překračující MTU jsou zahozeny).
+
+
+\subsubsection{Služby}
+
+\underline{\emph{Best Effort}} jsou služby s~negarantovaným doručením.
+Síťové prvky se maximálně snaží o~jejich doručení, ale při~zahlcení mohou být zahozeny.
+Směrovací prvky je typicky uschovávají ve~frontách FIFO \emph{(First In, First Out)}, ve~kterých čekají dokud na~ně nedojde řada.
+
+\underline{IntServ} \emph{(Integrated Services)} rezervují kvalitu služeb pro~celou dobu trvání přenosu (tj. budují okruhy).
+Aplikace si samy určují nároky na~svůj přenos, který ukládají do~datagramu kde jej mohou směrovače přečíst.
+IPv4 i IPv6 sítě k~tomu mohou používat RSVP \emph{(Resource Reservation Protocol)}.
+
+\underline{DiffServ} \emph{(Differentiated Services)} používá k~určení QoS směrovače na~základě klasifikace přenosu, ne vysílací stanice.
+Využívají se metody jako WFQ \emph{(Weighted Fair Queuing)} nebo WRED \emph{(Weighted Random Early Detection)}.
 
 
 \subsection{Referenční model OSI}
-Sedm vrstev k zajištění protokolové komunikaci mezi zařízeními. Základní myšlenkou je, že každá z vrstev komunikuje pouze s vrstvou
-vlastní horizontálně pomocí jednotek PDU (Packet Data Unit). Mezi jednotlivými vrstvami jsou stanovená pevně definovaná rozhraní
-komunikující ve vertikálním směru provádějící servisní operace mezi vrstvami nazývané SDU (Service Data Unit). Každá z nižších vrstev přidá své PDI (Protocol Control Information) k datům, která převzala od vrstvy vyšší.
-\begin{figure} [h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{snimky/osi.png}
-    \label{fig:osi}
-\end{figure}
 
-\begin{itemize}
-    \item fyzická vrstva -- zajišťuje spojení mezi zařízeními na fyzické úrovni, poskytuje služby zpracování signálu. Definuje základní zpracování a přenos informací v signálové části a přizpůsobení se fyzickému médiu. Základní jednotka \textit{bit}.
-    \item linková vrstva -- zajišťuje přenos a zpracování \textbf{rámců} v rámci segmentu. Pro vyšší vrstvu zajišťuje bezporuchovou službu a spojení mezi dvěma síťovými prvky.
-    \item síťová vrstva -- zajišťuje směrování \textbf{paketů} a její úlohou je najít nejvhodnější cestu v síti pro přenos informace.
-    \item transportní vrstva -- zajišťuje řízení komunikace mezi odesílatelem a příjemcem a poskytuje přenos a zpracování jednotek \textbf{TCP segmentů} a \textbf{UDP datagramů}.
-    \item relační vrstva -- zajišťuje navázání, udržování a ukončení relací mezi jednotlivými účastníky spojení. Při navazování spojení si vyžádá od transportní vrstvy vytvoření relace. \textbf{Data}
-    \item prezenční vrstva -- zajišťuje kódování, překlad, konverzi, šifrování a kompresi přenášených informací. Je zde zaveden společný jazyk pro konverzi údajů ASN.1. (Abstract Syntax Notation One). Dále se sem řadí protokoly TLS, starší SSL. \textbf{Data}
-    \item aplikační vrstva -- provádí správu aplikačních systémů a programů. Mezi protokoly řadící se do této vrstvy patří HTTP, FTP, POP3, SNMP, AIM, DHCP a jiné. \textbf{Data}
-\end{itemize}
+ISO/OSI je teoretický model struktury počítačových sítí, který předpokládá jednoduché terminály.
+Obsahuje sedm vrstev s~pevně stanovenými úkoly.
+
+\begin{enumerate}
+\item
+    Fyzická vrstva:
+    zajišťuje spojení mezi zařízeními na~fyzické úrovni a transformuje digitální signál na~impulsy na~fyzickém médiu.
+    Základní jednotkou je bit.
+\item
+    Linková vrstva:
+    zajišťuje přenos a~zpracování rámců v~rámci segmentu.
+    Zajišťuje bezporuchovou službu a~vytvoření zdálnivě kontinuální spojení mezi dvěma síťovými prvky.
+\item
+    Síťová vrstva:
+    zajišťuje směrování paketů co nejvhodnější cestou v~síti.
+\item
+    Transportní vrstva:
+    zajišťuje řízení komunikace mezi odesílatelem a~příjemcem a poskytuje přenos a~zpracování TCP/UDP segmentů/datagramů.
+\item
+    Relační vrstva:
+    zajišťuje navázání, udržování a ukončení relací mezi účastníky spojení.
+\item
+    Prezentační vrstva:
+    zajišťuje kódování, překlad, konverzi, šifrování a kompresi přenášených dat.
+\item
+    Aplikační vrstva:
+    provádí správu aplikačních systémů a~programů.
+\end{enumerate}
+\FloatBarrier
+
 
 \subsection{Porovnání ISO/OSI a TCP/IP}
-\begin{figure} [h]
+
+\begin{table}[ht]
     \centering
-    \includegraphics[scale=0.85]{snimky/Vrstvy2.jpg}
-\end{figure}
+    \begin{tabular}{lll}
+    \textbf{ISO/OSI} & \textbf{TCP/IP} & zástupci \\
+    \hline \hline
+    aplikační vrstva   & aplikační vrstva   & HTTP, DNS \\
+    prezentační vrstva &                    & \\
+    relační vrstva     &                    & \\
+    \hline
+    transportní vrstva & transportní vrstva & TCP, UDP \\
+    \hline
+    síťová vrstva      & internetová vrstva & IP \\
+    \hline
+    spojová vrstva     & vrstva síťového rozhraní & 802.3 (Ethernet), 802.11 (WiFi) \\
+    fyzická vrstva     &                    & \\
+    \end{tabular}
+    \label{Srovnání modelů ISO/OSI a TCP/IP}
+\end{table}
+
 
 \clearpage
 \section{Pasivní optické sítě (topologie sítě a způsob komunikace sestupný/vzestupný směr).}
