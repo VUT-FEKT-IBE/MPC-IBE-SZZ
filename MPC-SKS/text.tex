@@ -462,14 +462,15 @@ Pasivní optické sítě (PON) se skládají z:
     \label{fig:pon}
 \end{figure}
 
-Komunikace probíhá v sestupném směru jako broadcast, kdy splitter rozesílá data na všechny jednotky ONU v poměru 1:N. ONU jednotka zkontroluje identifikátor (nejspíše ONU-ID) přijatého rámce a pokud se identifikátor shoduje s přiřazeným identifikátorem tak data příjme. V opačném případě data zahodí. Tyto data se poté přenáší k cílové OLT kdy jsou spojována do jednoho signálu. Viz obrázek.
+Komunikace probíhá v sestupném směru jako broadcast, kdy splitter dělí sestupný signál dle daného dělicího poměru (1:N) ke všem koncovým jednotkám ONU v poměru. ONU jednotka přijatý provoz filtruje na základě ONU-ID a cizí provoz je zahazován. Ve vzestupném směru mají jednotky dohodnutá časová okna ve kterých vysílají (TDM). Na základě potřeby vyšších rychlostí může docházet k úpravě délky těchto oken (např. algoritmus Max-Min Fair DBA).
 
 \begin{figure} [h]
     \centering
     \includegraphics[width=\textwidth]{snimky/upDownPON.png}
 \end{figure}
 
-Pro realizaci obou směrů na jednom vlákně lze využít např. dělení podle času, nebo vlnové délky.
+Pro realizaci obou směrů na jednom vlákně je využito dělení podle času (TDM) a vlnové délky (WDM). Pro downstream je dělení pomocí WDM -- rozdílná vlnová délka pro upstream oproti downstreamu, viz otázka 7. Pro upstream je komunikace koncových zařízení zajištěna pomocí časového multiplexu.
+
 \clearpage
 \section{Vývoj pasivních optických sítí a jejich rozdíly z pohledu fyzické a přenosové vrstvy.}
 
