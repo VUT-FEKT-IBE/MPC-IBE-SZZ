@@ -38,18 +38,17 @@ Mezi algoritmy řešení patří brute-force, Pollardůvo $\rho$ algoritmus, Pol
 
 \subsection{Služby}
 
+\uline{Zabezpečení důvěrnosti dat} (\emph{data confidentiality}) je ochrana obsahu proti analýze.
+Může jít o~zajištění důvěrnosti přenosu zpráv, spojení, toku dat nebo služby selektivní důvěrnosti (které chrání pouze část informace).
+\uline{Zabezpečení integrity dat} (\emph{data integrity}) je ochrana proti neautorizované modifikaci.
+Slabá integrita: modifikace zprávy šumem, změna pořadí paketů, náhodná duplicita (kontrolní součet, CRC, pořadové číslo).
+Silná integrita: podvržení zprávy, úmyslné pozměnění zprávy; bez~oprav a s~opravami.
+
 \uline{Autentizace} (\emph{authentication}) je proces ověření identity entity.
 \emph{Peer Entity Authentication} ověřuje uživatele,
 \emph{Data Origin Authentication} ověřuje všechna data a eliminuje např. útoky opakováním.
 
 \uline{Řízení přístupu} (\emph{access control}) je možnost povolit či odepřít použití určitého zdroje určitému subjektu.
-
-\uline{Zabezpečení důvěrnosti dat} (\emph{data confidentiality}) je ochrana obsahu proti analýze.
-Může jít o~zajištění důvěrnosti přenosu zpráv, spojení, toku dat nebo služby selektivní důvěrnosti (které chrání pouze část informace).
-
-\uline{Zabezpečení integrity dat} (\emph{data integrity}) je ochrana proti neautorizované modifikaci.
-Slabá integrita: modifikace zprávy šumem, změna pořadí paketů, náhodná duplicita (kontrolní součet, CRC, pořadové číslo).
-Silná integrita: podvržení zprávy, úmyslné pozměnění zprávy; bez~oprav a s~opravami.
 
 \uline{Ochrana proti odmítnutí původu zprávy} (\emph{non-repudiation}) zajišťuje důkaz o~původu dat a dokazuje původ nebo doručení.
 
@@ -148,7 +147,7 @@ Mezi jejich výhody patří velká rychlost, lehká realizovatelnost a dobrá na
 \subsubsection{Kryptograficky bezpečné generátory}
 
 Kryptograficky bezpečné generátory vyžadují pro~generování výstupu skutečně náhodné vstupy (\emph{seed}), na~kterých závisí kvalita výstupu.
-V~moderních operačních systémech (Linux) jde např. o~sběr událostí z~pohybu myši a~klávesnice, prodlevy pevných disků a některých přerušeních.
+V~moderních operačních systémech (Linux) jde např. o~sběr událostí z~pohybu myši a~klávesnice, prodlevy pevných disků a některých přerušení.
 
 
 \subsubsection{Generátory skutečně náhodných čísel}
@@ -242,18 +241,18 @@ Bezpečnost a rychlost je dána parametry $r$ (\emph{rate}) a $c$ (\emph{capacit
 Eliptická křivka je množina bodů, která vyhovuje rovnici eliptické funkce.
 
 \subsection{Principy:}
-Eliptická křivka (EC) nad množinou reálných čísel je definována jako množina bodů (x,y) vyhovujících rovnici 3. řádu ve tvaru:
+Eliptická křivka (EC) nad množinou reálných čísel je definována jako množina bodů $(x,y)$ vyhovujících rovnici 3.~řádu ve~Weierstrassově tvaru:
 
-\begin{center}
-    $y^2=x^3+ax+b$
-\end{center} 
+$$y^2=x^3+ax+b$$
 
-kde x, y, a, b jsou reálná čísla.
+kde $x, y, a, b$ jsou reálná čísla.
 
-EC je symetrická podle osy x(mimo bod v nekonečnu O).
+EC je symetrická podle osy $x$ (mimo bod v nekonečnu O).
 
-Pro „různá tělesa“ může být rovnice EC transformována do jiných
-tvarů.
+Pro~\enquote{různá tělesa} může být rovnice EC transformována do~jiných tvarů.
+
+% TODO Ukázka křivky
+% TODO Ukázka sčítání
 
 EC lze použít pro DLP
 \subsection{Důvody použití:}
@@ -285,11 +284,11 @@ Požadavky:
 \end{itemize}
 
 \subsection{Princip}
-2 klíče - soukromí a veřejný
+2 klíče - soukromý a veřejný
 
-Veřejný klíč zveřejnit, soukromí klíč držet v tajnosti
+Veřejný klíč zveřejnit, soukromý klíč držet v tajnosti
 
-Soukromí klíč slouží k podpisu, veřejný k ověření.
+Soukromý klíč slouží k podpisu, veřejný k ověření.
 
 \subsection{Standardy}
 \begin{itemize}
@@ -301,28 +300,28 @@ Soukromí klíč slouží k podpisu, veřejný k ověření.
 \end{itemize}
 
 \subsection{Metody pro distribuci veřejných klíčů (PKI)}
-\begin{itemize}
-    \item 1. zveřejnění veřejných klíčů (public announcement)
-\begin{itemize}
+\begin{enumerate}
+    \item zveřejnění veřejných klíčů (public announcement)
+    \begin{itemize}
     \item individuální zveřejnění např. na internetu
     \item nízký stupeň bezpečnosti
-\end{itemize}
-\item 2. veřejně dostupné adresáře (publicly available directory)
-\begin{itemize}
+    \end{itemize}
+\item veřejně dostupné adresáře (publicly available directory)
+    \begin{itemize}
     \item veřejně dostupný adresář, spravuje důvěryhodná instituce
     \item každý účastník registruje svůj veřejný klíč pomocí správce adresáře
-\end{itemize}
-\item 3. autorita pro veřejné klíče (public-key authority)
-\begin{itemize}
+    \end{itemize}
+\item autorita pro veřejné klíče (public-key authority)
+    \begin{itemize}
     \item obdobné jako předchozí, ale autorita při distribuci veřejného klíče uživatele jej podepíše vlastním soukromým klíčem
     \item oproti předchozím vyšší stupeň bezpečnosti
     \item nevýhodou je, že každý účastník musí nejdříve komunikovat s autoritou
-\end{itemize}
-\item 4. certifikace veřejných klíčů (public-key certificates)
-\begin{itemize}
+    \end{itemize}
+\item certifikace veřejných klíčů (public-key certificates)
+    \begin{itemize}
     \item umožňuje vzájemnou komunikaci bez kontaktu s třetí stranou.
-\end{itemize}
-\end{itemize}
+    \end{itemize}
+\end{enumerate}
 
 PKI
 \begin{itemize}
@@ -337,7 +336,7 @@ PKI
 \clearpage
 \section{Kvantová distribuce klíčů, důvody použití, příklady protokolů.}
 
-QKD (\emph{Quantum Key Distribution}) používá pro~komunikaci kvantové jevy, např. spin fotonu.
+QKD (\emph{Quantum Key Distribution}) používá pro~komunikaci kvantové jevy, např. polarizaci fotonu.
 
 Z~důvodu Heisenbergova principu neurčitosti není možné vytvořit kopii neznámého kvantového stavu: čtení zprávy ovlivňuje její obsah.
 
@@ -356,6 +355,8 @@ Stálý odposlech tedy způsobí přibližně 25\% chybovost.
 
 
 \subsection{QKD protokoly}
+
+Probíhají na~optickém kanálu se~současným využitím klasického.
 
 \begin{table}[ht]
 \subsubsection*{BB84}
@@ -389,8 +390,8 @@ Jde o~dvě navzájem kolmé lineární polarizace ve~dvou bázích vůči sobě 
 Alice & \verb@0100101111010100010001110@ & výběr zprávy \\
       & \verb@-/--/-////-/-/---/---///-@ & polarizace náhodnou bází \\
 Bob   & \verb@xx+++x+x++xx+xx+xx++xx++x@ & náhodné zvolení bází \\
-      & \verb@\/--|/|/ -\/- /-\/--//-|/@ & polarizace přijatých bází \\
-      & \verb@0???1?1? ?0?? ??0??????1?@ & \dots přijatý výsledek \\
+      & \verb@\/--|/|/ -\/- /-\/--//-|/@ & přijatý výsledek \\
+      & \verb@0???1?1? ?0?? ??0??????1?@ & dekódovaný výsledek \\
 \hline
 Bob   & \verb@.   . .   .     .      . @ & poslání pozic dekódovaných quibitů \\
       & \verb@    1           0        @ & obětování bitů odesláním \\
@@ -406,13 +407,13 @@ Alice si vybírá jednu polarizaci v~každé bázi; jedna báze reprezentuje~0, 
 
 \subsubsection*{Šestistavový protokol}
 
-Vychází z~BB84, ale používá polarizaci v~šesti směrech (\enquote{plus}, \enquote{kříž}, rotatce).
+Vychází z~BB84, ale používá polarizaci v~šesti směrech (\enquote{plus}, \enquote{kříž}, rotace).
 
-Všechny obětují část dohodnutého klíče a veřejným kanálem se informují o~přijatých hodnotách.
+Všichni obětují část dohodnutého klíče a veřejným kanálem se informují o~přijatých hodnotách.
 Tuto komunikaci je nutné autentizovat.
 Při~obětování $n$ bitů je pravděpodobnost detekce soustavného odposlechu $1 - \left(\frac{1}{4}\right)^n$.
 
-\subsubsection*{EPR}
+\subsubsection*{EPR (Einstein--Podolski--Rosen)}
 
 Využívá kvantově provázaný pár fotonů.
 
@@ -488,7 +489,7 @@ Pro~podepsání jednobitové zprávy $0$ je zveřejněn S0; pro~ověření je z~
 Toto schéma je možné rozšířit na $n$-bitové zprávy.
 Privátní klíče S0, S1 budou řetězce S0-1, S1-1, S0-2, S1-2, \dots, S0-$n$, S1-$n$;
 k~nim odpovídající veřejné klíče jsou H0-1, H1-1, \dots, H0-$n$, H1-$n$.
-Každý bit zprávy je podepsán oddelěně, tzn. veřejný i~soukromý klíč mají velikost $2n^2$ bitů.
+Každý bit zprávy je podepsán odděleně, tzn. veřejný i~soukromý klíč mají velikost $2n^2$ bitů.
 Příkladem podpisu zprávy $m = 001\dots{}n$ je sekvence S0-1, S0-2, S1-3, S0-3, \dots, S1-$n$.
 
 Paměťovou náročnost lze zmírnit použitím Merkleho stromu.
@@ -547,6 +548,7 @@ Zajišťuje důkaz o~existenci dokumentu a~validitu podepisujícího certifikát
 
 Razítko je nutné pro~poskytování elektronických notářských služeb a zajištění dlouhodobé archivace elektronicky podepsaných dokumentů.
 Je vydáváno autoritou pro~vydávání časových razítek (TSA, \emph{Time Stamping Authority}).
+Je nutné dokumenty pravidelně přerazítkovat, pokud má být zachována jejich platnost.
 
 Obsahem razítka je jméno vydavatele (autority), sériové číslo razítka, kontrolní součet dokumentu a čas.
 
@@ -594,7 +596,7 @@ Zabývá se protokoly na~abstraktní úrovni: neřeší implementaci protokolu a
 
 \begin{tabularx}{\textwidth}{lX}
 $P$ věří $X$ & $P$ věří výroku $X$, může jednat jako by $X$ bylo pravdivé. \\
-$P$ vidí $X$ & $P$ přijal zprávu obsahující výrok $X$, jenž může přečíst a~zaopakovat. \\
+$P$ vidí $X$ & $P$ přijal zprávu obsahující výrok $X$, jenž může přečíst a~zopakovat. \\
 $P$ vyslovil $X$ & $P$ někdy zaslal zprávu obsahující výrok $X$. \\
 $P$ jurisdikce $X$ & $P$ je autorita k~$X$ a~měl by být důvěryhodný. \\
 & \emph{Např. servery generující klíče pro~další entity.} \\
