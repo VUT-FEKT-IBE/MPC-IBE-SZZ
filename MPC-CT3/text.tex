@@ -36,6 +36,8 @@ Externí útoky: modifikace dat (\emph{tampering}), rušení (\emph{jamming}), o
 
 Interní útoky: poškození kabelů nebo zařízení, neoprávněné připojení k~portu (\emph{tap}, \emph{splitter}) a odposlech či modifikace dat.
 
+% TODO Spectre, Meltdown (?)
+
 
 \subsection{Bezpečnostní opatření na~L2}
 
@@ -51,7 +53,7 @@ Ethernet packet obsahuje pouze CRC32, nelze ho považovat za~bezpečnostní prve
 802.1x: kontrola přístupu zařízení do~sítě na~portech nebo na~bezdrátových přístupových bodech.
 Doporučuje se EAP a integrace s~AAA (Radius, Diameter).
 
-802.11: WEP i WPA obsahují mnoho chyb, WPA2 (802.11i): KRACK (2017), WPA3: zranitelnost v~Dragonfly handshake.
+802.11: WEP i WPA obsahují mnoho chyb, WPA2 (802.11i): KRACK (2017), WPA3 (2019): zranitelnost v~Dragonfly handshake.
 
 Konkrétní opatření:
 \vspace*{-0.5em}\begin{itemize}
@@ -68,6 +70,7 @@ Konkrétní opatření:
 
 DoS (vyčerpání MAC adres, kolize), odposlech, modifikace dat.
 
+% TODO VLAN útoky? jak si to představit, co to znamená?
 Existuje množství útoků: spoofing MAC adres, \emph{ARP cache poisoning}, \emph{ARP cache flooding}, WEP/WPA zranitelnosti, VLAN útoky.
 
 % TODO Příklady útoků
@@ -103,8 +106,8 @@ Zabezpečení.
 Key management (PKI), autentizace (AAA řešení, Radius, Tacacs, Kerberos), ACL, firewally.
 
 Důvěrnost a integrita.
-Bezpečnost je založena na~vyšších vrstvách (TLS, DTLS, QUIC).
 IPSec.
+Bezpečnost je založena na~vyšších vrstvách (TLS, DTLS, QUIC).
 
 Ochrana funkčnosti sítě.
 Směrovací protokoly nemívají možnost vzájemné autentizace (OSPFv2, RIPv2, EIGRP, BGP: zcela bez autentizace, případně MD5 PSK).
@@ -391,6 +394,8 @@ V~síti existují nejen plošné, ale i~vertikální buňky (drony, letový prov
 
 Bezpečnost založena na~ozkoušených protokolech z~4G, oboustranná autentizace, kontrola integrity i autentičnosti, mitigace a prevence známých útoků.
 Byly odděleny a segmentovány části (snížení mitigace útoků).
+% TODO Používá Snow-V
+% https://www.ericsson.com/en/blog/2020/6/encryption-in-virtualized-5g-environments
 
 
 \subsection{Bezpečnost a slabiny optických sítí}
@@ -639,6 +644,8 @@ Penetrační testy odhalují zranitelnosti i~hrozby, jakými by mohla být aktiv
 
 Stupnice závažností zranitelností: informační, nízká, střední, vysoká, kritická.
 
+Black box -- grey box -- white box.
+
 
 \subsection{Testování metodou Ad-hoc}
 
@@ -715,6 +722,7 @@ IEC (\emph{International Electrotechnical Comission}) a~národní organizace (NI
 
 Norma ISMS (\emph{Information Security Management Systems}) je součást rodiny ISO/IEC 27k.
 Definuje požadavky na~systém managementu bezpečnosti informací, především řízení bezpečnosti důvěry informací pro~zaměstnance, procesy, IT systémy a firemní strategie.
+Je kompatibilní s~dalšími normami a certifikacemi (např. GDPR, \dots).
 
 Norma rozlišuje pět skupin informačních aktiv: informace, hardware, software, prostory, lidé.
 
@@ -737,7 +745,7 @@ PCI DSS specifikuje dvanáct požadavků pro~splnění, které jsou organizován
 \item Udržovat bezpečnostní politiku informačních systémů.
 \end{enumerate}
 
-Požavky na PCI DSS jsou:
+Požadavky na PCI DSS jsou:
 \vspace*{-0.5em}\begin{enumerate}
 \item Instalace a údržba konfigurace firewallu pro ochranu dat uživatelů karet (tj. uživatelská data).
 \item Nepoužívat defaultní hesla a jiné parametry nastavené prodejcem/dodavatelem komponent.
