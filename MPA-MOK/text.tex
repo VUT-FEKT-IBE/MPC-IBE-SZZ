@@ -64,6 +64,7 @@ Existují deterministické ($n^{O(n)}$) či randomizované ($2^{O(n)}$); rychlej
 % Kannan, Ravi (1983): Improved Algorithms for Integer Programming and Related Lattice Problems; https://doi.org/10.1145/800061.808749
 % Ajtai, Miklós; Kumar, Ravi; Sivakumar, D. (2001): A sieve algorithm for the shortest lattice vector problem; https://doi.org/10.1145/380752.380857
 
+% TODO Toto je potřeba vysvětlit lépe
 \emph{Worst-case} SVP je možné redukovat na~\emph{average-case}.
 % Ajtai, Miklós (1998): The shortest vector problem in L2 is NP-hard for randomized reductions. https://doi.org/10.1145/276698.276705
 Nejde o~problém dostatečně složitý pro~praktickou kryptografii.
@@ -84,14 +85,12 @@ Pokud je $\base$ ortogonální báze v~$\lat$, approx-CVP může být vyřešen 
 Algoritmus funguje i při~dostatečně ortogonálních bázích.
 
 \begin{itemize}
-\item $\mathcal{E}$: $t = t_1 b_1 + t_2 b_2 + \cdots + t_n b_n$ kde $t_1, t_2, \dots, t_n \in \mathbb{R}$.
-\item $\mathcal{D}$: $v = a_1 b_1 + a_2 b_2 + \cdots + a_n b_n$ kde $a_i = \lceil t_i \rfloor$ pro $i = 1, 2, \dots, n$.
+\item $\mathcal{E}$: $c = c_1 b_1 + c_2 b_2 + \cdots + c_n b_n$ kde $c_1, c_2, \dots, c_n \in \mathbb{R}$.
+\item $\mathcal{D}$: $m = a_1 b_1 + a_2 b_2 + \cdots + a_n b_n$ kde $a_i = \lceil c_i \rfloor$ pro $i = 1, 2, \dots, n$.
 \end{itemize}
 
-% FIXME Vysvětlení?
-
 \begin{figure}[ht]
-    \emph{Příklad}: Pro $t = (-1.1, 6.2)$ získejte $v$.
+    \emph{Příklad}: Pro $c = (-1.1, 6.2)$ získejte $m$.
 
     \begin{minipage}{0.5\textwidth}
         \centering
@@ -99,18 +98,18 @@ Algoritmus funguje i při~dostatečně ortogonálních bázích.
 
         $b_1 = (5, 0)$, $b_2 = (1, 2)$
 
-        $t_1\left(\begin{matrix}5\\0\end{matrix}\right) + t_2 \left(\begin{matrix}1\\2\end{matrix}\right) = \left(\begin{matrix}-1.1\\6.2\end{matrix}\right)$
+        $c_1\left(\begin{matrix}5\\0\end{matrix}\right) + c_2 \left(\begin{matrix}1\\2\end{matrix}\right) = \left(\begin{matrix}-1.1\\6.2\end{matrix}\right)$
 
-        $v = -b_1 + 3b_2 = (-2, 6)$
+        $m = -b_1 + 3b_2 = (-2, 6)$
     \end{minipage}\hfill\begin{minipage}{0.5\textwidth}
         \centering
         \caption*{\emph{špatná báze:}}
 
         $b_1 = (9, 8)$, $b_2 = (8, 6)$
 
-        $t_1\left(\begin{matrix}9\\8\end{matrix}\right) + t_2 \left(\begin{matrix}8\\6\end{matrix}\right) = \left(\begin{matrix}-1.1\\6.2\end{matrix}\right)$
+        $c_1\left(\begin{matrix}9\\8\end{matrix}\right) + c_2 \left(\begin{matrix}8\\6\end{matrix}\right) = \left(\begin{matrix}-1.1\\6.2\end{matrix}\right)$
 
-        $v = 6b_1 - 7b_2 = (6, 12)$
+        $m = 6b_1 - 7b_2 = (6, 12)$
     \end{minipage}
 \end{figure}
 
@@ -238,10 +237,10 @@ Dešifrováno bude $\begin{cases}
     \multicolumn{2}{c}{Šifrování} \\
     & výběr zprávy $b = 1$ \\
     & výběr některých řádků $S$ z~vektoru $p$ \\
-    & $\mathcal{E}_{\textbf{A},p}(b) = (a', p') = \left( \sum_S a_i, \sum_S p_i + b \lfloor \frac{q}{2} \rfloor \right)$ \\
+    & $\mathcal{E}_{\textbf{A},p}(b) = (\textbf{A}', p') = \left( \sum_S \textbf{A}_i, \sum_S p_i + b \lfloor \frac{q}{2} \rfloor \right)$ \\
 
     \multicolumn{2}{c}{Dešifrování} \\
-    $e' = p' - a' s^T = 12 - 2 = 10$ \\
+    $e' = p' - \textbf{A}' s^T = 12 - 2 = 10$ \\
     $\mathcal{D}_{s}(a',p') = \begin{cases}
     0 & e' \sim 0 \\
     1 & e' \sim \frac{17}{2} \\
@@ -272,7 +271,8 @@ $$
 -3x^3 + x^2 -x
 \end{matrix}\right|
 \cdot
-x^3 -x +1
+(x^3 -x +1)
++ e
 \equiv
 \left|\begin{matrix}
 -3x^3 +2x^2 -4x +3 \\
@@ -290,7 +290,7 @@ $$
 Modul je generalizace tělesa, ve~kterém je těleso\footnotemark{} nahrazeno okruhem\footnotemark{}.
 \footnotetext{Těleso je okruh který obsahuje inverzní prvky vzhledem k~násobení.}
 \footnotetext{Okruh je uzavřený, asociativní, komutativní, distributivní, obsahuje nulový a inverzní prvky vzhledem ke~sčítání.}
-M-LWE je jednodušší struktura než R-LWE a je rychlejší než LWE.
+M-LWE je jednodušší struktura než R-LWE (ze~které vychází) a je rychlejší než LWE.
 
 Pro~M-LWE platí, že je obtížné získat tajný vektor $s$ při~znalosti matice \textbf{A} a~vektoru $b$, kde
 $$
@@ -318,9 +318,7 @@ Chyba je vytvořena přičtením čísel, násobením nebo zaokrouhlováním.
 \emph{Learning with Rounding} je varianta LWE, kde je náhodná chyba nahrazena deterministickým zaokrouhlováním.
 Jde o~problém postavený na~Regev a je stejně těžký jako LWE.
 
-% TODO Vysvětlit co se zde děje, je to šifrování?
-% TODO V čem je důležité to že je to polynomiální modulus?
-Nechť $q$ je polynomiální modulus a $p < q$.
+Nechť $q$ je polynomiální modulus (mocnina dvou) a $p < q$.
 Poté $b = \left\lfloor \frac{p}{q} \textbf{A}s \right\rceil$.
 
 Pro~$p < q$ rozdělíme prvky $\mathbb{Z}_q$ do~$p$ sousedících intervalů (každých velkých zhruba $\frac{q}{p}$), a definujeme funkci zaokrouhlení $\lfloor \cdot \rceil_p$: $\mathbb{Z}_q \rightarrow \mathbb{Z}_p$ která mapuje $x \in \mathbb{Z}_q$ na~index intervalu do~kterého $x$ patří.
@@ -501,7 +499,7 @@ Při~provádění operací roste šum. Šumem je malé číslo $r$ díky kterém
 \\AND: $c_1 c_2 = p(c_2 q_1 + c_1 q_2 - q_1 q_2) + 2(r_1 r_2 + r_1 m_2 + r_2 m_1) + m_1 m_2$
 
 
-\emph{Bootstrapping} je operace kterou se dá z~šifrového textu s~velkým chybovým vektorem získat nový šifrový text s~malou chybou.
+\emph{Bootstrapping} je operace kterou se dá z~šifrového textu s~velkým chybovým vektorem \emph{(\enquote{exhausted ciphertext})} získat nový šifrový text s~malou chybou \emph{(\enquote{refreshed ciphertext})}.
 Této operaci se také říká \emph{squashing the~decryption circuit}.
 
 Provádí se opětovným zašifrováním: $c_\text{new} = E(c, E(s_k))$.
@@ -736,6 +734,8 @@ Pro~bezpečnostní podmínky platí způsobilost (\emph{eligibility}; pouze způ
 Hlas účastníka $V_i$ pro~volbu Ne je $m_i = 0$ a pro~volbu Ano $m_i = 1$.
 $\mathcal{E}$ a $\mathcal{D}$ reprezentují šifrování a dešifrování v~DJN schématu (viz stranu~\pageref{fig:paillier-djn}).
 
+% TODO Popsat vlastnosti a jejich vysvětlení: correctness, fairness, transparency, privacy, verifiability, vote cohersion resistance, vote-selling resistance
+
 \begin{enumerate}
 \item Autorita $\mathcal{A}$ zvolí $n = pq$ a $d: d \mod n \in \mathbb{Z}_n^* \ \wedge \ d \equiv 0 \mod \lambda(n)$.
 \item Každý volič $V_i$ hlasuje hlasem $m_i$:
@@ -815,7 +815,7 @@ Je možné ho odvodit např. z~ElGamal schématu:
 
 
 \clearpage
-\section{Data privacy 1: statistical disclosure control methods, disclosure risk, information loss, microdata, privacy categories (identifiers, quasi-identifiers, sensitive data), non-perturbative methods (sampling, global recording, suppression)}
+\section{Data privacy 1: statistical disclosure control methods, disclosure risk, information loss, microdata, privacy categories (identifiers, quasi-identifiers, sensitive data), non-perturbative methods (sampling, global recoding, suppression)}
 
 Tradiční způsoby ochrany informací zajišťují omezený přístup k~soukromým datům.
 Zveřeňování dat zachovávající soukromí ho chrání a zároveň umožňuje publikovat použitelné informace.
@@ -847,7 +847,7 @@ Metody zveřejňování zajišťují statistickou pravdivost při~zachování so
 Např. \emph{$k$-anonymity}, \emph{differential privacy}.
 
 \emph{Utility-first} metodami zajišťujeme že zveřejněná data mohou být použita pro~další výzkum, rizika jsou zvažována na~druhém místě.
-Neporuchové \emph{(non-perturbative)} metody vybírají data k~publikování, poruchové \emph{(perturbative)} metody data přes publikací upravují.
+Nerušivé \emph{(non-perturbative)} metody vybírají data k~publikování, rušivé \emph{(perturbative)} metody data přes publikací upravují.
 Syntetická data jsou generována tak aby statisticky odpovídala nasbíraným datům a jsou zveřejněna namísto dat opravdových.
 
 
@@ -858,7 +858,7 @@ Maskovaná mikrodata mají identifikující data odebrána.
 Externí informace je jakákoliv informace, známá externí entitě, která je spojena s~některými jedinci v~mikrodatech.
 
 
-\subsection{Neporuchové maskování dat}
+\subsection{Nerušivé maskování dat}
 
 \emph{Non-perturbative} maskování neprovádí změny původních dat.
 Pouze je lokálně utlumují nebo redukují jejich detaily.
@@ -878,7 +878,7 @@ Záznamy jsou vybírány náhodně, buď se stejnou nebo s~jinou pravděpodobnos
 
 \subsubsection*{Generalizace}
 
-\emph{Global recording}.
+\emph{Global recoding}.
 Konkrétní data jsou kombinována do~obecnějších.
 
 Čísla: zaokrouhlování.
@@ -903,7 +903,7 @@ Pokud by došlo k~moc velké ztrátě výpovědní hodnoty, mohou být potlačen
 \section{Data privacy 2: syntethic data, perturbative masking (noise addition, microaggregation, rank swapping), k-anonymity, record linkage}
 
 
-\subsection{Poruchové maskování dat}
+\subsection{Rušivé maskování dat}
 
 \emph{Perturbative masking} je většinou realizováno maticovým maskováním.
 Pro~matici mikrodat $\mathbf{X}$ můžeme vytvořit maskovaná data $\textbf{Z} = \textbf{A} \times \textbf{X} \times \mathbf{B} + \textbf{C}$, kde \textbf{A} je matice transformací záznamů, \textbf{B} matice transformací hodnot a \textbf{C} matice šumu/posunu.
@@ -924,7 +924,7 @@ Prvky atributu $X_j$ jsou rozděleny do~konečného počtu skupin.
 Ve~skupině se vyskytnou prvky které jsou si vzájemně velmi podobné, a hodnota prvků každé skupiny je nahrazena centroidem (průměrem).
 
 
-\subsubsection*{Výměna pozic}
+\subsubsection*{Výměna pořadí}
 
 
 Prvky atributu $X_j$ jsou seřazeny a jsou prohozeny s~jinými prvky (do~určité vzdálenosti).
