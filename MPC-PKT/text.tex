@@ -237,7 +237,7 @@ Dále umožňuje SCTP možnost specifikace délky života zprávy (Message Time-
 Pokud se nepodaří zprávu doručit v tomto časovém okně, odesílatel ji může zahodit.
 
 \subsubsection{Multihoming a multistreaming}
-Multihoming umožňuje přiřadit koncovému bodu při navazování spojení přiřadit více IP adres.
+Multihoming umožňuje přiřadit koncovému bodu při navazování spojení více IP adres.
 Jedna adresa je primární a druhá pak záložní.
 
 Multistreaming umožňuje jedním transportním spojením přenášet více toků dat, které na sobě nemají být zcela závislé.
@@ -295,6 +295,7 @@ Nakonec velikost datové části paketu je menší jak u TCP, jelikož využív�
     \includegraphics[width=0.55\textwidth]{obrazky/036.png}
 \end{figure}
 
+% TODO Popsat tabulku, nebo alespoň uvést co jsou ty hvězdičky
 \subsection{Srovnání protokolů transportní vrstvy}
 \begin{figure}[!ht]
 \begin{center}
@@ -329,12 +330,12 @@ Klient se zeptá lokálního DNS serveru na~IP pro tuto doménu.
 Jelikož ten to často neví tak se zeptá kořenových DNS serverů.
 Jelikož často kořenový neví, ale ví adresu dalšího DNS serveru pro doménu nejvyššího řádu, tak mu odešle IP na~ten server.
 Tak se postupuje stejným způsobem dokud se nenajde server, který danou IP adresu zná.
-Tuto IP adresu poté lokální DNS server zašle klientovy\footnote{\url{https://cs.wikipedia.org/wiki/Domain_Name_System\#/media/Soubor:Dns-wikipedia.png}}.
+Tuto IP adresu poté lokální DNS server zašle klientovi\footnote{\url{https://cs.wikipedia.org/wiki/Domain_Name_System\#/media/Soubor:Dns-wikipedia.png}}.
 
 \subsection{Úloha resolveru}
 
 Primární úlohou je překlad doménového jména na IP adresu.
-V rámci OS existuje tzv. stub resolver, který zprostředkovává stanicím dotazy na rekurzivní DNS servery.
+V rámci OS existuje tzv. stub resolver, který zprostředkovává dotazy na rekurzivní DNS servery.
 Než odešle požadavek tak prověří zda překlad není definován staticky nebo není uložen v mezipaměti.
 Dotazování na DNS server je často vícenásobné i při jediném překladu.
 
@@ -399,7 +400,7 @@ Využívá port 5355 a využívá jinou cache v rámci OS.
 Tvoří doplněk k DNS, jelikož pracuje pouze na lokální lince.
 
 LLMNR dotazy jsou posílány a přijímány na portu 5355 a multicastová adresa uživatelů je 224.0.0.252 a FF02::1:3.
-Prlběh je že odesílatel vyšle dotaz na multicast adresu.
+Průběh je že odesílatel vyšle dotaz na multicast adresu.
 Odpovídač na tento dotaz odpoví pouze v případě, že jeho odpověď je autoritativní pro dané doménové jméno.
 Odpovídá unicast odpovědí.
 Odpověď je po přijetí zpracována a vyhodnocena.
@@ -415,7 +416,7 @@ Na stanicích lze nastavit pouze jednu výchozí bránu a tím pádem problém n
 Sama stanice nedokáže poznat, že výchozí brána vypadla a mělo by se přepnout na záložní.
 
 Od tohoto existují protokoly pro automatickou konfiguraci výchozí brány.
-Základní myšlenou je, že toto provádí sami směrovače, aniž by do toho byly zapojeny stanice.
+Základní myšlenou je, že toto provádí samy směrovače, aniž by do toho byly zapojeny stanice.
 Protokoly se dělí na dvě skupiny.
 První skupinou jsou protokoly které umožňují pouze zálohování dostupnosti výchozí brány (HSRP a VRRP).
 Druhou skupinou jsou protokoly, které umožňují nejen zálohování ale i rozkládání zátěže mezi dostupné výchozí brány (GLBP).
@@ -471,7 +472,7 @@ Většina těchto nevýhod je způsobena důsledkem využití UDP protokolu, jel
 
 Adresování pro IPv6 je popsáno v jedné z dalších otázek.
 
-Pro IPv4 má vyhrazen multicast celou třídu D (224.0.0.0 -.239.255.255.255).
+Pro IPv4 má vyhrazen multicast celou třídu D (224.0.0.0 -- 239.255.255.255).
 Dělí se na tři skupiny.
 \begin{itemize}[noitemsep]
     \item Určené pouze pro lokální sítě (224.0.0.0 -- 224.0.0.255)
@@ -529,7 +530,7 @@ Stanice si mužou vybírat od koho budou nebo nebudou provoz přijímat.
 \subsection{Směrování multicastu}
 
 Směrování je tvořené nejčastěji ve stromové struktuře pomocí distribučních stromů.
-Směrování se v nich provádí pomocí protokolů DVMRP (Distance Vector Multicast Routing Protocol), MOSPF (Multicast Open Shortest Path First), CBT(Core-Based Trees) nebo nejčastěji pomocí PIM (Protocol Independent Multicast).
+Směrování se v nich provádí pomocí protokolů DVMRP (Distance Vector Multicast Routing Protocol), MOSPF (Multicast Open Shortest Path First), CBT (Core-Based Trees) nebo nejčastěji pomocí PIM (Protocol Independent Multicast).
 Každý protokol k hledání co nejefektivnější stormu používá jiné metriky.
 Jedinou podmínkou je že ve stromu nesmí existovat smyčka.
 
@@ -538,7 +539,7 @@ Stromy se dělí na dva základní druhy:
 \begin{itemize}[noitemsep]
     \item Shortest Path Tree (SPT) -- Snaží se odeslat data nejkratší cestou dál přes další směrovač až k příjemcům.
     Musí existovat pro každý zdroj dat.
-    \item Shared Tree -- zde je kořen stromu umístěň uprostřed stromu.
+    \item Shared Tree -- zde je kořen stromu umístěn uprostřed stromu.
     Zdroje data posílají prvně na tento kořen, a ten je dále pak rozesílá pomocí jediného stromu.
     Tento způsob nemusí být vždy efektivní jelikož může existovat lepší cesta od zdroje k příjemci.
 \end{itemize}
@@ -562,7 +563,7 @@ PIM-SM nezaplavuje sítě pakety a proto se zejména nasazuje na rozsáhlých s�
 
 U PIM-DM se předpokládá že bude možné směrovat mnoho multicast přenosů a bude se v ní nacházet mnoho příjemců.
 Na začátku je síť zaplavena multicast přenosem a ve větvích kde se nenachází příjemce musí dojít k potlačení přenosu.
-Pokud se ve větvy nenachází žádný příjemce směrovač musí informovat souseda a přenos do této větve je zastaven.
+Pokud se ve větvi nenachází žádný příjemce směrovač musí informovat souseda a přenos do této větve je zastaven.
 Směrovač vždy při přijetí kontroluje zda provoz přišel po optimální trase, v případě že ne pakety jsou zahozeny.
 PIM-DM slouží primárně pro tvorbu stromů s nejkratší cestou.
 
@@ -575,6 +576,8 @@ PIM-DM slouží primárně pro tvorbu stromů s nejkratší cestou.
 IPv6 je nekompatibilní s~IPv4.
 Hlavním rozdílem je změna zápisu adres (\texttt{fe80:1a3d::0/64}) a~rozšíření velikosti adresního prostoru z~32 bitů na~128 bitů.
 Pro přechodné zajištění kompatibility se využívá technik jako souběh protokolů (SW a~HW podporuje oba dva druhy), tunelování (většinou zapouzdření IPv6 do IPv4 paketu) a~překlad adres (podobné nat jen s~rozdílem že se zaměňují přímo adresy obou verzí, nazývá se to NAT-PT [protocol translator]).
+
+% TODO menší směrovací tabulky, nepotřebuje NAT
 
 \subsection{Datagram}
 \begin{center}
@@ -672,7 +675,7 @@ Ke komunikaci využívá ICMPv6 typů 148 (žádost o certifikační cestu) a 14
 
 Základním principem bezstavové adresní konfigurace (SLAAC) je, že směrovač do sítě vysílá opakovaně potřebné informace pomocí ICMPv6 zprávy typy 134 (ohlášení směrovače/router advertisment).
 Stanice může o tyto informace požádat pomocí zprávy typu 133 (výzva směrovači).
-Stanice na základě přijatý informací stanoví vlastní IP adresu.
+Stanice na základě přijatých informací stanoví vlastní IP adresu.
 Informace umožní stanicím v síti vědět, kde se nacházejí, jak se mají chovat a kdo je implicitní směrovač.
 
 
@@ -711,18 +714,18 @@ DHCPv6 také podporuje přidělení celého IPv6 prefixu místo konkrétní IPv6
 \subsubsection{Bezstavové DHCPv6}
 
 Bezstavová DHCPv6 je zjednodušená verze DHCPv6.
-Zprávy mají stejný formát ale pužívají se pouze dva typy zpráv (žádost o informace a odpověď).
+Zprávy mají stejný formát ale užívají se pouze dva typy zpráv (žádost o informace a odpověď).
 Používá se hlavně pokud si stanice umí nakonfigurovat samy IPv6 adresu ale potřebují informace o DNS.
 
 \subsection{MLD Multicast Listener Discovery}
 
 MLD není samostatný protokol ale podmnožina ICMPv6.
 Pakety MLD mají počet skoků nastaven maximálně na 1.
-V případě že je odeílatel směrovač, jako IPv6 adresa odesílatele je využita lokální linková adresa daného rozhraní (local-link).
+V případě že je odesílatel směrovač, jako IPv6 adresa odesílatele je využita lokální linková adresa daného rozhraní (local-link).
 Adresátem je pak IPv6 adresa multicastové skupiny.
 MLD paket musí obsahovat rozšiřující IP záhlaví označované jako volby pro všechny (hop-by-hop option).
 
-Existují 3 ICMPv6 typy zpráv (130 -- dotaz na členstvý ve skupině, 131 -- ohlášení členství ve skupině, 132 -- ukončení člensví ve skupině).
+Existují 3 ICMPv6 typy zpráv (130 -- dotaz na členství ve skupině, 131 -- ohlášení členství ve skupině, 132 -- ukončení členství ve skupině).
 
 
 \subsubsection{MLDv1}
@@ -897,7 +900,7 @@ Páteřní síť je také AS.
 Tranzit se skládá ze dvou služeb.
 První je že poskytovatel oznamuje připojenému AS informace o routách k sítím svých zákazníků, čímž umožní příchozí provoz z celého internetu.
 Druhou službou je informování sítí zákazníků o routách do internetu (např. výchozí brána).
-Toto umožňuje zákazníkovy vytvářet odchozí provoz.
+Toto umožňuje zákazníkovi vytvářet odchozí provoz.
 
 Rozdíl s peeringem je, že přes peeringové spojení dvou ISP prochází pouze přenos mezi zákazníky těchto dvou sítí.
 Na rozdíl od tranzitu, kdy přes toto spojení může procházet i přenos směřující z/do jiného AS.
@@ -946,7 +949,7 @@ Existuje tolik uzlů kolik existuje stavů.
 Pro pár stavů Q existuje nula, jeden nebo více přechodů zapsaných pomocí orientovaných křivek.
 Nad křivkou je označeno jaký vstup X a jaký výstup Y je očekáván.
 
-\subsection{Mooreho automat}
+\subsubsection{Mooreho automat}
 
 U Moorova automatu platí že každý uzel je označen stavem Q a odpovídajícím výstupem Y.
 Nad spojovací křivkou je v tom případě označeno pouze X.
@@ -954,6 +957,12 @@ Výhodou Moorova automatu je snadná čitelnost popisu chování dané sítě.
 
 
 \subsection{Příklad viz skripta}
+
+% TODO Toto by šlo zjednodušit
+% - Y0 a Y1 a X0 a X1 místo Y2 a X2
+% vlevo: vstup/výstup a uvnitř stav
+% vpravo: vstup a uvnitř uzel a výstup
+% 1 na výstupu znamená dokončená detekce
 
 Mějme konečný automat, který realizuje triviální funkci detektoru binární (sériové)
 sekvence 011.
