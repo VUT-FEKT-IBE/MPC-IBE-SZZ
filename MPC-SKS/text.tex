@@ -171,8 +171,8 @@ Kódování 4B/3T nebo 2B/1Q.
 Napájení terminálů v~ISDN bylo možné realizovat:
 
 \begin{enumerate}
-    \item \textbf{Interní napáječ terminálu}.
-    \item \textbf{Síťový napáječ NT}: fantomní napájení skrz datový kabel.
+    \item \textbf{Interní napáječ terminálu}: napájení ze~zásuvky.
+    \item \textbf{Síťový napáječ NT}: fantomní napájení skrz datový kabel z~ústředny.
     \item \textbf{Napájení z~jiného terminálu}: připojení pomocí přídavného páru vodičů a jednotky NT která umožňuje přenos napájení mezi terminály.
     \item \textbf{Napájení z~ústředny přes NT a rozhraní~S0}: fantomní napájení z~ústředny přes rozhraní S0.
 \end{enumerate}
@@ -185,7 +185,7 @@ ATM je standard vytvořený pro~\enquote{vysokorychlostní} síťě 80. a~90.~le
 Má buňky o~konstantní velikosti (5+48~B) a podporuje QoS pro~přenos hlasu a videa.
 Přenášeny jsou samostatné pakety směrovány dle jejich identifikátoru ve~virtuálním okruhu (sestaveném pro~celý přenos).
 
-Mělo jít o~technologii nahrazující ISDN, ale místoho toho byl na~sítích nasazen rychlejší a~efektivnější Ethernet.
+Mělo jít o~technologii nahrazující ISDN, ale místoho toho byly na~sítích nasazen rychlejší a~efektivnější Ethernet, xDSL a optika.
 
 
 \subsection{Buňka v ATM}
@@ -265,9 +265,10 @@ terminály \emph{(terminals)} slouží jako koncové body přenosu dat.
 \subsection{xDSL -- Digital Subscriber Line}
 Digitální účastnické přípojky jsou technologie pro rychlé připojení konečných uživatelů k poskytovatelům služeb využívající existující infrastrukturu, jako je telefonní síť.
 
-Nejznámějšími typy xDSL (Digital Subscriber Line) jsou HDSL (High-bit-rate Digital Subscriber Line), ADSL(Asymmetric Digital Subscriber Line), VDSL (Very-high-bit-rate Digital Subscriber Line), atd. Každý typ xDSL má specifické frekvenční pásmo, přenosovou rychlost a dosah.
+Nejznámějšími typy xDSL (Digital Subscriber Line) jsou HDSL (High-bit-rate Digital Subscriber Line), ADSL (Asymmetric Digital Subscriber Line), VDSL (Very-high-bit-rate Digital Subscriber Line), atd. Každý typ xDSL má specifické frekvenční pásmo, přenosovou rychlost a dosah.
 
-Obecně platí, že čím horším je vedení od ústředny k uživateli (kvalita rozvodu a délka), tím menší je přenosová rychlost. Nejčastějším typem DSL je stále ještě ADSL, postupně je však nahrazováno sofistikovanějšími a rychlejšími technologiemi \textbf{Is it really??}.
+Obecně platí, že čím horším je vedení od ústředny k uživateli (kvalita rozvodu a délka), tím menší je přenosová rychlost. Nejčastějším typem DSL je stále ještě ADSL, postupně je však nahrazováno sofistikovanějšími a rychlejšími technologiemi
+% TODO Zkontrolovat, pravděpodobně je VDSL již mnohem častější
 
 Jsou rozlišovány dvě základní verze xDSL technologie:
 \begin{itemize}
@@ -276,12 +277,21 @@ Jsou rozlišovány dvě základní verze xDSL technologie:
 \end{itemize}
 
 \subsection{HDSL}
-HDSL je jednou z technologií xDSL, která se používá pro přenos dat vysokou rychlostí po telefonních linkách. HDSL je symetrická technologie, což znamená, že nabízí stejnou rychlost pro stahování i nahrávání. Byla představena na trhu v 90. letech jako součást digitálního vývoje telefonních připojení. HDSL je navrženo pro podnikové prostředí a umožňuje dosáhnout rychlostí až 1,544 Mbps nebo 2,048 Mbps na jedné telefonní lince.
+HDSL je jednou z technologií xDSL, která se používala pro přenos dat po telefonních linkách. HDSL je symetrická technologie, což znamená, že nabízí stejnou rychlost pro stahování i nahrávání. Byla představena na trhu v 90. letech jako součást digitálního vývoje telefonních připojení. HDSL je navrženo pro podnikové prostředí a umožňuje dosáhnout rychlostí až 1,544 Mbps nebo 2,048 Mbps na jedné telefonní lince.
 
 \subsection{ADSL}
 ADSL je asymetrická xDSL technologie, která umožňuje rychlé připojení k internetu a přenos dat po telefonních linkách. Byla představena na trhu v 90. letech jako způsob využití stávající telefonní infrastruktury pro poskytování širokopásmového připojení. ADSL je asymetrické, což znamená, že nabízí vyšší rychlost stahování dat než rychlost nahrávání. Typické rychlosti ADSL se pohybují od 8 Mbps do 24 Mbps pro stahování a od 1 Mbps do 3 Mbps pro nahrávání. Tato technologie je vhodná pro domácnosti a malé firmy, které potřebují přístup k internetu a online službám.
 
+% TODO VDSL
+
+% TODO Tabulka UL/DL rychlostí a přibližných frekvencí na lince
+% telefon ... 0-4 kHz, HDSL..., ADSL...
+
 \subsection{Spojení a referenční model}
+
+% TODO Nakreslit nový a lepší obrázek místo těchto dvou:
+% internet --(fiber)-- DSLAM --(telefonní linka)-- splitter (propust) do telefonu a modemu --(ethernet)-- router -- zařízení přes ethernet a wifi
+
 \begin{figure} [h]
     \centering
     \includegraphics[scale=0.85]{snimky/ADSL model.png}
@@ -446,8 +456,8 @@ Obsahuje sedm vrstev s~pevně stanovenými úkoly.
 \section{Pasivní optické sítě (topologie sítě a způsob komunikace sestupný/vzestupný směr).}
 Pasivní optické sítě (PON) se skládají z:
 \begin{itemize}
-    \item OLT -- je řídící jednotka, která řídí celou funkcionalitu PON pro obousměrnou komunikaci.
-    \item ONU -- optická síťová jednotka realizující převod z optického signálu na elektrický signál nebo naopak.
+    \item OLT \emph{(Optical Line Terminal)} -- je řídící jednotka, která řídí celou funkcionalitu PON pro obousměrnou komunikaci.
+    \item ONU \emph{(Optical Network Unit)} -- optická síťová jednotka realizující převod z optického signálu na elektrický signál nebo naopak.
     \item Splitter -- rozděluje optický signál na více signálů
 \end{itemize}
 \begin{figure} [h]
@@ -576,6 +586,8 @@ Parametry:
     \caption{Kompatibilita PON protokolů}
 \end{figure}
 
+% TODO Sloučit všechny tabulky do jedné, nemá smysl je rozdělovat na tři stránky
+
 \clearpage
 \section{Aktivační proces koncové jednotky v síti GPON.}
 V současné době je GPON jedním z nejslibnějších řešení pro přístupové sítě (z pohledu ceny). GPON byl první standard, který podporoval přenos/zapouzdření ATM buněk i Ethernet rámců.
@@ -587,6 +599,16 @@ Aktivační proces:
     \label{fig:gpon-proces}
 \end{figure}
 
+% TODO
+% 1/ nově připojená jednotka ONU nastaví vysílací úroveň na výchozí hodnotu
+% 2/ ONU čeká na rámec OLT dle kterého upraví vysílací úroveň
+% 3/ OLT se periodicky dotazuje sítě na sériová čísla
+% 4/ ONU se ve správném čase hlásí zpět
+% 5/ OLT přiřadí ONU její ONU-ID (pokud nebyla předem zadána obsluhou ručně) a vyzve k přechodu do "ranging"
+% 6/ při "ranging" OLT vyhodnotí celkové zpoždění
+% 7/ OLT výsledek zašle ONU, které upraví vysílací obvody
+
+% TODO Tento obrázek/tabulka je naprosto zbytečný
 Jednotka ONU komunikuje s OLT pomocí PLOAM zpráv, kdy typy zpráv a průběh komunikace je vidět níže.
 
 \begin{figure} [h]
@@ -607,13 +629,13 @@ Maximalizace hledá tok v~orientovaném grafu tak, aby se maximalizoval objem p�
 $\text{max}~v$.
 
 Minimalizace hledá tok v~váženém orientovaném grafu tak, aby se při~maximálním objemu minimalizovala cena:
-$\text{max}\ 4x_{12} + 8x_{13} + 2x_{23} + 6x_{24} + 7x_{34}$.
+$\text{max}\ 5x_{12} + 8x_{13} + 2x_{23} + 6x_{24} + 7x_{34}$.
 
 \begin{center}\begin{minipage}{0.3\textwidth}
         \begin{align}
-            x_{12} + x_{23}          & = v     \\
+            x_{12} + x_{13}          & = v     \\
             x_{12} - x_{23} - x_{24} & = 0     \\
-            x_{13} + x_{23} + x_{34} & = 0     \\
+            x_{13} + x_{23} - x_{34} & = 0     \\
             0 \leq x_{12}            & \leq 14 \\
             0 \leq x_{13}            & \leq 15 \\
             0 \leq x_{23}            & \leq 4  \\
@@ -622,6 +644,7 @@ $\text{max}\ 4x_{12} + 8x_{13} + 2x_{23} + 6x_{24} + 7x_{34}$.
         \end{align}
     \end{minipage}\end{center}
 
+% TODO Graf vpravo je špatně, je potřeba se podívat jak je to v prezentacích a opravit čísla tak aby tam byly alternativní cesty
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{snimky/ilp}.
@@ -678,8 +701,11 @@ spravovat. Proto jsou nezbytné techniky vícenásobného využití vlákna.
     \caption{TDM vs. WDM}
 \end{figure}
 
-\subsection{Problematika přiřazení vlnových délek (RWA)}
+\subsection{Problematika přiřazení vlnových délek (RWA, \emph{Routing and Wavelength Assessment})}
 Klasické datové sítě pracují s pakety, které jsou předávány mezi aktivními prvky. Výsledkem je přijetí paketu, kontrola cílové IP adresy a jeho následné odeslání přes zvolené rozhraní. Na druhou stranu optické sítě jsou data přenášená přes optické \enquote{crossconnect}, jenž každý přepíná optický signál, který je přenášen na různé vlnové délce do zvoleného směru.
+
+% TODO Používá se např. v páteřních sítích:
+% Na trase Plzeň--Praha--Brno--Ostrava chceme přidávat a odebírat jednotlivé proudy aniž by je bylo třeba převádět na jinou frekvenci tak aby se v jednom vláknu nikdy nesetkaly dvě stejné frekvence ze dvou různých zdrojů
 
 Pro aplikaci ILP modelu uvažujme následující scénář:
 \begin{itemize}
