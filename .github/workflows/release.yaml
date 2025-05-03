@@ -112,7 +112,7 @@ jobs:
 
     # stažení dříve nahráneho zip souboru v subjects jobu
     - name: Download artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
         name: ${{ matrix.dir }}
         path: ${{ matrix.dir }}
