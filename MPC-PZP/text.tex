@@ -1,0 +1,365 @@
+\section{Paralelismus – využití, paralelní technologie.}
+\begin{itemize}
+    \item Neplést \textit{parallelism} (využívá více jader, více úloh naráz) a~\textit{concurrency} (může se odehrávat i~na jediném jádře)
+    \item Všechny paralelní programy jsou konkurentní, ne všechny konkurentní programy jsou paralelní
+    \item Využití: není možné pokračovat s~trendem Moorova zákona\footnote{je to doopravdy jen pozorování, každých několik let se zdvojnásobil počet tranzistorů v~integrovaných čipech}, je nutné využít více jader pro zvýšení výkonnosti (zvýšení frekvence vyžaduje vyšší napájení, jak ale takový čip chladit?)
+    \item Ne v~každé situaci je paralelismus výhodný
+\end{itemize}
+
+\subsection{paralelní technologie}
+\begin{itemize}
+    \item CPU (vícejádrový / vícevláknový (hyperthreading))
+    \item GPU
+\end{itemize}
+
+\section{CPU – návrh paralelního programu, vlákna a procesy, synchronizace dat (Lock, RLock, Semaphore).}
+Je potřeba zjistit úzká hrdla programu. Výpočty na sobě nezávislé mohou být paralelizované.
+
+\subsection{Vlákna a~procesy}
+Procesy mají vlastní paměťový prostor (kontext). Vlákna tento kontext mezi sebou sdílí, jeden proces může mít více vláken.
+
+Procesy
+\begin{itemize}
+    \item Vytvoří se voláním \texttt{fork()}, \texttt{system()}, \texttt{popen()} nebo dalšími
+    \item Minimální sdílení dat mezi rodičovským a \textit{child} procesem, běží na sobě nezávisle
+\end{itemize}
+
+Vlákna
+\begin{itemize}
+    \item Je to součást procesu, v~něm sdílí prostředky
+    \item Jsou vhodné k~vykonání více operací nad sdílenými daty procesu
+    \item Vlákna mohou být plně konkurentní
+    \item Vhodná k~obsluze I/O (celý proces nemusí být blokován)
+    \item Vlákna sdílí globální proměnné, ale mohou mít i~lokální proměnné nepřístupné jiným vláknům
+    \item Je nutné je synchronizovat (mutual exclusion = mutex) pro zabránění souběhu
+    \item Python je \underline{\textbf{stoopid}}, má GIL (Global Interpreter Lock) a~z~jediného procesu dokáže nechat běžet jen jediné vlákno. Má low-level (\texttt{thread}) a~high-level knihovnu (\texttt{threading})
+    \item Stavy Python vláken:
+    \begin{itemize}
+        \item initial state
+        \item runnable
+        \item running
+        \item blocked
+        \item finished
+    \end{itemize}
+\end{itemize}
+
+\subsection{Lock}
+\begin{itemize}
+    \item Jedná se o~zámek kritické sekce. 
+    \item 2 stavy: zamčeno, odemčeno
+    \item Pokud se zámek snaží získat vlákno:
+    \begin{itemize}
+        \item Pokud je zámek odemčený, zamkne ho vlákno pro sebe
+        \item Pokud je zámek zamčený, vlákno je blokováno, dokud se zámek neuvolní
+    \end{itemize}
+\end{itemize}
+
+\subsection{RLock}
+\begin{itemize}
+    \item Podobný jako Lock, ale R znamená \uv{reentrant}, další volání stejného vlákna na získání zámku toto vlákno nezablokuje
+    \item Je potřeba zámek uvolnit stejně-krát jako byl získán
+    \item Vhodné pro rekurzivní funkce
+\end{itemize}
+
+\subsection{Semaphore}
+\begin{itemize}
+    \item Umožňuje určitý počet přístupů
+    \item Každé vlákno, které semafor získá, dekrementuje počítadlo
+    \item Pokud vlákno chce získat přístup k~semaforu, s~počítadlem na nule, je blokované, dokud některé předchozí vlákno semafor neuvolní
+    \item Vhodné pro limitování  počtu vláken, které mají přístup k~nějakému zdroji (třeba socket)
+\end{itemize}
+
+
+\section{GPU – vztahy mezi vlákny, bloky a mřížkou (grid), charakteristika Streaming Multiprocesoru.}
+\subsection{Vlákno}
+\begin{itemize}
+    \item Vlákno provádí jedny instrukce (kernel) nad jednou částí dat
+    \item Seskupení do Warpů: 32 jader má stejnou instrukci, ale různá data
+    \item Warpy jsou lock-step (dělají stejné kroky ve stejný čas)
+    \item SIMD (single instruction set, multiple data sets)
+    \item Žadný context switching, každé vlákno má své registry, jejich velikost limituje počet vláken
+    \item Má \texttt{threadIdx}, které může být 1D až 3D
+\end{itemize}
+
+\subsection{Bloky}
+\begin{itemize}
+    \item Skupina vláken, sdílí instrukce~a datas
+    \item Vykonáván na jediném SM
+    \item Má \texttt{blockIdx}, které může být 1D až 3D
+    \item Mohou se umisťovat do fronty bloků, ty se pak rozdělují na SM
+\end{itemize}
+
+\subsection{Mřížka}
+\begin{itemize}
+    \item Skupina bloků
+    \item Sdílet data mezi bloky lze jedině přes globální paměť (velká a~pomalá)
+\end{itemize}
+
+\subsection{Streaming Multiprocessor}
+Popis Nvidia GV100 (jedna z~možných architektur)
+\begin{itemize}
+    \item Jádra FP32 (64 ks), FP64 (32 ks), INT32\dots
+    \item Rozdělen na 4 procesní bloky, každý má čtvrtinu jader, registry, warp scheduler, L0 instruction cache\dots
+    \item Warp (32 vláken) se posílá na vybraná jádra SM
+    \item L1 cache (jedna na SM) rozdělena na instrukční a~datovou
+    \item Grafické karty mají desítky SM
+\end{itemize}
+
+\section{GPU – paměti – rychlost, velikost, použití (vlákno, blok, mřížka).}
+GPU má vlastní DRAM, je menší než DRAM v~PC, ale je do ní rychlejší přístup.
+
+\subsection{Registry}
+\begin{itemize}
+    \item Nejrychlejší
+    \item Nejmenší
+    \item Přímo v~SM
+    \item Přístup z~vlákna
+    \item Rychlý přístup
+    \item Stovky KB na SM (jsou jich tisíce, každý má 32 b)
+    \item Vlákno může mít proměnlivý počet registrů, maximum dané architekturou
+    \item Ukládá data přímo relevantní k~aktuální instrukci
+\end{itemize}
+
+\subsection{Lokální (L1) cache}
+\begin{itemize}
+    \item V~SM
+    \item Obsahuje:
+    \begin{itemize}
+        \item Paměť sdílenou v~bloku (keyword \texttt{\_\_shared\_\_})
+        \item Cache konstantní paměti
+        \item Cache dat pro čtení
+    \end{itemize}
+    \item Řádky o~velikosti 128 B (vejde se 32 čísel o délce 32 b)
+    \item Přístup z~bloku nebo z~vlákna
+    \item Asi 80 cyklů potřeba pro přístup k~paměti
+    \item Desítky kB (podle architektury)
+    \item Obsahuje taky data pouze pro čtení
+\end{itemize}
+
+\subsection{L2 Cache}
+\begin{itemize}
+    \item Lze sdílet i~mezi bloky (přístup z~celé mřížky)
+    \item 6 MB
+    \item Stovky cyklů potřebných k~přístupu, až 1000 GB/s bandwidth
+    \item \texttt{\_\_global\_\_} keyword
+\end{itemize}
+
+\subsection{DRAM}
+\begin{itemize}
+    \item Přístup z~celé mřížky
+    \item Obsahuje:
+    \begin{itemize}
+        \item Globální paměť
+        \item Konstantní paměť
+        \item Paměť jen pro čtení
+    \end{itemize}
+    \item Jednotky až desítky GB
+    \item Stovky cyklů potřebných k~přístupu, až 500 GB/s bandwidth
+    \item DDR5
+\end{itemize}
+
+\subsection{Rozdíl mezi konstantní a~pamětí jen pro čtení}
+\begin{itemize}
+    \item Konstantní paměť se nakopíruje do každé cache stejně
+    \item Paměť jen pro čtení může obsahovat velké množství dat, které se cachuje jen po částech (jen část vektoru relevantní pro blok)
+\end{itemize}
+
+\subsection{Použití cache}
+\begin{itemize}
+    \item Je potřeba navrhnout kernel tak, aby vyžadoval paměť co nejblíže (ideálně na jediném řádku cache)
+    \item Při nedodržení (třeba při načítání každého tisícátého prvku vektoru) se výkon zpomalí kvůli cache misses
+    \item Úplně ideální je, pokud jeden warp využívá data z~jediného řádku cache
+\end{itemize}
+
+\section{GPU – synchronizace, warp, divergence warpu, atomické operace.}
+\subsection{Synchronizace}
+\subsubsection{Synchronizace warpu a bloku}
+\begin{itemize}
+    \item Všechna vlákna warpu jsou synchronizovaná
+    \item V bloku lze vlákna synchronizovat funkcí CUDA \texttt{\_\_syncthreads();}, tato funkce tvoří bariéru blokující, dokud všechna vlákna bloku nedoběhnou do této bariéry
+    \item Může nastat deadlock, pokud tento statement není dosažen všemi vlákny kvůli větvení
+    \item Pořadí bloků garantované není
+    \item Další synchronizační funkce v bloku:
+    \begin{itemize}
+        \item \texttt{int \_\_syncthreads\_count(predicate)} -- kolik predikátů je pravdivých
+        \item \texttt{int \_\_syncthreads\_and(predicate} -- vrátí \texttt{true}, pokud jsou všechny predikáty pravdivé
+        \item \texttt{int \_\_syncthreads\_or(predicate)} -- vrátí \texttt{true}, pokud jsou aspoň některé predikáty pravdivé
+    \end{itemize}
+    \item taky existuje \texttt{\_\_threadfence\_block();} -- blokuje, dokud všechna vlákna v~bloku nevidí provedené zápisy v~globální a~sdílené paměti
+\end{itemize}
+
+\subsubsection{Synchronizace hostitele (PC) a zařízení (GPU)}
+V kódu hosta volání \texttt{context.synchronize()}, zajistí, že všechny asynchronní úlohy jsou dokončeny. Blokuje na straně hosta.
+
+\texttt{\_\_threadfence();} Blokuje vlákna v~bloku, dokud všechna z~nich nevidí změny ve sdílené paměti, nebo blokuje všechna vlákna, dokud nejsou změny v~globální paměti viditelné všem
+
+\subsection{Warp}
+\begin{itemize}
+    \item 32 threadů
+    \item Synchronizované \textit{lock-step} (stejná instrukce v~celém warpu)
+    \item Každý blok má 1 nebo více Warpů
+    \item Každý warp je plánovaný nezávisle na ostatních
+    \item Scheduler preferuje warpy, které mají input přichystaný ke zpracování
+    \item Protože warpy mají stejné instrukce, nastávají problémy při větvení
+    \item Musí se vykonat obě větve pro celý warp, vlákna se pouze maskují ve větvi, která pro ně není relevantní
+    \item Není potřeba warp voting, pokud je větvení jasné už z~kompilace (podmínka podle pevně dané hodnoty)
+\end{itemize}
+
+\subsection{Warp divergence}
+\begin{itemize}
+    \item = různá vlákna warpu vyžadují různé větve kódu
+    \item Redukuje výkonnost paralelizace
+    \item Nejhorší případ: zpomalení 32\(\times\) (pokud každé vlákno má jinou větev)
+    \item Existují predikáty, fungují podobně jako if/else: \texttt{p = (x<0.0); p: z = x-2.0; !p:z= sqrt(x);}, pořád se jedná o~3~instrukce
+    \item V rámci warpu také dochází k~\uv{warp voting}, každé vlákno avizuje, kterou větev bude vykonávat. Pokud všechna vlákna warpu vykonávají stejnou větev, je výpočet rychlejší (druhá větev se nepoužije vůbec)
+\end{itemize}
+
+\subsection{Atomické operace}
+\begin{itemize}
+    \item Při zápisu více vláken do jediné proměnné
+    \item Čtení i zápis v jediné nedělitelné instrukci, zajistí integritu dat (nenastane souběh, při kterém by byla dříve přečtená hodnota změněna jiným vláknem před zápisem, což by přemazalo výstup druhého vlákna)
+    \item \texttt{atomicAdd}
+    \begin{itemize}
+        \item první atribut je pointer, druhý hodnota k~přičtení
+    \end{itemize}
+    \item \texttt{atomicExch}
+    \begin{itemize}
+        \item Uloží hodnotu na adresu pointeru
+    \end{itemize}
+    \item \texttt{atomicMin}
+    \item \texttt{atomicMax}
+    \item \texttt{atomicCAS(int *addr, int compare, int val)} -- compare and swap, pokud je hodnota \texttt{compare} stejná jako ta na \texttt{addr}, nahraje tam místo toho \texttt{val} -- dá se použít k~atomickým zámkům
+    \item A další
+    \item Rychlé pro data ve sdílené paměti, pomalé pro globální paměť
+\end{itemize}
+
+\section{GPU - paralelní vzory, paralelní redukce, funkce shfl\_down\_sync(), asynchronní spouštění funkcí.}
+
+\subsection{Paralelní vzory}
+\begin{itemize}
+    \item Jsou to stavební kameny pro složitější algoritmy
+    \item Např.\,Map: aplikuje funkci na všechny prvky listu, snadno paralelizovatelné
+    \item Další příklad: Scan (nový vektor, má o 1 méně hodnot, v~každém poli je součet hodnot původního pole po aktuální index)
+\end{itemize}
+\subsubsection{Redukce}
+\begin{itemize}
+    \item = Aplikování asociativního binárního operátoru na všechny prvky, redukování do jediné hodnoty
+    \item +, *, max, min\dots
+    \item Paralelní redukce: což takhle použít strom? -- redukce po párech (vznikne N/2 hodnot), opakovat, dokud nemám jedinou hodnotu
+    \item Chtěli bychom dosáhnout toho, ať je celý wapr buď aktivní nebo neaktivní, chceme mitigovat warp divergenci
+    \item Redukce na bloku vyžaduje synchronizaci
+    \begin{verbatim}
+__global__ void sum_reduction(float *input, float *block_results){
+    extern __shared__ int sdata[];
+    unsigned int i = blockIdx.x*blockDim.x + threadIdx.x;
+    sdata[threadIdx.x] = input[i];
+    __syncthreads();
+    for (unsigned int stride = blockDim.x/2; stride > 0; stride/=2){
+        unsigned int strided_i = threadIdx.x * 2 * stride;
+        if (strided_i < blockDim.x){
+            sdata[strided_i] += sdata[strided_i + stride]
+        }
+        __syncthreads();
+    }
+    if (threadIdx.x == 0) {
+        block_results[blockIdx.x] = sdata[0];
+    }
+}
+    \end{verbatim}
+    \item Globální redukce je vhodná lokálními redukcemi, které jsou pak stejným sečteny atomickými operacemi
+\end{itemize}
+
+\subsection{shfl\_down\_sync()}
+\subsubsection{Warp shuffle}
+\begin{itemize}
+    \item Pro přesun dat v~rámci jediného warpu
+    \item Lze užít místo atomických operací, nevyžaduje sdílenou paměť, vlákna čtou registry jiných vláken
+    \item Je nutné, aby bylo vlákno, ze kterého chci číst, aktivní, jinak se vrátí nedefinovaná hodnota
+\end{itemize}
+\subsubsection{Warp voting}
+\begin{itemize}
+    \item Aktivní vlákna mohou v~rámci warpu vyměňovat info o~podmínkách
+    \item \texttt{int all\_sync(mask, condition)} -- True, pokud platí podmínka ve všech aktivních vláknech warpu
+    \item \texttt{int any\_sync(mask, condition)} -- True, pokud platí podmínka v~aspoň jednom aktivním vláknu warpu
+    \item \texttt{unsigned int ballot\_sync(mask, condition)} -- Vrací číslo, kde bity jsou dané hodnotami jednotlivých hodnot condition z~vláken
+    \item Všechny tyto funkce blokují, ale jen aktivní vlákna
+\end{itemize}
+\subsubsection{Samotná funkce}
+\begin{itemize}
+    \item Argumenty:
+    \begin{itemize}
+        \item \texttt{unsigned mask} -- která vlákna se účastní
+        \item \texttt{T var} -- proměnná
+        \item \texttt{unsigned int delat} -- O kolik kroků dále se dívat na registry, z~těchto registrů čte hodnotu \texttt{var}. Pokud takový index neexistuje, vezme jen svou hodnotu registru
+        \item \texttt{int width=warpSize}
+    \end{itemize}
+    \item Navrací hodnotu proměnné z~jiného registru
+    \item Užití: třeba součet v~rámci warpu
+\begin{verbatim}
+#define FULL_MASK 0xffffffff
+global void sum_warp_kernel_shfl_down(int *a)
+{
+    int local_sum = a[threadIdx.x + blockIdx.x*blockDim.x];
+    for (int offset = WARP_SIZE / 2; offset>0; offset /= 2) {
+        local_sum += shfl_down_sync(FULL_MASK, local_sum, offset);
+    }
+    if (threadIdx.x%32 == 0) {
+        printf("Warp max is %d", local_sum)
+    }
+}
+\end{verbatim}
+\end{itemize}
+
+\subsection{Asynchronní spouštění funkcí}
+\begin{itemize}
+    \item Synchronní blokuje
+    \item Asynchronní neblokuje (spustím a jdu na další krok, ono to asi běží někde na pozadí, snad)
+\end{itemize}
+
+\subsubsection{Typy asynchronních funkcí}
+\begin{itemize}
+    \item Vzniklé v CPU pipeline
+    \begin{itemize}
+        \item napsáno synchronně, kompilátor vyhodnotil, že větve kódu na sebe nemají vliv a~vytvoří instrukce, které se překrývají pro maximální využití pipeline
+    \end{itemize}
+    \item CPU threading
+    \begin{itemize}
+        \item Podobná vlákna běží paralelně na procesoru, důležitá synchronizace
+    \end{itemize}
+    \item CUDA warp execution
+    \begin{itemize}
+        \item funkce ve stejném warpu jsou vzájemně synchronní
+        \item warpy na SMP jsou spouštěny asynchronně
+        \item synchronizace mezi warpy pomocí \texttt{syncthreads()}
+        \item synchronní jsou:
+        \begin{itemize}
+            \item volání kernelu
+            \item cudaMemcpy (device to device nebo host to device malých dat)
+        \end{itemize}
+        \item asynchronní volání jsou blokována:
+        \begin{itemize}
+            \item při \texttt{deviceSynchronize()}
+            \item když má být spuštěn nový kernel
+            \item Když se musí kopírovat data z~nebo na kartu
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{CUDA streamy}
+\begin{itemize}
+    \item Jedná se o~asynchronní volání ve frontě na spuštění kartou
+    \item V rámci streamu jsou operace seřazené, operace z~různých streamů řazené nejsou
+    \item Lze kernelu přiřadit stream
+    \item Podporují i~asynchronní přenos dat ve streamu (z~i~na kartu), ne pro defaultní stream
+    \item Nejlepší je nastavit streamy tak, ať kopírovací enginy mohou přenášet data, zatímco kernely jsou vykonávány na SM. \(n\)-way concurrency znamená, kolik operací naráz karta provádí (5-way je třeba kopírování z~a~na kartu a~3 kernely k~tomu. Je nutné správně rozřadit operace do streamů)
+    \item Všechny operace lze synchronizovat \texttt{cudaDeviceSynchronize()}
+    \item Synchronizovat stream lze \texttt{cudaStreamSynchronize(stream)}
+    \item synchronizaci lze provést i~pomocí eventů
+\end{itemize}
+
+
+
+\section{Apache Spark – vlastnosti, RDD, transformační funkce.}
+\section{Apache Spark – akumulátory, DataFrame, zpracování streamovaných dat.}
+\section{Apache Spark - strojové učení, klasifikační algoritmy, klasterizace, četné vzory, TF-IDF.}
+\section{Paralelní technologie – Apache Kafka, Nvidia Jetson, TPU.}
