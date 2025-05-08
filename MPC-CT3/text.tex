@@ -24,7 +24,7 @@ Kvantová kryptografie (distribuce klíčů protokolem BB84).
 
 \subsection{Dohled nad~L1 sítí}
 
-AIM (\emph{Automatized Infrastrucutre Management}) zajišťuje, dokumentuje a~monitoruje síťovou kabeláž.
+AIM (\emph{Automated Infrastrucutre Management}) zajišťuje, dokumentuje a~monitoruje síťovou kabeláž.
 Umožňuje detekovat vložení a odstranění propojovacích kabelů (pomocí mikrospínače nebo například měřením impedančních vlastností).
 
 IPLMS (\emph{Intelligent Physical-Layer Management Solution}) kombinuje inteligentní propojovací panely se softwarovými funkcemi a poskytuje informace o~stavu připojení na~portech.
@@ -130,6 +130,19 @@ Ustanovení klíče je možné přes PSK, IKE1/IKE2, Kerberos.
 Implementován ve~Windows, OSX, nových verzích Android, pro~Linux \{strong,libre,open\}swan.
 Alternativou k~IPSec je např. Wireguard.
 
+3 části:
+\begin{itemize}
+    \item authentication header (integrita, autentizace, integrita vlastně zajišťuje i~správnost adres)
+    \item encapsulating security payload (šifruje)
+    \item security association (databáze spojení)
+\end{itemize}
+
+Módy ESP:
+\begin{itemize}
+    \item transportní (IP packet nedotčen, v něm IPSec packet)
+    \item tunel (celý IP packet zašifrován, obalen IPSec a IP packetem)
+\end{itemize}
+
 
 \subsection{Bezpečnost IPv6}
 
@@ -216,6 +229,17 @@ Při~navazování se provádí čtyřcestný handshake:
 \end{center}
 Výsledná relace může obsahovat jedno nebo více TCP spojení.
 
+\begin{itemize}
+    \item ClientHello obsahuje cipher suite a~client random.
+    \item ServerHello obsahuje session ID, server random
+    \item Klient musí ověřit certifikát
+    \item Premaster secret vytvoří klient, zašifruje veř.\,klíčem serveru (např.\,u~RSA), pro jiné suites jiné mechanismy výpočtu (třeba DH)
+    \item Z premaster secret vypočtou obě strany secret key
+\end{itemize}
+
+
+
+
 
 \subsection{Útoky na~TLS}
 
@@ -245,7 +269,7 @@ Zranitelnost HeartBleed spočívala ve~faktu že server použil zadanou délku z
 
 
 \clearpage
-\section{Bezpečnost UDP (útoky, protiopatření, zabezpečení nad~protokolem UDP), bezpečnost DNS, protokol DNSSEC.}
+\section{Bezpečnost UDP (útoky, protiopatření, zabezpečení nad protokolem UDP), DTLS (princip, účel), bezpečnost DNS, protokol DNSSEC, šifrování zpráv DNS.}
 
 UDP je bezstavový protokol bez~garance doručení a kontroly pořadí; hlavička obsahuje pouze porty, délku a kontrolní součet.
 DTLS umožňuje data šifrovat, autentizovat i~kontrolovat.
@@ -262,13 +286,43 @@ Ochranou je limitace UDP odpovědí a zahazování nevyžádaného UDP provozu v
 
 \subsection{Zabezpečení nad~UDP}
 
-UDP lze balit do~TLS.
+UDP lze balit do~TLS (DTLS).
 
 IETF QUIC je protokol postavený nad~UDP.
 Vyžaduje použití TLS~1.3, součástí handshake je také TLS handshake, což umožňuje 2RTT až 1RTT komunikaci (protože součástí třetí a čtvrté zprávy již jsou i~data).
 Umožňuje dynamicky měnit adresy na~síťové a transportní vrstvě.
 
+\subsection{DTLS}
+\begin{itemize}
+    \item Stejně jako TLS: integrita, utajení, autentičnost.
+    \item Sekvenční čísla -- řeší ztrátovost UDP
+    \item Taky má connection ID a~délku payloadu
+    \item Verze obdobné jako TLS
+    \item Využito třeba v~SRTP, lze multicastovat (TLS umí jen unicast)
+\end{itemize}
 
+Jeden z~možných handshakes (podle suite)
+\begin{center}
+\begin{tabular}{rcl}
+	klient & & server \\
+	\hline
+	ClientHello & $\rightarrow$ & \\
+	& \(\leftarrow\) & HelloVerifyRequest (with cookie) \\
+    ClientHello (with cookie) & \(\rightarrow\) & \\
+    & \(\leftarrow\) & ServerHello \\
+	& & ServerCertificate \\
+    & & [ServerKeyExchange] \\
+    & & [CertificateRequest] \\
+    & & ServerHelloDone \\
+	ClientKeyExchange & \(\rightarrow\) & \\
+    {[}Cert{]} & & \\
+    CertVerify & & \\
+    ChangeCipherSpec & & \\
+	Finished & & \\
+	& \(\leftarrow\) & ChangeCipherSpec \\
+	& & Finished \\
+\end{tabular}
+\end{center}
 
 \subsection{Bezpečnost DNS}
 
@@ -327,11 +381,15 @@ Zprávy mívají kontrolu integrity, ale chybějící nebo slabé šifrování.
 Rychlost 292~bps až 50~kbps.
 Využívá proprietární modulaci a bezlicenční pásma s~dosahem přes 10~km.
 
+Sítě má veřejné i~soukromé.
+
 Specifikace LoRaWAN je otevřená.
 Zařízení komunikují asynchronně; buď ze~své vůle nebo při~stanoveném intervalu.
 Pakety přijaté sítí jsou filtrovány proti~duplicitám, zkontrolovány a předány aplikačním serverům.
 
-Pro~zabezpečení používá symetrickou kryptografii; autentizace (Device ID), integrita (MIC), zabezpečení (AES-128-CCM, sekvenční číslo).
+Pro~zabezpečení používá symetrickou kryptografii; autentizace (Device ID), integrita (MIC), zabezpečení (AES-128-CCM, sekvenční číslo -- zabezpečeno i~proti opakování zpráv).
+
+Umožňuje šifrování v~RF i~end-to-end. Klíč relace \uv{AppSKey} odvozen z~hlavního klíče zařízení \uv{AppKey}.
 
 
 \subsubsection{SigFox}
@@ -365,19 +423,20 @@ SIM obsahuje 128b (od~4G 256b) předsdílený klíč.
 Identifikace pomocí IMSI na~SIM, pseudonymita pomocí TMSI (dočasný síťový identifikátor%
 \footnote{Při~zapnutí SIM oznámí své IMSI v~otevřeném tvaru, síť odpoví s~šifrovaným TMSI, kterým se poté zařízení identifikuje. Falešné BTS může IMSI odposlechnout a zprávy podvrhovat.}%
 ).
-GSM vytvářelo okruhy, další technologie jsou již paketové.
-
-
-\subsubsection{2.5G: GPRS}
 
 Šifrování proudovými šiframi, autentizace jednostranně, integrita nezajištěna.
 
-Autentizace pomocí klíče na~SIM (algoritmy A3 a A8).
+\begin{itemize}
+    \item Autentizace pomocí klíče na~SIM (algoritmus A3).
+    \item A5: šifrování (64 b klíč)
+    \item A8: generování klíče pro A5
+\end{itemize}
+
 
 
 \subsubsection{3G: UMTS}
 
-Šifrování datové komunikace i signalizace pomocí AES, oboustranná autentizace, integrita, na~čipové kartě je logická aplikace USIM.
+Šifrování datové komunikace i signalizace pomocí AES (128 b), oboustranná autentizace, integrita, na~čipové kartě je logická aplikace USIM.
 
 Používá se algoritmická sada Milenage: autentizace (f1, f2), generování klíčů (f3, f4, f5), šifrování (f8; AES-CTR+OFB), integrita (f9).
 
@@ -386,6 +445,7 @@ Používá se algoritmická sada Milenage: autentizace (f1, f2), generování kl
 
 4G je packetová síť (EPS: \emph{Evolved Packet System}) přímo na~TCP/IP: SIP, RTP, IPSec, SRTP, DTLS, TLS.
 Využívá podobný AKA protokol jako 3G (ale s~256b klíčem), proudovou šifru Snow 3G, blokovou šifru AES.
+
 
 
 \subsubsection{5G}
@@ -408,6 +468,10 @@ Optické sítě tvoří fyzickou vrstvu – bezpečnost na této vrstvě není p
 \begin{itemize}
     \item Odposlech dat: neoprávněný přístup k~datům a k~hlavičkám rámců (pasivní útok; např. pomocí splitteru nebo využití ohybu vlákna).
     \item Narušení služeb v~optické síti: narušení datového přenosu nebo záměrná degradace fyzických parametrů v~optických sítí (aktivní útok; útočník musí disponovat speciálním zařízením pro~generování signálu).
+    \begin{itemize}
+        \item in-band jamming: rušivý signál v~konkrétním pásmu
+        \item out-of-band jamming: je potřeba větší výkon rušivého signálu, ruší více pásem naráz, ale ne plným výkonem)
+    \end{itemize}
     \item (D)DoS \emph{((Distributed) Denial of Service)}: narušení služeb pomocí DDoS útoků může nastat u~optických sítí využívající SDN \emph{(Software Defined Network)}.
     \item Narušení sítě: útok zneužívající např. slabou autentizaci a~autorizaci uživatelů. 
 \end{itemize}
@@ -421,13 +485,13 @@ Inicializace v~GPON: výměna klíče mezi OLT a ONU v~plaintextu (rok 2015).
 
 Další útoky v~GPON:
 \vspace*{-0.5em}\begin{itemize}
-    \item Možnost modifikace zpráv PLOAM (chybí autentizace a integrita zpráv).
-    \item Falešné OLT: odposlech upstream, MitM útoky.
-    \item Krádež služby (falešné ONU): útočník s~přeprogramovaným ONU se vydává za jiné ONU.
+    \item Možnost modifikace zpráv PLOAM (physical layer operation administration and maintenance)(chybí autentizace a integrita zpráv).
+    \item Falešné OLT (optical link termination -- na straně poskytovatele): odposlech upstream, MitM útoky.
+    \item Krádež služby (falešné ONU (optical network unit -- na straně zákazníka)): útočník s~přeprogramovaným ONU se vydává za jiné ONU.
 \end{itemize}
 
 \clearpage
-\section{Ochrana~soukromí v~ICT (pojmy), kryptografické metody zajištující ochranu soukromí, síťové metody poskytující ochranu soukromí a anonymizační nástroje a systémy.}
+\section{Ochrana~soukromí v~ICT (pojmy, typy anonymizace), kryptografické metody zajištující ochranu soukromí, síťové metody poskytující ochranu soukromí a anonymizační nástroje a systémy.}
 
 V~kontextu ICT se ochranou myslí zejména ochrana soukromí osob proti nekontrolovanému sběru, ukládání nebo uvolňování osobních údajů.
 
@@ -440,6 +504,12 @@ Ochrana soukromí lze dělit do osmi kategorií:
 Právně je ochrana soukromí zajištěna GDPR (příp. CCPA v~USA/Kalifornii),%
 \footnote{Více ve~státnicových otázkách z~MPC-ODP.}
 ISO/IEC 29100.
+
+\begin{itemize}
+    \item Anonymizace klienta
+    \item Anonymizace serveru
+    \item Oboustranná anonymizace
+\end{itemize}
 
 
 \subsection{Kryptografické metody ochrany soukromí}
@@ -555,83 +625,139 @@ Velmi často je také nutné vše převést na~UTC, protože zařízení mohlo b
 
 
 \clearpage
-\section{Analýza škodlivého kódu (základní dělení analýz, cíle a metody statické a dynamické analýzy).}
+\section{Bezpečnostní analýza zdrojového kódu (základní princip, fáze analýzy, výhody, limity, používané nástroje).}
 
-Hlavním cílem analýzy je poskytnutí informací, které jsou potřebné kvůli \textbf{vytvoření důkazního materiálu} a \textbf{obraně proti stejnému incidentu v~budoucnu}.  
+Jedná se o~automatizované nebo manuální bezpečnostní testování. Provádí se v~rámci DevSecOps (devops (prostředky pro rychlé vytvoření, testování a~nasazení kódu) + security). Hledá slabiny nebo škodlivý kód.
 
-\subsection{Základní dělení}
+% Hlavním cílem analýzy je poskytnutí informací, které jsou potřebné kvůli \textbf{vytvoření důkazního materiálu} a \textbf{obraně proti stejnému incidentu v~budoucnu}.  
 
-Cílem analýzy je zjistit, jak daný škodlivý kód funguje. Proto se analýza dělí na:
+% \subsection{Základní dělení analýzy malware}
 
-\subsubsection{Statická analýza}
+% (celá tahle část je ze staré prezentace)
 
-Hlavním cílem je pochopit strukturu programu a jeho funkčnost bez spuštění.
-Je bezpečnější než dynamická.
-Je považována za~základní analýzu malware.
-\textbf{Skenování antivirovými programy} slouží na~určení zda je vzorek malware či nikoli, porovnáním s~databázemi.
+% Cílem analýzy je zjistit, jak daný škodlivý kód funguje. Proto se analýza dělí na:
 
-Autoři škodlivého kódu využívají různé techniky k~maskování:
+% \subsubsection{Statická analýza}
 
+% Hlavním cílem je pochopit strukturu programu a jeho funkčnost bez spuštění.
+% Je bezpečnější než dynamická.
+% Je považována za~základní analýzu malware.
+% \textbf{Skenování antivirovými programy} slouží na~určení zda je vzorek malware či nikoli, porovnáním s~databázemi.
+
+% Autoři škodlivého kódu využívají různé techniky k~maskování:
+
+% \begin{itemize}
+%     \item Obfuskační techniky -- zmatení konstantami a podmínkami.
+%     \item Šifrovací techniky - využití entropie.
+% \end{itemize}
+
+% Nástroje statické analýzy:
+
+% \begin{itemize}
+%     \item \textbf{PEiD} -- základ statické analýzy, ovládaní pomocí GUI, výsledkem je detekce .exe souborů, kompilátorů a nástrojů pro~šifrování.
+%     \item \textbf{GT2} –- príkazový řádek, detekuje modifikátory a kompilátory podle binárního podpisu.
+%     \item Dependency Walker, HexDrive, strings, DIE, pestudio, IDA, \dots
+% \end{itemize}
+
+
+% \subsubsection{Dynamická analýza}
+
+% Dochází ke~spuštění programu v~kontrolovaném prostředí (\emph{sandbox}) a pozorování jeho chování.
+% Detekují se změny provedené malwarem v~systému, je potřeba rozlišit normální změny a změny způsobené škodlivým kódem.
+
+
+% Nástroje dynamické analýzy:
+
+% \begin{itemize}
+%     \item \textbf{Hook-based} -- zapíšou se do~API funkcí a zaznamenávají změny probíhající v~systému. Jsou to nástroje s~největší škálou možností.
+%     Např. \textit{Process Monitor, pymon.py}.
+%     \item \textbf{Difference-based} -- pořídí obraz před a po~spuštění a porovnávají změny.
+%     Např. \textit{Regshot, Winanalysis}.
+%     \item \textbf{Notification-based} -- zaregistrují oznámení při určité události.
+%     Např. \textit{Process Monitor, Preservation}.
+% \end{itemize}
+
+% Metody detekce změn systému:
+
+% \begin{itemize}
+%     \item \textbf{Sledování API funkcí} -- zaznamenávají tok mezi programy a OS.
+%     Funkce nástroje: \textit{Hook-based}.
+%     \item \textbf{Logování neúspěšných akcí} -- nahlášení neúspěšných pokusů o~provádění změn.
+%     Funkce nástroje: \textit{Hook-based}.
+%     \item \textbf{Logování dočasných souborů} -- zaznamenání vytváření dočasných souborů.
+%     Funkce nástroje: \textit{Hook-based, Notification-based}.
+%     \item \textbf{Rozlišování mezi různými typy modifikací} -- zaznamenání změn souboru.
+%     Nástroj \textit{Hook-based} je schopen rozpoznat, zda byla změněna velikost souboru a atributy.
+%     \item \textbf{Ukázka změn v téměř reálném čase} -- nástroje \textit{Hook-based, Notification-based} ukazují změny v systému okamžitě.
+%     \textit{Difference-based} vykazují změny až po vytvoření druhého otisku systému.
+%     \item \textbf{Zobrazení procesů zodpovědných za provedení změn} -- pouze \textit{Hook-based} mohou identifikovat procesy (název, ID) odpovědné za~provedení změny.
+%     \item \textbf{Zobrazení prováděných změn v časové ose} -- nástroje \textit{Hook-based, Notification-based} zaznamenávají aktivity v~pořadí ve~kterém k~nim dochází.
+% \end{itemize}
+
+% Příklady nástrojů:
+
+% \begin{itemize}
+%     \item
+%     	\textbf{Process Monitor PM} zachycuje Windows API funkce.
+%     	Je to hybrid mezi Hook-based a Notification-based.
+%     	Umožňuje sledovat všechny soubory, registry a procesy na~Windows.
+%     \item
+%     	\textbf{Regshot} patří mezi Difference-based nástroje.
+%     	Detekuje změny registrů.
+%     \item
+%     	\textbf{Debugger x64dbg} při spouštění a krokování vzorku dochází k~jeho reálnému spuštění.
+% \end{itemize}
+
+\subsection{Fáze DevSecOps}
 \begin{itemize}
-    \item Obfuskační techniky -- zmatení konstantami a podmínkami.
-    \item Šifrovací techniky - využití entropie.
+    \item SDLC = secure development lifecycle:
+    \item commit -- psát bezpečný kód
+    \item pull request
+    \item code review -- tady přichází analýza člověkem
+    \item CI/CD -- tady analýza nástroji
+    \item QA, integrační testy -- tady dynamická analýza (penetrační testování)
+    \item deployment, delivery -- taky jde dělat pentesty
+    \item opakuje se pro další změny kódu
 \end{itemize}
 
-Nástroje statické analýzy:
-
+\subsection{Statická analýza}
 \begin{itemize}
-    \item \textbf{PEiD} -- základ statické analýzy, ovládaní pomocí GUI, výsledkem je detekce .exe souborů, kompilátorů a nástrojů pro~šifrování.
-    \item \textbf{GT2} –- príkazový řádek, detekuje modifikátory a kompilátory podle binárního podpisu.
-    \item Dependency Walker, HexDrive, strings, DIE, pestudio, IDA, \dots
+    \item Nespouští kód
+    \item Fáze:
+    \begin{itemize}
+        \item kód
+        \item Tvorba modelu (lexikální analýza, syntaktická analýza)
+        \item statická analýza (pravidla, vyžadují sémantickou analýzu, symbolickou exekuci, abstraktní simulaci, analýzu toku dat a~graf toku řízení)
+        \item výsledky
+    \end{itemize}
 \end{itemize}
 
+Například: Nemá nedůvěryhodný zdroj možnost předávat parametry kritické funkci? (SQL query bez sanitizace?)
 
-\subsubsection{Dynamická analýza}
-
-Dochází ke~spuštění programu v~kontrolovaném prostředí (\emph{sandbox}) a pozorování jeho chování.
-Detekují se změny provedené malwarem v~systému, je potřeba rozlišit normální změny a změny způsobené škodlivým kódem.
-
-
-Nástroje dynamické analýzy:
-
+\subsubsection{Výhody}
 \begin{itemize}
-    \item \textbf{Hook-based} -- zapíšou se do~API funkcí a zaznamenávají změny probíhající v~systému. Jsou to nástroje s~největší škálou možností.
-    Např. \textit{Process Monitor, pymon.py}.
-    \item \textbf{Difference-based} -- pořídí obraz před a po~spuštění a porovnávají změny.
-    Např. \textit{Regshot, Winanalysis}.
-    \item \textbf{Notification-based} -- zaregistrují oznámení při určité události.
-    Např. \textit{Process Monitor, Preservation}.
+    \item Nedostatky ještě před buildem
+    \item CI/CD i lokálně
+    \item Whitebox, rychlé odhalení možných slabin
+    \item Výstupy jde použít v reportu
 \end{itemize}
-
-Metody detekce změn systému:
-
+\subsubsection{Limity}
 \begin{itemize}
-    \item \textbf{Sledování API funkcí} -- zaznamenávají tok mezi programy a OS.
-    Funkce nástroje: \textit{Hook-based}.
-    \item \textbf{Logování neúspěšných akcí} -- nahlášení neúspěšných pokusů o~provádění změn.
-    Funkce nástroje: \textit{Hook-based}.
-    \item \textbf{Logování dočasných souborů} -- zaznamenání vytváření dočasných souborů.
-    Funkce nástroje: \textit{Hook-based, Notification-based}.
-    \item \textbf{Rozlišování mezi různými typy modifikací} -- zaznamenání změn souboru.
-    Nástroj \textit{Hook-based} je schopen rozpoznat, zda byla změněna velikost souboru a atributy.
-    \item \textbf{Ukázka změn v téměř reálném čase} -- nástroje \textit{Hook-based, Notification-based} ukazují změny v systému okamžitě.
-    \textit{Difference-based} vykazují změny až po vytvoření druhého otisku systému.
-    \item \textbf{Zobrazení procesů zodpovědných za provedení změn} -- pouze \textit{Hook-based} mohou identifikovat procesy (název, ID) odpovědné za~provedení změny.
-    \item \textbf{Zobrazení prováděných změn v časové ose} -- nástroje \textit{Hook-based, Notification-based} zaznamenávají aktivity v~pořadí ve~kterém k~nim dochází.
+    \item Nutnost porozumět výstupům
+    \item Nejde bez zdrojového kódu
+    \item Všechny nálezy nutné otestovat (odfiltrovat false-positives)
+    \item Nástroje nemusí podporovat všechny jazyky nebo funkce
+    \item Různé konfigurace můžou způsobit různé výsledky
+    \item Neúplný model nebo default settings tvoří falešně pozitivní výsledky
+    \item Limitace nástrojů (neodhalí vše)
 \end{itemize}
-
-Příklady nástrojů:
-
+\subsubsection{Nástroje}
 \begin{itemize}
-    \item
-    	\textbf{Process Monitor PM} zachycuje Windows API funkce.
-    	Je to hybrid mezi Hook-based a Notification-based.
-    	Umožňuje sledovat všechny soubory, registry a procesy na~Windows.
-    \item
-    	\textbf{Regshot} patří mezi Difference-based nástroje.
-    	Detekuje změny registrů.
-    \item
-    	\textbf{Debugger x64dbg} při spouštění a krokování vzorku dochází k~jeho reálnému spuštění.
+    \item Snyk
+    \item Bandit
+    \item GitLab SAST
+    \item SonarQube
+    \item Fortify
 \end{itemize}
 
 
@@ -656,7 +782,7 @@ Zadavatel takzvaně kupuje zajíce v pytli (řídit se může pouze referencemi 
 
 \subsection{ASVS metodologie}
 
-\textit{Application Security Verification Standard} OWASP definuje úrovně testování (level 0 -- 3), které jasně formulují oblasti, které musí být během testu prověřeny.
+\textit{Application Security Verification Standard} OWASP definuje úrovně testování (level 1 -- 3), které jasně formulují oblasti, které musí být během testu prověřeny.
 Zadavatel i~tester tak ví co bude obsahem testování.
 
 ASVS má dva cíle:
@@ -667,9 +793,9 @@ ASVS má dva cíle:
 
 3 úrovně ověřování zabezpečení:
 \begin{itemize}
-    \item Úroveň 1 -- pro nízké úrovně zabezpečení, plně testovatelná penetrací.
-    \item Úroveň 2 -- pro aplikace, které obsahují citlivá data, která vyžadují ochranu.
-    \item Úroveň 3 -- pro nejkritičtější aplikace, které provádí transakce, obsahují citlivá lékařská data atd.
+    \item Úroveň 1 -- pro nízké úrovně zabezpečení, plně testovatelná penetrací, obstojí proti OWASP top 10.
+    \item Úroveň 2 -- pro aplikace, které obsahují citlivá data, která vyžadují ochranu. Útočníci nejspíše budou zruční
+    \item Úroveň 3 -- pro nejkritičtější aplikace, které provádí transakce, obsahují citlivá lékařská, vojenská data atd.
 \end{itemize}
 
 
@@ -737,28 +863,28 @@ Bývá vyžadován kartovými asociacemi a~společnostmi které zpracovávají, 
 
 PCI DSS specifikuje dvanáct požadavků pro~splnění, které jsou organizovány do~šesti základních skupin:
 \vspace*{-0.5em}\begin{enumerate}
-\item Vytvořit a udržovat bezpečnou síť a systémy.
-\item Chránit data uživatele karty.
-\item Udržovatel program managementu zranitelností.
-\item Implementovat silné metody kontroly přístupu.
-\item Pravidelně monitorovat a testovat sítě.
-\item Udržovat bezpečnostní politiku informačních systémů.
+\item \textcolor{red}{Vytvořit a udržovat bezpečnou síť a systémy.}
+\item \textcolor{orange}{Chránit data uživatele karty.}
+\item \textcolor{brown}{Udržovat program managementu zranitelností.}
+\item \textcolor{olive}{Implementovat silné metody kontroly přístupu.}
+\item \textcolor{teal}{Pravidelně monitorovat a testovat sítě.}
+\item \textcolor{blue}{Udržovat bezpečnostní politiku informačních systémů.}
 \end{enumerate}
 
 Požadavky na PCI DSS jsou:
 \vspace*{-0.5em}\begin{enumerate}
-\item Instalace a údržba konfigurace firewallu pro ochranu dat uživatelů karet (tj. uživatelská data).
-\item Nepoužívat defaultní hesla a jiné parametry nastavené prodejcem/dodavatelem komponent.
-\item Ochrana uložených dat uživatelů karet.
-\item Šifrování přenosu uživatelských dat přes otevřené spoje a veřejné sítě.
-\item Celková ochrana všech systémů proti malware včetně pravidelných updatů AV programů.
-\item Vývoj a údržba bezpečnostních systémů a aplikací.
-\item Omezení přístupu k uživatelským datům na potřebné minimum nutného k provedení služby.
-\item Identifikace a autentizace přístupu k systémovým komponentům.
-\item Omezení fyzického přístupu k uživatelským datům.
-\item Sledování a monitorování všech přístupů k síťovým zdrojům a uživatelským datům.
-\item Pravidelné bezpečnostní testování systémů a procesů
-\item Zajištění pravidel adresující informační bezpečnost pro fyzické osoby.
+\item \textcolor{red}{Instalace a údržba konfigurace firewallu pro ochranu dat uživatelů karet (tj. uživatelská data).}
+\item \textcolor{red}{Nepoužívat defaultní hesla a jiné parametry nastavené prodejcem/dodavatelem komponent.}
+\item \textcolor{orange}{Ochrana uložených dat uživatelů karet.}
+\item \textcolor{orange}{Šifrování přenosu uživatelských dat přes otevřené spoje a veřejné sítě.}
+\item \textcolor{brown}{Celková ochrana všech systémů proti malware včetně pravidelných updatů AV programů.}
+\item \textcolor{brown}{Vývoj a údržba bezpečnostních systémů a aplikací.}
+\item \textcolor{olive}{Omezení přístupu k uživatelským datům na potřebné minimum nutného k provedení služby.}
+\item \textcolor{olive}{Identifikace a autentizace přístupu k systémovým komponentům.}
+\item \textcolor{olive}{Omezení fyzického přístupu k uživatelským datům.}
+\item \textcolor{teal}{Sledování a monitorování všech přístupů k síťovým zdrojům a uživatelským datům.}
+\item \textcolor{teal}{Pravidelné bezpečnostní testování systémů a procesů}
+\item \textcolor{blue}{Zajištění pravidel adresující informační bezpečnost pro fyzické osoby.}
 \end{enumerate}
 
 
