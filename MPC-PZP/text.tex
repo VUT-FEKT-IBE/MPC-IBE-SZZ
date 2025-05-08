@@ -360,6 +360,146 @@ global void sum_warp_kernel_shfl_down(int *a)
 
 
 \section{Apache Spark – vlastnosti, RDD, transformační funkce.}
+\subsection{Vlastnosti}
+\begin{itemize}
+    \item Slovník:
+    \begin{itemize}
+        \item Job: Kód, co běží, vykonává funkci
+        \item Stage: Každý job má stages, jsou buď typu map nebo reduce
+        \item Task: Každá stage má jeden task na partition, je vykonaná na jednom stroji
+        \item DAG: Directed Acyclic Graph, je to graf operací
+        \item Executor: Proces vykonávající task
+        \item Master: Stroj, na kterím běží Driver
+        \item Slave: Stroj, na kterém běží executor
+        \item Partition: část RDD, pracuje s~ní jeden executor
+    \end{itemize}
+    \item Komponenty:
+    \begin{itemize}
+        \item Driver: Tvoří SparkContext, komunikuje s cluster managerem, scheduluje tasks
+        \item Executor(s): Spouštějí tasks, uloží data do paměti, na disk (Interakce s úložišti)
+        \item Cluster Manager: Spravuje cluster, technologie: Mesos, YARN, Spark Standalone
+    \end{itemize}
+    \item Driver:
+    \begin{itemize}
+        \item Více částí (RDD Graph, DAGScheduler, Task Scheduler, Scheduler Backend), mění kód na jobs, ty vykoná na clusteru
+    \end{itemize}
+    \item Executor:
+    \begin{itemize}
+        \item Má block manager, ten získává bloky jak lokálně, tak vzdáleně
+    \end{itemize}
+    \item Spark Context:
+    \begin{itemize}
+        \item Reprezentuje spojení se Spark clusterem
+        \item umožňuje vytvářet RDD, akumulátory a broadcast variables
+    \end{itemize}
+    \item DAG Scheduler:
+    \begin{itemize}
+        \item Vytvoří DAG stagů, předá je taskscheduleru
+        \item Určí preferované místo pro tasks
+    \end{itemize}
+    \item Task Scheduler:
+    \begin{itemize}
+        \item Posílá tasks clusteru, spustí je, získá výsledky, retry při chybách\dots
+    \end{itemize}
+    \item Scheduler Backend
+    \begin{itemize}
+        \item Interface pro scheduling system (třeba YARN)
+    \end{itemize}
+    \item Block Manager
+    \item SparkConf: objekt s~informacemi o~aplikaci
+    \item Využívá lazy evaluation
+\end{itemize}
+
+\subsection{RDD}
+= Resilient Distributed Dataset
+\begin{itemize}
+    \item Je typovaný
+    \item Může být rozdělený na partitions
+    \item Immutable
+    \item Odolný proti chybám
+    \item Paralelní
+    \item Vytvoření z~úložiště nebo z~jiného RDD, uchovává informace o~rodičích (optimalizace pipeline nebo opakování při chybě)
+    \item \texttt{collect()} vrátí data z~clusteru
+    \item \texttt{glom()} metoda dělí data na partitions
+    \item Persistence: dají se uložit na později, znovupoužít
+\end{itemize}
+
+Další typy:
+\begin{itemize}
+    \item Shared variables:
+    \begin{itemize}
+        \item Broadcast variables: ve všech nodes
+        \item Accumulators: do nich se ukládají data z~různých míst (výsledek součtu apod.)
+    \end{itemize}
+    \item DataFrame (tabulka podobná SQL)
+\end{itemize}
+
+\subsection{Transformační funkce}
+\begin{itemize}
+    \item Aplikují transformace na každý prvek v~partition nebo na celou partition
+    \item Reduce: agregační funkce (\texttt{groupBy}, \texttt{sortBy})
+    \item Vytváří závislosti mezi RDD (to tvoří DAG)
+    \item Umí znovu-vytvořit partitions
+    \item Map: aplikuje funkci na RDD, z výsledků nový RDD (existuje i~flatMap -- každá funkce může vrátit sekvenci, ty se spojí)
+    \item union, intersection, subtraction
+    \item join
+    \item Jsou úzké (pipelinable, každá partition závislá maximálně na jedné partition z~předchozího kroku) nebo široké (shuffle)
+\end{itemize}
+
 \section{Apache Spark – akumulátory, DataFrame, zpracování streamovaných dat.}
+\subsection{Akumulátory}
+\begin{itemize}
+    \item Pouze asociativní a~komutativní operace
+    \item Vestavěné implementace pro některé datové typy, lze doprogramovat další
+    \item Vytváří se na driveru, ale akumulace se provádí na nodes clusteru
+\end{itemize}
+\subsection{DataFrame}
+\begin{itemize}
+    \item Immutable, distributed
+    \item Pojmenované sloupce (tabulka)
+    \item Zvládá CSV, JSON lépe než RDD
+    \item Podporuje operace: transformace, akce
+    \begin{itemize}
+        \item Transformace jsou lazy (nepočítají se hned)
+        \item DF se spočítá až po spuštění akce nad tímto DF
+    \end{itemize}
+    \item Persistence: dají se uložit do pamměti i~na disk
+    \item Spark SQL, silně optimalizované, má optimizer Catalyst postavená na Scale
+    \item přejmenování sloupců: \texttt{withColumn}
+    \item Operace jak SQL
+\end{itemize}
+
+\subsection{Streaming}
+\begin{itemize}
+    \item Zachytávání dat v~reálném čase
+    \item Sběr může být z~různých zdrojů, třeba Kafka, S3, multimédia\dots
+    \item Streamy rozděleny na batches, i~výsledky v~batches
+    \item DSTREAM = diskretizovaný, reprezentovaný jako sekvence RDD
+    \item Je potřeba StreamingContext objekt, jen jeden může v~JVM existovat najednou
+    \item Batches jsou RDD z~daného časového intervalu
+    \item \texttt{updateStateByKey} -- podle klíčů updatuje stav (to definuje uživatel), používá funkce
+    \item Window Streaming: posuvné okno RDDs, definuje 2 parametry: délku okna a~krok
+    \item Streamy se dají joinnout vzájemně (podobně jako RDD)
+    \item \texttt{forEachRDD} vykoná funkci nad každým RDD
+    \item Structure Streaming: funguje s DataFrames, ne s~RDD
+    \begin{itemize}
+        \item microbatches, vše procesováno právě jednou
+        \item Módy: kompletní (vše se uloží), append (jen data appended od poslední změny se uloží), update (jen updated data od posledního triggeru se uloží)
+        \item Nedrží se vstupní data, jen aktuální stav
+    \end{itemize}
+    \item Vstupy: soubory, kafka, socket (ten je testovací)\dots
+    \item output: Sink, má druhy:
+    \begin{itemize}
+        \item file
+        \item kafka
+        \item fireach
+        \item console
+        \item memory
+    \end{itemize}
+    \item Watermarking -- drží current event time, pokud se data moc zdrží, lze je zahodit
+\end{itemize}
+
+
+
 \section{Apache Spark - strojové učení, klasifikační algoritmy, klasterizace, četné vzory, TF-IDF.}
 \section{Paralelní technologie – Apache Kafka, Nvidia Jetson, TPU.}
