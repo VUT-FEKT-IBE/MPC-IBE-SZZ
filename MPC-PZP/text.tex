@@ -502,4 +502,162 @@ Další typy:
 
 
 \section{Apache Spark - strojové učení, klasifikační algoritmy, klasterizace, četné vzory, TF-IDF.}
+Dělení:
+
+\begin{itemize}
+    \item S učitelem
+    \begin{itemize}
+        \item Regrese
+        \begin{itemize}
+            \item Lineární
+            \item Polynomiální
+        \end{itemize}
+        \item Klasifikace
+        \begin{itemize}
+            \item Logistická regrese
+            \item Support Vector Machine
+            \item Umělé neuronové sítě
+            \item Decision Trees
+        \end{itemize}
+        \item Hluboké učení
+        \begin{itemize}
+            \item Konvoluční neuronové sítě
+            \item Rekurentní neuronové sítě
+        \end{itemize}
+    \end{itemize}
+    \item Bez učitele
+    \begin{itemize}
+        \item Klasterizace
+        \begin{itemize}
+            \item K-means
+        \end{itemize}
+        \item Redukce dimenzionality
+        \begin{itemize}
+            \item PCA (principal code analysis -- analýza hlavních komponent)
+        \end{itemize}
+        \item Detekce anomálií
+    \end{itemize}
+    \item Semi-Supervised
+    \begin{itemize}
+        \item Samo-trénování
+        \item Low-density Separation Models
+    \end{itemize}
+    \item Reinforcement learning
+    \begin{itemize}
+        \item Dynamické programování
+        \item Metody Monte Carlo
+    \end{itemize}
+\end{itemize}
+
+Spark obsauje nástroje klasifikace, regrese, klasterizace a~collaborative filtering (algoritmus doporučování obsahu). Umí získávat znaky z~datové sady, transformace, redukci dimenzionality, má nástroje k~správě ML pipelines. Umí ukládat algoritmy, modely a~pipelines.
+
+Knihovny:
+\begin{itemize}
+    \item MLlib: RDD
+    \item ML: DataFrame
+\end{itemize}
+
+ML Pipelines jsou high-level API nad DataFrames, jednoduchá kombinace více algoritmů. Každý z nich má stejné API pro specifikaci parametrů. Pipelines se skládají z~transformerů a estimátorů.
+
+Transformer vytváří DF z~jiných DF, má metodu \texttt{transform()}. Estimátor produkuje model, který se po naučení chová jako transformer. Učí se na DF, užívá k~tomu metodu \texttt{fit()}.
+
+\subsection{Klasifikace}
+\begin{itemize}
+    \item Logistická regrese
+    \begin{itemize}
+        \item Měří vztah mezi proměnnou závislou na kategorii a~jednou či více nezávislými proměnnými.
+        \item Logistická funkce: kumulativní distribuční funkce logistického rozdělení
+        \item Příklad: hledáme funkci, která určuje pravděpodobnost úspěchu u~zkoušky (prospěl/neprospěl) v~závislosti na počtu hodin studia.
+    \end{itemize}
+    \item Rozhodovací stromy
+    \begin{itemize}
+        \item Dělení dat do množin podle kritérií
+        \item Algoritmicky se hledají způsoby, jak data dělit
+    \end{itemize}
+\end{itemize}
+
+\subsection{Klasterizace}
+= Shlukování objektů
+\begin{itemize}
+    \item K-means
+    \begin{itemize}
+        \item Nalezne k-center a~ke každému přiřadí body, které mají tento střed nejblíže
+        \item Střed se iterativně posouvá podle těžiště přiřazených bodů
+    \end{itemize}
+\end{itemize}
+
+\subsection{Četné vzory}
+= \textit{Frequent Pattern Mining} nebo \textit{Frequent Pattern Discovery}
+
+\begin{itemize}
+    \item Užívá se k~doporučování (marketing), IDS/IPS, bioinformatika
+    \item Na základě některých znaků a~předchozích zkušeností se předpovídají další znaky
+    \item Příklad: V obchodě si lidi kupují cibule, brambory a~burgery naráz
+    \item V~e-shopu po naklikání cibule a~brambor může e-shop doporučit burgery, s~nějakou pravděpodobností úspěšně prodá další zboží
+    \item Algoritmus:
+    \begin{itemize}
+        \item 1.\,průchod: počítání párů klíčů a~hodnot v~transakcích, vytvoří \textit{header} tabulku
+        \item Další průchod: vytváří FP-strom přidáváním položek podle transakcí. Každou transakci prochází od globálně nejfrekventovanějších položek, přidává vztahy
+        \item Ořeže nesignifikantní vztahy
+        \item Vznikne komprimovaný strom
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{TF-IDF}
+= Jedna z~metod feature extraction, \textit{term frequency-inverse document frequency}
+
+\begin{itemize}
+    \item Zjišťuje významnost pojmu v~dokumentu v~rámci korpusu dokumentů
+    \item \(w_{i,j}=tf_{i,j}\times\log\left(\frac{N}{df_i}\right)\)
+    \item \(tf\) je \textit{term frequency}, je to počet výskytu slova \(i\) dělen počtem všech slov v~jednom dokumentu \(j\), více možných způsobů výpočtu
+    \item \(tf_{i,j}=\frac{n_{i,j}}{\sum_k n_{k,j}}\)
+    \item IDF = \textit{inverse document frequency}, \uv{jak vzácné je slovo v~korpusu dokumentů?}, čím blíže 0, tím častější slovo. Vzácná slova se blíží 1.
+    \item \(idf(w)=\log\left(\frac{N}{df_i}\right)\) -- logaritmus (počtu dokumentů vydělený počtem dokumentů toto slovo obsahující)
+    \item Čím vyšší TF-IDF skóre, tím relevantnější je slovo pro daný dokument
+\end{itemize}
+
 \section{Paralelní technologie – Apache Kafka, Nvidia Jetson, TPU.}
+
+\subsection{Kafka}
+\begin{itemize}
+    \item Distribuovaná streaming platforma
+    \item Škálovatelná
+    \item Odolná proti chybám
+    \item Víceméně standard real-time ukládání, přístupu a procesování dat
+    \item Užíváno v~Hadoop
+    \item Data buffer pro eventy i~real-time data
+    \item Ukládání do databází/souborů periodicky či ihned, vše je v~bufferech (proti chybám)
+    \item 3 hlavní možnosti:
+    \begin{itemize}
+        \item Umí přijímat (subscribe) i~vytvářet (publish) eventy
+        \item Ukládá streamy eventů na libovolný čas
+        \item Procesuje streamy ihned nebo zpětně
+    \end{itemize}
+    \item Běží na serveru, cloudu, v~kontejnerech, VM\dots
+    \item Eventy rozdělené podle \textit{topics}, ty mají libovolné množství producentů i~konzumentů
+    \item Topicy se kopírují na různé geolokace -- vysoká dostupnost (např.\,jde nastavit trojitou replikaci dat)
+\end{itemize}
+
+\subsection{Nvidia Jetson}
+Jedná se o řadu HW, využívá CUDA. Jsou to akcelerátory užívané k~vývoji a~provozu algoritmů strojového učení. Využívá \textit{JetPack SDK}, podporuje velké množství funkconalit (deep learning, strojové vidění, multimédia\dots) a~modulů. Lze z~nich tvořit roboty (označení ISAAC).
+
+\subsection{TPU}
+Google-custom, obvody přímo pro akcelereaci strojového učení
+\begin{itemize}
+    \item TPU mají 4 čipy, každé z~nich má 2 výpočetní jádra, která mají mnoho výpočetních jednotek (skalární, vektorové, maticové -- MXU)
+    \item Nemají cache, predikování větví, výpočty mimo pořadí, multiprocessing, spekulativní prefetch, multithreading ani přepínání kontextu
+    \item využívá complex instruction set (cisc)
+    \item Je tam:
+    \begin{itemize}
+        \item MXU (matrix multiplication unit)
+        \item UB (unified buffer) -- Jednotný buffer (24 MB), funguje jako registry
+        \item AU (activation unit) -- pro hardwarové aktivační funkce
+    \end{itemize}
+    \item Systolic array: spojení několika ALU (arithmetic logical unit), výstup jednoho je vstupem dalšího -- urychluje násobení matic
+    \item MXU má 65536 ALUs
+    \item Optimalizace na trénování modelů, výkonnější a~levnější než grafické karty pro násobení velkých matic
+    \item Verze 2 a~3, větší výkon (více TPU cores, více paměti, až k~2048 jader a~32 TiB paměti)
+    \item Nehodí se na větvící se programy a~na programy zpracovávající matice po elementech
+    \item Neumí vysokou přesnost (doubles)
+\end{itemize}
