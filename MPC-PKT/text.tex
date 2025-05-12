@@ -364,7 +364,7 @@ Dotaz na kořenový server probíhá formou anycast - odpoví pouze nejbližší
 
 DNSsec poskytuje rozšíření DNS o systém pro ověření autentičnosti obdržených záznamů.
 Záznamy jsou digitálně podepisovány, takže pokud důvěřujeme autorovi podpisu, tak můžeme důvěřovat i poskytnuté informaci.
-Data nejsou šifrována pouze podepsána.
+Data nejsou šifrována, pouze podepsána.
 DNSsec přidává doplňující informace v záznamech jako jsou RRSIG (Resource Record Signature, dig. podpis), DNSKEY (DNS Public Key), DS (Delegation or Designated Signer) a NSEC/NSEC3 sloužící jako záznam zasílaný v odpovědi zpět v případě, že doména je DNS serveru neznámá.
 
 
@@ -376,7 +376,7 @@ DNSsec přidává doplňující informace v záznamech jako jsou RRSIG (Resource
 Je doplňující technika k protokolu DNS vyvinutá Applem.
 Je součástí skupiny protokolů ZeroConf, což jsou protokoly sloužící k nastavení sítě bez manuálních zásahů administrátorů/uživatelů.
 
-Byl vytvořen aby bylo možné posílat dotazy podobné DNS dotazům pomocí multicastu a bylo by možné aby se okolní stanice byly schopné podílet na odpovědi.
+Byl vytvořen, aby bylo možné posílat dotazy podobné DNS dotazům pomocí multicastu a bylo by možné, aby se okolní stanice byly schopné podílet na odpovědi.
 Umožňuje stanicím si zvolit DNS název (nazev.local), který bude využíván pro lokální označování a adresování a umožní tak i bez veřejně platných názvů usnadnění komunikace s využitím lokálních jmenných názvů.
 Předpokládá se že doménové jméno končící na .local je platné pouze v lokální síti.
 
@@ -547,8 +547,8 @@ Stromy se dělí na dva základní druhy:
 \subsubsection{RVP Reverse Path Forwarding}
 
 RPF je mechanizmus, který umožňuje multicastovým směrovačům správně předat pakety skrz distribuční stromy a zároveň se vyvarovat tvoření smyček.
-Směrovač u každého paketu sleduje zda směr odkud paket přišel odpovídá cestě ke zdroji dat dané skupiny.
-Pokud ano přepošle je přes svá rozhraní které směřují příjemcům.
+Směrovač u každého paketu sleduje, zda směr, odkud paket přišel, odpovídá cestě ke zdroji dat dané skupiny.
+Pokud, ano přepošle je přes svá rozhraní které směřují příjemcům.
 
 \subsubsection{PIM Protocol Independent Multicast}
 
@@ -589,8 +589,8 @@ Třída provozu nastavuje prioritu paketu, identifikace toku dat umožňuje zjed
 \subsection{Rozšiřující záhlaví}
 
 Pro každou rozšiřující operaci v IPv6 je zřízena samostatná jednoúčelová hlavička.
-V případě kdy je potřeba více operací tak se tyto hlavičky skládají za sebe.Podmínka je aby v každém rozšiřujícím záhlaví byla informace o typu následujícího záhlaví.
-Poslední záhlaví obsahuje v tomto poli obsahuje informace o typu přenášených dat.
+V případě kdy je potřeba více operací tak se tyto hlavičky skládají za sebe. Podmínka je, aby v každém rozšiřujícím záhlaví byla informace o typu následujícího záhlaví.
+Poslední záhlaví obsahuje v tomto poli obsahuje informace o typu přenášených dat (protokol vyšší vrstvy).
 
 \subsection{Adresace}
 
@@ -657,12 +657,12 @@ Dále může sloužit k:
 \end{itemize}
 
 ND využívá ke všem operacím ICMPv6 zprávy.
-Postup ND je podobný jako v případě ARP avšak jsou změny jsou provedeny v přejmenování zpráv (výzva sousedovi -- neighbor solicitation, ohlášení souseda -- neighbor advertisement).
+Postup ND je podobný jako v případě ARP, avšak jsou změny jsou provedeny v přejmenování zpráv (výzva sousedovi -- neighbor solicitation, ohlášení souseda -- neighbor advertisement).
 Pro zasílání zpráv je využívána multicast skupina s prefixem ff02:0:0:0:0:1:ff00::/104.
 Posledních 24 bitů adresy se vytvoří tak že z hledané adresy se odebere nejnižších 24 bitů.
-Tato adresa se poté nazývá vyzývavý uzel.
+Tato adresa se poté nazývá vyzývaný uzel.
 Stanice musí při startu síťového uzlu vstoupit do všech skupin odpovídajících adresám vyzývaného uzlu.
-Takže zprávu výzva sousedovi nedostane každý v síti, ale jen stanice které mají posledních 24 bitů shodných.
+Takže zprávu \textit{výzva sousedovi} nedostane každý v síti, ale jen stanice které mají posledních 24 bitů shodných.
 
 K ověřování platnosti adresy se využívá detekce dosažitelnosti souseda.
 Uzel v IPv6 aktivně monitoruje stav sousedů.
@@ -680,10 +680,10 @@ Informace umožní stanicím v síti vědět, kde se nacházejí, jak se mají c
 
 
 Při odesílání paketu se stanice nejdřív podívá do lokální cache, zda nemá už záznam o komunikaci.
-Pokud ne zjišťuje na základě seznamu prefixů zda je stanice lokální nebo vzdálená.
-Pokud je lokální tak se aplikuje ND.
-Pokud není je zvolen vhodný implicitní směrovač a na něj odeslat paket.
-Pokud zvolený směrovač není vhodný tak zašle ICMPv6 zprávu typu 137 (přesměrování), obsahujicí kam by se měl paket odeslat.
+Pokud ne, zjišťuje na základě seznamu prefixů, zda je stanice lokální nebo vzdálená.
+Pokud je lokální, tak se aplikuje ND.
+Pokud není, je zvolen vhodný implicitní směrovač a na něj odeslat paket.
+Pokud zvolený směrovač není vhodný, tak zašle ICMPv6 zprávu typu 137 (přesměrování), obsahujicí kam by se měl paket odeslat.
 
 \subsection{DHCPv6}
 
@@ -774,7 +774,7 @@ Vychází z představy že v rámci každého AS je alespoň jedna brána pově�
 Tuto bránu vybírá správce AS a je označena jako externí brána.
 Tato brána pak komunikuje s ostatními externími branami jiných AS.
 
-Protokol umožňuje dohodu mezi dvěma AS jestli si budou směrovací informace vůbec vyměňovat.
+Protokol umožňuje dohodu mezi dvěma AS, jestli si budou směrovací informace vůbec vyměňovat.
 Dále je umožněno, aby AS pravidelně testoval dostupnost ostatních AS.
 Hlavní úkol je avšak pravidelný přenos směrovacích údajů a informací o průběžných změnách mezi AS.
 
@@ -909,7 +909,7 @@ Na rozdíl od tranzitu, kdy přes toto spojení může procházet i přenos smě
 \clearpage
 \section{Teorie konečných automatů a její použití v oblasti komunikačních protokolů, způsoby grafické reprezentace.}
 
-Každý systém lze popsat pomocí stavů vstupních veličin X, kde X se mění v závislosti na čase a pomocí výstupních veličin Y, jejich hodnoty jsou zpravidla závislé na vstupních veličinách.
+Každý systém lze popsat pomocí stavů vstupních veličin X (vstupní vektor), kde X se mění v závislosti na čase, a pomocí výstupních veličin Y (výstupní vektor), jejich hodnoty jsou zpravidla závislé na vstupních veličinách.
 Zároveň se dá předpokládat že v systému existují vnitřní stavy označované jako Q.
 Každá veličina X, Y a Q může být v systému 1-n, kde je konečné diskrétní číslo.
 Pro každou veličinu může být konečné číslo jiné.
@@ -919,14 +919,14 @@ Existují dva typy systémů (Kombinační sítě a sekvenční sítě).
 
 Kombinační sítě jsou charakterizovány jednoznačným přiřazením výstupní kombinace na každou vstupní kombinaci.
 Tyto systémy nemají žádné vnitřní stavy Q.
-Vnitřní stavy Q jsou nahrazeny funkcí f, která jednoznačně převádí vstupní vektor X na výstupní vektor Y.
+Vnitřní stavy Q jsou nahrazeny funkcí f, která jednoznačně převádí vstupní vektor X na výstupní vektor Y. (Všechny součásti tedy jsou: vstupy, výstupy a~funkce převodu vstupu na výstup.)
 
 \subsection{Sekvenční sítě}
 
 Sekvenční sítě mají nějak zakomponovanou vnitřní paměť, která jim umožňuje udržovat si informaci o vnitřním stavu Q.
 Hodnoty výstupního vektoru Y nezávisí pouze na vstupním vektoru X ale také na vnitřním stavu Q.
 Systém se skládá ze vstupních vektorů X, výstupních vektorů Y, vnitřních stavů Q (jsou dané pamětí obsahující informace o předešlých stavech) a operací.
-V rámci operace si pro každé $n\ge0$ síť spočítá pomocí vstupního vektoru X v daném kroku a aktuálního vnitřního stavu Q nový vnitřní stav Q.
+V rámci operace si pro každé $n\ge0$ síť spočítá pomocí vstupního vektoru X v daném kroku a aktuálního vnitřního stavu Q nový vnitřní stav Q. (Všechny součásti: vstupy, výstupy, vnitřní stavy, operace -- ta je definovaná přechodovou a~výstupní funkcí.) 
 
 Algoritmus sekvenční sítě musí mít vlastnosti:
 \begin{itemize}[noitemsep]
@@ -939,6 +939,25 @@ Algoritmus sekvenční sítě musí mít vlastnosti:
 \textbf{Tabulka přechodů} bude obsahovat výchozí stav $Q_n$ a následný stav $Q_{n+1}$, který byl vyvolán vstupem~X.
 
 \textbf{Tabulka výstupů}  obsahuje výchozí stav Q a odezvu na výstup Y vyvolanou jedním z možných vstup~X.
+
+\subsection{Užití v~oblasti komunikačních protokolů}
+Tento model lze užít při návrhu protokolů. Návrh protokolu se skládá ze tří částí:
+\begin{itemize}
+    \item Definice problému, který má protokol řešit (včetně specifikace ISO/OSI vrstvy)
+    \item Specifikace chování
+    \begin{itemize}
+        \item Typ komunikace: Klient-server? P2P?
+        \item Typy zpráv
+        \item Schéma chování stran
+        \item Schéma výměny zpráv
+        \item Chování komunikujících stran v~závislosti na zprávy: popis stavovým automatem
+        \item Transportní protokol?
+        \item Zabezpečení přenosu?
+        \item Nestandardní situace? -- modelaování stavovými automaty
+    \end{itemize}
+\end{itemize}
+
+Jednotlivé protokoly lze reprezentovat konečnými automaty, při návrhu je dobré ohlídat veškeré možné vstupy a~vnitřní stavy a~co nejlépe protokol popsat pro snadnou specifikaci chování.
 
 \subsection{Grafická reprezentace automatů}
 
