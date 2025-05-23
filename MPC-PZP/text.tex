@@ -1,47 +1,54 @@
 \section{Paralelismus – využití, paralelní technologie.}
+\subsection{Souběžnost vs paralelismus}
+Souběžné(Concurrent) programy jsou programy vykonávající úlohy nezávisle na sobě a mohou se odehrávat na jednom jádře.
+Paralelní je program právě tehdy když jeden program vykonává více úloh zároveň. Všechny paralelní programy jsou 
+souběžné, ale ne všechny souběžné programy jsou paralelní.
+
+\subsection{Využití}
+Ne pro všechno je vhodný. Už není možné pokračovat s trendem Moorova zákona (každých několik let se zdvojnásobí počet tranzistorů
+v integrovaných čipech). Je nutné využít více jader pro zvýšení výkonnosti. Zvyšování frekvence vyžaduje vyšší napájení a jak 
+takový čip chladit?
+
+Příklady využití: 
 \begin{itemize}
-    \item Neplést \textit{parallelism} (využívá více jader, více úloh naráz) a~\textit{concurrency} (může se odehrávat i~na jediném jádře)
-    \item Všechny paralelní programy jsou konkurentní, ne všechny konkurentní programy jsou paralelní
-    \item Využití: není možné pokračovat s~trendem Moorova zákona\footnote{je to doopravdy jen pozorování, každých několik let se zdvojnásobil počet tranzistorů v~integrovaných čipech}, je nutné využít více jader pro zvýšení výkonnosti (zvýšení frekvence vyžaduje vyšší napájení, jak ale takový čip chladit?)
-    \item Ne v~každé situaci je paralelismus výhodný
+    \item Simulace
+    \item Renderování grafiky a grafické zpracování
+    \item Big data
+    \item AI
 \end{itemize}
 
-\subsection{paralelní technologie}
+\subsection{Paralelní technologie}
 \begin{itemize}
     \item CPU (vícejádrový / vícevláknový (hyperthreading))
     \item GPU
+    \item Distribuované systémy - clustery, grid computing, cloud computing
 \end{itemize}
 
 \section{CPU – návrh paralelního programu, vlákna a procesy, synchronizace dat (Lock, RLock, Semaphore).}
-Je potřeba zjistit úzká hrdla programu. Výpočty na sobě nezávislé mohou být paralelizované.
+\subsection{Návrh paralelního programu}
+\begin{itemize}
+    \item Nalezení částí, které mohou být paralelizovány
+    \item Rozdělení úloh do vláken/procesů
+    \item Ošetření přístupu ke sdíleným datům
+    \item Ošetření deadlocků a race conditions
+\end{itemize}
 
 \subsection{Vlákna a~procesy}
 Procesy mají vlastní paměťový prostor (kontext). Vlákna tento kontext mezi sebou sdílí, jeden proces může mít více vláken.
 
-Procesy
-\begin{itemize}
-    \item Vytvoří se voláním \texttt{fork()}, \texttt{system()}, \texttt{popen()} nebo dalšími
-    \item Minimální sdílení dat mezi rodičovským a \textit{child} procesem, běží na sobě nezávisle
-\end{itemize}
+\subsubsection{Procesy}
+Každý proces má svůj vlastní paměťový prostor (halda a datové segmenty). Procesy mezi sebou nesdílí paměť. Mohou mezi sebou komunikovat pomocí meziprocesové komunikace(IPC) pomocí front, socketů, rour.  Nové procesy se vytváří pomocí \texttt{fork()}, \texttt{popen()} nebo \texttt{system()}. Child procesy běží nezávisle na rodičovském procesu.
 
-Vlákna
-\begin{itemize}
-    \item Je to součást procesu, v~něm sdílí prostředky
-    \item Jsou vhodné k~vykonání více operací nad sdílenými daty procesu
-    \item Vlákna mohou být plně konkurentní
-    \item Vhodná k~obsluze I/O (celý proces nemusí být blokován)
-    \item Vlákna sdílí globální proměnné, ale mohou mít i~lokální proměnné nepřístupné jiným vláknům
-    \item Je nutné je synchronizovat (mutual exclusion = mutex) pro zabránění souběhu
-    \item Python je \underline{\textbf{stoopid}}, má GIL (Global Interpreter Lock) a~z~jediného procesu dokáže nechat běžet jen jediné vlákno. Má low-level (\texttt{thread}) a~high-level knihovnu (\texttt{threading})
-    \item Stavy Python vláken:
-    \begin{itemize}
-        \item initial state
-        \item runnable
-        \item running
-        \item blocked
-        \item finished
-    \end{itemize}
-\end{itemize}
+\subsubsection{Vlákna}
+Jsou součástí procesu a sdílí celý paměťový prostor procesu. Je to softwarová abstrakce, která umožňuje provádění více souběžných operací na stejných datech. Vlákna mohou být plně souběžná. 
+Jejich použití je vhodné pro obsluhu I/O. Mimo sdíleného prostoru mají i svůj vlastní paměťový prostor v podobě zásobníku a registrů. Zásobník vs halda - zásobník pevná velikost, alokace/dealokace změnou pointeru, halda proměnná velikost, doalokování/odalokování paměti podle potřeby. Zásobník ukládá dočasná lokální data do RAM, registry obsahují návratové adresy, stav programu, mezivýsledky apod. Je nutné vlákna synchronizovat, aby nedošlo k inkonzistencím v paměti (moment, kdy 2 vlákna operují nad stejnou pamětí), tzv. mutual exclusion (mutex).
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\linewidth]{pict/multithread.png}
+    \caption{Multi-threaded proces}
+\end{figure}
+
+Python je debílek, protože má GIL (Global Interpreter Lock) a z jednoho procesu může běžet jenom jedno vlákno. Má 2 knihovny, low-level \texttt{thread} (jednoduché mutex locks, vytváření threadů, zabíjení threadů, signály může chytat jenom hlavní vlákno) a high-level \texttt{threading} (víc locků, lepší fíčury). Stavy python vláken: inital state (před startem), runnable(po startu, ale čeká na místo v procesoru), running(když scheduler vybere vlákno k tomu aby dělalo bžum bžum), blocked (čeká na zdroje využívané jiným vláknem), dead(když run() metoda doběhne. Jádro se zničí a nemůže být provedeno znovu.)
 
 \subsection{Lock}
 \begin{itemize}
@@ -76,14 +83,14 @@ Vlákna
     \item Vlákno provádí jedny instrukce (kernel) nad jednou částí dat
     \item Seskupení do Warpů: 32 jader má stejnou instrukci, ale různá data
     \item Warpy jsou lock-step (dělají stejné kroky ve stejný čas)
-    \item SIMD (single instruction set, multiple data sets)
+    \item SIMT (single instruction set, multiple threads) všechny vlákna ve warpu vykonávají stejnou instrukci, ale s jinými daty
     \item Žadný context switching, každé vlákno má své registry, jejich velikost limituje počet vláken
     \item Má \texttt{threadIdx}, které může být 1D až 3D
 \end{itemize}
 
 \subsection{Bloky}
 \begin{itemize}
-    \item Skupina vláken, sdílí instrukce~a datas
+    \item Skupina vláken, sdílí instrukce~a data
     \item Vykonáván na jediném SM
     \item Má \texttt{blockIdx}, které může být 1D až 3D
     \item Mohou se umisťovat do fronty bloků, ty se pak rozdělují na SM
@@ -96,18 +103,32 @@ Vlákna
 \end{itemize}
 
 \subsection{Streaming Multiprocessor}
+Základní stavební blok GPU, základní blok pro provádění paralelních výpočtů. 
 Popis Nvidia GV100 (jedna z~možných architektur)
 \begin{itemize}
-    \item Jádra FP32 (64 ks), FP64 (32 ks), INT32\dots
+    \item Jádra FP32 (64 ks), FP64 (32 ks), INT32 Jádra, L1 shared memory, Register files
     \item Rozdělen na 4 procesní bloky, každý má čtvrtinu jader, registry, warp scheduler, L0 instruction cache\dots
     \item Warp (32 vláken) se posílá na vybraná jádra SM
     \item L1 cache (jedna na SM) rozdělena na instrukční a~datovou
-    \item Grafické karty mají desítky SM
+    \item Grafické karty mají desítky až stovky SM
 \end{itemize}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{pict/SM.png}
+    \caption{SM}
+    \label{fig:SM}
+\end{figure}
 
 \section{GPU – paměti – rychlost, velikost, použití (vlákno, blok, mřížka).}
 GPU má vlastní DRAM, je menší než DRAM v~PC, ale je do ní rychlejší přístup.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{pict/mem.png}
+    \caption{Paměť v GPU}
+    \label{fig:enter-label}
+\end{figure}
 \subsection{Registry}
 \begin{itemize}
     \item Nejrychlejší
@@ -144,6 +165,14 @@ GPU má vlastní DRAM, je menší než DRAM v~PC, ale je do ní rychlejší př�
     \item \texttt{\_\_global\_\_} keyword
 \end{itemize}
 
+\subsection{Lokální paměť}
+\begin{itemize}
+    \item Paměť která se doalokuje z kernelu
+    \item Lokální paměť je dostupná pouze vláknu, které si ji zaalokovalo
+    \item Každé vlákno exekuující kernel bude mít svoji vlastní lokální paměť
+    \item Stejně jako globální paměť je v DRAM a má podobnou latenci
+    \item Automaticky se použije při přetečení registrů
+\end{itemize}
 \subsection{DRAM}
 \begin{itemize}
     \item Přístup z~celé mřížky
@@ -155,13 +184,28 @@ GPU má vlastní DRAM, je menší než DRAM v~PC, ale je do ní rychlejší př�
     \end{itemize}
     \item Jednotky až desítky GB
     \item Stovky cyklů potřebných k~přístupu, až 500 GB/s bandwidth
-    \item DDR5
+    \item GDDR6/7
 \end{itemize}
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|c|c|c|} \hline
+        Paměť & Přístup vlákno & Přístup blok & Přístup mřížka \\ \hline
+        Registr & Ano & Ne & Ne \\ \hline
+        Sdílená paměť & Ano & Ano & Ne \\ \hline
+        L2 Cache  & Ano & Ano & Ano \\ \hline
+        Globální paměť & Ano & Ano & Ano  \\ \hline
+        Konstantní paměť & Ano & Ano & Ano \\ \hline
+        Lokální paměť & Ano & Ne & Ne \\ \hline
+    \end{tabular}
+    \caption{Přístupy do pamětí}
+    \label{tab:my_label}
+\end{table}
 
 \subsection{Rozdíl mezi konstantní a~pamětí jen pro čtení}
 \begin{itemize}
-    \item Konstantní paměť se nakopíruje do každé cache stejně
-    \item Paměť jen pro čtení může obsahovat velké množství dat, které se cachuje jen po částech (jen část vektoru relevantní pro blok)
+    \item Konstantní paměť, druh cache pro celé SM. Sdílená na všech jádrech na SM. Zapsaná při kompilaci před spuštěním kernelu. Definuje se pomocí \texttt{\_\_constant\_\_} 
+    \item Paměť jen pro čtení může obsahovat velké množství dat, uložená v globální paměti a čitelná z read-only cache. Například pro velké pole, do cache bloku se načte jen relevatní část, kterou bude zpracovávat.
 \end{itemize}
 
 \subsection{Použití cache}
@@ -175,14 +219,14 @@ GPU má vlastní DRAM, je menší než DRAM v~PC, ale je do ní rychlejší př�
 \subsection{Synchronizace}
 \subsubsection{Synchronizace warpu a bloku}
 \begin{itemize}
-    \item Všechna vlákna warpu jsou synchronizovaná
-    \item V bloku lze vlákna synchronizovat funkcí CUDA \texttt{\_\_syncthreads();}, tato funkce tvoří bariéru blokující, dokud všechna vlákna bloku nedoběhnou do této bariéry
-    \item Může nastat deadlock, pokud tento statement není dosažen všemi vlákny kvůli větvení
-    \item Pořadí bloků garantované není
+    \item Všechna vlákna warpu jsou synchronizovaná, všechna vykonávána současně, není potřeba je synchronizovat explicitně.
+    \item V bloku lze vlákna synchronizovat funkcí CUDA \texttt{\_\_syncthreads();}, tato funkce tvoří bariéru blokující, dokud všechna vlákna bloku nedoběhnou do této bariéry.
+    \item Může nastat deadlock, pokud \texttt{\_\_syncthreads} není dosažen všemi vlákny kvůli větvení.
+    \item Pořadí bloků garantováno není. Tudíž nejde předpokládat synchronizaci mezi bloky.
     \item Další synchronizační funkce v bloku:
     \begin{itemize}
         \item \texttt{int \_\_syncthreads\_count(predicate)} -- kolik predikátů je pravdivých
-        \item \texttt{int \_\_syncthreads\_and(predicate} -- vrátí \texttt{true}, pokud jsou všechny predikáty pravdivé
+        \item \texttt{int \_\_syncthreads\_and(predicate)} -- vrátí \texttt{true}, pokud jsou všechny predikáty pravdivé
         \item \texttt{int \_\_syncthreads\_or(predicate)} -- vrátí \texttt{true}, pokud jsou aspoň některé predikáty pravdivé
     \end{itemize}
     \item taky existuje \texttt{\_\_threadfence\_block();} -- blokuje, dokud všechna vlákna v~bloku nevidí provedené zápisy v~globální a~sdílené paměti
@@ -240,6 +284,8 @@ V kódu hosta volání \texttt{context.synchronize()}, zajistí, že všechny as
     \item Jsou to stavební kameny pro složitější algoritmy
     \item Např.\,Map: aplikuje funkci na všechny prvky listu, snadno paralelizovatelné
     \item Další příklad: Scan (nový vektor, má o 1 méně hodnot, v~každém poli je součet hodnot původního pole po aktuální index)
+    \item Stencil výpočet prvků na základě sousedů
+    \item Histogram/Binning kategorizace vstupů - nutny atomické operace
 \end{itemize}
 \subsubsection{Redukce}
 \begin{itemize}
@@ -362,74 +408,80 @@ global void sum_warp_kernel_shfl_down(int *a)
 \section{Apache Spark – vlastnosti, RDD, transformační funkce.}
 \subsection{Vlastnosti}
 \begin{itemize}
-    \item Slovník:
+    \item \textbf{Slovník:}
     \begin{itemize}
         \item Job: Kód, co běží, vykonává funkci
         \item Stage: Každý job má stages, jsou buď typu map nebo reduce
+        \item TaskSet: Skupina tasků tvořící jednu stage
         \item Task: Každá stage má jeden task na partition, je vykonaná na jednom stroji
         \item DAG: Directed Acyclic Graph, je to graf operací
         \item Executor: Proces vykonávající task
         \item Master: Stroj, na kterím běží Driver
         \item Slave: Stroj, na kterém běží executor
         \item Partition: část RDD, pracuje s~ní jeden executor
+        \item Shuffle: operace vyžadující přenos dat mezi nodes(groupByKey, reduceByKey, join)
     \end{itemize}
-    \item Komponenty:
+    \item \textbf{Komponenty:}
     \begin{itemize}
         \item Driver: Tvoří SparkContext, komunikuje s cluster managerem, scheduluje tasks
         \item Executor(s): Spouštějí tasks, uloží data do paměti, na disk (Interakce s úložišti)
         \item Cluster Manager: Spravuje cluster, technologie: Mesos, YARN, Spark Standalone
+        \item SparkSession: Vstupní bod do Spark aplikací od Spark 2.0, pro většinu aplikací nahrazuje SparkContext
     \end{itemize}
-    \item Driver:
+    \item \textbf{Driver:}
     \begin{itemize}
         \item Více částí (RDD Graph, DAGScheduler, Task Scheduler, Scheduler Backend), mění kód na jobs, ty vykoná na clusteru
     \end{itemize}
-    \item Executor:
+    \item \textbf{Executor:}
     \begin{itemize}
         \item Má block manager, ten získává bloky jak lokálně, tak vzdáleně
     \end{itemize}
-    \item Spark Context:
+    \item \textbf{Spark Context:}
     \begin{itemize}
         \item Reprezentuje spojení se Spark clusterem
         \item umožňuje vytvářet RDD, akumulátory a broadcast variables
     \end{itemize}
-    \item DAG Scheduler:
+    \item \textbf{DAG Scheduler:}
     \begin{itemize}
         \item Vytvoří DAG stagů, předá je taskscheduleru
-        \item Určí preferované místo pro tasks
+        \item Určí preferované místo pro tasks (na základě stavu cache a lokací souborů)
     \end{itemize}
-    \item Task Scheduler:
+    \item \textbf{Task Scheduler:}
     \begin{itemize}
         \item Posílá tasks clusteru, spustí je, získá výsledky, retry při chybách\dots
     \end{itemize}
-    \item Scheduler Backend
+    \item \textbf{Scheduler Backend}
     \begin{itemize}
-        \item Interface pro scheduling system (třeba YARN)
+        \item Interface pro scheduling system, dovoluje různé implementace (třeba YARN)
     \end{itemize}
-    \item Block Manager
-    \item SparkConf: objekt s~informacemi o~aplikaci
-    \item Využívá lazy evaluation
+    \item \textbf{Block Manager}: poskytuje rozhraní pro ukládání bloků do různých uložišť (paměť, disk, off-heap)
+    \item \textbf{SparkConf}: objekt s~informacemi o~aplikaci
+    \item Využívá lazy evaluation - výpočty nedělá hned, ale až je to potřeba
+    \item Podpora více jazyků - Scala, Python, Java, R
+    \item Odolnost proti chybám, může vytvořit ztracená data pomocí lineage (graf, který trackuje operace na input datech)
 \end{itemize}
 
 \subsection{RDD}
 = Resilient Distributed Dataset
-\begin{itemize}
-    \item Je typovaný
-    \item Může být rozdělený na partitions
-    \item Immutable
-    \item Odolný proti chybám
-    \item Paralelní
-    \item Vytvoření z~úložiště nebo z~jiného RDD, uchovává informace o~rodičích (optimalizace pipeline nebo opakování při chybě)
-    \item \texttt{collect()} vrátí data z~clusteru
-    \item \texttt{glom()} metoda dělí data na partitions
-    \item Persistence: dají se uložit na později, znovupoužít
-\end{itemize}
+\subsubsection{Vytvoření}
+Buď pomocí \texttt{parallelize()} z lokálních dat, z úložiště pomocí \texttt{textFile()} a \texttt{wholeTextFiles()}, nebo transformací jiného RDD. 
+
+\subsubsection{Vlastnosti}
+ RDD je immutable, jakmile se vytvoří, nedá se měnit. Je typovaný(RDD[Int], RDD[String]). Může být rozdělený na partice(běžet na více uzlech). Každá partice je paralelní. RDD si uchovává informace o
+ svých rodičích a transformačních operacích. Při selhání se může obnovit podle DAG.
+
+\subsubsection{Persistence}
+Různé úrovně(MEMORY\_ONLY, MEMORY\_and\_DISK, DISK\_ONLY)
+
+\subsubsection{Metody}
+\texttt{collect()} stáhne data z clusteru do driveru, \texttt{glom()} seskupí prvky podle particí do seznamů
 
 Další typy:
 \begin{itemize}
     \item Shared variables:
     \begin{itemize}
-        \item Broadcast variables: ve všech nodes
-        \item Accumulators: do nich se ukládají data z~různých míst (výsledek součtu apod.)
+        \item Broadcast variables: hodnoty sdílené ve všech uzlech
+        \item Accumulators: proměnné pro agregaci hodnot z různých uzlů
     \end{itemize}
     \item DataFrame (tabulka podobná SQL)
 \end{itemize}
@@ -443,7 +495,7 @@ Další typy:
     \item Map: aplikuje funkci na RDD, z výsledků nový RDD (existuje i~flatMap -- každá funkce může vrátit sekvenci, ty se spojí)
     \item union, intersection, subtraction
     \item join
-    \item Jsou úzké (pipelinable, každá partition závislá maximálně na jedné partition z~předchozího kroku) nebo široké (shuffle)
+    \item Jsou úzké (pipelinable, každá partition závislá maximálně na jedné partition z~předchozího kroku) nebo široké (shuffle - přesun dat mezi uzly)
 \end{itemize}
 
 \section{Apache Spark – akumulátory, DataFrame, zpracování streamovaných dat.}
@@ -463,8 +515,8 @@ Další typy:
         \item Transformace jsou lazy (nepočítají se hned)
         \item DF se spočítá až po spuštění akce nad tímto DF
     \end{itemize}
-    \item Persistence: dají se uložit do pamměti i~na disk
-    \item Spark SQL, silně optimalizované, má optimizer Catalyst postavená na Scale
+    \item Persistence: dají se uložit do paměti i~na disk
+    \item Spark SQL, silně optimalizované, má optimizer Catalyst postavený na Scale.
     \item přejmenování sloupců: \texttt{withColumn}
     \item Operace jak SQL
 \end{itemize}
@@ -565,14 +617,17 @@ Transformer vytváří DF z~jiných DF, má metodu \texttt{transform()}. Estimá
 \begin{itemize}
     \item Logistická regrese
     \begin{itemize}
-        \item Měří vztah mezi proměnnou závislou na kategorii a~jednou či více nezávislými proměnnými.
-        \item Logistická funkce: kumulativní distribuční funkce logistického rozdělení
+        \item Měří vztah mezi proměnnou závislou na kategorii a~jednou či více nezávislými proměnnými. Toto provádí pomocí logistické funkce, což je kumulativní distribuční funkce logistického rozložení
         \item Příklad: hledáme funkci, která určuje pravděpodobnost úspěchu u~zkoušky (prospěl/neprospěl) v~závislosti na počtu hodin studia.
     \end{itemize}
     \item Rozhodovací stromy
     \begin{itemize}
-        \item Dělení dat do množin podle kritérií
-        \item Algoritmicky se hledají způsoby, jak data dělit
+        \item Dělení dat do množin podle kritérií. Data se rozdělují pomocí algoritmického hledání způsobů jak data rozdělit na základě různých podmínek.
+    \end{itemize}
+    \item Regrese
+    \begin{itemize}
+        \item Použití když můžou výstupy mít nějakou numerickou hodnotu v rozsahu
+        \item Lineární regrese, Generalizovaná lineární regrese, Random forest... 
     \end{itemize}
 \end{itemize}
 
@@ -583,6 +638,10 @@ Transformer vytváří DF z~jiných DF, má metodu \texttt{transform()}. Estimá
     \begin{itemize}
         \item Nalezne k-center a~ke každému přiřadí body, které mají tento střed nejblíže
         \item Střed se iterativně posouvá podle těžiště přiřazených bodů
+    \end{itemize}
+    \item Gaussian mixture
+    \begin{itemize}
+        \item Modeluje data jako směs více normálních rozložení
     \end{itemize}
 \end{itemize}
 
@@ -621,7 +680,7 @@ Transformer vytváří DF z~jiných DF, má metodu \texttt{transform()}. Estimá
 
 \subsection{Kafka}
 \begin{itemize}
-    \item Distribuovaná streaming platforma
+    \item Distribuovaná streaming platforma pro zpracování dat v reálném čase
     \item Škálovatelná
     \item Odolná proti chybám
     \item Víceméně standard real-time ukládání, přístupu a procesování dat
@@ -640,14 +699,14 @@ Transformer vytváří DF z~jiných DF, má metodu \texttt{transform()}. Estimá
 \end{itemize}
 
 \subsection{Nvidia Jetson}
-Jedná se o řadu HW, využívá CUDA. Jsou to akcelerátory užívané k~vývoji a~provozu algoritmů strojového učení. Využívá \textit{JetPack SDK}, podporuje velké množství funkconalit (deep learning, strojové vidění, multimédia\dots) a~modulů. Lze z~nich tvořit roboty (označení ISAAC).
+Jedná se o řadu HW pro edge computing, robotiku, AI a IoT. ARM procesory a nvidia GPU. Jsou to akcelerátory užívané k~vývoji a~provozu algoritmů strojového učení. Využívá \textit{JetPack SDK}(Ubuntu based OS), podporuje velké množství funkcionalit (deep learning, strojové vidění, multimédia\dots) a~modulů. Lze z~nich tvořit roboty (označení ISAAC). Nejvíce se používají pro embedded a mobilní aplikace. 
 
 \subsection{TPU}
-Google-custom, obvody přímo pro akcelereaci strojového učení
+Tensor processing unit je ASIC(application-specific integrated circuit) vyvinutý Googlem pro akceleraci machine learningu.
 \begin{itemize}
     \item TPU mají 4 čipy, každé z~nich má 2 výpočetní jádra, která mají mnoho výpočetních jednotek (skalární, vektorové, maticové -- MXU)
-    \item Nemají cache, predikování větví, výpočty mimo pořadí, multiprocessing, spekulativní prefetch, multithreading ani přepínání kontextu
-    \item využívá complex instruction set (cisc)
+    \item Nemají cache, predikování větví, výpočty mimo pořadí, multiprocessing, spekulativní prefetch, multithreading ani přepínání kontextu, protože jsou to věci pro obecnou použitelnost zařízení, TPU má jeden specifický účel tím pádem je nepotřebuje
+    \item využívá complex instruction set (CISC) - Má komplexní instrukci multiply-and-add, která je výhodná pro TPU výpočty. Má speciální high-level instrukce pro rychlejší exekuci inference neuronových sítí.
     \item Je tam:
     \begin{itemize}
         \item MXU (matrix multiplication unit)
@@ -655,9 +714,12 @@ Google-custom, obvody přímo pro akcelereaci strojového učení
         \item AU (activation unit) -- pro hardwarové aktivační funkce
     \end{itemize}
     \item Systolic array: spojení několika ALU (arithmetic logical unit), výstup jednoho je vstupem dalšího -- urychluje násobení matic
-    \item MXU má 65536 ALUs
+    \item MXU má 256x256(65536) ALU, může za jeden cyklus provést 65536x operaci multiply-and-add
     \item Optimalizace na trénování modelů, výkonnější a~levnější než grafické karty pro násobení velkých matic
-    \item Verze 2 a~3, větší výkon (více TPU cores, více paměti, až k~2048 jader a~32 TiB paměti)
+    \item Tohle všechno platí pro verzi 1. Teď už je verze 6 a je ohlášena verze 7
+    \item 
     \item Nehodí se na větvící se programy a~na programy zpracovávající matice po elementech
     \item Neumí vysokou přesnost (doubles)
 \end{itemize}
+
+A teď sekce jak vypadá TPU dnes. TPU v6 stojí na jiné architektuře. TPU v1 mělo jenom MMU jednotky a malou paměť, jako hlavní paměť se používala DRAM připojená přes PCIe. Dnešní TPU v6 je kompletní System on a Chip, který optimalizuje nejen inferenci, ale i trénink. TPU v1 má nízkou přesnost pouze int8, dnešní TPU v6 podporuje bfloat16 a float32. v1 nemělo paměť na čipu, dnešní TPU mají desítky GB HBM(High Bandwith Memory), což je speciálně skládaná paměť s velkou šířkou sběrnice(1024-bit vs 64-bit DDR4), která je umístěna velmi blízko procesoru pro nízkou latenci, kde v6 TPU má mít až 819GBps bandwidth. TPU se nyní již dají škálovat pomocí optical mesh, která propojuje jednotlivé TPU pro rychlou a škálovatelnou komunikaci. Možné již deployovat čistě v cloudu jako TPU pody pro výpočetní výkon.
