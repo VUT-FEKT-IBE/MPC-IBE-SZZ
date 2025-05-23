@@ -44,7 +44,7 @@ Jsou součástí procesu a sdílí celý paměťový prostor procesu. Je to soft
 Jejich použití je vhodné pro obsluhu I/O. Mimo sdíleného prostoru mají i svůj vlastní paměťový prostor v podobě zásobníku a registrů. Zásobník vs halda - zásobník pevná velikost, alokace/dealokace změnou pointeru, halda proměnná velikost, doalokování/odalokování paměti podle potřeby. Zásobník ukládá dočasná lokální data do RAM, registry obsahují návratové adresy, stav programu, mezivýsledky apod. Je nutné vlákna synchronizovat, aby nedošlo k inkonzistencím v paměti (moment, kdy 2 vlákna operují nad stejnou pamětí), tzv. mutual exclusion (mutex).
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\linewidth]{MPC-PZP/pict/multithread.png}
+    \includegraphics[width=0.5\linewidth]{pict/multithread.png}
     \caption{Multi-threaded proces}
 \end{figure}
 
@@ -115,7 +115,7 @@ Popis Nvidia GV100 (jedna z~možných architektur)
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.7\linewidth]{MPC-PZP/pict/SM.png}
+    \includegraphics[width=0.7\linewidth]{pict/SM.png}
     \caption{SM}
     \label{fig:SM}
 \end{figure}
@@ -125,7 +125,7 @@ GPU má vlastní DRAM, je menší než DRAM v~PC, ale je do ní rychlejší př�
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.6\linewidth]{MPC-PZP/pict/mem.png}
+    \includegraphics[width=0.6\linewidth]{pict/mem.png}
     \caption{Paměť v GPU}
     \label{fig:enter-label}
 \end{figure}
