@@ -4,6 +4,11 @@ Souběžné(Concurrent) programy jsou programy vykonávající úlohy nezávisle
 Paralelní je program právě tehdy když jeden program vykonává více úloh zároveň. Všechny paralelní programy jsou 
 souběžné, ale ne všechny souběžné programy jsou paralelní.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{pict/concurrency.png}
+\end{figure}
+
 \subsection{Využití}
 Ne pro všechno je vhodný. Už není možné pokračovat s trendem Moorova zákona (každých několik let se zdvojnásobí počet tranzistorů
 v integrovaných čipech). Je nutné využít více jader pro zvýšení výkonnosti. Zvyšování frekvence vyžaduje vyšší napájení a jak 
@@ -34,7 +39,7 @@ Příklady využití:
 \end{itemize}
 
 \subsection{Vlákna a~procesy}
-Procesy mají vlastní paměťový prostor (kontext). Vlákna tento kontext mezi sebou sdílí, jeden proces může mít více vláken.
+Instance programu běžícího v OS. Procesy mají vlastní paměťový prostor (kontext). Vlákna tento kontext mezi sebou sdílí, jeden proces může mít více vláken.
 
 \subsubsection{Procesy}
 Každý proces má svůj vlastní paměťový prostor (halda a datové segmenty). Procesy mezi sebou nesdílí paměť. Mohou mezi sebou komunikovat pomocí meziprocesové komunikace(IPC) pomocí front, socketů, rour.  Nové procesy se vytváří pomocí \texttt{fork()}, \texttt{popen()} nebo \texttt{system()}. Child procesy běží nezávisle na rodičovském procesu.
@@ -103,12 +108,16 @@ Python je debílek, protože má GIL (Global Interpreter Lock) a z jednoho proce
 \end{itemize}
 
 \subsection{Streaming Multiprocessor}
-Základní stavební blok GPU, základní blok pro provádění paralelních výpočtů. 
+Základní stavební blok GPU, základní blok pro provádění paralelních výpočtů.
+Kolekce CUDA jader, sdílené paměti, registrů a dalších věcí. 
 Popis Nvidia GV100 (jedna z~možných architektur)
 \begin{itemize}
+    \item LD/ST jednotky pro vkládání dat do jader
     \item Jádra FP32 (64 ks), FP64 (32 ks), INT32 Jádra, L1 shared memory, Register files
     \item Rozdělen na 4 procesní bloky, každý má čtvrtinu jader, registry, warp scheduler, L0 instruction cache\dots
     \item Warp (32 vláken) se posílá na vybraná jádra SM
+    \item Warp scheduler managuje warpy
+    \item SFU - special function unit
     \item L1 cache (jedna na SM) rozdělena na instrukční a~datovou
     \item Grafické karty mají desítky až stovky SM
 \end{itemize}
@@ -460,7 +469,10 @@ global void sum_warp_kernel_shfl_down(int *a)
     \item Podpora více jazyků - Scala, Python, Java, R
     \item Odolnost proti chybám, může vytvořit ztracená data pomocí lineage (graf, který trackuje operace na input datech)
 \end{itemize}
-
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{pict/SparkArch.png}
+\end{figure}
 \subsection{RDD}
 = Resilient Distributed Dataset
 \subsubsection{Vytvoření}
