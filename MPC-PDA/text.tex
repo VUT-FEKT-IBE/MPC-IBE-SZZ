@@ -318,11 +318,11 @@ Silně propojené komponenty jsou podgrafy, které jsou samy o~sobě pevně prop
 
 \subsubsection{Kosarajův algoritmus}
 
-Kosarajův algoritmus je algoritmus pro nalezení silně propojených komponent v~orientovaném grafu pracující v~lineárním čase.. Jeho základní myšlenkou je provést dva průchody grafem - první průchod pro získání "finishing times" (čas dokončení) uzlů a~druhý průchod pro nalezení silně propojených komponent.
-% TODO Tato poznámka je sice pravdivá, ale není zřejmá z pseudokódu
-% Využívá faktu, že transponovaný graf $G^T$ má stejné silně propojené komponenty jako původní graf $G$.
-
-% TODO ^^ Blbě! https://www.youtube.com/watch?v=Jb1XlDsr46o
+Kosarajův algoritmus je algoritmus pro nalezení silně propojených komponent v~orientovaném grafu pracující v~lineárním čase složitost je O(V+E).
+Využívá vlastnosti grafů, že transponovaný graf \(G^T\) má stejné silně propojené komponenty jako graf \(G\).
+Jeho základní myšlenkou je provést dva průchody grafem - první průchod pro získání "finishing times" (čas dokončení) uzlů a~druhý průchod pro 
+nalezení silně propojených komponent.
+Vizualizace: \url{https://www.youtube.com/watch?v=Jb1XlDsr46o}
 
 \subsubsection{Tarjanův algoritmus}
 
@@ -345,6 +345,7 @@ Další efektivní algoritmus pro nalezení silně propojených komponent v~orie
                             \end{enumerate}
                       \item Jinak nedělej nic
                   \end{itemize}
+            \item Invertuj hrany grafu
             \item Pro každý vrchol $u$ zásobníku $L$ spusť podprogram Přiřaď($u$, $u$):
                   \begin{itemize}
                       \item Pokud $u$ nepatří žádné komponentě:
@@ -397,7 +398,7 @@ Další efektivní algoritmus pro nalezení silně propojených komponent v~orie
 \end{figure}
 
 \clearpage
-\section{Detekce cyklů v~grafu. Eulerova cesta grafem, Hamiltonovská cesta grafem. Floyd-Warhsallův algoritmus. Algoritmus rozpoznání bipartitiního grafu.}
+\section{Detekce cyklů v~grafu. Eulerova cesta grafem - orientovaný a neorientovaný graf, Hamiltonovská cesta grafem. Floyd-Warhsallův algoritmus. Algoritmus rozpoznání bipartitiního grafu.}
 
 \subsection{Detekce cyklů v~grafu}
 
@@ -412,8 +413,25 @@ Detekce cyklů v~grafech je důležitý problém v~teorii grafů s~mnoha praktic
 
 \subsection{Eulerova cesta grafem}
 
-Eulerova cesta je cesta v~grafu, která projde každou hranou právě jednou. Eulerův cyklus je Eulerova cesta, která začíná a~končí ve stejném vrcholu. Graf, který obsahuje Eulerův cyklus, se nazývá Eulerův graf. Patří do P.
+Eulerova cesta je cesta v~grafu, která projde každou hranou právě jednou, ale může projít vícekrát přes jeden vrchol. Eulerův cyklus je 
+Eulerova cesta, která začíná a~končí ve stejném vrcholu. Graf, který obsahuje Eulerův cyklus, se nazývá Eulerův graf. Patří do P.
 
+\subsubsection{Eulerova cesta neorientovaným grafem}
+Podmínky existence cesty:
+\begin{itemize}
+    \item Graf musí být souvislý, všechny vrcholy s nenulovým stupněm musí být propojeny
+    \item Nanejvýš dva vrcholy mají lichý stupeň.
+\end{itemize}
+
+Graf s nula hranami je vždy eulerovský Graf
+\subsubsection{Eulerova cesta orientovaným grafem}
+Podmínky existence cesty:
+\begin{itemize}
+    \item Graf musí být silně souvislý. Pokud nehledáme cyklus může být slabě souvislý
+    \item Nejvýše jeden vrchol má počet výstupních hran o 1 vyšší než počet vstupních hran a nejvýše jeden vrchol má počet vstupních hran o 1 vyšší než počet výstupních hran. Zbytek hran má počet vstupních a výstupních hran stejný.
+\end{itemize}
+
+Pokud mají všechny vrcholy stejný počet vstupních a výstupních hran pak existuje Eulerův cyklus.
 \subsection{Hamiltonovská cesta grafem}
 
 Hamiltonovská cesta je cesta v~grafu, která projde každým vrcholem právě jednou. Hamiltonovský cyklus je Hamiltonovská cesta, která začíná a~končí ve stejném vrcholu. Graf, který obsahuje Hamiltonovský cyklus, se nazývá Hamiltonovský graf. Patří do NP-complete.
@@ -425,7 +443,7 @@ Floyd-Warshallův algoritmus je algoritmus pro nalezení nejkratších cest mezi
 
 \subsection{Detekce bipartitního grafu}
 
-Graf je bipartitní\footnotemark[1], pokud lze jeho vrcholy rozdělit na dvě skupiny tak, že žádné dvě vrcholy ve stejné skupině nejsou spojeny hranou.
+Graf je bipartitní\footnotemark[1], pokud lze jeho vrcholy rozdělit na dvě skupiny tak, že žádné dva vrcholy ve stejné skupině nejsou spojeny hranou.
 
 \footnotetext[1]{Bipartitní graf G je definován jako dvojice $(V, E)$, kde $V$ je množina vrcholů a~$E$ je množina hran. Je-li $V$ rozdělena na dvě disjunktní množiny $V_1$ a~$V_2$ ($V = V_1 \cup V_2$, $V_1 \cap V_2 = \emptyset$), pak každá hrana v~$E$ spojuje vrchol z~množiny $V_1$ s~vrcholem z~množiny $V_2$.}
 
@@ -482,17 +500,23 @@ Graf je bipartitní\footnotemark[1], pokud lze jeho vrcholy rozdělit na dvě sk
 
 \subsection{Párování grafu}
 
-Párování grafu se týká propojení hranami vrcholů v~grafu. V~neorientovaném grafu je párování množina hran, které spojují vrcholy tak, aby se žádné dva vrcholy nesdílely stejnou hranu. Maximální shoda je párování s~co největším počtem hran. V~orientovaném grafu je párování množina hran, které vycházejí z~vrcholů a~vedou k~jiným vrcholům, přičemž každý vrchol je spojen maximálně s~jednou hranou. Párování grafu se používá v~různých aplikacích, jako je plánování úkolů, rozvrhování a~mapování v~překladačích.
+Párování grafu se týká propojení hranami vrcholů v~grafu. V~neorientovaném grafu je párování množina hran, které spojují vrcholy tak, aby se 
+žádné dva vrcholy nesdílely stejnou hranu. Maximální shoda je párování s~co největším počtem hran. V~orientovaném grafu je párování množina hran, 
+které vycházejí z~vrcholů a~vedou k~jiným vrcholům, přičemž každý vrchol je spojen maximálně s~jednou hranou. Párování grafu se používá v~různých 
+aplikacích, jako je plánování úkolů, rozvrhování a~mapování v~překladačích.
 
-% Párování grafu je taková podmnožina hran grafu $M \subseteq E$, ve~které žádné dvě hrany nemají společný vrchol.
-% Vrcholy, které patří do~párování, se nazývají \emph{saturované}.
-% 
-% {}\emph{Maximální} párování má nejvíce hran (protože graf může mít párování více).
-% \\\emph{Perfektní} párování pokrývá všechny vrcholy grafu.
+Maximal matching vs Maximum matching: Maximal matching je takové párování, které nemůže být rozšířeno přidáním další hrany. Maximum matching
+je největší maximal párování
+
+Perfektní párování je takové párování ve kterém jsou obsaženy všechny vrcholy grafu
+Vrcholy, které patří do~párování, se nazývají \emph{saturované}.
+
 
 \subsection{Problém maximální shody}
 
-Problém maximální shody se týká hledání největší možné množiny hran v~grafu, kde žádné dvě hrany nesdílejí společný vrchol. Cílem je najít co největší počet hran, které se nepřekrývají. Tento problém má různé aplikace, například při hledání nejlepšího párování mezi lidmi v~sociální síti. Existuje několik algoritmů pro řešení tohoto problému, které postupně rozšiřují párování a~hledají nejlepší kombinace hran.
+Problém maximální shody se týká hledání největší možné množiny hran v~grafu, kde žádné dvě hrany nesdílejí společný vrchol. Cílem je najít co 
+největší počet hran, které se nepřekrývají. Tento problém má různé aplikace, například při hledání nejlepšího párování mezi lidmi v~sociální 
+síti. Existuje několik algoritmů pro řešení tohoto problému, které postupně rozšiřují párování a~hledají nejlepší kombinace hran.
 
 \subsubsection{Maďarský algoritmus}
 
@@ -625,7 +649,15 @@ Neříká však nic o~způsobu konstrukce aktivační funkce.
 
 \subsection{Neuron}
 
-Neuron je základní stavební prvek neuronových sítí. Jedná se o~matematický model, který simuluje chování biologických neuronů. Neuron přijímá vstupní signály, provádí na nich váhovou sumaci a~předává výstupní signál pomocí aktivační funkce. V~neuronových sítích se neurony organizují do vrstev a~vzájemně propojují pomocí vah.
+Neuron je základní stavební prvek neuronových sítí. Jedná se o~matematický model, který simuluje chování biologických neuronů. 
+V~neuronových sítích se neurony organizují do vrstev a~vzájemně propojují pomocí vah.
+
+\begin{figure}
+    \centering
+    \includegraphics[height=25em]{images/7_neuron}
+\end{figure}
+Neuron přebere vstup, pomocí potenciálu neuronu provede transformaci vstupů a předá je do aktivační funkce, která vytváří výstup neuronu.
+Vnitření potenciál neuronu může být lineární \(z = w_0 + \sum_{i=1}^n w_i x_i\) nebo radiální \(z = w_0 + \sqrt{\sum_{i=1}^n (x_i - w_i)^2}\).
 
 \subsection{Dopředná neuronová síť}
 
@@ -634,7 +666,8 @@ FFNN je umělá neuronová síť ve~které neurony netvoří cykly (čímž se l
 Informace prochází od~vstupu přes (volitelné) skryté vrstvy do~vstvy výstupní.
 
 Jednovrstvá síť (ve~které je vstup přímo napojen na~výstup) se nazývá \emph{perceptron}.
-Vstupy jsou sečteny na~základě vah a~tvoří výslednou hodnotu (typicky jedinou).
+Vstupy jsou sečteny na~základě vah a~tvoří výslednou hodnotu (typicky jedinou). Přenosová funkce je u perceptronu 
+skoková přenosová funkce.
 Vzhledem ke~své limitaci se dokáže naučit pouze lineárně separovatelné funkce (mezi které \emph{ne}patří například XOR).
 Reálně využívané FFNN však mají skrytých vrstev více.
 
@@ -1021,7 +1054,7 @@ $$
 $$
 kde $(g(X\theta_i) - \vec{y})$ určuje chybu (error).
 
-\subsection{Optimalizace s~poocí gradientního sestupu}
+\subsection{Optimalizace s~pomocí gradientního sestupu}
 
 Cílem gradientního sestupu je nalezení globálního minima v~prostoru všech možných řešení.
 
@@ -1073,7 +1106,9 @@ Unrolled RNN je pouze převedení základního principu tak, aby to bylo pochopi
 
 \subsection{Long Short Term Memory (LSTM)}
 
-LSTM (Long Short-Term Memory) je speciální typ RNN, který byl navržen k~překonání problémů s~gradientem v~klasických RNN. LSTM obsahuje paměťovou jednotku, která je schopna se rozhodnout, které informace uchovat a~které zapomenout. To umožňuje LSTM lépe zachytit dlouhodobé závislosti v~sekvencích dat.
+LSTM (Long Short-Term Memory) je speciální typ RNN, který byl navržen k~překonání problémů s~gradientem v~klasických RNN. 
+LSTM obsahuje paměťovou jednotku, která je schopna se rozhodnout, které informace uchovat a~které zapomenout. To umožňuje LSTM lépe 
+zachytit dlouhodobé závislosti v~sekvencích dat.
 Obsahuje několik vrstev, které kontrolují proud informací a~jsou založené na~několika branách (\emph{gates}).
 Tyto brány regulují kolik informací bude propuštěno a~kolik ne.
 
@@ -1254,6 +1289,15 @@ Node2vec má dva parametry:
     \item $q$ udavající \enquote{poměr} mězi BFS a~DFS (\enquote{walk away} parameter)
 \end{itemize}
 
+Založeno na algoritmu word2vec pro reprezentaci textu. Word2vec vytváří reprezentaci slov pomocí vektorů, čím podobnější slova tím jsou si 
+vektory blíž. Algoritmus word2vec používá skip-gram pro predikci slov v kontextu
+z cílového slova. Příklad: Věta "The cat sat on the mat", cílové slovo je "sat", velikost kontextu je 2, výsledné páry pro skip-gram budo (sat, the), (sat, cat),(sat, on),(sat, the).
+Pomocí těchto párů se algoritmu natrénuje aby ukládal tyto slova v kontextu do blízkých vektorů.
+
+Steně to funguje u node2vec s rozdílem toho, že nemáme slova, ale vrcholy. Na základě \(p\) a \(q\) se generují náhodné průchody. 
+Tak jak se word2vec učí, že slova, které se vyskytují v podobném kontextu mají podobný význam se node2vec učí, že vrcholy, které se objevují
+v podobných random walks mají podobné pozice nebo role v grafu.
+
 Při zvolení $q>p$ se algoritmus zaměřuje spíše na~globální pohled (bude směřovat k~BFS průchodu). Při zvolení $q<p$ se algoritmus zaměří spíše na~lokalní pohled (bude směřovat k~DFS).
 
 \begin{figure}[ht]
@@ -1262,7 +1306,7 @@ Při zvolení $q>p$ se algoritmus zaměřuje spíše na~globální pohled (bude 
     \caption{Prioritizace $p$ nebo $q$ v~node2vec}
 \end{figure}
 
-Při prochocházení grafem (viz obr.~\ref{pruchod-node2vec}) může dojít ke třem stavům (z~hlediska bodu $w$):
+Při procházení grafem (viz obr.~\ref{pruchod-node2vec}) může dojít ke třem stavům (z~hlediska bodu $w$):
 \begin{itemize}
     \item návrat k~předchozímu vrcholu ($s1$),
     \item navštívení vedlejšího vrcholu, který má stejnou vzdálenost od~počátečního vrcholu ($s2$)

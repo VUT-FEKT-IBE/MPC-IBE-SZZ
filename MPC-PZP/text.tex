@@ -1,4 +1,19 @@
 \section{Paralelismus – využití, paralelní technologie.}
+\subsection{Souběžnost vs paralelismus}
+Souběžné(Concurrent) programy jsou programy vykonávající úlohy nezávisle na sobě a mohou se odehrávat na jednom jádře.
+Paralelní je program právě tehdy když jeden program vykonává více úloh zároveň. Všechny paralelní programy jsou 
+souběžné, ale ne všechny souběžné programy jsou paralelní.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{pict/concurrecy.png}
+\end{figure}
+\subsection{Využití}
+Ne pro všechno je vhodný. Už není možné pokračovat s trendem Moorova zákona (každých několik let se zdvojnásobí počet tranzistorů
+v integrovaných čipech). Je nutné využít více jader pro zvýšení výkonnosti. Zvyšování frekvence vyžaduje vyšší napájení a jak 
+takový čip chladit?
+
+Příklady využití: 
 \begin{itemize}
     \item Neplést \textit{parallelism} (využívá více jader, více úloh naráz) a~\textit{concurrency} (může se odehrávat i~na jediném jádře)
     \item Všechny paralelní programy jsou konkurentní, ne všechny konkurentní programy jsou paralelní
@@ -13,35 +28,30 @@
 \end{itemize}
 
 \section{CPU – návrh paralelního programu, vlákna a procesy, synchronizace dat (Lock, RLock, Semaphore).}
-Je potřeba zjistit úzká hrdla programu. Výpočty na sobě nezávislé mohou být paralelizované.
+\subsection{Návrh paralelního programu}
+\begin{itemize}
+    \item Nalezení částí, které mohou být paralelizovány
+    \item Rozdělení úloh do vláken/procesů
+    \item Ošetření přístupu ke sdíleným datům
+    \item Ošetření deadlocků a race conditions
+\end{itemize}
 
 \subsection{Vlákna a~procesy}
-Procesy mají vlastní paměťový prostor (kontext). Vlákna tento kontext mezi sebou sdílí, jeden proces může mít více vláken.
+Instance programu běžícího v OS. Procesy mají vlastní paměťový prostor (kontext). Vlákna tento kontext mezi sebou sdílí, jeden proces může mít více vláken.
 
-Procesy
-\begin{itemize}
-    \item Vytvoří se voláním \texttt{fork()}, \texttt{system()}, \texttt{popen()} nebo dalšími
-    \item Minimální sdílení dat mezi rodičovským a \textit{child} procesem, běží na sobě nezávisle
-\end{itemize}
+\subsubsection{Procesy}
+Každý proces má svůj vlastní paměťový prostor (halda a datové segmenty). Procesy mezi sebou nesdílí paměť. Mohou mezi sebou komunikovat pomocí meziprocesové komunikace(IPC) pomocí front, socketů, rour.  Nové procesy se vytváří pomocí \texttt{fork()}, \texttt{popen()} nebo \texttt{system()}. Child procesy běží nezávisle na rodičovském procesu.
 
-Vlákna
-\begin{itemize}
-    \item Je to součást procesu, v~něm sdílí prostředky
-    \item Jsou vhodné k~vykonání více operací nad sdílenými daty procesu
-    \item Vlákna mohou být plně konkurentní
-    \item Vhodná k~obsluze I/O (celý proces nemusí být blokován)
-    \item Vlákna sdílí globální proměnné, ale mohou mít i~lokální proměnné nepřístupné jiným vláknům
-    \item Je nutné je synchronizovat (mutual exclusion = mutex) pro zabránění souběhu
-    \item Python je \underline{\textbf{stoopid}}, má GIL (Global Interpreter Lock) a~z~jediného procesu dokáže nechat běžet jen jediné vlákno. Má low-level (\texttt{thread}) a~high-level knihovnu (\texttt{threading})
-    \item Stavy Python vláken:
-    \begin{itemize}
-        \item initial state
-        \item runnable
-        \item running
-        \item blocked
-        \item finished
-    \end{itemize}
-\end{itemize}
+\subsubsection{Vlákna}
+Jsou součástí procesu a sdílí celý paměťový prostor procesu. Je to softwarová abstrakce, která umožňuje provádění více souběžných operací na stejných datech. Vlákna mohou být plně souběžná. 
+Jejich použití je vhodné pro obsluhu I/O. Mimo sdíleného prostoru mají i svůj vlastní paměťový prostor v podobě zásobníku a registrů. Zásobník vs halda - zásobník pevná velikost, alokace/dealokace změnou pointeru, halda proměnná velikost, doalokování/odalokování paměti podle potřeby. Zásobník ukládá dočasná lokální data do RAM, registry obsahují návratové adresy, stav programu, mezivýsledky apod. Je nutné vlákna synchronizovat, aby nedošlo k inkonzistencím v paměti (moment, kdy 2 vlákna operují nad stejnou pamětí), tzv. mutual exclusion (mutex).
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\linewidth]{pict/multithread.png}
+    \caption{Multi-threaded proces}
+\end{figure}
+
+Python je debílek, protože má GIL (Global Interpreter Lock) a z jednoho procesu může běžet jenom jedno vlákno. Má 2 knihovny, low-level \texttt{thread} (jednoduché mutex locks, vytváření threadů, zabíjení threadů, signály může chytat jenom hlavní vlákno) a high-level \texttt{threading} (víc locků, lepší fíčury). Stavy python vláken: inital state (před startem), runnable(po startu, ale čeká na místo v procesoru), running(když scheduler vybere vlákno k tomu aby dělalo bžum bžum), blocked (čeká na zdroje využívané jiným vláknem), dead(když run() metoda doběhne. Jádro se zničí a nemůže být provedeno znovu.)
 
 \subsection{Lock}
 \begin{itemize}
@@ -96,11 +106,16 @@ Vlákna
 \end{itemize}
 
 \subsection{Streaming Multiprocessor}
+Základní stavební blok GPU, základní blok pro provádění paralelních výpočtů.
+Kolekce CUDA jader, sdílené paměti, registrů a dalších věcí. 
 Popis Nvidia GV100 (jedna z~možných architektur)
 \begin{itemize}
-    \item Jádra FP32 (64 ks), FP64 (32 ks), INT32\dots
+    \item LD/ST jednotky pro vkládání dat do jader
+    \item Jádra FP32 (64 ks), FP64 (32 ks), INT32 Jádra, L1 shared memory, Register files
     \item Rozdělen na 4 procesní bloky, každý má čtvrtinu jader, registry, warp scheduler, L0 instruction cache\dots
     \item Warp (32 vláken) se posílá na vybraná jádra SM
+    \item Warp scheduler managuje warpy
+    \item SFU - special function unit
     \item L1 cache (jedna na SM) rozdělena na instrukční a~datovou
     \item Grafické karty mají desítky SM
 \end{itemize}
@@ -409,7 +424,10 @@ global void sum_warp_kernel_shfl_down(int *a)
     \item SparkConf: objekt s~informacemi o~aplikaci
     \item Využívá lazy evaluation
 \end{itemize}
-
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{pict/SparkArch.png}
+\end{figure}
 \subsection{RDD}
 = Resilient Distributed Dataset
 \begin{itemize}
