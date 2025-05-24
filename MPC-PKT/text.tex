@@ -579,6 +579,19 @@ Pro přechodné zajištění kompatibility se využívá technik jako souběh pr
 
 % TODO menší směrovací tabulky, nepotřebuje NAT
 
+\subsection{Přechodové mechanismy}
+\begin{itemize}
+    \item Tunelování (IPv6 in IPv4)
+    \begin{itemize}
+        \item Manuální tunely
+        \item Automaticky vytvářené tunely (např.\,technologie \texttt{6to4})
+    \end{itemize}
+    \item Souběh obou protokolů (DS = dualstack)
+    \item DSLite (IPv4 jen pro lokální adresy, IPv4 ven je tunelováno přes IPv6)
+    \item Překlad IPv4 a~IPv6 (NAT64, vyžaduje DNS64, který spoofuje adresy, aby vše vypadalo přístupné pouze přes v6)
+    \item IPv6 mostly (NAT64 s~tím, že zařízení signalizují, že nepotřebují IPv4 adresu v~DHCP dotazu -- DHCP option 108. IPv4 je funkční, pokud to zařízení vyžadují)
+\end{itemize}
+
 \subsection{Datagram}
 \begin{center}
 	\includegraphics[width=0.6\textwidth]{obrazky/070.png}
@@ -953,8 +966,9 @@ Tento model lze užít při návrhu protokolů. Návrh protokolu se skládá ze 
         \item Chování komunikujících stran v~závislosti na zprávy: popis stavovým automatem
         \item Transportní protokol?
         \item Zabezpečení přenosu?
-        \item Nestandardní situace? -- modelaování stavovými automaty
+        \item Nestandardní situace? -- modelování stavovými automaty
     \end{itemize}
+    \item Implementace
 \end{itemize}
 
 Jednotlivé protokoly lze reprezentovat konečnými automaty, při návrhu je dobré ohlídat veškeré možné vstupy a~vnitřní stavy a~co nejlépe protokol popsat pro snadnou specifikaci chování.
